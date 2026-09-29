@@ -10,6 +10,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="referrer"
+        content="no-referrer"
+    >
+
     <title>Track Order | ProBee</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -557,7 +562,7 @@
 
 
         /* ==============================
-           11E STATUS MESSAGE
+           STATUS MESSAGE
         ============================== */
 
         .status-message {
@@ -1070,6 +1075,8 @@
 
                 font-size: 13px;
 
+                line-height: 1.5;
+
             }
 
 
@@ -1245,7 +1252,7 @@
                 </h1>
 
                 <p>
-                    Enter your order number to see
+                    Use your secure tracking link to see
                     the latest status of your order.
                 </p>
 
@@ -1257,8 +1264,8 @@
 
             <div class="search-card">
 
-                <label for="orderNumber">
-                    Order Number
+                <label for="trackingToken">
+                    Secure Tracking Token
                 </label>
 
 
@@ -1266,9 +1273,10 @@
 
                     <input
                         type="text"
-                        id="orderNumber"
-                        placeholder="Example: PROB-260930-1234"
+                        id="trackingToken"
+                        placeholder="Enter your secure tracking token"
                         autocomplete="off"
+                        spellcheck="false"
                     >
 
 
@@ -1356,7 +1364,7 @@
 
 
 
-                <!-- 11E STATUS MESSAGE -->
+                <!-- STATUS MESSAGE -->
 
                 <div
                     class="status-message"
@@ -1573,9 +1581,9 @@
     ============================== */
 
 
-    const orderInput =
+    const trackingInput =
         document.getElementById(
-            "orderNumber"
+            "trackingToken"
         );
 
 
@@ -1636,8 +1644,8 @@
     async function trackOrder() {
 
 
-        const orderNumber =
-            orderInput.value.trim();
+        const trackingToken =
+            trackingInput.value.trim();
 
 
         errorMessage.style.display =
@@ -1648,10 +1656,10 @@
             "none";
 
 
-        if (!orderNumber) {
+        if (!trackingToken) {
 
             showError(
-                "Please enter your order number."
+                "Please enter your secure tracking token."
             );
 
             return;
@@ -1677,10 +1685,10 @@
             const { data, error } =
                 await supabaseClient
                     .rpc(
-                        "track_order",
+                        "track_order_by_token",
                         {
-                            p_order_number:
-                                orderNumber
+                            p_tracking_token:
+                                trackingToken
                         }
                     );
 
@@ -1702,7 +1710,7 @@
             ) {
 
                 showError(
-                    "Order not found. Please check your order number and try again."
+                    "Order not found. Please check your secure tracking link and try again."
                 );
 
                 return;
@@ -1845,7 +1853,7 @@
 
 
     /* ==============================
-       11E STATUS MESSAGE
+       STATUS MESSAGE
     ============================== */
 
 
@@ -2161,12 +2169,6 @@
                 "active"
             );
 
-
-            /*
-             * Cancelled orders do not show
-             * processing/completed as active.
-             */
-
         }
 
 
@@ -2341,7 +2343,7 @@
 
 
     /* =====================================================
-       11D — URL ORDER NUMBER + AUTO TRACKING
+       11F — SECURE TOKEN AUTO TRACKING
     ===================================================== */
 
 
@@ -2351,20 +2353,21 @@
         );
 
 
-    const urlOrderNumber =
-        urlParams.get("order");
+    const urlTrackingToken =
+        urlParams.get("token");
 
 
-    if (urlOrderNumber) {
+    if (urlTrackingToken) {
 
 
-        orderInput.value =
-            urlOrderNumber;
+        trackingInput.value =
+            urlTrackingToken;
 
 
         /*
          * Automatically track the order
-         * when coming from Checkout.
+         * when the customer opens the
+         * secure tracking link.
          */
 
         trackOrder();
@@ -2378,7 +2381,7 @@
     ===================================================== */
 
 
-    orderInput.addEventListener(
+    trackingInput.addEventListener(
         "keydown",
         function(event) {
 
