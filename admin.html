@@ -1,477 +1,729 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ProBee Admin</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #080808;
-            color: #fff;
-            min-height: 100vh;
-        }
-
-        button,
-        input,
-        select {
-            font: inherit;
-        }
-
-        /* =========================
-           LOGIN
-        ========================= */
-
-        #loginPage {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-box {
-            width: 100%;
-            max-width: 420px;
-            background: #111;
-            border: 1px solid #292929;
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 20px 60px rgba(0,0,0,.5);
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .logo h1 {
-            color: #d6ad4b;
-            font-size: 32px;
-            letter-spacing: 2px;
-        }
-
-        .logo p {
-            color: #888;
-            margin-top: 6px;
-            font-size: 13px;
-        }
-
-        .field {
-            margin-bottom: 18px;
-        }
-
-        .field label {
-            display: block;
-            margin-bottom: 8px;
-            color: #aaa;
-            font-size: 13px;
-        }
-
-        .field input {
-            width: 100%;
-            padding: 14px 15px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: #080808;
-            color: #fff;
-            outline: none;
-        }
-
-        .field input:focus {
-            border-color: #d6ad4b;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            border: 0;
-            border-radius: 10px;
-            background: #d6ad4b;
-            color: #080808;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .login-btn:hover {
-            background: #e7c366;
-        }
-
-        #loginError {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 9px;
-            background: rgba(180, 40, 40, .15);
-            border: 1px solid #642b2b;
-            color: #ff8f8f;
-            font-size: 13px;
-        }
-
-        /* =========================
-           DASHBOARD
-        ========================= */
-
-        #dashboard {
-            display: none;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            background: rgba(8,8,8,.95);
-            border-bottom: 1px solid #222;
-            backdrop-filter: blur(12px);
-        }
-
-        .header-inner {
-            max-width: 1400px;
-            margin: auto;
-            padding: 18px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .brand {
-            color: #d6ad4b;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .admin-label {
-            color: #777;
-            font-size: 12px;
-            margin-left: 8px;
-        }
-
-        .logout-btn {
-            border: 1px solid #333;
-            background: #111;
-            color: #ddd;
-            padding: 9px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .logout-btn:hover {
-            border-color: #d6ad4b;
-            color: #d6ad4b;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: auto;
-            padding: 28px 24px 50px;
-        }
-
-        .top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .title h2 {
-            font-size: 28px;
-        }
-
-        .title p {
-            color: #777;
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        .stats {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            min-width: 125px;
-            padding: 14px 17px;
-            background: #111;
-            border: 1px solid #252525;
-            border-radius: 12px;
-        }
-
-        .stat span {
-            display: block;
-            color: #777;
-            font-size: 11px;
-            margin-bottom: 5px;
-        }
-
-        .stat strong {
-            font-size: 20px;
-            color: #d6ad4b;
-        }
-
-        /* =========================
-           SEARCH
-        ========================= */
-
-        .toolbar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 18px;
-            flex-wrap: wrap;
-        }
-
-        .search {
-            flex: 1;
-            min-width: 220px;
-        }
-
-        .search input {
-            width: 100%;
-            padding: 13px 15px;
-            background: #111;
-            color: #fff;
-            border: 1px solid #292929;
-            border-radius: 10px;
-            outline: none;
-        }
-
-        .search input:focus {
-            border-color: #d6ad4b;
-        }
-
-        .refresh-btn {
-            padding: 13px 18px;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 10px;
-            color: #ddd;
-            cursor: pointer;
-        }
-
-        .refresh-btn:hover {
-            border-color: #d6ad4b;
-            color: #d6ad4b;
-        }
-
-        /* =========================
-           ORDERS
-        ========================= */
-
-        .orders {
-            display: grid;
-            gap: 14px;
-        }
-
-        .order-card {
-            background: #111;
-            border: 1px solid #242424;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .order-head {
-            padding: 17px 19px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #222;
-        }
-
-        .order-number {
-            color: #d6ad4b;
-            font-weight: 700;
-            font-size: 15px;
-        }
-
-        .order-date {
-            color: #777;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        .status {
-            border: 1px solid #444;
-            background: #080808;
-            color: #ddd;
-            padding: 8px 10px;
-            border-radius: 8px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .status:focus {
-            border-color: #d6ad4b;
-        }
-
-        .order-body {
-            padding: 19px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 22px;
-        }
-
-        .customer h3,
-        .items h3 {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: .5px;
-        }
-
-        .customer p {
-            margin-bottom: 7px;
-            color: #ddd;
-            font-size: 14px;
-            word-break: break-word;
-        }
-
-        .customer a {
-            color: #d6ad4b;
-            text-decoration: none;
-        }
-
-        .item {
-            padding: 10px 0;
-            border-bottom: 1px solid #222;
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            font-size: 13px;
-        }
-
-        .item:last-child {
-            border-bottom: 0;
-        }
-
-        .item-name {
-            color: #ddd;
-        }
-
-        .item-meta {
-            color: #777;
-            font-size: 11px;
-            margin-top: 3px;
-        }
-
-        .item-price {
-            color: #ddd;
-            white-space: nowrap;
-        }
-
-        .order-footer {
-            border-top: 1px solid #222;
-            padding: 15px 19px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .note {
-            color: #999;
-            font-size: 12px;
-            max-width: 70%;
-        }
-
-        .total {
-            color: #d6ad4b;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 60px 20px;
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 15px;
-            color: #777;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: #888;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 700px) {
-
-            .header-inner {
-                padding: 15px;
-            }
-
-            .brand {
-                font-size: 20px;
-            }
-
-            .admin-label {
-                display: none;
-            }
-
-            .container {
-                padding: 20px 14px 40px;
-            }
-
-            .title h2 {
-                font-size: 23px;
-            }
-
-            .stats {
-                width: 100%;
-            }
-
-            .stat {
-                flex: 1;
-                min-width: 0;
-            }
-
-            .order-body {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .order-footer {
-                align-items: flex-start;
-            }
-
-            .note {
-                max-width: 100%;
-            }
-
-            .logout-btn {
-                padding: 8px 11px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ProBee Admin Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#070707;
+    color:#fff;
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:22px;
+    padding:34px;
+    box-shadow:0 25px 70px rgba(0,0,0,.55);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo h1{
+    color:#d6ad4b;
+    font-size:34px;
+    letter-spacing:2px;
+}
+
+.logo p{
+    color:#777;
+    margin-top:7px;
+    font-size:13px;
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.field label{
+    display:block;
+    color:#999;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.field input{
+    width:100%;
+    padding:14px;
+    border:1px solid #333;
+    border-radius:10px;
+    background:#080808;
+    color:#fff;
+    outline:none;
+}
+
+.field input:focus{
+    border-color:#d6ad4b;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#d6ad4b;
+    color:#080808;
+    font-weight:700;
+}
+
+.login-btn:hover{
+    background:#e6c263;
+}
+
+.login-btn:disabled{
+    opacity:.6;
+}
+
+#loginError{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:9px;
+    background:#241010;
+    border:1px solid #633333;
+    color:#ff9999;
+    font-size:13px;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+#dashboard{
+    display:none;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(7,7,7,.95);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid #222;
+}
+
+.header-inner{
+    max-width:1450px;
+    margin:auto;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.brand{
+    color:#d6ad4b;
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.admin-label{
+    color:#777;
+    font-size:11px;
+    margin-left:8px;
+    letter-spacing:1px;
+}
+
+.logout-btn{
+    padding:9px 15px;
+    border:1px solid #333;
+    border-radius:9px;
+    background:#111;
+    color:#ddd;
+}
+
+.logout-btn:hover{
+    border-color:#d6ad4b;
+    color:#d6ad4b;
+}
+
+.container{
+    max-width:1450px;
+    margin:auto;
+    padding:28px 24px 60px;
+}
+
+
+/* =========================
+   TOP
+========================= */
+
+.top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.title h2{
+    font-size:30px;
+}
+
+.title p{
+    color:#777;
+    font-size:13px;
+    margin-top:6px;
+}
+
+.last-updated{
+    color:#666;
+    font-size:11px;
+    margin-top:8px;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+    margin-bottom:24px;
+}
+
+.stat{
+    background:#111;
+    border:1px solid #242424;
+    border-radius:15px;
+    padding:18px;
+}
+
+.stat-label{
+    color:#777;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+}
+
+.stat-value{
+    color:#d6ad4b;
+    font-size:25px;
+    font-weight:700;
+    margin-top:8px;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.search{
+    flex:1;
+    min-width:220px;
+}
+
+.search input{
+    width:100%;
+    padding:13px 15px;
+    border:1px solid #292929;
+    border-radius:10px;
+    background:#111;
+    color:#fff;
+    outline:none;
+}
+
+.search input:focus{
+    border-color:#d6ad4b;
+}
+
+.filter{
+    min-width:150px;
+}
+
+.filter select,
+.date-filter input{
+    width:100%;
+    padding:13px;
+    border:1px solid #292929;
+    border-radius:10px;
+    background:#111;
+    color:#ddd;
+    outline:none;
+}
+
+.date-filter{
+    min-width:150px;
+}
+
+.refresh-btn{
+    padding:13px 17px;
+    border:1px solid #333;
+    border-radius:10px;
+    background:#111;
+    color:#ddd;
+}
+
+.refresh-btn:hover{
+    color:#d6ad4b;
+    border-color:#d6ad4b;
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+.orders{
+    display:grid;
+    gap:13px;
+}
+
+.order-card{
+    background:#111;
+    border:1px solid #242424;
+    border-radius:16px;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.order-card:hover{
+    border-color:#3b3b3b;
+}
+
+.order-head{
+    padding:17px 19px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    border-bottom:1px solid #222;
+}
+
+.order-number{
+    color:#d6ad4b;
+    font-weight:700;
+    font-size:15px;
+}
+
+.order-date{
+    color:#666;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.status{
+    padding:8px 11px;
+    border-radius:8px;
+    border:1px solid #333;
+    background:#090909;
+    color:#ddd;
+    outline:none;
+}
+
+.status.pending{
+    border-color:#765d1c;
+    color:#e5c35e;
+}
+
+.status.processing{
+    border-color:#315b76;
+    color:#75b9e8;
+}
+
+.status.completed{
+    border-color:#28633c;
+    color:#70d18c;
+}
+
+.status.cancelled{
+    border-color:#6b3030;
+    color:#ff8a8a;
+}
+
+.order-body{
+    padding:19px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.section-title{
+    color:#777;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    margin-bottom:10px;
+}
+
+.customer p{
+    color:#ddd;
+    font-size:13px;
+    margin-bottom:7px;
+    word-break:break-word;
+}
+
+.customer a{
+    color:#d6ad4b;
+    text-decoration:none;
+}
+
+.customer a:hover{
+    text-decoration:underline;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:10px 0;
+    border-bottom:1px solid #222;
+}
+
+.item:last-child{
+    border-bottom:none;
+}
+
+.item-name{
+    color:#ddd;
+    font-size:13px;
+}
+
+.item-meta{
+    color:#666;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.item-price{
+    color:#ddd;
+    font-size:13px;
+    white-space:nowrap;
+}
+
+.order-footer{
+    padding:14px 19px;
+    border-top:1px solid #222;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.note{
+    color:#777;
+    font-size:11px;
+    max-width:70%;
+}
+
+.total{
+    color:#d6ad4b;
+    font-weight:700;
+    font-size:18px;
+    white-space:nowrap;
+}
+
+.view-btn{
+    padding:8px 12px;
+    border:1px solid #333;
+    background:#090909;
+    color:#ddd;
+    border-radius:8px;
+    margin-left:7px;
+}
+
+.view-btn:hover{
+    border-color:#d6ad4b;
+    color:#d6ad4b;
+}
+
+
+/* =========================
+   EMPTY / LOADING
+========================= */
+
+.empty,
+.loading{
+    padding:60px 20px;
+    text-align:center;
+    background:#111;
+    border:1px solid #222;
+    border-radius:15px;
+    color:#777;
+}
+
+.empty h3{
+    color:#aaa;
+    margin-bottom:7px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.78);
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:650px;
+    max-height:90vh;
+    overflow:auto;
+    background:#111;
+    border:1px solid #333;
+    border-radius:18px;
+    box-shadow:0 30px 90px rgba(0,0,0,.7);
+}
+
+.modal-head{
+    padding:18px 20px;
+    border-bottom:1px solid #222;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.modal-head h3{
+    color:#d6ad4b;
+}
+
+.close-btn{
+    width:34px;
+    height:34px;
+    border:1px solid #333;
+    border-radius:8px;
+    background:#090909;
+    color:#aaa;
+    font-size:18px;
+}
+
+.close-btn:hover{
+    color:#fff;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:11px 0;
+    border-bottom:1px solid #222;
+    font-size:13px;
+}
+
+.detail-row span:first-child{
+    color:#777;
+}
+
+.detail-row span:last-child{
+    color:#ddd;
+    text-align:right;
+    word-break:break-word;
+}
+
+.modal-items{
+    margin-top:20px;
+}
+
+.modal-items h4{
+    color:#777;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
+
+.modal-total{
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid #333;
+    display:flex;
+    justify-content:space-between;
+    font-size:18px;
+}
+
+.modal-total strong{
+    color:#d6ad4b;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .header-inner{
+        padding:14px;
+    }
+
+    .brand{
+        font-size:20px;
+    }
+
+    .admin-label{
+        display:none;
+    }
+
+    .container{
+        padding:20px 14px 45px;
+    }
+
+    .title h2{
+        font-size:24px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stat{
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+    .toolbar{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .search{
+        grid-column:1 / -1;
+    }
+
+    .refresh-btn{
+        width:100%;
+    }
+
+    .order-body{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .order-footer{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .note{
+        max-width:100%;
+    }
+
+    .view-btn{
+        margin-left:0;
+        margin-top:7px;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+    }
+
+    .stat{
+        padding:12px;
+    }
+
+    .stat-label{
+        font-size:9px;
+    }
+
+    .stat-value{
+        font-size:18px;
+    }
+
+    .toolbar{
+        grid-template-columns:1fr;
+    }
+
+    .search{
+        grid-column:auto;
+    }
+
+}
+</style>
 </head>
 
 <body>
 
-<!-- =========================
-     LOGIN PAGE
-========================= -->
+
+<!-- =====================================
+     LOGIN
+===================================== -->
 
 <div id="loginPage">
 
@@ -479,13 +731,14 @@
 
         <div class="logo">
             <h1>ProBee</h1>
-            <p>Admin Dashboard</p>
+            <p>Secure Admin Dashboard</p>
         </div>
 
         <form id="loginForm">
 
             <div class="field">
-                <label for="email">Admin Email</label>
+                <label>Admin Email</label>
+
                 <input
                     type="email"
                     id="email"
@@ -495,7 +748,8 @@
             </div>
 
             <div class="field">
-                <label for="password">Password</label>
+                <label>Password</label>
+
                 <input
                     type="password"
                     id="password"
@@ -505,9 +759,9 @@
             </div>
 
             <button
-                type="submit"
                 class="login-btn"
                 id="loginBtn"
+                type="submit"
             >
                 Login
             </button>
@@ -521,648 +775,1430 @@
 </div>
 
 
-<!-- =========================
-     ADMIN DASHBOARD
-========================= -->
+<!-- =====================================
+     DASHBOARD
+===================================== -->
 
 <div id="dashboard">
 
-    <header>
+<header>
 
-        <div class="header-inner">
+    <div class="header-inner">
 
-            <div>
-                <span class="brand">ProBee</span>
-                <span class="admin-label">ADMIN PANEL</span>
+        <div>
+            <span class="brand">ProBee</span>
+            <span class="admin-label">ADMIN PANEL</span>
+        </div>
+
+        <button
+            class="logout-btn"
+            id="logoutBtn"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="top-row">
+
+        <div class="title">
+
+            <h2>Order Dashboard</h2>
+
+            <p>
+                Manage and monitor customer orders
+            </p>
+
+            <div
+                class="last-updated"
+                id="lastUpdated"
+            >
+                Not updated yet
             </div>
 
-            <button
-                class="logout-btn"
-                id="logoutBtn"
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-label">
+                Total Orders
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalOrders"
             >
-                Logout
+                0
+            </div>
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Total Sales
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalSales"
+            >
+                LKR 0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Pending
+            </div>
+
+            <div
+                class="stat-value"
+                id="pendingOrders"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Completed
+            </div>
+
+            <div
+                class="stat-value"
+                id="completedOrders"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+        <div class="search">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search order, customer, WhatsApp or email..."
+            >
+
+        </div>
+
+
+        <div class="filter">
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="processing">
+                    Processing
+                </option>
+
+                <option value="completed">
+                    Completed
+                </option>
+
+                <option value="cancelled">
+                    Cancelled
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="date-filter">
+
+            <input
+                type="date"
+                id="dateFilter"
+            >
+
+        </div>
+
+
+        <button
+            class="refresh-btn"
+            id="refreshBtn"
+        >
+            ↻ Refresh
+        </button>
+
+    </div>
+
+
+    <!-- ORDERS -->
+
+    <div id="ordersContainer">
+
+        <div class="loading">
+            Loading orders...
+        </div>
+
+    </div>
+
+</main>
+
+</div>
+
+
+<!-- =====================================
+     ORDER DETAILS MODAL
+===================================== -->
+
+<div
+    class="modal"
+    id="orderModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h3 id="modalTitle">
+                Order Details
+            </h3>
+
+            <button
+                class="close-btn"
+                id="closeModal"
+            >
+                ×
             </button>
 
         </div>
 
-    </header>
+        <div
+            class="modal-body"
+            id="modalBody"
+        ></div>
 
-
-    <main class="container">
-
-        <div class="top-row">
-
-            <div class="title">
-                <h2>Orders</h2>
-                <p>Manage customer orders</p>
-            </div>
-
-            <div class="stats">
-
-                <div class="stat">
-                    <span>Total Orders</span>
-                    <strong id="totalOrders">0</strong>
-                </div>
-
-                <div class="stat">
-                    <span>Pending</span>
-                    <strong id="pendingOrders">0</strong>
-                </div>
-
-                <div class="stat">
-                    <span>Completed</span>
-                    <strong id="completedOrders">0</strong>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="toolbar">
-
-            <div class="search">
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search order, customer, WhatsApp or email..."
-                >
-            </div>
-
-            <button
-                class="refresh-btn"
-                id="refreshBtn"
-            >
-                ↻ Refresh
-            </button>
-
-        </div>
-
-
-        <div id="ordersContainer">
-
-            <div class="loading">
-                Loading orders...
-            </div>
-
-        </div>
-
-    </main>
+    </div>
 
 </div>
 
 
 <script>
 
-    /* =========================================
-       SUPABASE CONFIG
-    ========================================= */
+/* =====================================
+   SUPABASE
+===================================== */
 
-    const SUPABASE_URL =
-        'https://fjczxixfajvvizsywrtr.supabase.co';
+const SUPABASE_URL =
+    'https://fjczxixfajvvizsywrtr.supabase.co';
 
-    const SUPABASE_ANON_KEY =
-        'sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN';
+const SUPABASE_ANON_KEY =
+    'sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN';
 
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-        );
-
-
-    /* =========================================
-       ELEMENTS
-    ========================================= */
-
-    const loginPage =
-        document.getElementById('loginPage');
-
-    const dashboard =
-        document.getElementById('dashboard');
-
-    const loginForm =
-        document.getElementById('loginForm');
-
-    const loginBtn =
-        document.getElementById('loginBtn');
-
-    const loginError =
-        document.getElementById('loginError');
-
-    const logoutBtn =
-        document.getElementById('logoutBtn');
-
-    const ordersContainer =
-        document.getElementById('ordersContainer');
-
-    const searchInput =
-        document.getElementById('searchInput');
-
-    const refreshBtn =
-        document.getElementById('refreshBtn');
-
-    const totalOrders =
-        document.getElementById('totalOrders');
-
-    const pendingOrders =
-        document.getElementById('pendingOrders');
-
-    const completedOrders =
-        document.getElementById('completedOrders');
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
 
 
-    let allOrders = [];
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const loginPage =
+    document.getElementById('loginPage');
+
+const dashboard =
+    document.getElementById('dashboard');
+
+const loginForm =
+    document.getElementById('loginForm');
+
+const loginBtn =
+    document.getElementById('loginBtn');
+
+const loginError =
+    document.getElementById('loginError');
+
+const logoutBtn =
+    document.getElementById('logoutBtn');
+
+const ordersContainer =
+    document.getElementById('ordersContainer');
+
+const searchInput =
+    document.getElementById('searchInput');
+
+const statusFilter =
+    document.getElementById('statusFilter');
+
+const dateFilter =
+    document.getElementById('dateFilter');
+
+const refreshBtn =
+    document.getElementById('refreshBtn');
+
+const totalOrders =
+    document.getElementById('totalOrders');
+
+const totalSales =
+    document.getElementById('totalSales');
+
+const pendingOrders =
+    document.getElementById('pendingOrders');
+
+const completedOrders =
+    document.getElementById('completedOrders');
+
+const lastUpdated =
+    document.getElementById('lastUpdated');
+
+const orderModal =
+    document.getElementById('orderModal');
+
+const modalTitle =
+    document.getElementById('modalTitle');
+
+const modalBody =
+    document.getElementById('modalBody');
+
+const closeModal =
+    document.getElementById('closeModal');
 
 
-    /* =========================================
-       LOGIN
-    ========================================= */
+let allOrders = [];
 
-    loginForm.addEventListener('submit', async function(event) {
+
+/* =====================================
+   LOGIN
+===================================== */
+
+loginForm.addEventListener(
+    'submit',
+    async function(event){
 
         event.preventDefault();
 
         loginError.style.display = 'none';
 
         const email =
-            document.getElementById('email').value.trim();
+            document.getElementById('email')
+            .value
+            .trim();
 
         const password =
-            document.getElementById('password').value;
+            document.getElementById('password')
+            .value;
 
         loginBtn.disabled = true;
-        loginBtn.textContent = 'Logging in...';
+
+        loginBtn.textContent =
+            'Logging in...';
+
 
         const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
-                email: email,
-                password: password
+            await supabaseClient.auth
+            .signInWithPassword({
+                email,
+                password
             });
 
-        if (error) {
+
+        if(error){
 
             loginError.textContent =
                 'Login failed: ' + error.message;
 
-            loginError.style.display = 'block';
+            loginError.style.display =
+                'block';
 
             loginBtn.disabled = false;
-            loginBtn.textContent = 'Login';
+
+            loginBtn.textContent =
+                'Login';
 
             return;
         }
+
 
         await showDashboard();
 
-    });
+    }
+);
 
 
-    /* =========================================
-       SHOW DASHBOARD
-    ========================================= */
+/* =====================================
+   SHOW DASHBOARD
+===================================== */
 
-    async function showDashboard() {
+async function showDashboard(){
 
-        loginPage.style.display = 'none';
-        dashboard.style.display = 'block';
+    loginPage.style.display =
+        'none';
 
-        await loadOrders();
+    dashboard.style.display =
+        'block';
 
+    await loadOrders();
+
+}
+
+
+/* =====================================
+   LOAD ORDERS
+===================================== */
+
+async function loadOrders(){
+
+    ordersContainer.innerHTML =
+        '<div class="loading">Loading orders...</div>';
+
+
+    const { data, error } =
+        await supabaseClient
+        .from('orders')
+        .select('*')
+        .order(
+            'created_at',
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        console.error(error);
+
+        ordersContainer.innerHTML = `
+            <div class="empty">
+
+                <h3>Could not load orders</h3>
+
+                <p>
+                    ${escapeHtml(error.message)}
+                </p>
+
+            </div>
+        `;
+
+        return;
     }
 
 
-    /* =========================================
-       LOAD ORDERS
-    ========================================= */
-
-    async function loadOrders() {
-
-        ordersContainer.innerHTML =
-            '<div class="loading">Loading orders...</div>';
-
-        const { data, error } =
-            await supabaseClient
-                .from('orders')
-                .select('*')
-                .order('created_at', {
-                    ascending: false
-                });
-
-        if (error) {
-
-            console.error(error);
-
-            ordersContainer.innerHTML = `
-                <div class="empty">
-                    <h3>Could not load orders</h3>
-                    <p style="margin-top:8px;">
-                        ${escapeHtml(error.message)}
-                    </p>
-                </div>
-            `;
-
-            return;
-        }
-
-        allOrders = data || [];
-
-        updateStats();
-
-        renderOrders(allOrders);
-
-    }
+    allOrders =
+        data || [];
 
 
-    /* =========================================
-       STATS
-    ========================================= */
+    updateStats();
 
-    function updateStats() {
+    applyFilters();
 
-        const pending =
-            allOrders.filter(order =>
+
+    lastUpdated.textContent =
+        'Last updated: ' +
+        new Date().toLocaleTimeString();
+
+}
+
+
+/* =====================================
+   STATS
+===================================== */
+
+function updateStats(){
+
+    const total =
+        allOrders.length;
+
+
+    const sales =
+        allOrders.reduce(
+            (sum, order) =>
+                sum + Number(order.total || 0),
+            0
+        );
+
+
+    const pending =
+        allOrders.filter(
+            order =>
                 order.order_status === 'pending'
-            ).length;
+        ).length;
 
-        const completed =
-            allOrders.filter(order =>
+
+    const completed =
+        allOrders.filter(
+            order =>
                 order.order_status === 'completed'
-            ).length;
+        ).length;
 
-        totalOrders.textContent =
-            allOrders.length;
 
-        pendingOrders.textContent =
-            pending;
+    totalOrders.textContent =
+        total;
 
-        completedOrders.textContent =
-            completed;
+
+    totalSales.textContent =
+        'LKR ' +
+        sales.toLocaleString();
+
+
+    pendingOrders.textContent =
+        pending;
+
+
+    completedOrders.textContent =
+        completed;
+
+}
+
+
+/* =====================================
+   FILTERS
+===================================== */
+
+function applyFilters(){
+
+    const query =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    const selectedStatus =
+        statusFilter.value;
+
+
+    const selectedDate =
+        dateFilter.value;
+
+
+    const filtered =
+        allOrders.filter(order => {
+
+
+            const searchableText = [
+
+                order.order_number,
+                order.customer_name,
+                order.whatsapp,
+                order.email,
+                order.order_status
+
+            ]
+            .join(' ')
+            .toLowerCase();
+
+
+            if(
+                query &&
+                !searchableText.includes(query)
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                selectedStatus !== 'all' &&
+                order.order_status !== selectedStatus
+            ){
+
+                return false;
+
+            }
+
+
+            if(selectedDate){
+
+                const orderDate =
+                    new Date(order.created_at);
+
+                const localDate =
+                    orderDate
+                    .toLocaleDateString(
+                        'en-CA'
+                    );
+
+
+                if(
+                    localDate !== selectedDate
+                ){
+
+                    return false;
+
+                }
+
+            }
+
+
+            return true;
+
+        });
+
+
+    renderOrders(filtered);
+
+}
+
+
+/* =====================================
+   RENDER ORDERS
+===================================== */
+
+function renderOrders(orders){
+
+    if(!orders.length){
+
+        ordersContainer.innerHTML = `
+            <div class="empty">
+
+                <h3>No orders found</h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            </div>
+        `;
+
+        return;
     }
 
 
-    /* =========================================
-       RENDER ORDERS
-    ========================================= */
+    ordersContainer.innerHTML =
 
-    function renderOrders(orders) {
+        '<div class="orders">' +
 
-        if (!orders.length) {
+        orders
+        .map(createOrderCard)
+        .join('') +
 
-            ordersContainer.innerHTML = `
-                <div class="empty">
-                    <h3>No orders found</h3>
-                    <p style="margin-top:8px;">
-                        Customer orders will appear here.
-                    </p>
-                </div>
-            `;
+        '</div>';
 
-            return;
-        }
-
-        ordersContainer.innerHTML =
-            '<div class="orders">' +
-            orders.map(createOrderCard).join('') +
-            '</div>';
-
-    }
+}
 
 
-    /* =========================================
-       ORDER CARD
-    ========================================= */
+/* =====================================
+   ORDER CARD
+===================================== */
 
-    function createOrderCard(order) {
+function createOrderCard(order){
 
-        const items =
-            Array.isArray(order.items)
-                ? order.items
-                : [];
-
-        const itemsHtml =
-            items.length
-                ? items.map(item => {
-
-                    const quantity =
-                        Number(item.quantity || 1);
-
-                    const price =
-                        Number(item.price || 0);
-
-                    return `
-                        <div class="item">
-
-                            <div>
-                                <div class="item-name">
-                                    ${escapeHtml(item.name || 'Product')}
-                                </div>
-
-                                <div class="item-meta">
-                                    ${escapeHtml(item.plan || '')}
-                                    × ${quantity}
-                                </div>
-                            </div>
-
-                            <div class="item-price">
-                                LKR ${(price * quantity).toLocaleString()}
-                            </div>
-
-                        </div>
-                    `;
-
-                }).join('')
-                : `
-                    <div style="color:#777;font-size:13px;">
-                        No item information
-                    </div>
-                `;
+    const items =
+        Array.isArray(order.items)
+        ? order.items
+        : [];
 
 
-        const date =
+    const status =
+        order.order_status ||
+        'pending';
+
+
+    const date =
+        order.created_at
+        ? new Date(
             order.created_at
-                ? new Date(order.created_at).toLocaleString()
-                : 'Unknown date';
+        ).toLocaleString()
+        : 'Unknown';
 
 
-        const status =
-            order.order_status || 'pending';
+    const itemsHtml =
+        items.length
+
+        ?
+
+        items.map(item => {
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+            const price =
+                Number(
+                    item.price || 0
+                );
 
 
-        return `
-            <div class="order-card">
+            return `
 
-                <div class="order-head">
+                <div class="item">
 
                     <div>
-                        <div class="order-number">
-                            ${escapeHtml(order.order_number || 'No Order Number')}
+
+                        <div class="item-name">
+                            ${escapeHtml(
+                                item.name ||
+                                'Product'
+                            )}
                         </div>
 
-                        <div class="order-date">
-                            ${escapeHtml(date)}
+                        <div class="item-meta">
+                            ${escapeHtml(
+                                item.plan || ''
+                            )}
+                            × ${quantity}
                         </div>
+
                     </div>
 
+                    <div class="item-price">
+                        LKR ${
+                            (
+                                price *
+                                quantity
+                            ).toLocaleString()
+                        }
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join('')
+
+        :
+
+        '<div style="color:#666;font-size:13px;">No product information</div>';
+
+
+    return `
+
+        <div class="order-card">
+
+            <div class="order-head">
+
+                <div>
+
+                    <div class="order-number">
+                        ${escapeHtml(
+                            order.order_number ||
+                            'No Order Number'
+                        )}
+                    </div>
+
+                    <div class="order-date">
+                        ${escapeHtml(date)}
+                    </div>
+
+                </div>
+
+
+                <div>
 
                     <select
-                        class="status"
-                        onchange="changeStatus(${Number(order.id)}, this.value)"
+                        class="status ${status}"
+                        onchange="
+                            changeStatus(
+                                ${Number(order.id)},
+                                this.value
+                            )
+                        "
                     >
 
-                        <option value="pending"
-                            ${status === 'pending' ? 'selected' : ''}>
+                        <option
+                            value="pending"
+                            ${status === 'pending'
+                                ? 'selected'
+                                : ''}
+                        >
                             Pending
                         </option>
 
-                        <option value="processing"
-                            ${status === 'processing' ? 'selected' : ''}>
+                        <option
+                            value="processing"
+                            ${status === 'processing'
+                                ? 'selected'
+                                : ''}
+                        >
                             Processing
                         </option>
 
-                        <option value="completed"
-                            ${status === 'completed' ? 'selected' : ''}>
+                        <option
+                            value="completed"
+                            ${status === 'completed'
+                                ? 'selected'
+                                : ''}
+                        >
                             Completed
                         </option>
 
-                        <option value="cancelled"
-                            ${status === 'cancelled' ? 'selected' : ''}>
+                        <option
+                            value="cancelled"
+                            ${status === 'cancelled'
+                                ? 'selected'
+                                : ''}
+                        >
                             Cancelled
                         </option>
 
                     </select>
 
-                </div>
 
-
-                <div class="order-body">
-
-                    <div class="customer">
-
-                        <h3>Customer</h3>
-
-                        <p>
-                            <strong>
-                                ${escapeHtml(order.customer_name || '')}
-                            </strong>
-                        </p>
-
-                        <p>
-                            WhatsApp:
-                            <a
-                                href="https://wa.me/${cleanPhone(order.whatsapp)}"
-                                target="_blank"
-                            >
-                                ${escapeHtml(order.whatsapp || '')}
-                            </a>
-                        </p>
-
-                        <p>
-                            Email:
-                            ${escapeHtml(order.email || '')}
-                        </p>
-
-                    </div>
-
-
-                    <div class="items">
-
-                        <h3>Products</h3>
-
-                        ${itemsHtml}
-
-                    </div>
-
-                </div>
-
-
-                <div class="order-footer">
-
-                    <div class="note">
-                        ${
-                            order.note
-                                ? 'Note: ' + escapeHtml(order.note)
-                                : 'No customer note'
-                        }
-                    </div>
-
-                    <div class="total">
-                        LKR ${Number(order.total || 0).toLocaleString()}
-                    </div>
+                    <button
+                        class="view-btn"
+                        onclick="
+                            openOrder(
+                                ${Number(order.id)}
+                            )
+                        "
+                    >
+                        View
+                    </button>
 
                 </div>
 
             </div>
-        `;
+
+
+            <div class="order-body">
+
+
+                <div class="customer">
+
+                    <div class="section-title">
+                        Customer
+                    </div>
+
+
+                    <p>
+                        <strong>
+                            ${escapeHtml(
+                                order.customer_name ||
+                                ''
+                            )}
+                        </strong>
+                    </p>
+
+
+                    <p>
+                        WhatsApp:
+
+                        <a
+                            href="https://wa.me/${cleanPhone(
+                                order.whatsapp
+                            )}"
+                            target="_blank"
+                        >
+                            ${escapeHtml(
+                                order.whatsapp ||
+                                ''
+                            )}
+                        </a>
+
+                    </p>
+
+
+                    <p>
+                        Email:
+                        ${escapeHtml(
+                            order.email ||
+                            ''
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <div class="section-title">
+                        Products
+                    </div>
+
+                    ${itemsHtml}
+
+                </div>
+
+            </div>
+
+
+            <div class="order-footer">
+
+                <div class="note">
+
+                    ${
+                        order.note
+
+                        ?
+
+                        'Note: ' +
+                        escapeHtml(
+                            order.note
+                        )
+
+                        :
+
+                        'No customer note'
+                    }
+
+                </div>
+
+
+                <div class="total">
+
+                    LKR ${
+                        Number(
+                            order.total ||
+                            0
+                        ).toLocaleString()
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================
+   OPEN ORDER
+===================================== */
+
+function openOrder(orderId){
+
+    const order =
+        allOrders.find(
+            item =>
+                Number(item.id) ===
+                Number(orderId)
+        );
+
+
+    if(!order){
+
+        return;
+
     }
 
 
-    /* =========================================
-       CHANGE ORDER STATUS
-    ========================================= */
+    modalTitle.textContent =
+        order.order_number ||
+        'Order Details';
 
-    async function changeStatus(orderId, newStatus) {
 
-        const { error } =
-            await supabaseClient
-                .from('orders')
-                .update({
-                    order_status: newStatus
-                })
-                .eq('id', orderId);
+    const items =
+        Array.isArray(order.items)
+        ? order.items
+        : [];
 
-        if (error) {
 
-            alert(
-                'Could not update order status.\n\n' +
-                error.message
+    const itemsHtml =
+        items.length
+
+        ?
+
+        items.map(item => {
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+            const price =
+                Number(
+                    item.price || 0
+                );
+
+
+            return `
+
+                <div class="item">
+
+                    <div>
+
+                        <div class="item-name">
+                            ${escapeHtml(
+                                item.name ||
+                                'Product'
+                            )}
+                        </div>
+
+                        <div class="item-meta">
+                            ${escapeHtml(
+                                item.plan || ''
+                            )}
+                            × ${quantity}
+                        </div>
+
+                    </div>
+
+                    <div class="item-price">
+                        LKR ${
+                            (
+                                price *
+                                quantity
+                            ).toLocaleString()
+                        }
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join('')
+
+        :
+
+        '<p style="color:#777;">No products found.</p>';
+
+
+    const date =
+        order.created_at
+        ? new Date(
+            order.created_at
+        ).toLocaleString()
+        : 'Unknown';
+
+
+    modalBody.innerHTML = `
+
+        <div class="detail-row">
+
+            <span>Order Number</span>
+
+            <span>
+                ${escapeHtml(
+                    order.order_number ||
+                    ''
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>Customer</span>
+
+            <span>
+                ${escapeHtml(
+                    order.customer_name ||
+                    ''
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>WhatsApp</span>
+
+            <span>
+                ${escapeHtml(
+                    order.whatsapp ||
+                    ''
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>Email</span>
+
+            <span>
+                ${escapeHtml(
+                    order.email ||
+                    ''
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>Date</span>
+
+            <span>
+                ${escapeHtml(date)}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>Status</span>
+
+            <span>
+                ${escapeHtml(
+                    order.order_status ||
+                    'pending'
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>Payment</span>
+
+            <span>
+                ${escapeHtml(
+                    order.payment_method ||
+                    'pending'
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="modal-items">
+
+            <h4>Products</h4>
+
+            ${itemsHtml}
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>Subtotal</span>
+
+            <span>
+                LKR ${
+                    Number(
+                        order.subtotal ||
+                        0
+                    ).toLocaleString()
+                }
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span>Delivery</span>
+
+            <span>
+                LKR ${
+                    Number(
+                        order.delivery_fee ||
+                        0
+                    ).toLocaleString()
+                }
+            </span>
+
+        </div>
+
+
+        <div class="modal-total">
+
+            <span>Total</span>
+
+            <strong>
+                LKR ${
+                    Number(
+                        order.total ||
+                        0
+                    ).toLocaleString()
+                }
+            </strong>
+
+        </div>
+
+
+        <div
+            style="
+                margin-top:20px;
+                padding-top:15px;
+                border-top:1px solid #222;
+                color:#888;
+                font-size:13px;
+            "
+        >
+
+            <strong style="color:#aaa;">
+                Customer Note
+            </strong>
+
+            <div style="margin-top:7px;">
+                ${
+                    order.note
+                    ? escapeHtml(order.note)
+                    : 'No customer note'
+                }
+            </div>
+
+        </div>
+
+    `;
+
+
+    orderModal.classList.add('active');
+
+}
+
+
+/* =====================================
+   CLOSE MODAL
+===================================== */
+
+closeModal.addEventListener(
+    'click',
+    function(){
+
+        orderModal.classList.remove(
+            'active'
+        );
+
+    }
+);
+
+
+orderModal.addEventListener(
+    'click',
+    function(event){
+
+        if(
+            event.target ===
+            orderModal
+        ){
+
+            orderModal.classList.remove(
+                'active'
             );
 
-            await loadOrders();
-
-            return;
         }
 
-        const order =
-            allOrders.find(item =>
-                Number(item.id) === Number(orderId)
-            );
+    }
+);
 
-        if (order) {
-            order.order_status = newStatus;
-        }
 
-        updateStats();
+/* =====================================
+   CHANGE STATUS
+===================================== */
+
+async function changeStatus(
+    orderId,
+    newStatus
+){
+
+    const { error } =
+        await supabaseClient
+        .from('orders')
+        .update({
+            order_status:newStatus
+        })
+        .eq(
+            'id',
+            orderId
+        );
+
+
+    if(error){
+
+        alert(
+            'Could not update order status.\n\n' +
+            error.message
+        );
+
+        await loadOrders();
+
+        return;
+    }
+
+
+    const order =
+        allOrders.find(
+            item =>
+                Number(item.id) ===
+                Number(orderId)
+        );
+
+
+    if(order){
+
+        order.order_status =
+            newStatus;
 
     }
 
 
-    /* =========================================
-       SEARCH
-    ========================================= */
+    updateStats();
 
-    searchInput.addEventListener(
-        'input',
-        function() {
+    applyFilters();
 
-            const query =
-                this.value.trim().toLowerCase();
+}
 
-            if (!query) {
 
-                renderOrders(allOrders);
+/* =====================================
+   SEARCH + FILTER EVENTS
+===================================== */
 
-                return;
-            }
+searchInput.addEventListener(
+    'input',
+    applyFilters
+);
 
-            const filtered =
-                allOrders.filter(order => {
 
-                    const text = [
+statusFilter.addEventListener(
+    'change',
+    applyFilters
+);
 
-                        order.order_number,
-                        order.customer_name,
-                        order.whatsapp,
-                        order.email,
-                        order.order_status
 
-                    ]
-                    .join(' ')
-                    .toLowerCase();
+dateFilter.addEventListener(
+    'change',
+    applyFilters
+);
 
-                    return text.includes(query);
 
-                });
+/* =====================================
+   REFRESH
+===================================== */
 
-            renderOrders(filtered);
+refreshBtn.addEventListener(
+    'click',
+    loadOrders
+);
 
-        }
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+logoutBtn.addEventListener(
+    'click',
+    async function(){
+
+        await supabaseClient.auth.signOut();
+
+        dashboard.style.display =
+            'none';
+
+        loginPage.style.display =
+            'flex';
+
+        loginForm.reset();
+
+    }
+);
+
+
+/* =====================================
+   SESSION CHECK
+===================================== */
+
+async function checkSession(){
+
+    const { data } =
+        await supabaseClient.auth
+        .getSession();
+
+
+    if(data.session){
+
+        await showDashboard();
+
+    }
+    else{
+
+        loginPage.style.display =
+            'flex';
+
+        dashboard.style.display =
+            'none';
+
+    }
+
+}
+
+
+/* =====================================
+   HELPERS
+===================================== */
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ''
+    )
+    .replace(
+        /&/g,
+        '&amp;'
+    )
+    .replace(
+        /</g,
+        '&lt;'
+    )
+    .replace(
+        />/g,
+        '&gt;'
+    )
+    .replace(
+        /"/g,
+        '&quot;'
+    )
+    .replace(
+        /'/g,
+        '&#039;'
     );
 
+}
 
-    /* =========================================
-       REFRESH
-    ========================================= */
 
-    refreshBtn.addEventListener(
-        'click',
-        loadOrders
+function cleanPhone(phone){
+
+    return String(
+        phone || ''
+    )
+    .replace(
+        /[^\d]/g,
+        ''
     );
 
-
-    /* =========================================
-       LOGOUT
-    ========================================= */
-
-    logoutBtn.addEventListener(
-        'click',
-        async function() {
-
-            await supabaseClient.auth.signOut();
-
-            dashboard.style.display = 'none';
-            loginPage.style.display = 'flex';
-
-            loginForm.reset();
-
-        }
-    );
+}
 
 
-    /* =========================================
-       SESSION CHECK
-    ========================================= */
+/* =====================================
+   START
+===================================== */
 
-    async function checkSession() {
-
-        const { data } =
-            await supabaseClient.auth.getSession();
-
-        if (data.session) {
-
-            await showDashboard();
-
-        } else {
-
-            loginPage.style.display = 'flex';
-            dashboard.style.display = 'none';
-
-        }
-
-    }
-
-
-    /* =========================================
-       SECURITY HELPERS
-    ========================================= */
-
-    function escapeHtml(value) {
-
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-
-    }
-
-
-    function cleanPhone(phone) {
-
-        return String(phone || '')
-            .replace(/[^\d]/g, '');
-
-    }
-
-
-    /* =========================================
-       START
-    ========================================= */
-
-    checkSession();
+checkSession();
 
 </script>
 
 </body>
-</html>
+    </html>
