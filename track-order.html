@@ -557,6 +557,155 @@
 
 
         /* ==============================
+           11E STATUS MESSAGE
+        ============================== */
+
+        .status-message {
+
+            margin-top: 20px;
+
+            padding: 20px 22px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(214,173,96,0.055);
+
+            border:
+                1px solid
+                rgba(214,173,96,0.16);
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 15px;
+
+        }
+
+
+        .status-message-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            flex: 0 0 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(214,173,96,0.12);
+
+            color: #d6ad60;
+
+            font-size: 18px;
+
+        }
+
+
+        .status-message-content {
+
+            flex: 1;
+
+        }
+
+
+        .status-message-title {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .status-message-text {
+
+            color: #aaa;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .status-message.processing {
+
+            background:
+                rgba(90,160,255,0.055);
+
+            border-color:
+                rgba(90,160,255,0.16);
+
+        }
+
+
+        .status-message.processing
+        .status-message-icon {
+
+            background:
+                rgba(90,160,255,0.12);
+
+            color: #8fc2ff;
+
+        }
+
+
+        .status-message.completed {
+
+            background:
+                rgba(80,210,130,0.055);
+
+            border-color:
+                rgba(80,210,130,0.16);
+
+        }
+
+
+        .status-message.completed
+        .status-message-icon {
+
+            background:
+                rgba(80,210,130,0.12);
+
+            color: #7ee6a3;
+
+        }
+
+
+        .status-message.cancelled {
+
+            background:
+                rgba(255,80,80,0.055);
+
+            border-color:
+                rgba(255,80,80,0.16);
+
+        }
+
+
+        .status-message.cancelled
+        .status-message-icon {
+
+            background:
+                rgba(255,80,80,0.12);
+
+            color: #ff9999;
+
+        }
+
+
+        /* ==============================
            TIMELINE
         ============================== */
 
@@ -1004,6 +1153,42 @@
 
             }
 
+
+            .status-message {
+
+                padding: 17px;
+
+                gap: 12px;
+
+            }
+
+
+            .status-message-icon {
+
+                width: 38px;
+
+                height: 38px;
+
+                flex-basis: 38px;
+
+                font-size: 16px;
+
+            }
+
+
+            .status-message-title {
+
+                font-size: 14px;
+
+            }
+
+
+            .status-message-text {
+
+                font-size: 12px;
+
+            }
+
         }
 
     </style>
@@ -1165,6 +1350,44 @@
                         class="status-badge"
                         id="statusBadge"
                     >
+                    </div>
+
+                </div>
+
+
+
+                <!-- 11E STATUS MESSAGE -->
+
+                <div
+                    class="status-message"
+                    id="statusMessage"
+                >
+
+                    <div
+                        class="status-message-icon"
+                        id="statusMessageIcon"
+                    >
+                        ✓
+                    </div>
+
+
+                    <div class="status-message-content">
+
+                        <div
+                            class="status-message-title"
+                            id="statusMessageTitle"
+                        >
+                            Order Received
+                        </div>
+
+
+                        <div
+                            class="status-message-text"
+                            id="statusMessageText"
+                        >
+                            Your order has been received.
+                        </div>
+
                     </div>
 
                 </div>
@@ -1380,6 +1603,30 @@
         );
 
 
+    const statusMessage =
+        document.getElementById(
+            "statusMessage"
+        );
+
+
+    const statusMessageIcon =
+        document.getElementById(
+            "statusMessageIcon"
+        );
+
+
+    const statusMessageTitle =
+        document.getElementById(
+            "statusMessageTitle"
+        );
+
+
+    const statusMessageText =
+        document.getElementById(
+            "statusMessageText"
+        );
+
+
 
     /* ==============================
        TRACK ORDER
@@ -1392,8 +1639,6 @@
         const orderNumber =
             orderInput.value.trim();
 
-
-        /* Clear old messages */
 
         errorMessage.style.display =
             "none";
@@ -1413,8 +1658,6 @@
 
         }
 
-
-        /* Loading */
 
         loading.style.display =
             "block";
@@ -1544,6 +1787,9 @@
         setStatus(status);
 
 
+        setStatusMessage(status);
+
+
         document.getElementById(
             "subtotal"
         ).textContent =
@@ -1593,6 +1839,104 @@
             behavior: "smooth",
             block: "start"
         });
+
+    }
+
+
+
+    /* ==============================
+       11E STATUS MESSAGE
+    ============================== */
+
+
+    function setStatusMessage(status) {
+
+
+        statusMessage.className =
+            "status-message";
+
+
+        if (status === "processing") {
+
+
+            statusMessage.classList.add(
+                "processing"
+            );
+
+
+            statusMessageIcon.textContent =
+                "⚙";
+
+
+            statusMessageTitle.textContent =
+                "Your Order Is Being Prepared";
+
+
+            statusMessageText.textContent =
+                "Your order is currently being prepared. We are working on it and will update the status when it is completed.";
+
+        }
+
+
+        else if (status === "completed") {
+
+
+            statusMessage.classList.add(
+                "completed"
+            );
+
+
+            statusMessageIcon.textContent =
+                "✓";
+
+
+            statusMessageTitle.textContent =
+                "Order Completed";
+
+
+            statusMessageText.textContent =
+                "Your order has been completed successfully. Thank you for choosing ProBee!";
+
+        }
+
+
+        else if (status === "cancelled") {
+
+
+            statusMessage.classList.add(
+                "cancelled"
+            );
+
+
+            statusMessageIcon.textContent =
+                "×";
+
+
+            statusMessageTitle.textContent =
+                "Order Cancelled";
+
+
+            statusMessageText.textContent =
+                "This order has been cancelled. If you believe this is unexpected, please contact ProBee for assistance.";
+
+        }
+
+
+        else {
+
+
+            statusMessageIcon.textContent =
+                "✓";
+
+
+            statusMessageTitle.textContent =
+                "Order Received";
+
+
+            statusMessageText.textContent =
+                "Your order has been received successfully and is currently waiting to be processed.";
+
+        }
 
     }
 
@@ -1817,6 +2161,12 @@
                 "active"
             );
 
+
+            /*
+             * Cancelled orders do not show
+             * processing/completed as active.
+             */
+
         }
 
 
@@ -2013,10 +2363,8 @@
 
 
         /*
-         * Automatically track the order.
-         *
-         * This happens when the customer
-         * clicks "Track My Order" from checkout.
+         * Automatically track the order
+         * when coming from Checkout.
          */
 
         trackOrder();
