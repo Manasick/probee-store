@@ -1120,21 +1120,50 @@
     }
 
 
-    /* ENTER KEY */
+/* =====================================================
+   URL ORDER NUMBER
+===================================================== */
 
-    document
-        .getElementById("orderNumber")
-        .addEventListener(
-            "keydown",
-            function(event) {
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
 
-                if (event.key === "Enter") {
-                    trackOrder();
-                }
+const urlOrderNumber =
+    urlParams.get("order");
 
-            }
+
+if (urlOrderNumber) {
+
+    const orderInput =
+        document.getElementById(
+            "orderNumber"
         );
 
+    orderInput.value =
+        urlOrderNumber;
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document
+    .getElementById("orderNumber")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                trackOrder();
+
+            }
+
+        }
+    );
 </script>
 
 </body>
