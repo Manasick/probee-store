@@ -1,605 +1,1235 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Track Order | ProBee</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
             background:
-                radial-gradient(circle at top, #242424 0%, #0d0d0d 45%, #050505 100%);
+                radial-gradient(
+                    circle at top,
+                    #242424 0%,
+                    #0d0d0d 45%,
+                    #050505 100%
+                );
+
             color: #fff;
+
             min-height: 100vh;
+
         }
+
 
         .container {
+
             width: 92%;
+
             max-width: 850px;
+
             margin: auto;
+
         }
 
-        /* HEADER */
+
+        /* ==============================
+           HEADER
+        ============================== */
+
         header {
+
             height: 75px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
             display: flex;
+
             align-items: center;
-            background: rgba(5,5,5,0.85);
+
+            background:
+                rgba(5,5,5,0.85);
+
             backdrop-filter: blur(15px);
+
         }
+
 
         .header-inner {
+
             width: 92%;
+
             max-width: 1200px;
+
             margin: auto;
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
         }
+
 
         .logo {
+
             font-size: 25px;
+
             font-weight: 800;
+
             color: #d6ad60;
+
             letter-spacing: 1px;
+
             text-decoration: none;
+
         }
+
 
         .back-btn {
+
             color: #fff;
+
             text-decoration: none;
+
             font-size: 14px;
+
             padding: 10px 15px;
-            border: 1px solid rgba(255,255,255,0.12);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
             border-radius: 10px;
+
             transition: 0.25s;
+
         }
+
 
         .back-btn:hover {
+
             border-color: #d6ad60;
+
             color: #d6ad60;
+
         }
 
-        /* MAIN */
+
+        /* ==============================
+           MAIN
+        ============================== */
+
         main {
-            padding: 55px 0 80px;
+
+            padding:
+                55px 0 80px;
+
         }
+
 
         .hero {
+
             text-align: center;
+
             margin-bottom: 35px;
+
         }
+
 
         .hero h1 {
+
             font-size: 38px;
+
             margin-bottom: 10px;
+
         }
+
 
         .hero h1 span {
+
             color: #d6ad60;
+
         }
+
 
         .hero p {
+
             color: #aaa;
+
             font-size: 15px;
+
         }
 
-        /* SEARCH CARD */
+
+        /* ==============================
+           SEARCH CARD
+        ============================== */
+
         .search-card {
-            background: rgba(255,255,255,0.045);
-            border: 1px solid rgba(255,255,255,0.09);
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
             border-radius: 20px;
+
             padding: 28px;
+
             backdrop-filter: blur(15px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.35);
+
         }
+
 
         .search-card label {
+
             display: block;
+
             font-size: 13px;
+
             color: #aaa;
-            margin-bottom: 9px;
+
+            margin-bottom: 10px;
+
         }
+
 
         .search-row {
+
             display: flex;
+
             gap: 12px;
+
         }
+
 
         .search-row input {
+
             flex: 1;
+
+            min-width: 0;
+
             height: 52px;
+
+            padding:
+                0 16px;
+
+            background:
+                rgba(0,0,0,0.35);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: #111;
+
             color: #fff;
-            padding: 0 16px;
+
             font-size: 15px;
+
             outline: none;
+
         }
+
 
         .search-row input:focus {
+
             border-color: #d6ad60;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(214,173,96,0.08);
+
         }
 
-        .track-btn {
+
+        .search-row button {
+
             height: 52px;
-            padding: 0 24px;
+
+            padding:
+                0 22px;
+
             border: none;
+
             border-radius: 12px;
-            background: linear-gradient(135deg, #d6ad60, #b98b3e);
-            color: #111;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d6ad60,
+                    #b78a3e
+                );
+
+            color: #080808;
+
+            font-size: 14px;
+
             font-weight: 800;
+
             cursor: pointer;
+
             transition: 0.25s;
-        }
 
-        .track-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(214,173,96,0.2);
-        }
-
-        .track-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .error {
-            display: none;
-            margin-top: 15px;
-            padding: 13px 15px;
-            border-radius: 10px;
-            background: rgba(255,70,70,0.1);
-            border: 1px solid rgba(255,70,70,0.25);
-            color: #ff8585;
-            font-size: 14px;
-        }
-
-        /* RESULT */
-        #result {
-            display: none;
-            margin-top: 28px;
-        }
-
-        .order-card {
-            background: rgba(255,255,255,0.045);
-            border: 1px solid rgba(255,255,255,0.09);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .order-top {
-            padding: 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .order-number {
-            font-size: 22px;
-            font-weight: 800;
-        }
-
-        .order-date {
-            margin-top: 6px;
-            color: #888;
-            font-size: 13px;
-        }
-
-        .status-badge {
-            padding: 8px 13px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .status-pending {
-            background: rgba(255,193,7,0.12);
-            color: #ffd45c;
-        }
-
-        .status-processing {
-            background: rgba(80,160,255,0.12);
-            color: #78b7ff;
-        }
-
-        .status-completed {
-            background: rgba(50,210,130,0.12);
-            color: #64e09d;
-        }
-
-        .status-cancelled {
-            background: rgba(255,70,70,0.12);
-            color: #ff7777;
-        }
-
-        /* TIMELINE */
-        .timeline {
-            padding: 30px 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .timeline-title {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 25px;
-        }
-
-        .steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        .steps::before {
-            content: "";
-            position: absolute;
-            left: 8%;
-            right: 8%;
-            top: 17px;
-            height: 2px;
-            background: #292929;
-            z-index: 0;
-        }
-
-        .step {
-            width: 25%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .dot {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            margin: auto;
-            background: #1d1d1d;
-            border: 2px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .step.active .dot {
-            background: #d6ad60;
-            color: #111;
-            border-color: #d6ad60;
-        }
-
-        .step-label {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #777;
-        }
-
-        .step.active .step-label {
-            color: #fff;
-        }
-
-        /* ITEMS */
-        .section {
-            padding: 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .section-title {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 18px;
-        }
-
-        .item {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 13px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .item:last-child {
-            border-bottom: none;
-        }
-
-        .item-name {
-            color: #ddd;
-            font-size: 14px;
-        }
-
-        .item-qty {
-            color: #777;
-            font-size: 13px;
-            margin-top: 4px;
-        }
-
-        .item-price {
-            color: #d6ad60;
-            font-weight: 700;
-            font-size: 14px;
             white-space: nowrap;
+
         }
 
-        /* TOTALS */
-        .totals {
-            padding: 25px;
+
+        .search-row button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(214,173,96,0.18);
+
         }
 
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            color: #999;
-            font-size: 14px;
+
+        .search-row button:disabled {
+
+            opacity: 0.65;
+
+            cursor: wait;
+
+            transform: none;
+
         }
 
-        .total-row.final {
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
-            font-size: 18px;
-            font-weight: 800;
-        }
 
-        .total-row.final span:last-child {
-            color: #d6ad60;
-        }
+        /* ==============================
+           LOADING
+        ============================== */
 
-        .payment {
-            margin-top: 15px;
-            color: #888;
-            font-size: 13px;
-        }
-
-        .payment strong {
-            color: #ddd;
-        }
-
-        /* LOADING */
         .loading {
+
             display: none;
+
             text-align: center;
-            margin-top: 25px;
+
+            padding: 35px 10px;
+
             color: #aaa;
-            font-size: 14px;
+
         }
+
 
         .spinner {
-            width: 25px;
-            height: 25px;
-            border: 3px solid #333;
+
+            width: 32px;
+
+            height: 32px;
+
+            margin: 0 auto 14px;
+
+            border:
+                3px solid
+                rgba(255,255,255,0.12);
+
             border-top-color: #d6ad60;
+
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 10px;
+
+            animation:
+                spin 0.8s linear infinite;
+
         }
 
+
         @keyframes spin {
+
             to {
                 transform: rotate(360deg);
             }
+
         }
 
-        /* FOOTER */
-        footer {
-            text-align: center;
-            color: #666;
+
+        /* ==============================
+           ERROR
+        ============================== */
+
+        .error {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 14px 16px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,70,70,0.08);
+
+            border:
+                1px solid
+                rgba(255,70,70,0.20);
+
+            color: #ffaaaa;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ==============================
+           RESULT
+        ============================== */
+
+        .result {
+
+            display: none;
+
+            margin-top: 25px;
+
+        }
+
+
+        .order-header {
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+
+        .order-number {
+
+            color: #d6ad60;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .customer-name {
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+        }
+
+
+        .order-date {
+
+            color: #999;
+
+            font-size: 13px;
+
+            margin-top: 7px;
+
+        }
+
+
+        .status-badge {
+
+            padding:
+                9px 15px;
+
+            border-radius: 999px;
+
             font-size: 12px;
-            padding: 30px 15px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            white-space: nowrap;
+
         }
 
-        /* MOBILE */
+
+        .status-pending {
+
+            background:
+                rgba(214,173,96,0.12);
+
+            color: #d6ad60;
+
+            border:
+                1px solid
+                rgba(214,173,96,0.25);
+
+        }
+
+
+        .status-processing {
+
+            background:
+                rgba(90,160,255,0.12);
+
+            color: #8fc2ff;
+
+            border:
+                1px solid
+                rgba(90,160,255,0.25);
+
+        }
+
+
+        .status-completed {
+
+            background:
+                rgba(80,210,130,0.12);
+
+            color: #7ee6a3;
+
+            border:
+                1px solid
+                rgba(80,210,130,0.25);
+
+        }
+
+
+        .status-cancelled {
+
+            background:
+                rgba(255,80,80,0.12);
+
+            color: #ff9999;
+
+            border:
+                1px solid
+                rgba(255,80,80,0.25);
+
+        }
+
+
+        /* ==============================
+           TIMELINE
+        ============================== */
+
+        .timeline-card {
+
+            margin-top: 20px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+        }
+
+
+        .section-title {
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .timeline {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+        }
+
+
+        .timeline-step {
+
+            text-align: center;
+
+            position: relative;
+
+        }
+
+
+        .timeline-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            color: #777;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .timeline-step.active
+        .timeline-icon {
+
+            background:
+                rgba(214,173,96,0.15);
+
+            border-color: #d6ad60;
+
+            color: #d6ad60;
+
+            box-shadow:
+                0 0 20px
+                rgba(214,173,96,0.12);
+
+        }
+
+
+        .timeline-label {
+
+            margin-top: 10px;
+
+            font-size: 12px;
+
+            color: #777;
+
+        }
+
+
+        .timeline-step.active
+        .timeline-label {
+
+            color: #fff;
+
+        }
+
+
+        /* ==============================
+           ORDER DETAILS
+        ============================== */
+
+        .details-card {
+
+            margin-top: 20px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+        }
+
+
+        .items {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding:
+                15px 0;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.07);
+
+        }
+
+
+        .item:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .item-name {
+
+            font-size: 14px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .item-qty {
+
+            color: #888;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+
+        }
+
+
+        .item-price {
+
+            color: #d6ad60;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .summary {
+
+            margin-top: 18px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+
+        }
+
+
+        .summary-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 7px 0;
+
+            color: #aaa;
+
+            font-size: 14px;
+
+        }
+
+
+        .summary-row.total {
+
+            margin-top: 8px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            color: #fff;
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+        }
+
+
+        .summary-row.total span:last-child {
+
+            color: #d6ad60;
+
+        }
+
+
+        .payment {
+
+            margin-top: 18px;
+
+            padding:
+                14px 16px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            color: #aaa;
+
+            font-size: 13px;
+
+        }
+
+
+        .payment strong {
+
+            color: #fff;
+
+        }
+
+
+        /* ==============================
+           EMPTY
+        ============================== */
+
+        .empty {
+
+            text-align: center;
+
+            color: #888;
+
+            padding: 25px 0;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
         @media (max-width: 600px) {
 
             header {
-                height: 65px;
+
+                height: 68px;
+
             }
+
 
             .logo {
+
                 font-size: 22px;
+
             }
+
 
             .back-btn {
+
                 font-size: 12px;
-                padding: 8px 11px;
+
+                padding:
+                    8px 11px;
+
             }
+
 
             main {
-                padding: 40px 0 60px;
+
+                padding:
+                    40px 0 60px;
+
             }
+
 
             .hero h1 {
+
                 font-size: 30px;
+
             }
+
 
             .hero p {
+
                 font-size: 13px;
-                line-height: 1.5;
+
             }
+
 
             .search-card {
+
                 padding: 20px;
-                border-radius: 16px;
+
+                border-radius: 17px;
+
             }
+
 
             .search-row {
+
                 flex-direction: column;
+
             }
 
-            .track-btn {
+
+            .search-row button {
+
                 width: 100%;
+
             }
 
-            .order-top {
-                align-items: flex-start;
+
+            .order-header {
+
                 flex-direction: column;
+
+                align-items: flex-start;
+
+                padding: 20px;
+
             }
 
-            .order-number {
+
+            .status-badge {
+
+                align-self: flex-start;
+
+            }
+
+
+            .timeline-card,
+            .details-card {
+
+                padding: 20px;
+
+                border-radius: 17px;
+
+            }
+
+
+            .timeline {
+
+                gap: 5px;
+
+            }
+
+
+            .timeline-icon {
+
+                width: 40px;
+
+                height: 40px;
+
+            }
+
+
+            .timeline-label {
+
+                font-size: 11px;
+
+            }
+
+
+            .customer-name {
+
                 font-size: 19px;
+
             }
 
-            .steps::before {
-                display: none;
-            }
-
-            .steps {
-                flex-direction: column;
-                gap: 18px;
-            }
-
-            .step {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                text-align: left;
-                gap: 12px;
-            }
-
-            .dot {
-                margin: 0;
-                flex-shrink: 0;
-            }
-
-            .step-label {
-                margin-top: 0;
-            }
-
-            .item {
-                align-items: flex-start;
-            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-<header>
-    <div class="header-inner">
-        <a href="index.html" class="logo">ProBee</a>
 
-        <a href="products.html" class="back-btn">
-            ← Back to Products
-        </a>
-    </div>
-</header>
+    <!-- ==============================
+         HEADER
+    ============================== -->
+
+    <header>
+
+        <div class="header-inner">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                ProBee
+            </a>
 
 
-<main>
+            <a
+                href="products.html"
+                class="back-btn"
+            >
+                ← Continue Shopping
+            </a>
 
-    <div class="container">
-
-        <div class="hero">
-            <h1>Track Your <span>Order</span></h1>
-
-            <p>
-                Enter your ProBee order number to check your order status.
-            </p>
         </div>
 
+    </header>
 
-        <!-- SEARCH -->
-        <div class="search-card">
 
-            <label for="orderNumber">
-                Order Number
-            </label>
 
-            <div class="search-row">
+    <!-- ==============================
+         MAIN
+    ============================== -->
 
-                <input
-                    type="text"
-                    id="orderNumber"
-                    placeholder="Example: PROB-1234"
-                    autocomplete="off"
-                >
+    <main>
 
-                <button
-                    class="track-btn"
-                    id="trackBtn"
-                    onclick="trackOrder()"
-                >
-                    Track Order
-                </button>
+        <div class="container">
+
+
+            <div class="hero">
+
+                <h1>
+                    Track Your
+                    <span>Order</span>
+                </h1>
+
+                <p>
+                    Enter your order number to see
+                    the latest status of your order.
+                </p>
 
             </div>
 
-            <div class="error" id="errorBox"></div>
 
-            <div class="loading" id="loadingBox">
+
+            <!-- SEARCH -->
+
+            <div class="search-card">
+
+                <label for="orderNumber">
+                    Order Number
+                </label>
+
+
+                <div class="search-row">
+
+                    <input
+                        type="text"
+                        id="orderNumber"
+                        placeholder="Example: PROB-260930-1234"
+                        autocomplete="off"
+                    >
+
+
+                    <button
+                        type="button"
+                        id="trackButton"
+                        onclick="trackOrder()"
+                    >
+                        Track Order
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="error"
+                    id="errorMessage"
+                ></div>
+
+            </div>
+
+
+
+            <!-- LOADING -->
+
+            <div
+                class="loading"
+                id="loading"
+            >
+
                 <div class="spinner"></div>
-                Checking your order...
+
+                <div>
+                    Checking your order...
+                </div>
+
             </div>
 
-        </div>
 
 
-        <!-- RESULT -->
-        <div id="result">
+            <!-- RESULT -->
 
-            <div class="order-card">
+            <div
+                class="result"
+                id="result"
+            >
 
-                <div class="order-top">
+
+                <!-- ORDER HEADER -->
+
+                <div class="order-header">
 
                     <div>
-                        <div class="order-number" id="displayOrderNumber">
-                            -
+
+                        <div
+                            class="order-number"
+                            id="displayOrderNumber"
+                        >
                         </div>
 
-                        <div class="order-date" id="displayDate">
-                            -
+
+                        <div
+                            class="customer-name"
+                            id="customerName"
+                        >
                         </div>
+
+
+                        <div
+                            class="order-date"
+                            id="orderDate"
+                        >
+                        </div>
+
                     </div>
+
 
                     <div
                         class="status-badge"
                         id="statusBadge"
                     >
-                        Pending
                     </div>
 
                 </div>
+
 
 
                 <!-- TIMELINE -->
-                <div class="timeline">
 
-                    <div class="timeline-title">
+                <div class="timeline-card">
+
+                    <div class="section-title">
                         Order Progress
                     </div>
 
-                    <div class="steps">
 
-                        <div class="step" id="stepPending">
-                            <div class="dot">1</div>
-                            <div class="step-label">Pending</div>
+                    <div class="timeline">
+
+
+                        <div
+                            class="timeline-step"
+                            id="pendingStep"
+                        >
+
+                            <div class="timeline-icon">
+                                ✓
+                            </div>
+
+                            <div class="timeline-label">
+                                Pending
+                            </div>
+
                         </div>
 
-                        <div class="step" id="stepProcessing">
-                            <div class="dot">2</div>
-                            <div class="step-label">Processing</div>
+
+
+                        <div
+                            class="timeline-step"
+                            id="processingStep"
+                        >
+
+                            <div class="timeline-icon">
+                                ⚙
+                            </div>
+
+                            <div class="timeline-label">
+                                Processing
+                            </div>
+
                         </div>
 
-                        <div class="step" id="stepCompleted">
-                            <div class="dot">3</div>
-                            <div class="step-label">Completed</div>
+
+
+                        <div
+                            class="timeline-step"
+                            id="completedStep"
+                        >
+
+                            <div class="timeline-icon">
+                                ✓
+                            </div>
+
+                            <div class="timeline-label">
+                                Completed
+                            </div>
+
                         </div>
 
                     </div>
@@ -607,70 +1237,105 @@
                 </div>
 
 
-                <!-- ITEMS -->
-                <div class="section">
+
+                <!-- ORDER DETAILS -->
+
+                <div class="details-card">
 
                     <div class="section-title">
-                        Order Items
+                        Order Details
                     </div>
 
-                    <div id="itemsList"></div>
 
-                </div>
-
-
-                <!-- TOTALS -->
-                <div class="totals">
-
-                    <div class="total-row">
-                        <span>Subtotal</span>
-                        <span id="subtotal">LKR 0</span>
+                    <div
+                        class="items"
+                        id="orderItems"
+                    >
                     </div>
 
-                    <div class="total-row">
-                        <span>Delivery</span>
-                        <span id="delivery">FREE</span>
+
+                    <div class="summary">
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <span id="subtotal">
+                                LKR 0
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Delivery
+                            </span>
+
+                            <span id="delivery">
+                                FREE
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="summary-row total"
+                        >
+
+                            <span>
+                                Total
+                            </span>
+
+                            <span id="total">
+                                LKR 0
+                            </span>
+
+                        </div>
+
+
                     </div>
 
-                    <div class="total-row final">
-                        <span>Total</span>
-                        <span id="total">LKR 0</span>
-                    </div>
 
                     <div class="payment">
-                        Payment:
+
+                        Payment Method:
                         <strong id="paymentMethod">
                             Pending
                         </strong>
+
                     </div>
 
                 </div>
+
 
             </div>
 
         </div>
 
-    </div>
-
-</main>
+    </main>
 
 
-<footer>
-    © 2026 ProBee. All rights reserved.
-</footer>
 
+    <script>
 
-<script>
 
     /* ==============================
        SUPABASE
     ============================== */
 
+
     const SUPABASE_URL =
-        'https://fjczxixfajvvizsywrtr.supabase.co';
+        "https://fjczxixfajvvizsywrtr.supabase.co";
+
 
     const SUPABASE_ANON_KEY =
-        'sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN';
+        "sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN";
+
 
     const supabaseClient =
         window.supabase.createClient(
@@ -679,59 +1344,102 @@
         );
 
 
+
+    /* ==============================
+       ELEMENTS
+    ============================== */
+
+
+    const orderInput =
+        document.getElementById(
+            "orderNumber"
+        );
+
+
+    const trackButton =
+        document.getElementById(
+            "trackButton"
+        );
+
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+
     /* ==============================
        TRACK ORDER
     ============================== */
 
+
     async function trackOrder() {
 
-        const input =
-            document.getElementById("orderNumber");
 
         const orderNumber =
-            input.value.trim();
-
-        const errorBox =
-            document.getElementById("errorBox");
-
-        const result =
-            document.getElementById("result");
-
-        const loading =
-            document.getElementById("loadingBox");
-
-        const button =
-            document.getElementById("trackBtn");
+            orderInput.value.trim();
 
 
-        errorBox.style.display = "none";
-        result.style.display = "none";
+        /* Clear old messages */
+
+        errorMessage.style.display =
+            "none";
+
+
+        result.style.display =
+            "none";
 
 
         if (!orderNumber) {
 
-            errorBox.textContent =
-                "Please enter your order number.";
-
-            errorBox.style.display = "block";
+            showError(
+                "Please enter your order number."
+            );
 
             return;
+
         }
 
 
-        button.disabled = true;
-        loading.style.display = "block";
+        /* Loading */
+
+        loading.style.display =
+            "block";
+
+
+        trackButton.disabled =
+            true;
+
+
+        trackButton.textContent =
+            "Checking...";
 
 
         try {
 
+
             const { data, error } =
-                await supabaseClient.rpc(
-                    "track_order",
-                    {
-                        p_order_number: orderNumber
-                    }
-                );
+                await supabaseClient
+                    .rpc(
+                        "track_order",
+                        {
+                            p_order_number:
+                                orderNumber
+                        }
+                    );
 
 
             if (error) {
@@ -741,21 +1449,30 @@
                 throw new Error(
                     "Unable to check the order right now."
                 );
+
             }
 
 
-            if (!data || data.length === 0) {
+            if (
+                !data ||
+                data.length === 0
+            ) {
 
-                errorBox.textContent =
-                    "Order not found. Please check your order number and try again.";
-
-                errorBox.style.display = "block";
+                showError(
+                    "Order not found. Please check your order number and try again."
+                );
 
                 return;
+
             }
 
 
-            displayOrder(data[0]);
+            const order =
+                data[0];
+
+
+            displayOrder(order);
+
 
         }
 
@@ -763,239 +1480,95 @@
 
             console.error(error);
 
-            errorBox.textContent =
+            showError(
                 error.message ||
-                "Something went wrong. Please try again.";
-
-            errorBox.style.display = "block";
+                "Something went wrong. Please try again."
+            );
 
         }
 
         finally {
 
-            button.disabled = false;
-            loading.style.display = "none";
+            loading.style.display =
+                "none";
+
+
+            trackButton.disabled =
+                false;
+
+
+            trackButton.textContent =
+                "Track Order";
 
         }
 
     }
 
 
+
     /* ==============================
        DISPLAY ORDER
     ============================== */
 
-    function displayOrder(order) {
 
-        document.getElementById(
-            "result"
-        ).style.display = "block";
+    function displayOrder(order) {
 
 
         document.getElementById(
             "displayOrderNumber"
         ).textContent =
-            order.order_number || "-";
-
-
-        const date =
-            order.created_at
-                ? new Date(order.created_at)
-                    .toLocaleString()
-                : "-";
+            order.order_number || "";
 
 
         document.getElementById(
-            "displayDate"
+            "customerName"
         ).textContent =
-            "Placed on " + date;
+            order.customer_name || "Customer";
+
+
+        document.getElementById(
+            "orderDate"
+        ).textContent =
+            formatDate(
+                order.created_at
+            );
 
 
         const status =
-            (order.order_status || "pending")
-                .toLowerCase();
+            String(
+                order.order_status ||
+                "pending"
+            ).toLowerCase();
 
 
-        const badge =
-            document.getElementById(
-                "statusBadge"
-            );
+        setStatus(status);
 
-
-        badge.className =
-            "status-badge";
-
-
-        if (status === "processing") {
-
-            badge.textContent =
-                "Processing";
-
-            badge.classList.add(
-                "status-processing"
-            );
-
-        }
-
-        else if (status === "completed") {
-
-            badge.textContent =
-                "Completed";
-
-            badge.classList.add(
-                "status-completed"
-            );
-
-        }
-
-        else if (status === "cancelled") {
-
-            badge.textContent =
-                "Cancelled";
-
-            badge.classList.add(
-                "status-cancelled"
-            );
-
-        }
-
-        else {
-
-            badge.textContent =
-                "Pending";
-
-            badge.classList.add(
-                "status-pending"
-            );
-
-        }
-
-
-        updateTimeline(status);
-
-
-        /* ITEMS */
-
-        const itemsList =
-            document.getElementById(
-                "itemsList"
-            );
-
-        itemsList.innerHTML = "";
-
-
-        let items = order.items;
-
-
-        if (typeof items === "string") {
-
-            try {
-                items = JSON.parse(items);
-            }
-            catch {
-                items = [];
-            }
-
-        }
-
-
-        if (!Array.isArray(items)) {
-            items = [];
-        }
-
-
-        if (items.length === 0) {
-
-            itemsList.innerHTML =
-                '<div style="color:#777;font-size:13px;">No item information available.</div>';
-
-        }
-
-        else {
-
-            items.forEach(item => {
-
-                const row =
-                    document.createElement("div");
-
-                row.className = "item";
-
-
-                const name =
-                    item.name ||
-                    item.title ||
-                    "Product";
-
-
-                const quantity =
-                    Number(
-                        item.quantity ||
-                        item.qty ||
-                        1
-                    );
-
-
-                const price =
-                    Number(
-                        item.price || 0
-                    );
-
-
-                const subtotal =
-                    price * quantity;
-
-
-                row.innerHTML = `
-                    <div>
-                        <div class="item-name">
-                            ${escapeHtml(name)}
-                        </div>
-
-                        <div class="item-qty">
-                            Qty: ${quantity}
-                        </div>
-                    </div>
-
-                    <div class="item-price">
-                        ${formatMoney(subtotal)}
-                    </div>
-                `;
-
-
-                itemsList.appendChild(row);
-
-            });
-
-        }
-
-
-        /* TOTALS */
 
         document.getElementById(
             "subtotal"
         ).textContent =
             formatMoney(
-                Number(order.subtotal || 0)
+                order.subtotal
             );
-
-
-        const delivery =
-            Number(order.delivery_fee || 0);
 
 
         document.getElementById(
             "delivery"
         ).textContent =
-            delivery === 0
+            Number(
+                order.delivery_fee || 0
+            ) === 0
                 ? "FREE"
-                : formatMoney(delivery);
+                : formatMoney(
+                    order.delivery_fee
+                );
 
 
         document.getElementById(
             "total"
         ).textContent =
             formatMoney(
-                Number(order.total || 0)
+                order.total
             );
 
 
@@ -1007,9 +1580,16 @@
             );
 
 
-        document.getElementById(
-            "result"
-        ).scrollIntoView({
+        displayItems(
+            order.items
+        );
+
+
+        result.style.display =
+            "block";
+
+
+        result.scrollIntoView({
             behavior: "smooth",
             block: "start"
         });
@@ -1017,88 +1597,355 @@
     }
 
 
+
     /* ==============================
-       TIMELINE
+       DISPLAY ITEMS
     ============================== */
 
-    function updateTimeline(status) {
+
+    function displayItems(items) {
+
+
+        const container =
+            document.getElementById(
+                "orderItems"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        if (
+            !items ||
+            !Array.isArray(items) ||
+            items.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty">
+                    No product information available.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        items.forEach(function(item) {
+
+
+            const name =
+                escapeHtml(
+                    item.name ||
+                    item.title ||
+                    "Product"
+                );
+
+
+            const quantity =
+                Number(
+                    item.quantity ||
+                    item.qty ||
+                    1
+                );
+
+
+            const price =
+                Number(
+                    item.price ||
+                    0
+                );
+
+
+            const total =
+                price * quantity;
+
+
+            const itemElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            itemElement.className =
+                "item";
+
+
+            itemElement.innerHTML = `
+
+                <div>
+
+                    <div class="item-name">
+                        ${name}
+                    </div>
+
+                    <div class="item-qty">
+                        Qty: ${quantity}
+                    </div>
+
+                </div>
+
+                <div class="item-price">
+                    ${formatMoney(total)}
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                itemElement
+            );
+
+        });
+
+    }
+
+
+
+    /* ==============================
+       STATUS
+    ============================== */
+
+
+    function setStatus(status) {
+
+
+        const badge =
+            document.getElementById(
+                "statusBadge"
+            );
+
 
         const pending =
             document.getElementById(
-                "stepPending"
+                "pendingStep"
             );
+
 
         const processing =
             document.getElementById(
-                "stepProcessing"
+                "processingStep"
             );
+
 
         const completed =
             document.getElementById(
-                "stepCompleted"
+                "completedStep"
             );
 
 
-        pending.classList.remove("active");
-        processing.classList.remove("active");
-        completed.classList.remove("active");
+        pending.classList.remove(
+            "active"
+        );
+
+
+        processing.classList.remove(
+            "active"
+        );
+
+
+        completed.classList.remove(
+            "active"
+        );
+
+
+        badge.className =
+            "status-badge";
+
+
+        badge.textContent =
+            status.charAt(0).toUpperCase() +
+            status.slice(1);
 
 
         if (status === "processing") {
 
-            pending.classList.add("active");
-            processing.classList.add("active");
+
+            badge.classList.add(
+                "status-processing"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
+
+
+            processing.classList.add(
+                "active"
+            );
 
         }
+
 
         else if (status === "completed") {
 
-            pending.classList.add("active");
-            processing.classList.add("active");
-            completed.classList.add("active");
+
+            badge.classList.add(
+                "status-completed"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
+
+
+            processing.classList.add(
+                "active"
+            );
+
+
+            completed.classList.add(
+                "active"
+            );
 
         }
+
 
         else if (status === "cancelled") {
 
-            pending.classList.add("active");
+
+            badge.classList.add(
+                "status-cancelled"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
 
         }
+
 
         else {
 
-            pending.classList.add("active");
+
+            badge.classList.add(
+                "status-pending"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
 
         }
 
     }
 
 
+
     /* ==============================
-       HELPERS
+       SHOW ERROR
     ============================== */
+
+
+    function showError(message) {
+
+
+        errorMessage.textContent =
+            message;
+
+
+        errorMessage.style.display =
+            "block";
+
+    }
+
+
+
+    /* ==============================
+       DATE FORMAT
+    ============================== */
+
+
+    function formatDate(value) {
+
+
+        if (!value) {
+
+            return "";
+
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return "";
+
+        }
+
+
+        return date.toLocaleString(
+            "en-LK",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    }
+
+
+
+    /* ==============================
+       MONEY
+    ============================== */
+
 
     function formatMoney(value) {
 
+
         return "LKR " +
-            Number(value || 0)
-                .toLocaleString("en-LK", {
+            Number(
+                value || 0
+            ).toLocaleString(
+                "en-LK",
+                {
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 2
-                });
+                }
+            );
 
     }
+
+
+
+    /* ==============================
+       PAYMENT
+    ============================== */
 
 
     function formatPayment(value) {
 
+
         if (!value) {
+
             return "Pending";
+
         }
+
 
         const text =
             String(value)
-                .replace(/_/g, " ")
+                .replace(
+                    /_/g,
+                    " "
+                )
                 .trim();
 
 
@@ -1108,55 +1955,88 @@
     }
 
 
+
+    /* ==============================
+       ESCAPE HTML
+    ============================== */
+
+
     function escapeHtml(value) {
 
+
         return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
 
     }
 
 
-/* =====================================================
-   URL ORDER NUMBER
-===================================================== */
 
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const urlOrderNumber =
-    urlParams.get("order");
+    /* =====================================================
+       11D — URL ORDER NUMBER + AUTO TRACKING
+    ===================================================== */
 
 
-if (urlOrderNumber) {
-
-    const orderInput =
-        document.getElementById(
-            "orderNumber"
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
         );
 
-    orderInput.value =
-        urlOrderNumber;
 
-}
+    const urlOrderNumber =
+        urlParams.get("order");
 
 
-/* =====================================================
-   ENTER KEY
-===================================================== */
+    if (urlOrderNumber) {
 
-document
-    .getElementById("orderNumber")
-    .addEventListener(
+
+        orderInput.value =
+            urlOrderNumber;
+
+
+        /*
+         * Automatically track the order.
+         *
+         * This happens when the customer
+         * clicks "Track My Order" from checkout.
+         */
+
+        trackOrder();
+
+    }
+
+
+
+    /* =====================================================
+       ENTER KEY
+    ===================================================== */
+
+
+    orderInput.addEventListener(
         "keydown",
         function(event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.key === "Enter"
+            ) {
 
                 trackOrder();
 
@@ -1164,7 +2044,11 @@ document
 
         }
     );
-</script>
+
+
+    </script>
+
 
 </body>
+
 </html>
