@@ -1,0 +1,4126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="theme-color"
+    content="#080808">
+
+<meta
+    name="description"
+    content="ProBee Experience — Secure Checkout">
+
+<title>Checkout — ProBee</title>
+
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+      rel="stylesheet">
+
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<link rel="stylesheet"
+      href="style.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+
+/* =====================================================
+   PROBEE CHECKOUT
+===================================================== */
+
+.checkout-page{
+
+    max-width:1180px;
+
+    margin:0 auto;
+
+    padding:120px 25px 190px;
+
+}
+
+
+.checkout-heading{
+
+    text-align:center;
+
+    max-width:700px;
+
+    margin:0 auto 55px;
+
+}
+
+
+.checkout-heading .eyebrow{
+
+    display:block;
+
+    color:var(--gold,#dcae38);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+}
+
+
+.checkout-heading h1{
+
+    margin-top:12px;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:clamp(42px,7vw,68px);
+
+    line-height:1;
+
+    letter-spacing:-3px;
+
+}
+
+
+.checkout-heading h1 span{
+
+    color:var(--gold,#dcae38);
+
+}
+
+
+.checkout-heading p{
+
+    margin-top:18px;
+
+    color:#686868;
+
+    font-size:11px;
+
+    line-height:1.7;
+
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.checkout-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.35fr)
+        minmax(320px,.8fr);
+
+    gap:30px;
+
+    align-items:start;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.checkout-card{
+
+    padding:28px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.012)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+
+.checkout-card + .checkout-card{
+
+    margin-top:18px;
+
+}
+
+
+.checkout-card-heading{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:25px;
+
+}
+
+
+.checkout-number{
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#080808;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1c75d,
+            #b98420
+        );
+
+    font-size:11px;
+
+    font-weight:800;
+
+}
+
+
+.checkout-card-heading div{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+
+.checkout-card-heading span{
+
+    color:var(--gold,#dcae38);
+
+    font-size:7px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+}
+
+
+.checkout-card-heading h2{
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:16px;
+
+}
+
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+
+.form-group.full{
+
+    grid-column:1/-1;
+
+}
+
+
+.form-group label{
+
+    color:#777;
+
+    font-size:9px;
+
+    font-weight:600;
+
+}
+
+
+.required{
+
+    color:var(--gold,#dcae38);
+
+}
+
+
+.form-group input,
+.form-group textarea{
+
+    width:100%;
+
+    border:1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:12px;
+
+    outline:none;
+
+    color:#fff;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-family:"Inter";
+
+    font-size:11px;
+
+    transition:.25s;
+
+}
+
+
+.form-group input{
+
+    height:50px;
+
+    padding:0 15px;
+
+}
+
+
+.form-group textarea{
+
+    min-height:105px;
+
+    padding:14px 15px;
+
+    resize:vertical;
+
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+
+    color:#444;
+
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus{
+
+    border-color:
+        rgba(220,174,56,.5);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(220,174,56,.06);
+
+}
+
+
+.form-error{
+
+    display:none;
+
+    color:#e78b8b;
+
+    font-size:8px;
+
+}
+
+
+.form-group.invalid input,
+.form-group.invalid textarea{
+
+    border-color:
+        rgba(220,100,100,.5);
+
+}
+
+
+.form-group.invalid .form-error{
+
+    display:block;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp-hint{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:7px;
+
+    color:#555;
+
+    font-size:7px;
+
+}
+
+
+.whatsapp-hint i{
+
+    color:#61c894;
+
+}
+
+
+/* =====================================================
+   PAYMENT SETTINGS
+===================================================== */
+
+.payment-loading{
+
+    color:#777;
+
+    font-size:9px;
+
+    text-align:center;
+
+    padding:20px 5px;
+
+}
+
+
+.payment-disabled{
+
+    padding:18px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.02);
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    color:#777;
+
+    font-size:9px;
+
+    line-height:1.7;
+
+}
+
+
+.bank-details{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+.bank-detail-row{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr) auto;
+
+    gap:10px;
+
+    align-items:center;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+}
+
+
+.bank-detail-info{
+
+    min-width:0;
+
+}
+
+
+.bank-detail-label{
+
+    color:#666;
+
+    font-size:7px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+}
+
+
+.bank-detail-value{
+
+    margin-top:5px;
+
+    color:#eee;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    word-break:break-word;
+
+}
+
+
+.copy-bank-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    min-width:72px;
+
+    padding:9px 11px;
+
+    border:1px solid
+        rgba(220,174,56,.18);
+
+    border-radius:8px;
+
+    color:var(--gold,#dcae38);
+
+    background:
+        rgba(220,174,56,.05);
+
+    font-size:8px;
+
+    cursor:pointer;
+
+}
+
+
+.copy-bank-btn:hover{
+
+    background:
+        rgba(220,174,56,.12);
+
+}
+
+
+.copy-bank-btn.copied{
+
+    color:#63c796;
+
+    border-color:
+        rgba(99,199,150,.25);
+
+}
+
+
+.copy-all-bank-btn{
+
+    width:100%;
+
+    min-height:45px;
+
+    margin-top:13px;
+
+    border:1px solid
+        rgba(220,174,56,.2);
+
+    border-radius:10px;
+
+    color:#090909;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0c75e,
+            #bd8c25
+        );
+
+    font-size:9px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+.copy-all-bank-btn:hover{
+
+    transform:translateY(-1px);
+
+}
+
+
+.payment-note{
+
+    margin-top:15px;
+
+    padding:13px;
+
+    border-radius:11px;
+
+    background:
+        rgba(220,174,56,.035);
+
+    border:
+        1px solid
+        rgba(220,174,56,.09);
+
+}
+
+
+.payment-note-title{
+
+    color:var(--gold,#dcae38);
+
+    font-size:7px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+}
+
+
+.payment-note-text{
+
+    margin-top:6px;
+
+    color:#777;
+
+    font-size:8px;
+
+    line-height:1.6;
+
+    white-space:pre-line;
+
+}
+
+
+/* =====================================================
+   ITEMS
+===================================================== */
+
+.checkout-items{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+.checkout-item{
+
+    display:grid;
+
+    grid-template-columns:
+        52px minmax(0,1fr) auto;
+
+    gap:13px;
+
+    align-items:center;
+
+    padding:13px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+}
+
+
+.checkout-item-icon{
+
+    width:52px;
+
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    color:var(--gold,#dcae38);
+
+    background:
+        rgba(220,174,56,.08);
+
+    border:
+        1px solid
+        rgba(220,174,56,.14);
+
+}
+
+
+.checkout-item-info{
+
+    min-width:0;
+
+}
+
+
+.checkout-item-info strong{
+
+    display:block;
+
+    color:#eee;
+
+    font-size:11px;
+
+}
+
+
+.checkout-item-info span{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:#666;
+
+    font-size:8px;
+
+}
+
+
+.checkout-item-info small{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:var(--gold,#dcae38);
+
+    font-size:7px;
+
+}
+
+
+.checkout-item-price{
+
+    color:var(--gold-light,#f0ca61);
+
+    font-size:10px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.checkout-summary{
+
+    position:sticky;
+
+    top:105px;
+
+}
+
+
+.summary-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
+
+.summary-row span{
+
+    color:#666;
+
+    font-size:9px;
+
+}
+
+
+.summary-row strong{
+
+    color:#aaa;
+
+    font-size:10px;
+
+}
+
+
+.summary-row .free{
+
+    color:#63c796;
+
+}
+
+
+.summary-divider{
+
+    height:1px;
+
+    margin:22px 0;
+
+    background:
+        rgba(255,255,255,.07);
+
+}
+
+
+.checkout-total{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+
+.checkout-total span{
+
+    color:#777;
+
+    font-size:10px;
+
+}
+
+
+.checkout-total strong{
+
+    color:var(--gold-light,#f0ca61);
+
+    font-size:25px;
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.confirm-order-button{
+
+    width:100%;
+
+    min-height:56px;
+
+    margin-top:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    color:#090909;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0c75e,
+            #b9821e
+        );
+
+    font-family:"Inter";
+
+    font-size:10px;
+
+    font-weight:800;
+
+    transition:.3s ease;
+
+}
+
+
+.confirm-order-button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 15px 40px
+        rgba(220,174,56,.15);
+
+}
+
+
+.confirm-order-button:disabled{
+
+    opacity:.6;
+
+    cursor:wait;
+
+    transform:none;
+
+}
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+.checkout-security{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:11px;
+
+    margin-top:18px;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.02);
+
+}
+
+
+.checkout-security i{
+
+    color:#67c99a;
+
+    margin-top:2px;
+
+}
+
+
+.checkout-security strong{
+
+    display:block;
+
+    color:#aaa;
+
+    font-size:8px;
+
+}
+
+
+.checkout-security p{
+
+    margin-top:5px;
+
+    color:#555;
+
+    font-size:7px;
+
+    line-height:1.5;
+
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.checkout-empty{
+
+    display:none;
+
+    text-align:center;
+
+    max-width:600px;
+
+    margin:0 auto;
+
+    padding:65px 25px;
+
+    border-radius:22px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.02);
+
+}
+
+
+.checkout-empty.show{
+
+    display:block;
+
+}
+
+
+.checkout-empty-icon{
+
+    width:80px;
+
+    height:80px;
+
+    margin:0 auto 22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:22px;
+
+    color:var(--gold,#dcae38);
+
+    background:
+        rgba(220,174,56,.08);
+
+}
+
+
+.checkout-empty-icon i{
+
+    font-size:27px;
+
+}
+
+
+.checkout-empty h2{
+
+    font-family:"Montserrat";
+
+    font-size:23px;
+
+}
+
+
+.checkout-empty p{
+
+    margin-top:10px;
+
+    color:#666;
+
+    font-size:9px;
+
+}
+
+
+.back-products{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-top:22px;
+
+    padding:13px 18px;
+
+    border-radius:10px;
+
+    color:#090909;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0c75e,
+            #bd8c25
+        );
+
+    font-size:9px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+.order-success{
+
+    display:none;
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    padding:60px 25px;
+
+    text-align:center;
+
+    border-radius:24px;
+
+    border:
+        1px solid
+        rgba(220,174,56,.18);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(220,174,56,.07),
+            rgba(255,255,255,.018)
+        );
+
+}
+
+
+.order-success.show{
+
+    display:block;
+
+}
+
+
+.success-icon{
+
+    width:85px;
+
+    height:85px;
+
+    margin:0 auto 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#080808;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0c75e,
+            #bd8c25
+        );
+
+    box-shadow:
+        0 0 50px
+        rgba(220,174,56,.18);
+
+    font-size:30px;
+
+}
+
+
+.order-success .success-label{
+
+    color:var(--gold,#dcae38);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+}
+
+
+.order-success h2{
+
+    margin-top:10px;
+
+    font-family:"Montserrat";
+
+    font-size:clamp(32px,6vw,50px);
+
+    letter-spacing:-2px;
+
+}
+
+
+.order-success h2 span{
+
+    color:var(--gold-light,#f0ca61);
+
+}
+
+
+.order-success p{
+
+    max-width:500px;
+
+    margin:15px auto 0;
+
+    color:#666;
+
+    font-size:10px;
+
+    line-height:1.7;
+
+}
+
+
+.order-id-box{
+
+    display:inline-flex;
+
+    flex-direction:column;
+
+    gap:7px;
+
+    margin-top:25px;
+
+    padding:15px 25px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(220,174,56,.15);
+
+}
+
+
+.order-id-box span{
+
+    color:#555;
+
+    font-size:7px;
+
+    letter-spacing:2px;
+
+}
+
+
+.order-id-box strong{
+
+    color:var(--gold-light,#f0ca61);
+
+    font-size:15px;
+
+    letter-spacing:1px;
+
+}
+
+
+.success-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin-top:30px;
+
+}
+
+
+.success-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    min-height:45px;
+
+    padding:0 20px;
+
+    border-radius:10px;
+
+    font-size:9px;
+
+    font-weight:700;
+
+}
+
+
+.success-button.primary{
+
+    color:#080808;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0c75e,
+            #bd8c25
+        );
+
+}
+
+
+.success-button.secondary{
+
+    color:#aaa;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.02);
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:850px){
+
+    .checkout-page{
+
+        padding:
+            100px 17px 200px;
+
+    }
+
+
+    .checkout-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .checkout-summary{
+
+        position:static;
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .checkout-heading{
+
+        margin-bottom:35px;
+
+    }
+
+
+    .checkout-heading h1{
+
+        font-size:46px;
+
+    }
+
+
+    .checkout-card{
+
+        padding:20px;
+
+        border-radius:18px;
+
+    }
+
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .form-group.full{
+
+        grid-column:auto;
+
+    }
+
+
+    .checkout-item{
+
+        grid-template-columns:
+            45px minmax(0,1fr);
+
+    }
+
+
+    .checkout-item-icon{
+
+        width:45px;
+
+        height:45px;
+
+    }
+
+
+    .checkout-item-price{
+
+        grid-column:2;
+
+        margin-top:-3px;
+
+    }
+
+
+    .checkout-total strong{
+
+        font-size:21px;
+
+    }
+
+
+    .success-actions{
+
+        flex-direction:column;
+
+    }
+
+
+    .success-button{
+
+        width:100%;
+
+    }
+
+
+    .bank-detail-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .copy-bank-btn{
+
+        width:100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header scrolled">
+
+    <div class="nav-container">
+
+
+        <a href="index.html"
+           class="brand">
+
+            <div class="brand-mark">
+
+                <span>P</span>
+                <span>B</span>
+
+            </div>
+
+
+            <div class="brand-text">
+
+                <strong>
+                    Pro<span>Bee</span>
+                </strong>
+
+                <small>
+                    EXPERIENCE
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <nav class="desktop-nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
+            <a href="index.html#why-prob">
+                Why ProBee
+            </a>
+
+            <a href="index.html#support">
+                Support
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <button
+                class="icon-button"
+                onclick="openSearch()">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </button>
+
+
+            <a href="cart.html"
+               class="cart-button">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span
+                    class="cart-count"
+                    id="cartCount">
+
+                    0
+
+                </span>
+
+            </a>
+
+
+            <button
+                class="menu-button"
+                id="menuButton">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu">
+
+        <a href="index.html">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
+
+        <a href="products.html">
+            <i class="fa-solid fa-store"></i>
+            Products
+        </a>
+
+        <a href="index.html#categories">
+            <i class="fa-solid fa-layer-group"></i>
+            Categories
+        </a>
+
+        <a href="index.html#support">
+            <i class="fa-solid fa-headset"></i>
+            Support
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<div
+    class="search-overlay"
+    id="searchOverlay">
+
+    <button
+        class="close-search"
+        onclick="closeSearch()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <div class="search-box">
+
+        <span>
+            SEARCH PROBEE
+        </span>
+
+
+        <div class="search-input-wrapper">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                placeholder="Search products...">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CHECKOUT
+===================================================== -->
+
+<main class="checkout-page">
+
+
+    <section
+        class="checkout-heading"
+        id="checkoutHeading">
+
+        <span class="eyebrow">
+            PROBEE STORE
+        </span>
+
+        <h1>
+            Secure <span>Checkout.</span>
+        </h1>
+
+        <p>
+            Complete your details and confirm
+            your ProBee order.
+        </p>
+
+    </section>
+
+
+    <!-- EMPTY -->
+
+    <section
+        class="checkout-empty"
+        id="checkoutEmpty">
+
+        <div class="checkout-empty-icon">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+        </div>
+
+        <h2>
+            Your cart is empty
+        </h2>
+
+        <p>
+            Add a product to your cart before
+            proceeding to checkout.
+        </p>
+
+        <a
+            href="products.html"
+            class="back-products">
+
+            Explore Products
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </section>
+
+
+    <!-- CHECKOUT CONTENT -->
+
+    <section
+        class="checkout-grid"
+        id="checkoutContent">
+
+
+        <div>
+
+
+            <!-- CUSTOMER -->
+
+            <div class="checkout-card">
+
+                <div class="checkout-card-heading">
+
+                    <div class="checkout-number">
+                        1
+                    </div>
+
+                    <div>
+
+                        <span>
+                            CUSTOMER INFORMATION
+                        </span>
+
+                        <h2>
+                            Your Details
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <form id="checkoutForm">
+
+                    <div class="form-grid">
+
+
+                        <div
+                            class="form-group"
+                            id="nameGroup">
+
+                            <label for="customerName">
+
+                                Full Name
+                                <span class="required">*</span>
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="customerName"
+                                name="customerName"
+                                placeholder="Enter your full name"
+                                autocomplete="name">
+
+                            <span class="form-error">
+                                Please enter your full name.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="form-group"
+                            id="phoneGroup">
+
+                            <label for="customerPhone">
+
+                                WhatsApp Number
+                                <span class="required">*</span>
+
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="customerPhone"
+                                name="customerPhone"
+                                placeholder="07XXXXXXXX"
+                                autocomplete="tel">
+
+                            <div class="whatsapp-hint">
+
+                                <i class="fa-brands fa-whatsapp"></i>
+
+                                <span>
+                                    We'll use this for order updates.
+                                </span>
+
+                            </div>
+
+                            <span class="form-error">
+                                Please enter a valid WhatsApp number.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="form-group"
+                            id="emailGroup">
+
+                            <label for="customerEmail">
+
+                                Email Address
+                                <span class="required">*</span>
+
+                            </label>
+
+                            <input
+                                type="email"
+                                id="customerEmail"
+                                name="customerEmail"
+                                placeholder="you@example.com"
+                                autocomplete="email">
+
+                            <span class="form-error">
+                                Please enter a valid email address.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="form-group full">
+
+                            <label for="orderNote">
+
+                                Additional Note
+                                <span style="color:#555;">
+                                    (Optional)
+                                </span>
+
+                            </label>
+
+                            <textarea
+                                id="orderNote"
+                                name="orderNote"
+                                placeholder="Any additional information about your order..."></textarea>
+
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- DELIVERY -->
+
+            <div class="checkout-card">
+
+                <div class="checkout-card-heading">
+
+                    <div class="checkout-number">
+                        2
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ORDER METHOD
+                        </span>
+
+                        <h2>
+                            Digital Delivery
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="checkout-security"
+                    style="margin-top:0;">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                    <div>
+
+                        <strong>
+                            Fast Digital Delivery
+                        </strong>
+
+                        <p>
+                            After your order is confirmed,
+                            the ProBee team will contact you
+                            using the details provided above
+                            to complete your order.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="checkout-security">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+
+                        <strong>
+                            Secure Order
+                        </strong>
+
+                        <p>
+                            Your order details are handled
+                            securely by ProBee Experience.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <div class="checkout-card">
+
+                <div class="checkout-card-heading">
+
+                    <div class="checkout-number">
+                        3
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PAYMENT METHOD
+                        </span>
+
+                        <h2>
+                            Bank Transfer
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="paymentLoading"
+                    class="payment-loading">
+
+                    Loading payment details...
+
+                </div>
+
+
+                <div
+                    id="paymentDisabled"
+                    class="payment-disabled"
+                    style="display:none;">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    Bank Transfer is currently unavailable.
+                    Please contact ProBee support for
+                    available payment options.
+
+                </div>
+
+
+                <div
+                    id="bankPaymentDetails"
+                    style="display:none;">
+
+                    <div class="bank-details">
+
+
+                        <div class="bank-detail-row">
+
+                            <div class="bank-detail-info">
+
+                                <div class="bank-detail-label">
+                                    Bank Name
+                                </div>
+
+                                <div
+                                    class="bank-detail-value"
+                                    id="checkoutBankName">
+                                    -
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="copy-bank-btn"
+                                data-copy-field="bankName">
+
+                                <i class="fa-regular fa-copy"></i>
+                                Copy
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="bank-detail-row">
+
+                            <div class="bank-detail-info">
+
+                                <div class="bank-detail-label">
+                                    Account Name
+                                </div>
+
+                                <div
+                                    class="bank-detail-value"
+                                    id="checkoutAccountName">
+                                    -
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="copy-bank-btn"
+                                data-copy-field="accountName">
+
+                                <i class="fa-regular fa-copy"></i>
+                                Copy
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="bank-detail-row">
+
+                            <div class="bank-detail-info">
+
+                                <div class="bank-detail-label">
+                                    Account Number
+                                </div>
+
+                                <div
+                                    class="bank-detail-value"
+                                    id="checkoutAccountNumber">
+                                    -
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="copy-bank-btn"
+                                data-copy-field="accountNumber">
+
+                                <i class="fa-regular fa-copy"></i>
+                                Copy
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="bank-detail-row">
+
+                            <div class="bank-detail-info">
+
+                                <div class="bank-detail-label">
+                                    Branch
+                                </div>
+
+                                <div
+                                    class="bank-detail-value"
+                                    id="checkoutBranch">
+                                    -
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="copy-bank-btn"
+                                data-copy-field="branch">
+
+                                <i class="fa-regular fa-copy"></i>
+                                Copy
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="bank-detail-row"
+                            id="bankCodeRow">
+
+                            <div class="bank-detail-info">
+
+                                <div class="bank-detail-label">
+                                    Bank Code / SWIFT
+                                </div>
+
+                                <div
+                                    class="bank-detail-value"
+                                    id="checkoutBankCode">
+                                    -
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="copy-bank-btn"
+                                data-copy-field="bankCode">
+
+                                <i class="fa-regular fa-copy"></i>
+                                Copy
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="copy-all-bank-btn"
+                        id="copyAllBankDetails">
+
+                        <i class="fa-regular fa-copy"></i>
+
+                        Copy All Bank Details
+
+                    </button>
+
+
+                    <div
+                        class="payment-note"
+                        id="paymentNoteBox">
+
+                        <div class="payment-note-title">
+                            PAYMENT INSTRUCTIONS
+                        </div>
+
+                        <div
+                            class="payment-note-text"
+                            id="checkoutPaymentNote">
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkout-security">
+
+                        <i class="fa-solid fa-receipt"></i>
+
+                        <div>
+
+                            <strong>
+                                Payment Reference
+                            </strong>
+
+                            <p>
+                                Please keep your bank transfer
+                                reference/receipt. ProBee may
+                                request it to verify your payment.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <aside class="checkout-summary">
+
+
+            <div class="checkout-card">
+
+
+                <div class="checkout-card-heading">
+
+                    <div class="checkout-number">
+                        4
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ORDER SUMMARY
+                        </span>
+
+                        <h2>
+                            Your Order
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="checkout-items"
+                    id="checkoutItems">
+                </div>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="checkoutSubtotal">
+                        LKR 0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong class="free">
+                        FREE
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="checkout-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="checkoutTotal">
+                        LKR 0
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="confirm-order-button"
+                    id="confirmOrderButton"
+                    onclick="confirmOrder()">
+
+                    Confirm Order
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+
+                <div class="checkout-security">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <div>
+
+                        <strong>
+                            Secure Checkout
+                        </strong>
+
+                        <p>
+                            By confirming your order,
+                            you agree that the information
+                            provided is correct.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </aside>
+
+
+    </section>
+
+
+    <!-- SUCCESS -->
+
+    <section
+        class="order-success"
+        id="orderSuccess">
+
+
+        <div class="success-icon">
+
+            <i class="fa-solid fa-check"></i>
+
+        </div>
+
+
+        <span class="success-label">
+            ORDER CONFIRMED
+        </span>
+
+
+        <h2>
+            Thank You,
+            <span id="successName">
+                Customer
+            </span>.
+        </h2>
+
+
+        <p>
+            Your ProBee order has been successfully
+            received. Please keep your Order ID
+            for future reference.
+        </p>
+
+
+        <div class="order-id-box">
+
+            <span>
+                ORDER ID
+            </span>
+
+            <strong id="successOrderId">
+                PROB-000000
+            </strong>
+
+        </div>
+
+
+        <div class="success-actions">
+
+
+            <a
+                href="#"
+                id="trackOrderButton"
+                class="success-button primary">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                Track My Order
+
+            </a>
+
+
+            <a
+                href="products.html"
+                class="success-button secondary">
+
+                Continue Shopping
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+
+            <a
+                href="index.html"
+                class="success-button secondary">
+
+                Back Home
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<nav class="bottom-nav">
+
+
+    <a
+        href="index.html"
+        class="bottom-nav-item">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>
+            Home
+        </span>
+
+    </a>
+
+
+    <a
+        href="products.html"
+        class="bottom-nav-item">
+
+        <i class="fa-solid fa-store"></i>
+
+        <span>
+            Products
+        </span>
+
+    </a>
+
+
+    <a
+        href="cart.html"
+        class="bottom-nav-item">
+
+        <div>
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span id="bottomCartCount">
+                0
+            </span>
+
+        </div>
+
+        <span>
+            Cart
+        </span>
+
+    </a>
+
+
+    <a
+        href="index.html#support"
+        class="bottom-nav-item">
+
+        <i class="fa-solid fa-headset"></i>
+
+        <span>
+            Support
+        </span>
+
+    </a>
+
+
+    <a
+        href="#"
+        class="bottom-nav-item">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>
+            Account
+        </span>
+
+    </a>
+
+
+</nav>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://fjczxixfajvvizsywrtr.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   PAYMENT SETTINGS STATE
+===================================================== */
+
+let paymentSettings = null;
+
+
+/* =====================================================
+   GET CART
+===================================================== */
+
+function getCart(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("probCart")
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   PRICE
+===================================================== */
+
+function formatPrice(price){
+
+    return "LKR " +
+        Number(price).toLocaleString();
+
+}
+
+
+/* =====================================================
+   CART COUNT
+===================================================== */
+
+function updateCartCount(){
+
+    const cart =
+        getCart();
+
+
+    const count =
+        cart.reduce(
+            function(total,item){
+
+                return total +
+                    Number(
+                        item.quantity || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const top =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    const bottom =
+        document.getElementById(
+            "bottomCartCount"
+        );
+
+
+    if(top){
+
+        top.textContent =
+            count;
+
+    }
+
+
+    if(bottom){
+
+        bottom.textContent =
+            count;
+
+    }
+
+}
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHTML(value){
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        value == null
+            ? ""
+            : String(value);
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   LOAD PAYMENT SETTINGS
+===================================================== */
+
+async function loadPaymentSettings(){
+
+    const loading =
+        document.getElementById(
+            "paymentLoading"
+        );
+
+
+    const disabled =
+        document.getElementById(
+            "paymentDisabled"
+        );
+
+
+    const details =
+        document.getElementById(
+            "bankPaymentDetails"
+        );
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("payment_settings")
+                .select(
+                    "id,bank_enabled,bank_name,account_name,account_number,branch,bank_code,payment_note,updated_at"
+                )
+                .eq("id",1)
+                .maybeSingle();
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+        loading.style.display =
+            "none";
+
+
+        if(
+            !data ||
+            data.bank_enabled !== true
+        ){
+
+            disabled.style.display =
+                "block";
+
+            details.style.display =
+                "none";
+
+            paymentSettings = null;
+
+            return;
+
+        }
+
+
+        paymentSettings =
+            data;
+
+
+        disabled.style.display =
+            "none";
+
+
+        details.style.display =
+            "block";
+
+
+        document.getElementById(
+            "checkoutBankName"
+        ).textContent =
+            data.bank_name || "-";
+
+
+        document.getElementById(
+            "checkoutAccountName"
+        ).textContent =
+            data.account_name || "-";
+
+
+        document.getElementById(
+            "checkoutAccountNumber"
+        ).textContent =
+            data.account_number || "-";
+
+
+        document.getElementById(
+            "checkoutBranch"
+        ).textContent =
+            data.branch || "-";
+
+
+        const bankCodeRow =
+            document.getElementById(
+                "bankCodeRow"
+            );
+
+
+        if(
+            data.bank_code &&
+            data.bank_code.trim()
+        ){
+
+            document.getElementById(
+                "checkoutBankCode"
+            ).textContent =
+                data.bank_code;
+
+            bankCodeRow.style.display =
+                "grid";
+
+        }else{
+
+            bankCodeRow.style.display =
+                "none";
+
+        }
+
+
+        const noteBox =
+            document.getElementById(
+                "paymentNoteBox"
+            );
+
+
+        const note =
+            data.payment_note || "";
+
+
+        if(note.trim()){
+
+            document.getElementById(
+                "checkoutPaymentNote"
+            ).textContent =
+                note;
+
+            noteBox.style.display =
+                "block";
+
+        }else{
+
+            noteBox.style.display =
+                "none";
+
+        }
+
+
+    }catch(error){
+
+        console.error(
+            "Payment settings error:",
+            error
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        disabled.style.display =
+            "block";
+
+
+        disabled.innerHTML = `
+
+            <i class="fa-solid fa-circle-exclamation"></i>
+
+            Payment details could not be loaded.
+            Please contact ProBee support.
+
+        `;
+
+        paymentSettings = null;
+
+    }
+
+}
+
+
+/* =====================================================
+   COPY TEXT
+===================================================== */
+
+async function copyText(
+    text,
+    button
+){
+
+    if(
+        !text ||
+        text === "-"
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            text
+        );
+
+
+        const original =
+            button.innerHTML;
+
+
+        button.classList.add(
+            "copied"
+        );
+
+
+        button.innerHTML = `
+
+            <i class="fa-solid fa-check"></i>
+
+            Copied
+
+        `;
+
+
+        setTimeout(
+            function(){
+
+                button.classList.remove(
+                    "copied"
+                );
+
+                button.innerHTML =
+                    original;
+
+            },
+            1500
+        );
+
+
+    }catch(error){
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+
+        textarea.value =
+            text;
+
+
+        document.body.appendChild(
+            textarea
+        );
+
+
+        textarea.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        textarea.remove();
+
+
+        const original =
+            button.innerHTML;
+
+
+        button.classList.add(
+            "copied"
+        );
+
+
+        button.innerHTML = `
+
+            <i class="fa-solid fa-check"></i>
+
+            Copied
+
+        `;
+
+
+        setTimeout(
+            function(){
+
+                button.classList.remove(
+                    "copied"
+                );
+
+                button.innerHTML =
+                    original;
+
+            },
+            1500
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INDIVIDUAL COPY BUTTONS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".copy-bank-btn"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    if(!paymentSettings){
+
+                        return;
+
+                    }
+
+
+                    const field =
+                        button.dataset.copyField;
+
+
+                    let value = "";
+
+
+                    if(
+                        field ===
+                        "bankName"
+                    ){
+
+                        value =
+                            paymentSettings.bank_name;
+
+                    }
+
+
+                    if(
+                        field ===
+                        "accountName"
+                    ){
+
+                        value =
+                            paymentSettings.account_name;
+
+                    }
+
+
+                    if(
+                        field ===
+                        "accountNumber"
+                    ){
+
+                        value =
+                            paymentSettings.account_number;
+
+                    }
+
+
+                    if(
+                        field ===
+                        "branch"
+                    ){
+
+                        value =
+                            paymentSettings.branch;
+
+                    }
+
+
+                    if(
+                        field ===
+                        "bankCode"
+                    ){
+
+                        value =
+                            paymentSettings.bank_code;
+
+                    }
+
+
+                    copyText(
+                        value,
+                        button
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   COPY ALL
+===================================================== */
+
+document
+    .getElementById(
+        "copyAllBankDetails"
+    )
+    .addEventListener(
+        "click",
+        async function(){
+
+            if(!paymentSettings){
+
+                return;
+
+            }
+
+
+            let text =
+                "ProBee Bank Transfer Details\n\n";
+
+
+            text +=
+                "Bank Name: " +
+                (
+                    paymentSettings.bank_name ||
+                    ""
+                ) +
+                "\n";
+
+
+            text +=
+                "Account Name: " +
+                (
+                    paymentSettings.account_name ||
+                    ""
+                ) +
+                "\n";
+
+
+            text +=
+                "Account Number: " +
+                (
+                    paymentSettings.account_number ||
+                    ""
+                ) +
+                "\n";
+
+
+            text +=
+                "Branch: " +
+                (
+                    paymentSettings.branch ||
+                    ""
+                );
+
+
+            if(
+                paymentSettings.bank_code &&
+                paymentSettings.bank_code.trim()
+            ){
+
+                text +=
+                    "\nBank Code / SWIFT: " +
+                    paymentSettings.bank_code;
+
+            }
+
+
+            if(
+                paymentSettings.payment_note &&
+                paymentSettings.payment_note.trim()
+            ){
+
+                text +=
+                    "\n\nPayment Instructions:\n" +
+                    paymentSettings.payment_note;
+
+            }
+
+
+            const button =
+                this;
+
+
+            const original =
+                button.innerHTML;
+
+
+            try{
+
+                await navigator.clipboard.writeText(
+                    text
+                );
+
+            }catch(error){
+
+                const textarea =
+                    document.createElement(
+                        "textarea"
+                    );
+
+                textarea.value =
+                    text;
+
+                document.body.appendChild(
+                    textarea
+                );
+
+                textarea.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+                textarea.remove();
+
+            }
+
+
+            button.innerHTML = `
+
+                <i class="fa-solid fa-check"></i>
+
+                All Details Copied
+
+            `;
+
+
+            setTimeout(
+                function(){
+
+                    button.innerHTML =
+                        original;
+
+                },
+                1800
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   LOAD CHECKOUT
+===================================================== */
+
+function loadCheckout(){
+
+    const cart =
+        getCart();
+
+
+    const empty =
+        document.getElementById(
+            "checkoutEmpty"
+        );
+
+
+    const content =
+        document.getElementById(
+            "checkoutContent"
+        );
+
+
+    const heading =
+        document.getElementById(
+            "checkoutHeading"
+        );
+
+
+    const items =
+        document.getElementById(
+            "checkoutItems"
+        );
+
+
+    updateCartCount();
+
+
+    if(cart.length === 0){
+
+        empty.classList.add(
+            "show"
+        );
+
+        content.style.display =
+            "none";
+
+        heading.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    empty.classList.remove(
+        "show"
+    );
+
+
+    content.style.display =
+        "grid";
+
+
+    items.innerHTML = "";
+
+
+    let subtotal = 0;
+
+
+    cart.forEach(
+        function(item){
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+
+            const price =
+                Number(
+                    item.price || 0
+                );
+
+
+            const total =
+                quantity * price;
+
+
+            subtotal +=
+                total;
+
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "checkout-item";
+
+
+            element.innerHTML = `
+
+                <div class="checkout-item-icon">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                </div>
+
+
+                <div class="checkout-item-info">
+
+                    <strong>
+                        ${escapeHTML(item.name)}
+                    </strong>
+
+                    <span>
+                        ${escapeHTML(
+                            item.plan ||
+                            "Selected Plan"
+                        )}
+                    </span>
+
+                    <small>
+                        Quantity: ${quantity}
+                    </small>
+
+                </div>
+
+
+                <strong class="checkout-item-price">
+
+                    ${formatPrice(total)}
+
+                </strong>
+
+            `;
+
+
+            items.appendChild(
+                element
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "checkoutSubtotal"
+    ).textContent =
+        formatPrice(subtotal);
+
+
+    document.getElementById(
+        "checkoutTotal"
+    ).textContent =
+        formatPrice(subtotal);
+
+}
+
+
+/* =====================================================
+   VALIDATION
+===================================================== */
+
+function validateName(){
+
+    const group =
+        document.getElementById(
+            "nameGroup"
+        );
+
+
+    const input =
+        document.getElementById(
+            "customerName"
+        );
+
+
+    const valid =
+        input.value.trim().length >= 2;
+
+
+    group.classList.toggle(
+        "invalid",
+        !valid
+    );
+
+
+    return valid;
+
+}
+
+
+function validatePhone(){
+
+    const group =
+        document.getElementById(
+            "phoneGroup"
+        );
+
+
+    const input =
+        document.getElementById(
+            "customerPhone"
+        );
+
+
+    const cleaned =
+        input.value.replace(
+            /[\s\-]/g,
+            ""
+        );
+
+
+    const valid =
+        /^(?:\+94|0)7\d{8}$/.test(
+            cleaned
+        );
+
+
+    group.classList.toggle(
+        "invalid",
+        !valid
+    );
+
+
+    return valid;
+
+}
+
+
+function validateEmail(){
+
+    const group =
+        document.getElementById(
+            "emailGroup"
+        );
+
+
+    const input =
+        document.getElementById(
+            "customerEmail"
+        );
+
+
+    const valid =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(
+            input.value.trim()
+        );
+
+
+    group.classList.toggle(
+        "invalid",
+        !valid
+    );
+
+
+    return valid;
+
+}
+
+
+/* =====================================================
+   ORDER ID
+===================================================== */
+
+function generateOrderId(){
+
+    const now =
+        new Date();
+
+
+    const year =
+        String(
+            now.getFullYear()
+        ).slice(-2);
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(2,"0");
+
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2,"0");
+
+
+    const random =
+        Math.floor(
+            1000 +
+            Math.random() * 9000
+        );
+
+
+    return (
+        "PROB-" +
+        year +
+        month +
+        day +
+        "-" +
+        random
+    );
+
+}
+
+
+/* =====================================================
+   SECURE TRACKING TOKEN
+===================================================== */
+
+function generateTrackingToken(){
+
+    if(
+        window.crypto &&
+        typeof window.crypto.randomUUID ===
+        "function"
+    ){
+
+        return window.crypto.randomUUID();
+
+    }
+
+
+    const randomPart =
+        Math.random().toString(36).substring(2) +
+        Math.random().toString(36).substring(2);
+
+
+    return (
+        Date.now().toString(36) +
+        "-" +
+        randomPart
+    );
+
+}
+
+
+/* =====================================================
+   CONFIRM ORDER
+===================================================== */
+
+async function confirmOrder(){
+
+    const cart =
+        getCart();
+
+
+    if(cart.length === 0){
+
+        return;
+
+    }
+
+
+    const nameValid =
+        validateName();
+
+
+    const phoneValid =
+        validatePhone();
+
+
+    const emailValid =
+        validateEmail();
+
+
+    if(
+        !nameValid ||
+        !phoneValid ||
+        !emailValid
+    ){
+
+        const firstInvalid =
+            document.querySelector(
+                ".form-group.invalid input"
+            );
+
+
+        if(firstInvalid){
+
+            firstInvalid.focus();
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+       Bank Transfer must be available
+       before confirming the order.
+    */
+
+    if(
+        !paymentSettings ||
+        paymentSettings.bank_enabled !== true
+    ){
+
+        alert(
+            "Bank Transfer is currently unavailable. Please contact ProBee support."
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "confirmOrderButton"
+        );
+
+
+    button.disabled = true;
+
+
+    button.innerHTML = `
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        Processing Order...
+
+    `;
+
+
+    const name =
+        document.getElementById(
+            "customerName"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "customerPhone"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "customerEmail"
+        ).value.trim();
+
+
+    const note =
+        document.getElementById(
+            "orderNote"
+        ).value.trim();
+
+
+    const orderId =
+        generateOrderId();
+
+
+    const trackingToken =
+        generateTrackingToken();
+
+
+    let subtotal = 0;
+
+
+    cart.forEach(
+        function(item){
+
+            const price =
+                Number(
+                    item.price || 0
+                );
+
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+
+            subtotal +=
+                price * quantity;
+
+        }
+    );
+
+
+    const orderItems =
+        cart.map(
+            function(item){
+
+                return {
+
+                    name:
+                        String(
+                            item.name || ""
+                        ),
+
+                    plan:
+                        String(
+                            item.plan ||
+                            "Selected Plan"
+                        ),
+
+                    price:
+                        Number(
+                            item.price || 0
+                        ),
+
+                    quantity:
+                        Number(
+                            item.quantity || 1
+                        )
+
+                };
+
+            }
+        );
+
+
+    try{
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("orders")
+                .insert({
+
+                    order_number:
+                        orderId,
+
+                    tracking_token:
+                        trackingToken,
+
+                    customer_name:
+                        name,
+
+                    whatsapp:
+                        phone,
+
+                    email:
+                        email,
+
+                    note:
+                        note,
+
+                    items:
+                        orderItems,
+
+                    subtotal:
+                        subtotal,
+
+                    delivery_fee:
+                        0,
+
+                    total:
+                        subtotal,
+
+                    payment_method:
+                        "bank_transfer",
+
+                    order_status:
+                        "pending"
+
+                });
+
+
+        if(error){
+
+            console.error(
+                "Supabase order error:",
+                error
+            );
+
+
+            alert(
+                "Order could not be submitted. Please try again."
+            );
+
+
+            button.disabled = false;
+
+
+            button.innerHTML = `
+
+                Confirm Order
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            `;
+
+
+            return;
+
+        }
+
+
+        const order = {
+
+            orderId:
+                orderId,
+
+            trackingToken:
+                trackingToken,
+
+            customer:{
+
+                name:
+                    name,
+
+                phone:
+                    phone,
+
+                email:
+                    email,
+
+                note:
+                    note
+
+            },
+
+            items:
+                cart,
+
+            subtotal:
+                subtotal,
+
+            delivery:
+                0,
+
+            total:
+                subtotal,
+
+            status:
+                "pending",
+
+            paymentMethod:
+                "bank_transfer",
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        localStorage.setItem(
+            "probLastOrder",
+            JSON.stringify(order)
+        );
+
+
+        document.getElementById(
+            "checkoutContent"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "checkoutHeading"
+        ).style.display =
+            "none";
+
+
+        const success =
+            document.getElementById(
+                "orderSuccess"
+            );
+
+
+        success.classList.add(
+            "show"
+        );
+
+
+        document.getElementById(
+            "successName"
+        ).textContent =
+            name;
+
+
+        document.getElementById(
+            "successOrderId"
+        ).textContent =
+            orderId;
+
+
+        const trackOrderButton =
+            document.getElementById(
+                "trackOrderButton"
+            );
+
+
+        if(trackOrderButton){
+
+            trackOrderButton.href =
+                "track-order.html?token=" +
+                encodeURIComponent(
+                    trackingToken
+                );
+
+        }
+
+
+        localStorage.removeItem(
+            "probCart"
+        );
+
+
+        updateCartCount();
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+
+    }catch(error){
+
+        console.error(
+            "Unexpected order error:",
+            error
+        );
+
+
+        alert(
+            "Something went wrong. Please try again."
+        );
+
+
+        button.disabled = false;
+
+
+        button.innerHTML = `
+
+            Confirm Order
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+if(
+    menuButton &&
+    mobileMenu
+){
+
+    menuButton.addEventListener(
+        "click",
+        function(){
+
+            mobileMenu.classList.toggle(
+                "show"
+            );
+
+
+            const icon =
+                menuButton.querySelector(
+                    "i"
+                );
+
+
+            if(
+                mobileMenu.classList.contains(
+                    "show"
+                )
+            ){
+
+                icon.classList.remove(
+                    "fa-bars"
+                );
+
+                icon.classList.add(
+                    "fa-xmark"
+                );
+
+            }else{
+
+                icon.classList.remove(
+                    "fa-xmark"
+                );
+
+                icon.classList.add(
+                    "fa-bars"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function openSearch(){
+
+    const overlay =
+        document.getElementById(
+            "searchOverlay"
+        );
+
+
+    if(overlay){
+
+        overlay.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+function closeSearch(){
+
+    const overlay =
+        document.getElementById(
+            "searchOverlay"
+        );
+
+
+    if(overlay){
+
+        overlay.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LIVE VALIDATION
+===================================================== */
+
+const customerName =
+    document.getElementById(
+        "customerName"
+    );
+
+
+const customerPhone =
+    document.getElementById(
+        "customerPhone"
+    );
+
+
+const customerEmail =
+    document.getElementById(
+        "customerEmail"
+    );
+
+
+if(customerName){
+
+    customerName.addEventListener(
+        "input",
+        validateName
+    );
+
+}
+
+
+if(customerPhone){
+
+    customerPhone.addEventListener(
+        "input",
+        validatePhone
+    );
+
+}
+
+
+if(customerEmail){
+
+    customerEmail.addEventListener(
+        "input",
+        validateEmail
+    );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+loadCheckout();
+
+loadPaymentSettings();
+
+</script>
+
+
+</body>
+
+  </html>
