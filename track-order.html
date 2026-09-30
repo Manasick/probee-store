@@ -5,573 +5,935 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="theme-color"
-          content="#080808">
+    <meta
+        name="referrer"
+        content="no-referrer"
+    >
 
-    <meta name="description"
-          content="ProB Experience — Secure Checkout">
+    <title>Track Order | ProBee</title>
 
-    <title>Checkout — ProB</title>
-
-
-    <!-- Google Fonts -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
-          rel="stylesheet">
-
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-
-    <!-- Main ProB CSS -->
-    <link rel="stylesheet"
-          href="style.css">
-
-
-    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
     <style>
 
-        /* =====================================================
-           PROB CHECKOUT
-        ===================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        .checkout-page {
 
-            max-width: 1180px;
+        body {
 
-            margin: 0 auto;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-            padding:
-                120px 25px 190px;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #242424 0%,
+                    #0d0d0d 45%,
+                    #050505 100%
+                );
+
+            color: #fff;
+
+            min-height: 100vh;
 
         }
 
 
-        /* =====================================================
-           HEADING
-        ===================================================== */
+        .container {
 
-        .checkout-heading {
+            width: 92%;
 
-            text-align: center;
+            max-width: 850px;
 
-            max-width: 700px;
-
-            margin:
-                0 auto 55px;
+            margin: auto;
 
         }
 
 
-        .checkout-heading .eyebrow {
+        /* ==============================
+           HEADER
+        ============================== */
 
-            display: block;
+        header {
 
-            color: var(--gold, #dcae38);
+            height: 75px;
 
-            font-size: 8px;
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            display: flex;
+
+            align-items: center;
+
+            background:
+                rgba(5,5,5,0.85);
+
+            backdrop-filter: blur(15px);
+
+        }
+
+
+        .header-inner {
+
+            width: 92%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .logo {
+
+            font-size: 25px;
 
             font-weight: 800;
 
-            letter-spacing: 3px;
+            color: #d6ad60;
+
+            letter-spacing: 1px;
+
+            text-decoration: none;
 
         }
 
 
-        .checkout-heading h1 {
+        .back-btn {
 
-            margin-top: 12px;
+            color: #fff;
 
-            font-family:
-                "Montserrat",
-                sans-serif;
+            text-decoration: none;
 
-            font-size:
-                clamp(42px, 7vw, 68px);
+            font-size: 14px;
 
-            line-height: 1;
-
-            letter-spacing: -3px;
-
-        }
-
-
-        .checkout-heading h1 span {
-
-            color:
-                var(--gold, #dcae38);
-
-        }
-
-
-        .checkout-heading p {
-
-            margin-top: 18px;
-
-            color: #686868;
-
-            font-size: 11px;
-
-            line-height: 1.7;
-
-        }
-
-
-        /* =====================================================
-           CHECKOUT GRID
-        ===================================================== */
-
-        .checkout-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                minmax(0, 1.35fr)
-                minmax(320px, .8fr);
-
-            gap: 30px;
-
-            align-items: start;
-
-        }
-
-
-        /* =====================================================
-           CARD
-        ===================================================== */
-
-        .checkout-card {
-
-            padding: 28px;
-
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.035),
-                    rgba(255,255,255,.012)
-                );
+            padding: 10px 15px;
 
             border:
                 1px solid
-                rgba(255,255,255,.07);
+                rgba(255,255,255,0.12);
+
+            border-radius: 10px;
+
+            transition: 0.25s;
 
         }
 
 
-        .checkout-card + .checkout-card {
+        .back-btn:hover {
 
-            margin-top: 18px;
+            border-color: #d6ad60;
+
+            color: #d6ad60;
 
         }
 
 
-        .checkout-card-heading {
+        /* ==============================
+           MAIN
+        ============================== */
+
+        main {
+
+            padding:
+                55px 0 80px;
+
+        }
+
+
+        .hero {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .hero h1 {
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .hero h1 span {
+
+            color: #d6ad60;
+
+        }
+
+
+        .hero p {
+
+            color: #aaa;
+
+            font-size: 15px;
+
+        }
+
+
+        /* ==============================
+           SEARCH CARD
+        ============================== */
+
+        .search-card {
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.35);
+
+        }
+
+
+        .search-card label {
+
+            display: block;
+
+            font-size: 13px;
+
+            color: #aaa;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .search-row {
 
             display: flex;
 
-            align-items: center;
-
-            gap: 14px;
-
-            margin-bottom: 25px;
+            gap: 12px;
 
         }
 
 
-        .checkout-number {
+        .search-row input {
 
-            width: 34px;
+            flex: 1;
 
-            height: 34px;
+            min-width: 0;
 
-            display: flex;
+            height: 52px;
 
-            align-items: center;
+            padding:
+                0 16px;
 
-            justify-content: center;
+            background:
+                rgba(0,0,0,0.35);
 
-            border-radius: 50%;
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
 
-            color: #080808;
+            border-radius: 12px;
+
+            color: #fff;
+
+            font-size: 15px;
+
+            outline: none;
+
+        }
+
+
+        .search-row input:focus {
+
+            border-color: #d6ad60;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(214,173,96,0.08);
+
+        }
+
+
+        .search-row button {
+
+            height: 52px;
+
+            padding:
+                0 22px;
+
+            border: none;
+
+            border-radius: 12px;
 
             background:
                 linear-gradient(
                     135deg,
-                    #f1c75d,
-                    #b98420
+                    #d6ad60,
+                    #b78a3e
                 );
 
-            font-size: 11px;
+            color: #080808;
+
+            font-size: 14px;
 
             font-weight: 800;
 
-        }
+            cursor: pointer;
 
-
-        .checkout-card-heading div {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 4px;
-
-        }
-
-
-        .checkout-card-heading span {
-
-            color:
-                var(--gold, #dcae38);
-
-            font-size: 7px;
-
-            font-weight: 800;
-
-            letter-spacing: 2px;
-
-        }
-
-
-        .checkout-card-heading h2 {
-
-            font-family:
-                "Montserrat",
-                sans-serif;
-
-            font-size: 20px;
-
-        }
-
-
-        /* =====================================================
-           FORM
-        ===================================================== */
-
-        .form-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 16px;
-
-        }
-
-
-        .form-group {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 8px;
-
-        }
-
-
-        .form-group.full {
-
-            grid-column:
-                1 / -1;
-
-        }
-
-
-        .form-group label {
-
-            color: #777;
-
-            font-size: 9px;
-
-            font-weight: 600;
-
-        }
-
-
-        .required {
-
-            color:
-                var(--gold, #dcae38);
-
-        }
-
-
-        .form-group input,
-        .form-group textarea {
-
-            width: 100%;
-
-            border: 1px solid
-                rgba(255,255,255,.08);
-
-            border-radius: 12px;
-
-            outline: none;
-
-            color: #fff;
-
-            background:
-                rgba(255,255,255,.025);
-
-            font-family: "Inter";
-
-            font-size: 11px;
-
-            transition: .25s;
-
-        }
-
-
-        .form-group input {
-
-            height: 50px;
-
-            padding:
-                0 15px;
-
-        }
-
-
-        .form-group textarea {
-
-            min-height: 105px;
-
-            padding: 14px 15px;
-
-            resize: vertical;
-
-        }
-
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-
-            color: #444;
-
-        }
-
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-
-            border-color:
-                rgba(220,174,56,.5);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(220,174,56,.06);
-
-        }
-
-
-        .form-error {
-
-            display: none;
-
-            color: #e78b8b;
-
-            font-size: 8px;
-
-        }
-
-
-        .form-group.invalid input,
-        .form-group.invalid textarea {
-
-            border-color:
-                rgba(220,100,100,.5);
-
-        }
-
-
-        .form-group.invalid .form-error {
-
-            display: block;
-
-        }
-
-
-        /* =====================================================
-           WHATSAPP HINT
-        ===================================================== */
-
-        .whatsapp-hint {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            margin-top: 7px;
-
-            color: #555;
-
-            font-size: 7px;
-
-        }
-
-
-        .whatsapp-hint i {
-
-            color: #61c894;
-
-        }
-
-
-        /* =====================================================
-           ORDER ITEMS
-        ===================================================== */
-
-        .checkout-items {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 10px;
-
-        }
-
-
-        .checkout-item {
-
-            display: grid;
-
-            grid-template-columns:
-                52px minmax(0,1fr) auto;
-
-            gap: 13px;
-
-            align-items: center;
-
-            padding: 13px;
-
-            border-radius: 14px;
-
-            background:
-                rgba(255,255,255,.025);
-
-            border:
-                1px solid
-                rgba(255,255,255,.05);
-
-        }
-
-
-        .checkout-item-icon {
-
-            width: 52px;
-
-            height: 52px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 13px;
-
-            color:
-                var(--gold, #dcae38);
-
-            background:
-                rgba(220,174,56,.08);
-
-            border:
-                1px solid
-                rgba(220,174,56,.14);
-
-        }
-
-
-        .checkout-item-info {
-
-            min-width: 0;
-
-        }
-
-
-        .checkout-item-info strong {
-
-            display: block;
-
-            color: #eee;
-
-            font-size: 11px;
-
-        }
-
-
-        .checkout-item-info span {
-
-            display: block;
-
-            margin-top: 5px;
-
-            color: #666;
-
-            font-size: 8px;
-
-        }
-
-
-        .checkout-item-info small {
-
-            display: block;
-
-            margin-top: 4px;
-
-            color:
-                var(--gold, #dcae38);
-
-            font-size: 7px;
-
-        }
-
-
-        .checkout-item-price {
-
-            color:
-                var(--gold-light, #f0ca61);
-
-            font-size: 10px;
-
-            font-weight: 700;
+            transition: 0.25s;
 
             white-space: nowrap;
 
         }
 
 
-        /* =====================================================
-           SUMMARY
-        ===================================================== */
+        .search-row button:hover {
 
-        .checkout-summary {
+            transform: translateY(-2px);
 
-            position: sticky;
+            box-shadow:
+                0 10px 25px
+                rgba(214,173,96,0.18);
 
-            top: 105px;
+        }
+
+
+        .search-row button:disabled {
+
+            opacity: 0.65;
+
+            cursor: wait;
+
+            transform: none;
+
+        }
+
+
+        /* ==============================
+           LOADING
+        ============================== */
+
+        .loading {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 35px 10px;
+
+            color: #aaa;
+
+        }
+
+
+        .spinner {
+
+            width: 32px;
+
+            height: 32px;
+
+            margin: 0 auto 14px;
+
+            border:
+                3px solid
+                rgba(255,255,255,0.12);
+
+            border-top-color: #d6ad60;
+
+            border-radius: 50%;
+
+            animation:
+                spin 0.8s linear infinite;
+
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* ==============================
+           ERROR
+        ============================== */
+
+        .error {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 14px 16px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,70,70,0.08);
+
+            border:
+                1px solid
+                rgba(255,70,70,0.20);
+
+            color: #ffaaaa;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ==============================
+           RESULT
+        ============================== */
+
+        .result {
+
+            display: none;
+
+            margin-top: 25px;
+
+        }
+
+
+        .order-header {
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+
+        .order-number {
+
+            color: #d6ad60;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .customer-name {
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+        }
+
+
+        .order-date {
+
+            color: #999;
+
+            font-size: 13px;
+
+            margin-top: 7px;
+
+        }
+
+
+        .status-badge {
+
+            padding:
+                9px 15px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .status-pending {
+
+            background:
+                rgba(214,173,96,0.12);
+
+            color: #d6ad60;
+
+            border:
+                1px solid
+                rgba(214,173,96,0.25);
+
+        }
+
+
+        .status-processing {
+
+            background:
+                rgba(90,160,255,0.12);
+
+            color: #8fc2ff;
+
+            border:
+                1px solid
+                rgba(90,160,255,0.25);
+
+        }
+
+
+        .status-completed {
+
+            background:
+                rgba(80,210,130,0.12);
+
+            color: #7ee6a3;
+
+            border:
+                1px solid
+                rgba(80,210,130,0.25);
+
+        }
+
+
+        .status-cancelled {
+
+            background:
+                rgba(255,80,80,0.12);
+
+            color: #ff9999;
+
+            border:
+                1px solid
+                rgba(255,80,80,0.25);
+
+        }
+
+
+        /* ==============================
+           STATUS MESSAGE
+        ============================== */
+
+        .status-message {
+
+            margin-top: 20px;
+
+            padding: 20px 22px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(214,173,96,0.055);
+
+            border:
+                1px solid
+                rgba(214,173,96,0.16);
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 15px;
+
+        }
+
+
+        .status-message-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            flex: 0 0 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(214,173,96,0.12);
+
+            color: #d6ad60;
+
+            font-size: 18px;
+
+        }
+
+
+        .status-message-content {
+
+            flex: 1;
+
+        }
+
+
+        .status-message-title {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .status-message-text {
+
+            color: #aaa;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .status-message.processing {
+
+            background:
+                rgba(90,160,255,0.055);
+
+            border-color:
+                rgba(90,160,255,0.16);
+
+        }
+
+
+        .status-message.processing
+        .status-message-icon {
+
+            background:
+                rgba(90,160,255,0.12);
+
+            color: #8fc2ff;
+
+        }
+
+
+        .status-message.completed {
+
+            background:
+                rgba(80,210,130,0.055);
+
+            border-color:
+                rgba(80,210,130,0.16);
+
+        }
+
+
+        .status-message.completed
+        .status-message-icon {
+
+            background:
+                rgba(80,210,130,0.12);
+
+            color: #7ee6a3;
+
+        }
+
+
+        .status-message.cancelled {
+
+            background:
+                rgba(255,80,80,0.055);
+
+            border-color:
+                rgba(255,80,80,0.16);
+
+        }
+
+
+        .status-message.cancelled
+        .status-message-icon {
+
+            background:
+                rgba(255,80,80,0.12);
+
+            color: #ff9999;
+
+        }
+
+
+        /* ==============================
+           TIMELINE
+        ============================== */
+
+        .timeline-card {
+
+            margin-top: 20px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+        }
+
+
+        .section-title {
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .timeline {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+        }
+
+
+        .timeline-step {
+
+            text-align: center;
+
+            position: relative;
+
+        }
+
+
+        .timeline-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            color: #777;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .timeline-step.active
+        .timeline-icon {
+
+            background:
+                rgba(214,173,96,0.15);
+
+            border-color: #d6ad60;
+
+            color: #d6ad60;
+
+            box-shadow:
+                0 0 20px
+                rgba(214,173,96,0.12);
+
+        }
+
+
+        .timeline-label {
+
+            margin-top: 10px;
+
+            font-size: 12px;
+
+            color: #777;
+
+        }
+
+
+        .timeline-step.active
+        .timeline-label {
+
+            color: #fff;
+
+        }
+
+
+        /* ==============================
+           ORDER DETAILS
+        ============================== */
+
+        .details-card {
+
+            margin-top: 20px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+        }
+
+
+        .items {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding:
+                15px 0;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.07);
+
+        }
+
+
+        .item:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .item-name {
+
+            font-size: 14px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .item-qty {
+
+            color: #888;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+
+        }
+
+
+        .item-price {
+
+            color: #d6ad60;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .summary {
+
+            margin-top: 18px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
 
         }
 
@@ -584,680 +946,253 @@
 
             justify-content: space-between;
 
-            gap: 15px;
+            gap: 20px;
 
-            margin-top: 15px;
-
-        }
-
-
-        .summary-row span {
-
-            color: #666;
-
-            font-size: 9px;
-
-        }
-
-
-        .summary-row strong {
+            padding: 7px 0;
 
             color: #aaa;
 
-            font-size: 10px;
+            font-size: 14px;
 
         }
 
 
-        .summary-row .free {
+        .summary-row.total {
 
-            color: #63c796;
+            margin-top: 8px;
 
-        }
+            padding-top: 15px;
 
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
 
-        .summary-divider {
+            color: #fff;
 
-            height: 1px;
-
-            margin: 22px 0;
-
-            background:
-                rgba(255,255,255,.07);
-
-        }
-
-
-        .checkout-total {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-        }
-
-
-        .checkout-total span {
-
-            color: #777;
-
-            font-size: 10px;
-
-        }
-
-
-        .checkout-total strong {
-
-            color:
-                var(--gold-light, #f0ca61);
-
-            font-size: 25px;
-
-        }
-
-
-        /* =====================================================
-           CONFIRM BUTTON
-        ===================================================== */
-
-        .confirm-order-button {
-
-            width: 100%;
-
-            min-height: 56px;
-
-            margin-top: 25px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            border: none;
-
-            border-radius: 12px;
-
-            cursor: pointer;
-
-            color: #090909;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f0c75e,
-                    #b9821e
-                );
-
-            font-family:
-                "Inter";
-
-            font-size: 10px;
+            font-size: 18px;
 
             font-weight: 800;
 
-            transition: .3s ease;
+        }
+
+
+        .summary-row.total span:last-child {
+
+            color: #d6ad60;
 
         }
 
 
-        .confirm-order-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 15px 40px
-                rgba(220,174,56,.15);
-
-        }
-
-
-        .confirm-order-button:disabled {
-
-            opacity: .6;
-
-            cursor: wait;
-
-            transform: none;
-
-        }
-
-
-        /* =====================================================
-           SECURITY
-        ===================================================== */
-
-        .checkout-security {
-
-            display: flex;
-
-            align-items: flex-start;
-
-            gap: 11px;
+        .payment {
 
             margin-top: 18px;
 
-            padding: 14px;
-
-            border-radius: 13px;
-
-            background:
-                rgba(255,255,255,.02);
-
-        }
-
-
-        .checkout-security i {
-
-            color: #67c99a;
-
-            margin-top: 2px;
-
-        }
-
-
-        .checkout-security strong {
-
-            display: block;
-
-            color: #aaa;
-
-            font-size: 8px;
-
-        }
-
-
-        .checkout-security p {
-
-            margin-top: 5px;
-
-            color: #555;
-
-            font-size: 7px;
-
-            line-height: 1.5;
-
-        }
-
-
-        /* =====================================================
-           EMPTY CHECKOUT
-        ===================================================== */
-
-        .checkout-empty {
-
-            display: none;
-
-            text-align: center;
-
-            max-width: 600px;
-
-            margin: 0 auto;
-
-            padding: 65px 25px;
-
-            border-radius: 22px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.07);
-
-            background:
-                rgba(255,255,255,.02);
-
-        }
-
-
-        .checkout-empty.show {
-
-            display: block;
-
-        }
-
-
-        .checkout-empty-icon {
-
-            width: 80px;
-
-            height: 80px;
-
-            margin: 0 auto 22px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 22px;
-
-            color:
-                var(--gold, #dcae38);
-
-            background:
-                rgba(220,174,56,.08);
-
-        }
-
-
-        .checkout-empty-icon i {
-
-            font-size: 27px;
-
-        }
-
-
-        .checkout-empty h2 {
-
-            font-family:
-                "Montserrat";
-
-            font-size: 23px;
-
-        }
-
-
-        .checkout-empty p {
-
-            margin-top: 10px;
-
-            color: #666;
-
-            font-size: 9px;
-
-        }
-
-
-        .back-products {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 9px;
-
-            margin-top: 22px;
-
             padding:
-                13px 18px;
-
-            border-radius: 10px;
-
-            color: #090909;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f0c75e,
-                    #bd8c25
-                );
-
-            font-size: 9px;
-
-            font-weight: 800;
-
-        }
-
-
-        /* =====================================================
-           SUCCESS
-        ===================================================== */
-
-        .order-success {
-
-            display: none;
-
-            max-width: 700px;
-
-            margin: 0 auto;
-
-            padding: 60px 25px;
-
-            text-align: center;
-
-            border-radius: 24px;
-
-            border:
-                1px solid
-                rgba(220,174,56,.18);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(220,174,56,.07),
-                    rgba(255,255,255,.018)
-                );
-
-        }
-
-
-        .order-success.show {
-
-            display: block;
-
-        }
-
-
-        .success-icon {
-
-            width: 85px;
-
-            height: 85px;
-
-            margin: 0 auto 25px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 50%;
-
-            color: #080808;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f0c75e,
-                    #bd8c25
-                );
-
-            box-shadow:
-                0 0 50px
-                rgba(220,174,56,.18);
-
-            font-size: 30px;
-
-        }
-
-
-        .order-success .success-label {
-
-            color:
-                var(--gold, #dcae38);
-
-            font-size: 8px;
-
-            font-weight: 800;
-
-            letter-spacing: 3px;
-
-        }
-
-
-        .order-success h2 {
-
-            margin-top: 10px;
-
-            font-family:
-                "Montserrat";
-
-            font-size:
-                clamp(32px, 6vw, 50px);
-
-            letter-spacing: -2px;
-
-        }
-
-
-        .order-success h2 span {
-
-            color:
-                var(--gold-light, #f0ca61);
-
-        }
-
-
-        .order-success p {
-
-            max-width: 500px;
-
-            margin:
-                15px auto 0;
-
-            color: #666;
-
-            font-size: 10px;
-
-            line-height: 1.7;
-
-        }
-
-
-        .order-id-box {
-
-            display: inline-flex;
-
-            flex-direction: column;
-
-            gap: 7px;
-
-            margin-top: 25px;
-
-            padding:
-                15px 25px;
+                14px 16px;
 
             border-radius: 12px;
 
             background:
-                rgba(255,255,255,.025);
-
-            border:
-                1px solid
-                rgba(220,174,56,.15);
-
-        }
-
-
-        .order-id-box span {
-
-            color: #555;
-
-            font-size: 7px;
-
-            letter-spacing: 2px;
-
-        }
-
-
-        .order-id-box strong {
-
-            color:
-                var(--gold-light, #f0ca61);
-
-            font-size: 15px;
-
-            letter-spacing: 1px;
-
-        }
-
-
-        .success-actions {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            margin-top: 30px;
-
-        }
-
-
-        .success-button {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 8px;
-
-            min-height: 45px;
-
-            padding:
-                0 20px;
-
-            border-radius: 10px;
-
-            font-size: 9px;
-
-            font-weight: 700;
-
-        }
-
-
-        .success-button.primary {
-
-            color: #080808;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f0c75e,
-                    #bd8c25
-                );
-
-        }
-
-
-        .success-button.secondary {
+                rgba(255,255,255,0.035);
 
             color: #aaa;
 
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            background:
-                rgba(255,255,255,.02);
+            font-size: 13px;
 
         }
 
 
-        /* =====================================================
-           MOBILE
-        ===================================================== */
+        .payment strong {
 
-        @media (max-width: 850px) {
-
-            .checkout-page {
-
-                padding:
-                    100px 17px 200px;
-
-            }
-
-
-            .checkout-grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .checkout-summary {
-
-                position: static;
-
-            }
+            color: #fff;
 
         }
 
+
+        /* ==============================
+           EMPTY
+        ============================== */
+
+        .empty {
+
+            text-align: center;
+
+            color: #888;
+
+            padding: 25px 0;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
 
         @media (max-width: 600px) {
 
-            .checkout-heading {
+            header {
 
-                margin-bottom: 35px;
-
-            }
-
-
-            .checkout-heading h1 {
-
-                font-size: 46px;
+                height: 68px;
 
             }
 
 
-            .checkout-card {
+            .logo {
+
+                font-size: 22px;
+
+            }
+
+
+            .back-btn {
+
+                font-size: 12px;
+
+                padding:
+                    8px 11px;
+
+            }
+
+
+            main {
+
+                padding:
+                    40px 0 60px;
+
+            }
+
+
+            .hero h1 {
+
+                font-size: 30px;
+
+            }
+
+
+            .hero p {
+
+                font-size: 13px;
+
+                line-height: 1.5;
+
+            }
+
+
+            .search-card {
 
                 padding: 20px;
 
-                border-radius: 18px;
+                border-radius: 17px;
 
             }
 
 
-            .form-grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .form-group.full {
-
-                grid-column: auto;
-
-            }
-
-
-            .checkout-item {
-
-                grid-template-columns:
-                    45px minmax(0,1fr);
-
-            }
-
-
-            .checkout-item-icon {
-
-                width: 45px;
-
-                height: 45px;
-
-            }
-
-
-            .checkout-item-price {
-
-                grid-column:
-                    2;
-
-                margin-top: -3px;
-
-            }
-
-
-            .checkout-total strong {
-
-                font-size: 21px;
-
-            }
-
-
-            .success-actions {
+            .search-row {
 
                 flex-direction: column;
 
             }
 
 
-            .success-button {
+            .search-row button {
 
                 width: 100%;
+
+            }
+
+
+            .order-header {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                padding: 20px;
+
+            }
+
+
+            .status-badge {
+
+                align-self: flex-start;
+
+            }
+
+
+            .timeline-card,
+            .details-card {
+
+                padding: 20px;
+
+                border-radius: 17px;
+
+            }
+
+
+            .timeline {
+
+                gap: 5px;
+
+            }
+
+
+            .timeline-icon {
+
+                width: 40px;
+
+                height: 40px;
+
+            }
+
+
+            .timeline-label {
+
+                font-size: 11px;
+
+            }
+
+
+            .customer-name {
+
+                font-size: 19px;
+
+            }
+
+
+            .status-message {
+
+                padding: 17px;
+
+                gap: 12px;
+
+            }
+
+
+            .status-message-icon {
+
+                width: 38px;
+
+                height: 38px;
+
+                flex-basis: 38px;
+
+                font-size: 16px;
+
+            }
+
+
+            .status-message-title {
+
+                font-size: 14px;
+
+            }
+
+
+            .status-message-text {
+
+                font-size: 12px;
 
             }
 
@@ -1268,281 +1203,198 @@
 </head>
 
 
-
 <body>
 
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
+    <!-- ==============================
+         HEADER
+    ============================== -->
 
-<div class="background-glow glow-one"></div>
+    <header>
 
-<div class="background-glow glow-two"></div>
+        <div class="header-inner">
 
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="site-header scrolled">
-
-    <div class="nav-container">
+            <a
+                href="index.html"
+                class="logo"
+            >
+                ProBee
+            </a>
 
 
-        <a href="index.html"
-           class="brand">
+            <a
+                href="products.html"
+                class="back-btn"
+            >
+                ← Continue Shopping
+            </a>
 
-            <div class="brand-mark">
+        </div>
 
-                <span>P</span>
-                <span>B</span>
+    </header>
+
+
+
+    <!-- ==============================
+         MAIN
+    ============================== -->
+
+    <main>
+
+        <div class="container">
+
+
+            <div class="hero">
+
+                <h1>
+                    Track Your
+                    <span>Order</span>
+                </h1>
+
+                <p>
+                    Use your secure tracking link to see
+                    the latest status of your order.
+                </p>
 
             </div>
 
 
-            <div class="brand-text">
 
-                <strong>
-                    Pro<span>B</span>
-                </strong>
+            <!-- SEARCH -->
 
-                <small>
-                    EXPERIENCE
-                </small>
+            <div class="search-card">
+
+                <label for="trackingToken">
+                    Secure Tracking Token
+                </label>
+
+
+                <div class="search-row">
+
+                    <input
+                        type="text"
+                        id="trackingToken"
+                        placeholder="Enter your secure tracking token"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+
+
+                    <button
+                        type="button"
+                        id="trackButton"
+                        onclick="trackOrder()"
+                    >
+                        Track Order
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="error"
+                    id="errorMessage"
+                ></div>
 
             </div>
 
-        </a>
 
 
+            <!-- LOADING -->
 
-        <nav class="desktop-nav">
+            <div
+                class="loading"
+                id="loading"
+            >
 
-            <a href="index.html">
-                Home
-            </a>
+                <div class="spinner"></div>
 
-            <a href="products.html">
-                Products
-            </a>
+                <div>
+                    Checking your order...
+                </div>
 
-            <a href="index.html#categories">
-                Categories
-            </a>
+            </div>
 
-            <a href="index.html#why-prob">
-                Why ProB
-            </a>
 
-            <a href="index.html#support">
-                Support
-            </a>
 
-        </nav>
+            <!-- RESULT -->
 
+            <div
+                class="result"
+                id="result"
+            >
 
 
-        <div class="nav-actions">
+                <!-- ORDER HEADER -->
 
-            <button
-                class="icon-button"
-                onclick="openSearch()">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-            </button>
-
-
-
-            <a href="cart.html"
-               class="cart-button">
-
-                <i class="fa-solid fa-bag-shopping"></i>
-
-                <span
-                    class="cart-count"
-                    id="cartCount">
-
-                    0
-
-                </span>
-
-            </a>
-
-
-
-            <button
-                class="menu-button"
-                id="menuButton">
-
-                <i class="fa-solid fa-bars"></i>
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <div
-        class="mobile-menu"
-        id="mobileMenu">
-
-        <a href="index.html">
-            <i class="fa-solid fa-house"></i>
-            Home
-        </a>
-
-        <a href="products.html">
-            <i class="fa-solid fa-store"></i>
-            Products
-        </a>
-
-        <a href="index.html#categories">
-            <i class="fa-solid fa-layer-group"></i>
-            Categories
-        </a>
-
-        <a href="index.html#support">
-            <i class="fa-solid fa-headset"></i>
-            Support
-        </a>
-
-    </div>
-
-</header>
-
-
-
-<!-- =====================================================
-     SEARCH
-===================================================== -->
-
-<div
-    class="search-overlay"
-    id="searchOverlay">
-
-    <button
-        class="close-search"
-        onclick="closeSearch()">
-
-        <i class="fa-solid fa-xmark"></i>
-
-    </button>
-
-
-    <div class="search-box">
-
-        <span>
-            SEARCH PROB
-        </span>
-
-
-        <div class="search-input-wrapper">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-                type="text"
-                placeholder="Search products...">
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     CHECKOUT
-===================================================== -->
-
-<main class="checkout-page">
-
-
-    <section
-        class="checkout-heading"
-        id="checkoutHeading">
-
-        <span class="eyebrow">
-            PROB STORE
-        </span>
-
-        <h1>
-            Secure <span>Checkout.</span>
-        </h1>
-
-        <p>
-            Complete your details and confirm
-            your ProB order.
-        </p>
-
-    </section>
-
-
-
-    <section
-        class="checkout-empty"
-        id="checkoutEmpty">
-
-        <div class="checkout-empty-icon">
-
-            <i class="fa-solid fa-bag-shopping"></i>
-
-        </div>
-
-        <h2>
-            Your cart is empty
-        </h2>
-
-        <p>
-            Add a product to your cart before
-            proceeding to checkout.
-        </p>
-
-        <a href="products.html"
-           class="back-products">
-
-            Explore Products
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-        </a>
-
-    </section>
-
-
-
-    <section
-        class="checkout-grid"
-        id="checkoutContent">
-
-
-        <div>
-
-
-            <div class="checkout-card">
-
-
-                <div class="checkout-card-heading">
-
-                    <div class="checkout-number">
-                        1
-                    </div>
+                <div class="order-header">
 
                     <div>
 
-                        <span>
-                            CUSTOMER INFORMATION
-                        </span>
+                        <div
+                            class="order-number"
+                            id="displayOrderNumber"
+                        >
+                        </div>
 
-                        <h2>
-                            Your Details
-                        </h2>
+
+                        <div
+                            class="customer-name"
+                            id="customerName"
+                        >
+                        </div>
+
+
+                        <div
+                            class="order-date"
+                            id="orderDate"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="status-badge"
+                        id="statusBadge"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- STATUS MESSAGE -->
+
+                <div
+                    class="status-message"
+                    id="statusMessage"
+                >
+
+                    <div
+                        class="status-message-icon"
+                        id="statusMessageIcon"
+                    >
+                        ✓
+                    </div>
+
+
+                    <div class="status-message-content">
+
+                        <div
+                            class="status-message-title"
+                            id="statusMessageTitle"
+                        >
+                            Order Received
+                        </div>
+
+
+                        <div
+                            class="status-message-text"
+                            id="statusMessageText"
+                        >
+                            Your order has been received.
+                        </div>
 
                     </div>
 
@@ -1550,320 +1402,142 @@
 
 
 
-                <form id="checkoutForm">
+                <!-- TIMELINE -->
 
-                    <div class="form-grid">
+                <div class="timeline-card">
+
+                    <div class="section-title">
+                        Order Progress
+                    </div>
 
 
-                        <div
-                            class="form-group"
-                            id="nameGroup">
-
-                            <label for="customerName">
-
-                                Full Name
-                                <span class="required">*</span>
-
-                            </label>
-
-                            <input
-                                type="text"
-                                id="customerName"
-                                name="customerName"
-                                placeholder="Enter your full name"
-                                autocomplete="name">
-
-                            <span class="form-error">
-                                Please enter your full name.
-                            </span>
-
-                        </div>
-
+                    <div class="timeline">
 
 
                         <div
-                            class="form-group"
-                            id="phoneGroup">
+                            class="timeline-step"
+                            id="pendingStep"
+                        >
 
-                            <label for="customerPhone">
-
-                                WhatsApp Number
-                                <span class="required">*</span>
-
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="customerPhone"
-                                name="customerPhone"
-                                placeholder="07XXXXXXXX"
-                                autocomplete="tel">
-
-                            <div class="whatsapp-hint">
-
-                                <i class="fa-brands fa-whatsapp"></i>
-
-                                <span>
-                                    We'll use this for order updates.
-                                </span>
-
+                            <div class="timeline-icon">
+                                ✓
                             </div>
 
-                            <span class="form-error">
-                                Please enter a valid WhatsApp number.
-                            </span>
+                            <div class="timeline-label">
+                                Pending
+                            </div>
 
                         </div>
 
 
 
                         <div
-                            class="form-group"
-                            id="emailGroup">
+                            class="timeline-step"
+                            id="processingStep"
+                        >
 
-                            <label for="customerEmail">
+                            <div class="timeline-icon">
+                                ⚙
+                            </div>
 
-                                Email Address
-                                <span class="required">*</span>
-
-                            </label>
-
-                            <input
-                                type="email"
-                                id="customerEmail"
-                                name="customerEmail"
-                                placeholder="you@example.com"
-                                autocomplete="email">
-
-                            <span class="form-error">
-                                Please enter a valid email address.
-                            </span>
+                            <div class="timeline-label">
+                                Processing
+                            </div>
 
                         </div>
 
 
 
                         <div
-                            class="form-group full">
+                            class="timeline-step"
+                            id="completedStep"
+                        >
 
-                            <label for="orderNote">
+                            <div class="timeline-icon">
+                                ✓
+                            </div>
 
-                                Additional Note
-                                <span style="color:#555;">
-                                    (Optional)
-                                </span>
+                            <div class="timeline-label">
+                                Completed
+                            </div>
 
-                            </label>
+                        </div>
 
-                            <textarea
-                                id="orderNote"
-                                name="orderNote"
-                                placeholder="Any additional information about your order..."></textarea>
+                    </div>
+
+                </div>
+
+
+
+                <!-- ORDER DETAILS -->
+
+                <div class="details-card">
+
+                    <div class="section-title">
+                        Order Details
+                    </div>
+
+
+                    <div
+                        class="items"
+                        id="orderItems"
+                    >
+                    </div>
+
+
+                    <div class="summary">
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <span id="subtotal">
+                                LKR 0
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Delivery
+                            </span>
+
+                            <span id="delivery">
+                                FREE
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="summary-row total"
+                        >
+
+                            <span>
+                                Total
+                            </span>
+
+                            <span id="total">
+                                LKR 0
+                            </span>
 
                         </div>
 
 
                     </div>
 
-                </form>
 
-            </div>
+                    <div class="payment">
 
-
-
-            <div class="checkout-card">
-
-
-                <div class="checkout-card-heading">
-
-                    <div class="checkout-number">
-                        2
-                    </div>
-
-                    <div>
-
-                        <span>
-                            ORDER METHOD
-                        </span>
-
-                        <h2>
-                            Digital Delivery
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="checkout-security"
-                    style="margin-top:0;">
-
-                    <i class="fa-solid fa-bolt"></i>
-
-                    <div>
-
-                        <strong>
-                            Fast Digital Delivery
+                        Payment Method:
+                        <strong id="paymentMethod">
+                            Pending
                         </strong>
-
-                        <p>
-                            After your order is confirmed,
-                            the ProB team will contact you
-                            using the details provided above
-                            to complete your order.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="checkout-security">
-
-                    <i class="fa-solid fa-shield-halved"></i>
-
-                    <div>
-
-                        <strong>
-                            Secure Order
-                        </strong>
-
-                        <p>
-                            Your order details are handled
-                            securely by ProB Experience.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-
-        <aside
-            class="checkout-summary">
-
-
-            <div class="checkout-card">
-
-
-                <div class="checkout-card-heading">
-
-                    <div class="checkout-number">
-                        3
-                    </div>
-
-                    <div>
-
-                        <span>
-                            ORDER SUMMARY
-                        </span>
-
-                        <h2>
-                            Your Order
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="checkout-items"
-                    id="checkoutItems">
-
-                </div>
-
-
-
-                <div class="summary-divider"></div>
-
-
-
-                <div class="summary-row">
-
-                    <span>
-                        Subtotal
-                    </span>
-
-                    <strong id="checkoutSubtotal">
-                        LKR 0
-                    </strong>
-
-                </div>
-
-
-
-                <div class="summary-row">
-
-                    <span>
-                        Delivery
-                    </span>
-
-                    <strong class="free">
-                        FREE
-                    </strong>
-
-                </div>
-
-
-
-                <div class="summary-divider"></div>
-
-
-
-                <div class="checkout-total">
-
-                    <span>
-                        Total
-                    </span>
-
-                    <strong id="checkoutTotal">
-                        LKR 0
-                    </strong>
-
-                </div>
-
-
-
-                <button
-                    type="button"
-                    class="confirm-order-button"
-                    id="confirmOrderButton"
-                    onclick="confirmOrder()">
-
-                    Confirm Order
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </button>
-
-
-
-                <div class="checkout-security">
-
-                    <i class="fa-solid fa-lock"></i>
-
-                    <div>
-
-                        <strong>
-                            Secure Checkout
-                        </strong>
-
-                        <p>
-                            By confirming your order,
-                            you agree that the information
-                            provided is correct.
-                        </p>
 
                     </div>
 
@@ -1872,1274 +1546,858 @@
 
             </div>
 
-        </aside>
-
-
-    </section>
-
-
-
-    <section
-        class="order-success"
-        id="orderSuccess">
-
-
-        <div class="success-icon">
-
-            <i class="fa-solid fa-check"></i>
-
         </div>
 
+    </main>
 
-        <span class="success-label">
-            ORDER CONFIRMED
-        </span>
 
 
-        <h2>
-            Thank You, <span id="successName">
-                Customer
-            </span>.
-        </h2>
+    <script>
 
 
-        <p>
-            Your ProB order has been successfully
-            received. Please keep your Order ID
-            for future reference.
-        </p>
+    /* ==============================
+       SUPABASE
+    ============================== */
 
 
-        <div class="order-id-box">
+    const SUPABASE_URL =
+        "https://fjczxixfajvvizsywrtr.supabase.co";
 
-            <span>
-                ORDER ID
-            </span>
 
-            <strong id="successOrderId">
-                PROB-000000
-            </strong>
+    const SUPABASE_ANON_KEY =
+        "sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN";
 
-        </div>
 
-
-        <div class="success-actions">
-
-            <a href="#"
-               id="trackOrderButton"
-               class="success-button primary">
-
-                <i class="fa-solid fa-location-dot"></i>
-
-                Track My Order
-
-            </a>
-
-
-            <a href="products.html"
-               class="success-button secondary">
-
-                Continue Shopping
-
-                <i class="fa-solid fa-arrow-right"></i>
-
-            </a>
-
-
-            <a href="index.html"
-               class="success-button secondary">
-
-                Back Home
-
-            </a>
-
-        </div>
-
-
-    </section>
-
-
-</main>
-
-
-
-<!-- =====================================================
-     BOTTOM NAV
-===================================================== -->
-
-<nav class="bottom-nav">
-
-
-    <a href="index.html"
-       class="bottom-nav-item">
-
-        <i class="fa-solid fa-house"></i>
-
-        <span>
-            Home
-        </span>
-
-    </a>
-
-
-
-    <a href="products.html"
-       class="bottom-nav-item">
-
-        <i class="fa-solid fa-store"></i>
-
-        <span>
-            Products
-        </span>
-
-    </a>
-
-
-
-    <a href="cart.html"
-       class="bottom-nav-item">
-
-        <div>
-
-            <i class="fa-solid fa-bag-shopping"></i>
-
-            <span id="bottomCartCount">
-                0
-            </span>
-
-        </div>
-
-        <span>
-            Cart
-        </span>
-
-    </a>
-
-
-
-    <a href="index.html#support"
-       class="bottom-nav-item">
-
-        <i class="fa-solid fa-headset"></i>
-
-        <span>
-            Support
-        </span>
-
-    </a>
-
-
-
-    <a href="#"
-       class="bottom-nav-item">
-
-        <i class="fa-solid fa-user"></i>
-
-        <span>
-            Account
-        </span>
-
-    </a>
-
-</nav>
-
-
-
-<script>
-
-/* =====================================================
-   SUPABASE CONFIGURATION
-===================================================== */
-
-const SUPABASE_URL =
-    'https://fjczxixfajvvizsywrtr.supabase.co';
-
-const SUPABASE_ANON_KEY =
-    'sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN';
-
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
-
-
-
-/* =====================================================
-   GET CART
-===================================================== */
-
-function getCart() {
-
-    try {
-
-        return JSON.parse(
-            localStorage.getItem("probCart")
-        ) || [];
-
-    } catch (error) {
-
-        return [];
-
-    }
-
-}
-
-
-
-/* =====================================================
-   SAVE CART
-===================================================== */
-
-function saveCart(cart) {
-
-    localStorage.setItem(
-        "probCart",
-        JSON.stringify(cart)
-    );
-
-}
-
-
-
-/* =====================================================
-   PRICE FORMAT
-===================================================== */
-
-function formatPrice(price) {
-
-    return "LKR " +
-        Number(price).toLocaleString();
-
-}
-
-
-
-/* =====================================================
-   CART COUNT
-===================================================== */
-
-function updateCartCount() {
-
-    const cart = getCart();
-
-    const count =
-        cart.reduce(
-            function(total, item) {
-
-                return total +
-                    Number(
-                        item.quantity || 0
-                    );
-
-            },
-            0
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
         );
 
 
-    const top =
+
+    /* ==============================
+       ELEMENTS
+    ============================== */
+
+
+    const trackingInput =
         document.getElementById(
-            "cartCount"
+            "trackingToken"
         );
 
 
-    const bottom =
+    const trackButton =
         document.getElementById(
-            "bottomCartCount"
+            "trackButton"
         );
 
 
-    if (top) {
-
-        top.textContent = count;
-
-    }
-
-
-    if (bottom) {
-
-        bottom.textContent = count;
-
-    }
-
-}
-
-
-
-/* =====================================================
-   LOAD CHECKOUT
-===================================================== */
-
-function loadCheckout() {
-
-    const cart = getCart();
-
-
-    const empty =
+    const loading =
         document.getElementById(
-            "checkoutEmpty"
+            "loading"
         );
 
 
-    const content =
+    const result =
         document.getElementById(
-            "checkoutContent"
+            "result"
         );
 
 
-    const heading =
+    const errorMessage =
         document.getElementById(
-            "checkoutHeading"
+            "errorMessage"
         );
 
 
-    const items =
+    const statusMessage =
         document.getElementById(
-            "checkoutItems"
+            "statusMessage"
         );
 
 
-    updateCartCount();
-
-
-    if (cart.length === 0) {
-
-        empty.classList.add("show");
-
-        content.style.display = "none";
-
-        heading.style.display = "block";
-
-        return;
-
-    }
-
-
-    empty.classList.remove("show");
-
-    content.style.display = "grid";
-
-
-    items.innerHTML = "";
-
-
-    let subtotal = 0;
-
-
-    cart.forEach(
-        function(item) {
-
-            const quantity =
-                Number(item.quantity || 1);
-
-
-            const price =
-                Number(item.price || 0);
-
-
-            const total =
-                quantity * price;
-
-
-            subtotal += total;
-
-
-            const element =
-                document.createElement("div");
-
-
-            element.className =
-                "checkout-item";
-
-
-            element.innerHTML = `
-
-                <div class="checkout-item-icon">
-
-                    <i class="fa-solid fa-crown"></i>
-
-                </div>
-
-
-                <div class="checkout-item-info">
-
-                    <strong>
-                        ${escapeHTML(item.name)}
-                    </strong>
-
-                    <span>
-                        ${escapeHTML(item.plan || "Selected Plan")}
-                    </span>
-
-                    <small>
-                        Quantity: ${quantity}
-                    </small>
-
-                </div>
-
-
-                <strong class="checkout-item-price">
-
-                    ${formatPrice(total)}
-
-                </strong>
-
-            `;
-
-
-            items.appendChild(element);
-
-        }
-    );
-
-
-    document.getElementById(
-        "checkoutSubtotal"
-    ).textContent =
-        formatPrice(subtotal);
-
-
-    document.getElementById(
-        "checkoutTotal"
-    ).textContent =
-        formatPrice(subtotal);
-
-}
-
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(value) {
-
-    const div =
-        document.createElement("div");
-
-    div.textContent =
-        value == null
-            ? ""
-            : String(value);
-
-    return div.innerHTML;
-
-}
-
-
-
-/* =====================================================
-   VALIDATE NAME
-===================================================== */
-
-function validateName() {
-
-    const group =
+    const statusMessageIcon =
         document.getElementById(
-            "nameGroup"
+            "statusMessageIcon"
         );
 
-    const input =
+
+    const statusMessageTitle =
         document.getElementById(
-            "customerName"
+            "statusMessageTitle"
         );
 
 
-    const valid =
-        input.value.trim().length >= 2;
-
-
-    group.classList.toggle(
-        "invalid",
-        !valid
-    );
-
-
-    return valid;
-
-}
-
-
-
-/* =====================================================
-   VALIDATE PHONE
-===================================================== */
-
-function validatePhone() {
-
-    const group =
+    const statusMessageText =
         document.getElementById(
-            "phoneGroup"
-        );
-
-    const input =
-        document.getElementById(
-            "customerPhone"
+            "statusMessageText"
         );
 
 
-    const cleaned =
-        input.value.replace(
-            /[\s\-]/g,
-            ""
-        );
+
+    /* ==============================
+       TRACK ORDER
+    ============================== */
 
 
-    const valid =
-        /^(?:\+94|0)7\d{8}$/.test(
-            cleaned
-        );
+    async function trackOrder() {
 
 
-    group.classList.toggle(
-        "invalid",
-        !valid
-    );
+        const trackingToken =
+            trackingInput.value.trim();
 
 
-    return valid;
-
-}
-
+        errorMessage.style.display =
+            "none";
 
 
-/* =====================================================
-   VALIDATE EMAIL
-===================================================== */
-
-function validateEmail() {
-
-    const group =
-        document.getElementById(
-            "emailGroup"
-        );
-
-    const input =
-        document.getElementById(
-            "customerEmail"
-        );
+        result.style.display =
+            "none";
 
 
-    const valid =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            .test(
-                input.value.trim()
+        if (!trackingToken) {
+
+            showError(
+                "Please enter your secure tracking token."
             );
-
-
-    group.classList.toggle(
-        "invalid",
-        !valid
-    );
-
-
-    return valid;
-
-}
-
-
-
-/* =====================================================
-   GENERATE ORDER ID
-===================================================== */
-
-function generateOrderId() {
-
-    const now =
-        new Date();
-
-
-    const year =
-        String(
-            now.getFullYear()
-        ).slice(-2);
-
-
-    const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, "0");
-
-
-    const day =
-        String(
-            now.getDate()
-        ).padStart(2, "0");
-
-
-    const random =
-        Math.floor(
-            1000 +
-            Math.random() * 9000
-        );
-
-
-    return (
-        "PROB-" +
-        year +
-        month +
-        day +
-        "-" +
-        random
-    );
-
-}
-
-
-
-/* =====================================================
-   GENERATE SECURE TRACKING TOKEN
-===================================================== */
-
-function generateTrackingToken() {
-
-    if (
-        window.crypto &&
-        typeof window.crypto.randomUUID ===
-            "function"
-    ) {
-
-        return window.crypto.randomUUID();
-
-    }
-
-
-    const randomPart =
-        Math.random().toString(36).substring(2) +
-        Math.random().toString(36).substring(2);
-
-
-    return (
-        Date.now().toString(36) +
-        "-" +
-        randomPart
-    );
-
-}
-
-
-
-/* =====================================================
-   CONFIRM ORDER — SUPABASE
-===================================================== */
-
-async function confirmOrder() {
-
-    const cart = getCart();
-
-
-    if (cart.length === 0) {
-
-        return;
-
-    }
-
-
-    const nameValid =
-        validateName();
-
-
-    const phoneValid =
-        validatePhone();
-
-
-    const emailValid =
-        validateEmail();
-
-
-    if (
-        !nameValid ||
-        !phoneValid ||
-        !emailValid
-    ) {
-
-        const firstInvalid =
-            document.querySelector(
-                ".form-group.invalid input"
-            );
-
-
-        if (firstInvalid) {
-
-            firstInvalid.focus();
-
-        }
-
-
-        return;
-
-    }
-
-
-    const button =
-        document.getElementById(
-            "confirmOrderButton"
-        );
-
-
-    button.disabled = true;
-
-
-    button.innerHTML = `
-
-        <i class="fa-solid fa-spinner fa-spin"></i>
-
-        Processing Order...
-
-    `;
-
-
-    /* =================================================
-       CUSTOMER DETAILS
-    ================================================= */
-
-    const name =
-        document.getElementById(
-            "customerName"
-        ).value.trim();
-
-
-    const phone =
-        document.getElementById(
-            "customerPhone"
-        ).value.trim();
-
-
-    const email =
-        document.getElementById(
-            "customerEmail"
-        ).value.trim();
-
-
-    const note =
-        document.getElementById(
-            "orderNote"
-        ).value.trim();
-
-
-
-    /* =================================================
-       ORDER ID
-    ================================================= */
-
-    const orderId =
-        generateOrderId();
-
-
-
-    /* =================================================
-       SECURE TRACKING TOKEN
-    ================================================= */
-
-    const trackingToken =
-        generateTrackingToken();
-
-
-
-    /* =================================================
-       CALCULATE TOTAL
-    ================================================= */
-
-    let subtotal = 0;
-
-
-    cart.forEach(
-        function(item) {
-
-            const price =
-                Number(item.price || 0);
-
-
-            const quantity =
-                Number(item.quantity || 1);
-
-
-            subtotal +=
-                price * quantity;
-
-        }
-    );
-
-
-
-    /* =================================================
-       CLEAN ITEMS FOR DATABASE
-    ================================================= */
-
-    const orderItems =
-        cart.map(
-            function(item) {
-
-                return {
-
-                    name:
-                        String(
-                            item.name || ""
-                        ),
-
-                    plan:
-                        String(
-                            item.plan ||
-                            "Selected Plan"
-                        ),
-
-                    price:
-                        Number(
-                            item.price || 0
-                        ),
-
-                    quantity:
-                        Number(
-                            item.quantity || 1
-                        )
-
-                };
-
-            }
-        );
-
-
-
-    /* =================================================
-       INSERT ORDER INTO SUPABASE
-    ================================================= */
-
-    try {
-
-        const { error } =
-            await supabaseClient
-                .from("orders")
-                .insert({
-
-                    order_number:
-                        orderId,
-
-                    tracking_token:
-                        trackingToken,
-
-                    customer_name:
-                        name,
-
-                    whatsapp:
-                        phone,
-
-                    email:
-                        email,
-
-                    note:
-                        note,
-
-                    items:
-                        orderItems,
-
-                    subtotal:
-                        subtotal,
-
-                    delivery_fee:
-                        0,
-
-                    total:
-                        subtotal,
-
-                    payment_method:
-                        "pending",
-
-                    order_status:
-                        "pending"
-
-                });
-
-
-
-        /* =================================================
-           DATABASE ERROR
-        ================================================= */
-
-        if (error) {
-
-            console.error(
-                "Supabase order error:",
-                error
-            );
-
-
-            alert(
-                "Order could not be submitted. Please try again."
-            );
-
-
-            button.disabled = false;
-
-
-            button.innerHTML = `
-
-                Confirm Order
-
-                <i class="fa-solid fa-arrow-right"></i>
-
-            `;
-
 
             return;
 
         }
 
 
-
-        /* =================================================
-           SAVE LAST ORDER LOCALLY
-        ================================================= */
-
-        const order = {
-
-            orderId:
-                orderId,
-
-            trackingToken:
-                trackingToken,
-
-            customer: {
-
-                name:
-                    name,
-
-                phone:
-                    phone,
-
-                email:
-                    email,
-
-                note:
-                    note
-
-            },
-
-            items:
-                cart,
-
-            subtotal:
-                subtotal,
-
-            delivery:
-                0,
-
-            total:
-                subtotal,
-
-            status:
-                "pending",
-
-            createdAt:
-                new Date().toISOString()
-
-        };
+        loading.style.display =
+            "block";
 
 
-        localStorage.setItem(
-            "probLastOrder",
-            JSON.stringify(order)
-        );
+        trackButton.disabled =
+            true;
 
 
-
-        /* =================================================
-           SHOW SUCCESS
-        ================================================= */
-
-        document.getElementById(
-            "checkoutContent"
-        ).style.display =
-            "none";
+        trackButton.textContent =
+            "Checking...";
 
 
-        document.getElementById(
-            "checkoutHeading"
-        ).style.display =
-            "none";
+        try {
 
 
-        const success =
-            document.getElementById(
-                "orderSuccess"
-            );
+            const { data, error } =
+                await supabaseClient
+                    .rpc(
+                        "track_order_by_token",
+                        {
+                            p_tracking_token:
+                                trackingToken
+                        }
+                    );
 
 
-        success.classList.add(
-            "show"
-        );
+            if (error) {
 
+                console.error(error);
 
-        document.getElementById(
-            "successName"
-        ).textContent =
-            name;
-
-
-        document.getElementById(
-            "successOrderId"
-        ).textContent =
-            orderId;
-
-
-
-        /* =================================================
-           SECURE TRACK ORDER BUTTON
-        ================================================= */
-
-        const trackOrderButton =
-            document.getElementById(
-                "trackOrderButton"
-            );
-
-
-        if (trackOrderButton) {
-
-            trackOrderButton.href =
-                "track-order.html?token=" +
-                encodeURIComponent(
-                    trackingToken
+                throw new Error(
+                    "Unable to check the order right now."
                 );
+
+            }
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                showError(
+                    "Order not found. Please check your secure tracking link and try again."
+                );
+
+                return;
+
+            }
+
+
+            const order =
+                data[0];
+
+
+            displayOrder(order);
+
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            showError(
+                error.message ||
+                "Something went wrong. Please try again."
+            );
+
+        }
+
+        finally {
+
+            loading.style.display =
+                "none";
+
+
+            trackButton.disabled =
+                false;
+
+
+            trackButton.textContent =
+                "Track Order";
+
+        }
+
+    }
+
+
+
+    /* ==============================
+       DISPLAY ORDER
+    ============================== */
+
+
+    function displayOrder(order) {
+
+
+        document.getElementById(
+            "displayOrderNumber"
+        ).textContent =
+            order.order_number || "";
+
+
+        document.getElementById(
+            "customerName"
+        ).textContent =
+            order.customer_name || "Customer";
+
+
+        document.getElementById(
+            "orderDate"
+        ).textContent =
+            formatDate(
+                order.created_at
+            );
+
+
+        const status =
+            String(
+                order.order_status ||
+                "pending"
+            ).toLowerCase();
+
+
+        setStatus(status);
+
+
+        setStatusMessage(status);
+
+
+        document.getElementById(
+            "subtotal"
+        ).textContent =
+            formatMoney(
+                order.subtotal
+            );
+
+
+        document.getElementById(
+            "delivery"
+        ).textContent =
+            Number(
+                order.delivery_fee || 0
+            ) === 0
+                ? "FREE"
+                : formatMoney(
+                    order.delivery_fee
+                );
+
+
+        document.getElementById(
+            "total"
+        ).textContent =
+            formatMoney(
+                order.total
+            );
+
+
+        document.getElementById(
+            "paymentMethod"
+        ).textContent =
+            formatPayment(
+                order.payment_method
+            );
+
+
+        displayItems(
+            order.items
+        );
+
+
+        result.style.display =
+            "block";
+
+
+        result.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+
+    /* ==============================
+       STATUS MESSAGE
+    ============================== */
+
+
+    function setStatusMessage(status) {
+
+
+        statusMessage.className =
+            "status-message";
+
+
+        if (status === "processing") {
+
+
+            statusMessage.classList.add(
+                "processing"
+            );
+
+
+            statusMessageIcon.textContent =
+                "⚙";
+
+
+            statusMessageTitle.textContent =
+                "Your Order Is Being Prepared";
+
+
+            statusMessageText.textContent =
+                "Your order is currently being prepared. We are working on it and will update the status when it is completed.";
 
         }
 
 
-
-        /* =================================================
-           CLEAR CART ONLY AFTER SUCCESS
-        ================================================= */
-
-        localStorage.removeItem(
-            "probCart"
-        );
+        else if (status === "completed") {
 
 
-        updateCartCount();
-
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "Unexpected order error:",
-            error
-        );
-
-
-        alert(
-            "Something went wrong. Please try again."
-        );
-
-
-        button.disabled = false;
-
-
-        button.innerHTML = `
-
-            Confirm Order
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-        `;
-
-    }
-
-}
-
-
-
-/* =====================================================
-   MOBILE MENU
-===================================================== */
-
-const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
-
-
-const mobileMenu =
-    document.getElementById(
-        "mobileMenu"
-    );
-
-
-if (
-    menuButton &&
-    mobileMenu
-) {
-
-    menuButton.addEventListener(
-        "click",
-        function() {
-
-            mobileMenu.classList.toggle(
-                "show"
+            statusMessage.classList.add(
+                "completed"
             );
 
 
-            const icon =
-                menuButton.querySelector(
-                    "i"
+            statusMessageIcon.textContent =
+                "✓";
+
+
+            statusMessageTitle.textContent =
+                "Order Completed";
+
+
+            statusMessageText.textContent =
+                "Your order has been completed successfully. Thank you for choosing ProBee!";
+
+        }
+
+
+        else if (status === "cancelled") {
+
+
+            statusMessage.classList.add(
+                "cancelled"
+            );
+
+
+            statusMessageIcon.textContent =
+                "×";
+
+
+            statusMessageTitle.textContent =
+                "Order Cancelled";
+
+
+            statusMessageText.textContent =
+                "This order has been cancelled. If you believe this is unexpected, please contact ProBee for assistance.";
+
+        }
+
+
+        else {
+
+
+            statusMessageIcon.textContent =
+                "✓";
+
+
+            statusMessageTitle.textContent =
+                "Order Received";
+
+
+            statusMessageText.textContent =
+                "Your order has been received successfully and is currently waiting to be processed.";
+
+        }
+
+    }
+
+
+
+    /* ==============================
+       DISPLAY ITEMS
+    ============================== */
+
+
+    function displayItems(items) {
+
+
+        const container =
+            document.getElementById(
+                "orderItems"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        if (
+            !items ||
+            !Array.isArray(items) ||
+            items.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty">
+                    No product information available.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        items.forEach(function(item) {
+
+
+            const name =
+                escapeHtml(
+                    item.name ||
+                    item.title ||
+                    "Product"
                 );
 
+
+            const quantity =
+                Number(
+                    item.quantity ||
+                    item.qty ||
+                    1
+                );
+
+
+            const price =
+                Number(
+                    item.price ||
+                    0
+                );
+
+
+            const total =
+                price * quantity;
+
+
+            const itemElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            itemElement.className =
+                "item";
+
+
+            itemElement.innerHTML = `
+
+                <div>
+
+                    <div class="item-name">
+                        ${name}
+                    </div>
+
+                    <div class="item-qty">
+                        Qty: ${quantity}
+                    </div>
+
+                </div>
+
+                <div class="item-price">
+                    ${formatMoney(total)}
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                itemElement
+            );
+
+        });
+
+    }
+
+
+
+    /* ==============================
+       STATUS
+    ============================== */
+
+
+    function setStatus(status) {
+
+
+        const badge =
+            document.getElementById(
+                "statusBadge"
+            );
+
+
+        const pending =
+            document.getElementById(
+                "pendingStep"
+            );
+
+
+        const processing =
+            document.getElementById(
+                "processingStep"
+            );
+
+
+        const completed =
+            document.getElementById(
+                "completedStep"
+            );
+
+
+        pending.classList.remove(
+            "active"
+        );
+
+
+        processing.classList.remove(
+            "active"
+        );
+
+
+        completed.classList.remove(
+            "active"
+        );
+
+
+        badge.className =
+            "status-badge";
+
+
+        badge.textContent =
+            status.charAt(0).toUpperCase() +
+            status.slice(1);
+
+
+        if (status === "processing") {
+
+
+            badge.classList.add(
+                "status-processing"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
+
+
+            processing.classList.add(
+                "active"
+            );
+
+        }
+
+
+        else if (status === "completed") {
+
+
+            badge.classList.add(
+                "status-completed"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
+
+
+            processing.classList.add(
+                "active"
+            );
+
+
+            completed.classList.add(
+                "active"
+            );
+
+        }
+
+
+        else if (status === "cancelled") {
+
+
+            badge.classList.add(
+                "status-cancelled"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
+
+        }
+
+
+        else {
+
+
+            badge.classList.add(
+                "status-pending"
+            );
+
+
+            pending.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+
+
+    /* ==============================
+       SHOW ERROR
+    ============================== */
+
+
+    function showError(message) {
+
+
+        errorMessage.textContent =
+            message;
+
+
+        errorMessage.style.display =
+            "block";
+
+    }
+
+
+
+    /* ==============================
+       DATE FORMAT
+    ============================== */
+
+
+    function formatDate(value) {
+
+
+        if (!value) {
+
+            return "";
+
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return "";
+
+        }
+
+
+        return date.toLocaleString(
+            "en-LK",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    }
+
+
+
+    /* ==============================
+       MONEY
+    ============================== */
+
+
+    function formatMoney(value) {
+
+
+        return "LKR " +
+            Number(
+                value || 0
+            ).toLocaleString(
+                "en-LK",
+                {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2
+                }
+            );
+
+    }
+
+
+
+    /* ==============================
+       PAYMENT
+    ============================== */
+
+
+    function formatPayment(value) {
+
+
+        if (!value) {
+
+            return "Pending";
+
+        }
+
+
+        const text =
+            String(value)
+                .replace(
+                    /_/g,
+                    " "
+                )
+                .trim();
+
+
+        return text.charAt(0).toUpperCase() +
+            text.slice(1);
+
+    }
+
+
+
+    /* ==============================
+       ESCAPE HTML
+    ============================== */
+
+
+    function escapeHtml(value) {
+
+
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+
+    /* =====================================================
+       11F — SECURE TOKEN AUTO TRACKING
+    ===================================================== */
+
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const urlTrackingToken =
+        urlParams.get("token");
+
+
+    if (urlTrackingToken) {
+
+
+        trackingInput.value =
+            urlTrackingToken;
+
+
+        /*
+         * Automatically track the order
+         * when the customer opens the
+         * secure tracking link.
+         */
+
+        trackOrder();
+
+    }
+
+
+
+    /* =====================================================
+       ENTER KEY
+    ===================================================== */
+
+
+    trackingInput.addEventListener(
+        "keydown",
+        function(event) {
 
             if (
-                mobileMenu.classList.contains(
-                    "show"
-                )
+                event.key === "Enter"
             ) {
 
-                icon.classList.remove(
-                    "fa-bars"
-                );
-
-                icon.classList.add(
-                    "fa-xmark"
-                );
-
-            } else {
-
-                icon.classList.remove(
-                    "fa-xmark"
-                );
-
-                icon.classList.add(
-                    "fa-bars"
-                );
+                trackOrder();
 
             }
 
         }
     );
 
-}
 
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function openSearch() {
-
-    const overlay =
-        document.getElementById(
-            "searchOverlay"
-        );
-
-
-    if (overlay) {
-
-        overlay.classList.add(
-            "show"
-        );
-
-    }
-
-}
-
-
-function closeSearch() {
-
-    const overlay =
-        document.getElementById(
-            "searchOverlay"
-        );
-
-
-    if (overlay) {
-
-        overlay.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   LIVE VALIDATION
-===================================================== */
-
-const customerName =
-    document.getElementById(
-        "customerName"
-    );
-
-
-const customerPhone =
-    document.getElementById(
-        "customerPhone"
-    );
-
-
-const customerEmail =
-    document.getElementById(
-        "customerEmail"
-    );
-
-
-if (customerName) {
-
-    customerName.addEventListener(
-        "input",
-        function() {
-
-            validateName();
-
-        }
-    );
-
-}
-
-
-if (customerPhone) {
-
-    customerPhone.addEventListener(
-        "input",
-        function() {
-
-            validatePhone();
-
-        }
-    );
-
-}
-
-
-if (customerEmail) {
-
-    customerEmail.addEventListener(
-        "input",
-        function() {
-
-            validateEmail();
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-loadCheckout();
-
-</script>
+    </script>
 
 
 </body>
