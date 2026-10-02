@@ -27,16 +27,19 @@
       href="https://fonts.gstatic.com"
       crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
-      rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+    rel="stylesheet">
 
 
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
-<link rel="stylesheet"
-      href="style.css">
+<link
+    rel="stylesheet"
+    href="style.css">
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -45,7 +48,858 @@
 <style>
 
 /* =====================================================
-   PROBEE CHECKOUT
+   GLOBAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background:#080808;
+    color:#f5f5f5;
+    font-family:"Inter",sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.site-header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:9999;
+
+    background:rgba(8,8,8,.94);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+}
+
+
+.site-header.scrolled{
+
+    background:
+        rgba(8,8,8,.96);
+
+}
+
+
+.nav-container{
+
+    width:100%;
+
+    max-width:1280px;
+
+    height:78px;
+
+    margin:0 auto;
+
+    padding:0 28px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    flex-shrink:0;
+
+}
+
+
+.brand-mark{
+
+    width:38px;
+
+    height:38px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        rgba(220,174,56,.55);
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(220,174,56,.15),
+            rgba(255,255,255,.02)
+        );
+
+    color:#dcae38;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    text-align:center;
+
+}
+
+
+.brand-mark span{
+
+    display:block;
+
+}
+
+
+.brand-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+    line-height:1;
+
+}
+
+
+.brand-text strong{
+
+    color:#fff;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    letter-spacing:-.5px;
+
+}
+
+
+.brand-text strong span{
+
+    color:#dcae38;
+
+}
+
+
+.brand-text small{
+
+    margin-top:5px;
+
+    color:#777;
+
+    font-size:6px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+}
+
+
+/* =====================================================
+   DESKTOP NAV
+===================================================== */
+
+.desktop-nav{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:28px;
+
+    flex:1;
+
+}
+
+
+.desktop-nav a{
+
+    position:relative;
+
+    color:#aaa;
+
+    text-decoration:none;
+
+    font-size:9px;
+
+    font-weight:600;
+
+    transition:.25s ease;
+
+}
+
+
+.desktop-nav a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-7px;
+
+    width:0;
+
+    height:1px;
+
+    background:#dcae38;
+
+    transition:.25s ease;
+
+}
+
+
+.desktop-nav a:hover{
+
+    color:#fff;
+
+}
+
+
+.desktop-nav a:hover::after{
+
+    width:100%;
+
+}
+
+
+/* =====================================================
+   NAV ACTIONS
+===================================================== */
+
+.nav-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+.icon-button,
+.menu-button{
+
+    width:40px;
+
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:10px;
+
+    color:#aaa;
+
+    background:
+        rgba(255,255,255,.025);
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+}
+
+
+.icon-button:hover,
+.menu-button:hover{
+
+    color:#dcae38;
+
+    border-color:
+        rgba(220,174,56,.25);
+
+}
+
+
+.cart-button{
+
+    position:relative;
+
+    width:40px;
+
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#aaa;
+
+    text-decoration:none;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:10px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:.25s ease;
+
+}
+
+
+.cart-button:hover{
+
+    color:#dcae38;
+
+    border-color:
+        rgba(220,174,56,.25);
+
+}
+
+
+.cart-count{
+
+    position:absolute;
+
+    top:-5px;
+
+    right:-5px;
+
+    min-width:16px;
+
+    height:16px;
+
+    padding:0 4px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#080808;
+
+    background:#dcae38;
+
+    font-size:7px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+.menu-button{
+
+    display:none;
+
+}
+
+
+.mobile-menu{
+
+    display:none;
+
+}
+
+
+/* =====================================================
+   SEARCH OVERLAY
+===================================================== */
+
+.search-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    display:none;
+
+    align-items:flex-start;
+
+    justify-content:center;
+
+    padding-top:120px;
+
+    background:
+        rgba(8,8,8,.97);
+
+    backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
+
+}
+
+
+.search-overlay.show{
+
+    display:flex;
+
+}
+
+
+.close-search{
+
+    position:absolute;
+
+    top:28px;
+
+    right:28px;
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius:50%;
+
+    color:#aaa;
+
+    background:
+        rgba(255,255,255,.03);
+
+    cursor:pointer;
+
+}
+
+
+.close-search:hover{
+
+    color:#dcae38;
+
+    border-color:
+        rgba(220,174,56,.3);
+
+}
+
+
+.search-box{
+
+    width:min(
+        650px,
+        calc(100% - 40px)
+    );
+
+}
+
+
+.search-box > span{
+
+    display:block;
+
+    margin-bottom:14px;
+
+    color:#dcae38;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+}
+
+
+.search-input-wrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 17px;
+
+    height:58px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.035);
+
+}
+
+
+.search-input-wrapper i{
+
+    color:#dcae38;
+
+}
+
+
+.search-input-wrapper input{
+
+    width:100%;
+
+    height:100%;
+
+    border:none;
+
+    outline:none;
+
+    color:#fff;
+
+    background:transparent;
+
+    font-family:"Inter",sans-serif;
+
+    font-size:13px;
+
+}
+
+
+.search-input-wrapper input::placeholder{
+
+    color:#555;
+
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:14px;
+
+    transform:translateX(-50%);
+
+    width:min(
+        560px,
+        calc(100% - 24px)
+    );
+
+    min-height:64px;
+
+    z-index:9998;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    padding:8px 10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    background:
+        rgba(12,12,12,.94);
+
+    backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.45);
+
+}
+
+
+.bottom-nav-item{
+
+    min-width:60px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    color:#666;
+
+    text-decoration:none;
+
+    font-size:7px;
+
+    font-weight:600;
+
+    transition:.25s ease;
+
+}
+
+
+.bottom-nav-item i{
+
+    font-size:15px;
+
+}
+
+
+.bottom-nav-item:hover{
+
+    color:#dcae38;
+
+}
+
+
+.bottom-nav-item > div{
+
+    position:relative;
+
+}
+
+
+.bottom-nav-item > div > span{
+
+    position:absolute;
+
+    top:-7px;
+
+    right:-10px;
+
+    min-width:14px;
+
+    height:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0 3px;
+
+    border-radius:50%;
+
+    color:#080808;
+
+    background:#dcae38;
+
+    font-size:6px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+   HEADER RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+    .nav-container{
+
+        height:68px;
+
+        padding:0 17px;
+
+    }
+
+
+    .desktop-nav{
+
+        display:none;
+
+    }
+
+
+    .menu-button{
+
+        display:flex;
+
+    }
+
+
+    .brand-mark{
+
+        width:35px;
+
+        height:35px;
+
+    }
+
+
+    .brand-text strong{
+
+        font-size:15px;
+
+    }
+
+
+    .mobile-menu{
+
+        position:absolute;
+
+        top:68px;
+
+        left:12px;
+
+        right:12px;
+
+        padding:10px;
+
+        border:
+            1px solid
+            rgba(255,255,255,.08);
+
+        border-radius:16px;
+
+        background:
+            rgba(12,12,12,.98);
+
+        box-shadow:
+            0 20px 50px
+            rgba(0,0,0,.4);
+
+    }
+
+
+    .mobile-menu.show{
+
+        display:block;
+
+    }
+
+
+    .mobile-menu a{
+
+        display:flex;
+
+        align-items:center;
+
+        gap:12px;
+
+        padding:14px 15px;
+
+        color:#aaa;
+
+        text-decoration:none;
+
+        border-radius:10px;
+
+        font-size:10px;
+
+        font-weight:600;
+
+    }
+
+
+    .mobile-menu a i{
+
+        width:18px;
+
+        color:#dcae38;
+
+    }
+
+
+    .mobile-menu a:hover{
+
+        color:#fff;
+
+        background:
+            rgba(220,174,56,.06);
+
+    }
+
+}
+
+
+@media(min-width:851px){
+
+    .bottom-nav{
+
+        display:none;
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECKOUT PAGE
 ===================================================== */
 
 .checkout-page{
@@ -74,7 +928,7 @@
 
     display:block;
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     font-size:8px;
 
@@ -102,7 +956,7 @@
 
 .checkout-heading h1 span{
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
 }
 
@@ -226,7 +1080,7 @@
 
 .checkout-card-heading span{
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     font-size:7px;
 
@@ -238,6 +1092,10 @@
 
 
 .checkout-card-heading h2{
+
+    margin:0;
+
+    color:#f5f5f5;
 
     font-family:"Montserrat",sans-serif;
 
@@ -292,7 +1150,7 @@
 
 .required{
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
 }
 
@@ -302,7 +1160,8 @@
 
     width:100%;
 
-    border:1px solid
+    border:
+        1px solid
         rgba(255,255,255,.08);
 
     border-radius:12px;
@@ -420,7 +1279,7 @@
 
 
 /* =====================================================
-   PAYMENT SETTINGS
+   PAYMENT
 ===================================================== */
 
 .payment-loading{
@@ -543,12 +1402,13 @@
 
     padding:9px 11px;
 
-    border:1px solid
+    border:
+        1px solid
         rgba(220,174,56,.18);
 
     border-radius:8px;
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     background:
         rgba(220,174,56,.05);
@@ -586,7 +1446,8 @@
 
     margin-top:13px;
 
-    border:1px solid
+    border:
+        1px solid
         rgba(220,174,56,.2);
 
     border-radius:10px;
@@ -605,6 +1466,8 @@
     font-weight:800;
 
     cursor:pointer;
+
+    transition:.25s ease;
 
 }
 
@@ -636,7 +1499,7 @@
 
 .payment-note-title{
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     font-size:7px;
 
@@ -716,7 +1579,7 @@
 
     border-radius:13px;
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     background:
         rgba(220,174,56,.08);
@@ -765,7 +1628,7 @@
 
     margin-top:4px;
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     font-size:7px;
 
@@ -774,7 +1637,7 @@
 
 .checkout-item-price{
 
-    color:var(--gold-light,#f0ca61);
+    color:#f0ca61;
 
     font-size:10px;
 
@@ -872,7 +1735,7 @@
 
 .checkout-total strong{
 
-    color:var(--gold-light,#f0ca61);
+    color:#f0ca61;
 
     font-size:25px;
 
@@ -880,7 +1743,7 @@
 
 
 /* =====================================================
-   BUTTON
+   CONFIRM BUTTON
 ===================================================== */
 
 .confirm-order-button{
@@ -1055,7 +1918,7 @@
 
     border-radius:22px;
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     background:
         rgba(220,174,56,.08);
@@ -1071,6 +1934,10 @@
 
 
 .checkout-empty h2{
+
+    margin:0;
+
+    color:#fff;
 
     font-family:"Montserrat";
 
@@ -1116,6 +1983,8 @@
     font-size:9px;
 
     font-weight:800;
+
+    text-decoration:none;
 
 }
 
@@ -1195,7 +2064,7 @@
 
 .order-success .success-label{
 
-    color:var(--gold,#dcae38);
+    color:#dcae38;
 
     font-size:8px;
 
@@ -1210,6 +2079,8 @@
 
     margin-top:10px;
 
+    color:#fff;
+
     font-family:"Montserrat";
 
     font-size:clamp(32px,6vw,50px);
@@ -1221,7 +2092,7 @@
 
 .order-success h2 span{
 
-    color:var(--gold-light,#f0ca61);
+    color:#f0ca61;
 
 }
 
@@ -1278,7 +2149,7 @@
 
 .order-id-box strong{
 
-    color:var(--gold-light,#f0ca61);
+    color:#f0ca61;
 
     font-size:15px;
 
@@ -1322,6 +2193,8 @@
 
     font-weight:700;
 
+    text-decoration:none;
+
 }
 
 
@@ -1354,7 +2227,7 @@
 
 
 /* =====================================================
-   MOBILE
+   MOBILE CHECKOUT
 ===================================================== */
 
 @media(max-width:850px){
@@ -1501,8 +2374,9 @@
     <div class="nav-container">
 
 
-        <a href="index.html"
-           class="brand">
+        <a
+            href="index.html"
+            class="brand">
 
             <div class="brand-mark">
 
@@ -1555,6 +2429,7 @@
         <div class="nav-actions">
 
             <button
+                type="button"
                 class="icon-button"
                 onclick="openSearch()">
 
@@ -1563,8 +2438,9 @@
             </button>
 
 
-            <a href="cart.html"
-               class="cart-button">
+            <a
+                href="cart.html"
+                class="cart-button">
 
                 <i class="fa-solid fa-bag-shopping"></i>
 
@@ -1580,6 +2456,7 @@
 
 
             <button
+                type="button"
                 class="menu-button"
                 id="menuButton">
 
@@ -1597,23 +2474,38 @@
         id="mobileMenu">
 
         <a href="index.html">
+
             <i class="fa-solid fa-house"></i>
+
             Home
+
         </a>
+
 
         <a href="products.html">
+
             <i class="fa-solid fa-store"></i>
+
             Products
+
         </a>
+
 
         <a href="index.html#categories">
+
             <i class="fa-solid fa-layer-group"></i>
+
             Categories
+
         </a>
 
+
         <a href="index.html#support">
+
             <i class="fa-solid fa-headset"></i>
+
             Support
+
         </a>
 
     </div>
@@ -1630,6 +2522,7 @@
     id="searchOverlay">
 
     <button
+        type="button"
         class="close-search"
         onclick="closeSearch()">
 
@@ -1651,7 +2544,9 @@
 
             <input
                 type="text"
-                placeholder="Search products...">
+                id="searchInput"
+                placeholder="Search products..."
+                autocomplete="off">
 
         </div>
 
@@ -1687,7 +2582,9 @@
     </section>
 
 
-    <!-- EMPTY -->
+    <!-- =================================================
+         EMPTY CART
+    ================================================= -->
 
     <section
         class="checkout-empty"
@@ -1721,7 +2618,9 @@
     </section>
 
 
-    <!-- CHECKOUT CONTENT -->
+    <!-- =================================================
+         CHECKOUT CONTENT
+    ================================================= -->
 
     <section
         class="checkout-grid"
@@ -1731,7 +2630,9 @@
         <div>
 
 
-            <!-- CUSTOMER -->
+            <!-- =========================================
+                 CUSTOMER
+            ========================================== -->
 
             <div class="checkout-card">
 
@@ -1768,7 +2669,10 @@
                             <label for="customerName">
 
                                 Full Name
-                                <span class="required">*</span>
+
+                                <span class="required">
+                                    *
+                                </span>
 
                             </label>
 
@@ -1793,7 +2697,10 @@
                             <label for="customerPhone">
 
                                 WhatsApp Number
-                                <span class="required">*</span>
+
+                                <span class="required">
+                                    *
+                                </span>
 
                             </label>
 
@@ -1828,7 +2735,10 @@
                             <label for="customerEmail">
 
                                 Email Address
-                                <span class="required">*</span>
+
+                                <span class="required">
+                                    *
+                                </span>
 
                             </label>
 
@@ -1852,6 +2762,7 @@
                             <label for="orderNote">
 
                                 Additional Note
+
                                 <span style="color:#555;">
                                     (Optional)
                                 </span>
@@ -1865,7 +2776,6 @@
 
                         </div>
 
-
                     </div>
 
                 </form>
@@ -1873,7 +2783,9 @@
             </div>
 
 
-            <!-- DELIVERY -->
+            <!-- =========================================
+                 DELIVERY
+            ========================================== -->
 
             <div class="checkout-card">
 
@@ -1944,7 +2856,9 @@
             </div>
 
 
-            <!-- PAYMENT -->
+            <!-- =========================================
+                 PAYMENT
+            ========================================== -->
 
             <div class="checkout-card">
 
@@ -1996,8 +2910,11 @@
                     id="bankPaymentDetails"
                     style="display:none;">
 
+
                     <div class="bank-details">
 
+
+                        <!-- BANK NAME -->
 
                         <div class="bank-detail-row">
 
@@ -2010,7 +2927,9 @@
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutBankName">
+
                                     -
+
                                 </div>
 
                             </div>
@@ -2022,12 +2941,15 @@
                                 data-copy-field="bankName">
 
                                 <i class="fa-regular fa-copy"></i>
+
                                 Copy
 
                             </button>
 
                         </div>
 
+
+                        <!-- ACCOUNT NAME -->
 
                         <div class="bank-detail-row">
 
@@ -2040,7 +2962,9 @@
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutAccountName">
+
                                     -
+
                                 </div>
 
                             </div>
@@ -2052,12 +2976,15 @@
                                 data-copy-field="accountName">
 
                                 <i class="fa-regular fa-copy"></i>
+
                                 Copy
 
                             </button>
 
                         </div>
 
+
+                        <!-- ACCOUNT NUMBER -->
 
                         <div class="bank-detail-row">
 
@@ -2070,7 +2997,9 @@
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutAccountNumber">
+
                                     -
+
                                 </div>
 
                             </div>
@@ -2082,12 +3011,15 @@
                                 data-copy-field="accountNumber">
 
                                 <i class="fa-regular fa-copy"></i>
+
                                 Copy
 
                             </button>
 
                         </div>
 
+
+                        <!-- BRANCH -->
 
                         <div class="bank-detail-row">
 
@@ -2100,7 +3032,9 @@
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutBranch">
+
                                     -
+
                                 </div>
 
                             </div>
@@ -2112,12 +3046,15 @@
                                 data-copy-field="branch">
 
                                 <i class="fa-regular fa-copy"></i>
+
                                 Copy
 
                             </button>
 
                         </div>
 
+
+                        <!-- BANK CODE -->
 
                         <div
                             class="bank-detail-row"
@@ -2132,7 +3069,9 @@
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutBankCode">
+
                                     -
+
                                 </div>
 
                             </div>
@@ -2144,6 +3083,7 @@
                                 data-copy-field="bankCode">
 
                                 <i class="fa-regular fa-copy"></i>
+
                                 Copy
 
                             </button>
@@ -2153,6 +3093,8 @@
 
                     </div>
 
+
+                    <!-- COPY ALL -->
 
                     <button
                         type="button"
@@ -2166,12 +3108,16 @@
                     </button>
 
 
+                    <!-- PAYMENT NOTE -->
+
                     <div
                         class="payment-note"
                         id="paymentNoteBox">
 
                         <div class="payment-note-title">
+
                             PAYMENT INSTRUCTIONS
+
                         </div>
 
                         <div
@@ -2181,6 +3127,8 @@
 
                     </div>
 
+
+                    <!-- RECEIPT -->
 
                     <div class="checkout-security">
 
@@ -2202,6 +3150,7 @@
 
                     </div>
 
+
                 </div>
 
             </div>
@@ -2210,7 +3159,9 @@
         </div>
 
 
-        <!-- SUMMARY -->
+        <!-- =================================================
+             ORDER SUMMARY
+        ================================================= -->
 
         <aside class="checkout-summary">
 
@@ -2332,7 +3283,9 @@
     </section>
 
 
-    <!-- SUCCESS -->
+    <!-- =================================================
+         SUCCESS
+    ================================================= -->
 
     <section
         class="order-success"
@@ -2352,10 +3305,12 @@
 
 
         <h2>
+
             Thank You,
             <span id="successName">
                 Customer
             </span>.
+
         </h2>
 
 
@@ -2515,6 +3470,7 @@
 const SUPABASE_URL =
     "https://fjczxixfajvvizsywrtr.supabase.co";
 
+
 const SUPABASE_ANON_KEY =
     "sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN";
 
@@ -2527,7 +3483,7 @@ const supabaseClient =
 
 
 /* =====================================================
-   PAYMENT SETTINGS STATE
+   PAYMENT SETTINGS
 ===================================================== */
 
 let paymentSettings = null;
@@ -2621,7 +3577,7 @@ function updateCartCount(){
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value){
@@ -2642,7 +3598,7 @@ function escapeHTML(value){
 
 
 /* =====================================================
-   LOAD PAYMENT SETTINGS
+   PAYMENT SETTINGS
 ===================================================== */
 
 async function loadPaymentSettings(){
@@ -2676,7 +3632,10 @@ async function loadPaymentSettings(){
                 .select(
                     "id,bank_enabled,bank_name,account_name,account_number,branch,bank_code,payment_note,updated_at"
                 )
-                .eq("id",1)
+                .eq(
+                    "id",
+                    1
+                )
                 .maybeSingle();
 
 
@@ -2702,7 +3661,8 @@ async function loadPaymentSettings(){
             details.style.display =
                 "none";
 
-            paymentSettings = null;
+            paymentSettings =
+                null;
 
             return;
 
@@ -2721,11 +3681,15 @@ async function loadPaymentSettings(){
             "block";
 
 
+        /* BANK NAME */
+
         document.getElementById(
             "checkoutBankName"
         ).textContent =
             data.bank_name || "-";
 
+
+        /* ACCOUNT NAME */
 
         document.getElementById(
             "checkoutAccountName"
@@ -2733,17 +3697,23 @@ async function loadPaymentSettings(){
             data.account_name || "-";
 
 
+        /* ACCOUNT NUMBER */
+
         document.getElementById(
             "checkoutAccountNumber"
         ).textContent =
             data.account_number || "-";
 
 
+        /* BRANCH */
+
         document.getElementById(
             "checkoutBranch"
         ).textContent =
             data.branch || "-";
 
+
+        /* BANK CODE */
 
         const bankCodeRow =
             document.getElementById(
@@ -2761,6 +3731,7 @@ async function loadPaymentSettings(){
             ).textContent =
                 data.bank_code;
 
+
             bankCodeRow.style.display =
                 "grid";
 
@@ -2771,6 +3742,8 @@ async function loadPaymentSettings(){
 
         }
 
+
+        /* PAYMENT NOTE */
 
         const noteBox =
             document.getElementById(
@@ -2788,6 +3761,7 @@ async function loadPaymentSettings(){
                 "checkoutPaymentNote"
             ).textContent =
                 note;
+
 
             noteBox.style.display =
                 "block";
@@ -2825,7 +3799,9 @@ async function loadPaymentSettings(){
 
         `;
 
-        paymentSettings = null;
+
+        paymentSettings =
+            null;
 
     }
 
@@ -2851,15 +3827,58 @@ async function copyText(
     }
 
 
+    const original =
+        button.innerHTML;
+
+
     try{
 
-        await navigator.clipboard.writeText(
-            text
-        );
+        if(
+            navigator.clipboard &&
+            window.isSecureContext
+        ){
+
+            await navigator.clipboard.writeText(
+                text
+            );
+
+        }else{
+
+            const textarea =
+                document.createElement(
+                    "textarea"
+                );
 
 
-        const original =
-            button.innerHTML;
+            textarea.value =
+                text;
+
+
+            textarea.style.position =
+                "fixed";
+
+
+            textarea.style.opacity =
+                "0";
+
+
+            document.body.appendChild(
+                textarea
+            );
+
+
+            textarea.focus();
+
+            textarea.select();
+
+            document.execCommand(
+                "copy"
+            );
+
+
+            textarea.remove();
+
+        }
 
 
         button.classList.add(
@@ -2882,6 +3901,7 @@ async function copyText(
                 button.classList.remove(
                     "copied"
                 );
+
 
                 button.innerHTML =
                     original;
@@ -2893,61 +3913,9 @@ async function copyText(
 
     }catch(error){
 
-        const textarea =
-            document.createElement(
-                "textarea"
-            );
-
-
-        textarea.value =
-            text;
-
-
-        document.body.appendChild(
-            textarea
-        );
-
-
-        textarea.select();
-
-        document.execCommand(
-            "copy"
-        );
-
-
-        textarea.remove();
-
-
-        const original =
-            button.innerHTML;
-
-
-        button.classList.add(
-            "copied"
-        );
-
-
-        button.innerHTML = `
-
-            <i class="fa-solid fa-check"></i>
-
-            Copied
-
-        `;
-
-
-        setTimeout(
-            function(){
-
-                button.classList.remove(
-                    "copied"
-                );
-
-                button.innerHTML =
-                    original;
-
-            },
-            1500
+        console.error(
+            "Copy failed:",
+            error
         );
 
     }
@@ -3052,14 +4020,18 @@ document
 
 
 /* =====================================================
-   COPY ALL
+   COPY ALL BANK DETAILS
 ===================================================== */
 
-document
-    .getElementById(
+const copyAllButton =
+    document.getElementById(
         "copyAllBankDetails"
-    )
-    .addEventListener(
+    );
+
+
+if(copyAllButton){
+
+    copyAllButton.addEventListener(
         "click",
         async function(){
 
@@ -3143,56 +4115,87 @@ document
 
             try{
 
-                await navigator.clipboard.writeText(
-                    text
+                if(
+                    navigator.clipboard &&
+                    window.isSecureContext
+                ){
+
+                    await navigator.clipboard.writeText(
+                        text
+                    );
+
+                }else{
+
+                    const textarea =
+                        document.createElement(
+                            "textarea"
+                        );
+
+
+                    textarea.value =
+                        text;
+
+
+                    textarea.style.position =
+                        "fixed";
+
+
+                    textarea.style.opacity =
+                        "0";
+
+
+                    document.body.appendChild(
+                        textarea
+                    );
+
+
+                    textarea.focus();
+
+                    textarea.select();
+
+                    document.execCommand(
+                        "copy"
+                    );
+
+
+                    textarea.remove();
+
+                }
+
+
+                button.innerHTML = `
+
+                    <i class="fa-solid fa-check"></i>
+
+                    All Details Copied
+
+                `;
+
+
+                setTimeout(
+                    function(){
+
+                        button.innerHTML =
+                            original;
+
+                    },
+                    1800
                 );
+
 
             }catch(error){
 
-                const textarea =
-                    document.createElement(
-                        "textarea"
-                    );
-
-                textarea.value =
-                    text;
-
-                document.body.appendChild(
-                    textarea
+                console.error(
+                    "Copy all failed:",
+                    error
                 );
-
-                textarea.select();
-
-                document.execCommand(
-                    "copy"
-                );
-
-                textarea.remove();
 
             }
 
-
-            button.innerHTML = `
-
-                <i class="fa-solid fa-check"></i>
-
-                All Details Copied
-
-            `;
-
-
-            setTimeout(
-                function(){
-
-                    button.innerHTML =
-                        original;
-
-                },
-                1800
-            );
-
         }
     );
+
+}
 
 
 /* =====================================================
@@ -3238,11 +4241,14 @@ function loadCheckout(){
             "show"
         );
 
+
         content.style.display =
             "none";
 
+
         heading.style.display =
             "block";
+
 
         return;
 
@@ -3258,10 +4264,16 @@ function loadCheckout(){
         "grid";
 
 
-    items.innerHTML = "";
+    heading.style.display =
+        "block";
 
 
-    let subtotal = 0;
+    items.innerHTML =
+        "";
+
+
+    let subtotal =
+        0;
 
 
     cart.forEach(
@@ -3309,7 +4321,9 @@ function loadCheckout(){
                 <div class="checkout-item-info">
 
                     <strong>
-                        ${escapeHTML(item.name)}
+                        ${escapeHTML(
+                            item.name
+                        )}
                     </strong>
 
                     <span>
@@ -3479,13 +4493,19 @@ function generateOrderId(){
     const month =
         String(
             now.getMonth() + 1
-        ).padStart(2,"0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     const day =
         String(
             now.getDate()
-        ).padStart(2,"0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     const random =
@@ -3508,7 +4528,7 @@ function generateOrderId(){
 
 
 /* =====================================================
-   SECURE TRACKING TOKEN
+   TRACKING TOKEN
 ===================================================== */
 
 function generateTrackingToken(){
@@ -3591,10 +4611,9 @@ async function confirmOrder(){
     }
 
 
-    /*
-       Bank Transfer must be available
-       before confirming the order.
-    */
+    /* ---------------------------------------------
+       PAYMENT CHECK
+    --------------------------------------------- */
 
     if(
         !paymentSettings ||
@@ -3616,7 +4635,8 @@ async function confirmOrder(){
         );
 
 
-    button.disabled = true;
+    button.disabled =
+        true;
 
 
     button.innerHTML = `
@@ -3660,7 +4680,8 @@ async function confirmOrder(){
         generateTrackingToken();
 
 
-    let subtotal = 0;
+    let subtotal =
+        0;
 
 
     cart.forEach(
@@ -3779,7 +4800,8 @@ async function confirmOrder(){
             );
 
 
-            button.disabled = false;
+            button.disabled =
+                false;
 
 
             button.innerHTML = `
@@ -3795,6 +4817,10 @@ async function confirmOrder(){
 
         }
 
+
+        /* -----------------------------------------
+           LOCAL ORDER
+        ----------------------------------------- */
 
         const order = {
 
@@ -3846,9 +4872,15 @@ async function confirmOrder(){
 
         localStorage.setItem(
             "probLastOrder",
-            JSON.stringify(order)
+            JSON.stringify(
+                order
+            )
         );
 
+
+        /* -----------------------------------------
+           HIDE CHECKOUT
+        ----------------------------------------- */
 
         document.getElementById(
             "checkoutContent"
@@ -3861,6 +4893,10 @@ async function confirmOrder(){
         ).style.display =
             "none";
 
+
+        /* -----------------------------------------
+           SHOW SUCCESS
+        ----------------------------------------- */
 
         const success =
             document.getElementById(
@@ -3885,6 +4921,10 @@ async function confirmOrder(){
             orderId;
 
 
+        /* -----------------------------------------
+           TRACK BUTTON
+        ----------------------------------------- */
+
         const trackOrderButton =
             document.getElementById(
                 "trackOrderButton"
@@ -3902,6 +4942,10 @@ async function confirmOrder(){
         }
 
 
+        /* -----------------------------------------
+           CLEAR CART
+        ----------------------------------------- */
+
         localStorage.removeItem(
             "probCart"
         );
@@ -3909,6 +4953,10 @@ async function confirmOrder(){
 
         updateCartCount();
 
+
+        /* -----------------------------------------
+           TOP
+        ----------------------------------------- */
 
         window.scrollTo({
 
@@ -3932,7 +4980,8 @@ async function confirmOrder(){
         );
 
 
-        button.disabled = false;
+        button.disabled =
+            false;
 
 
         button.innerHTML = `
@@ -4034,6 +5083,26 @@ function openSearch(){
             "show"
         );
 
+
+        const input =
+            document.getElementById(
+                "searchInput"
+            );
+
+
+        if(input){
+
+            setTimeout(
+                function(){
+
+                    input.focus();
+
+                },
+                100
+            );
+
+        }
+
     }
 
 }
@@ -4056,6 +5125,27 @@ function closeSearch(){
     }
 
 }
+
+
+/* =====================================================
+   ESCAPE SEARCH WITH KEYBOARD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeSearch();
+
+        }
+
+    }
+);
 
 
 /* =====================================================
@@ -4123,4 +5213,4 @@ loadPaymentSettings();
 
 </body>
 
-  </html>
+    </html>
