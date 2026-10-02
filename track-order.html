@@ -1010,6 +1010,155 @@
 
 
         /* ==============================
+           PAYMENT VERIFICATION
+        ============================== */
+
+        .payment-verification {
+
+            margin-top: 18px;
+
+            padding:
+                20px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+        }
+
+
+        .payment-verification
+        .section-title {
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .payment-status-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding:
+                8px 14px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.3px;
+
+        }
+
+
+        .payment-pending {
+
+            color: #d6ad60;
+
+            background:
+                rgba(214,173,96,0.12);
+
+            border:
+                1px solid
+                rgba(214,173,96,0.25);
+
+        }
+
+
+        .payment-paid {
+
+            color: #7ee6a3;
+
+            background:
+                rgba(80,210,130,0.12);
+
+            border:
+                1px solid
+                rgba(80,210,130,0.25);
+
+        }
+
+
+        .payment-rejected {
+
+            color: #ff9999;
+
+            background:
+                rgba(255,80,80,0.12);
+
+            border:
+                1px solid
+                rgba(255,80,80,0.25);
+
+        }
+
+
+        .payment-status-message {
+
+            margin-top: 12px;
+
+            color: #aaa;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .payment-info-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-top: 14px;
+
+            padding-top: 14px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            font-size: 13px;
+
+        }
+
+
+        .payment-info-row span {
+
+            color: #999;
+
+        }
+
+
+        .payment-info-row strong {
+
+            color: #fff;
+
+            text-align: right;
+
+            word-break: break-word;
+
+        }
+
+
+        /* ==============================
            EMPTY
         ============================== */
 
@@ -1193,6 +1342,33 @@
             .status-message-text {
 
                 font-size: 12px;
+
+            }
+
+
+            .payment-verification {
+
+                padding: 17px;
+
+                border-radius: 14px;
+
+            }
+
+
+            .payment-info-row {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 5px;
+
+            }
+
+
+            .payment-info-row strong {
+
+                text-align: left;
 
             }
 
@@ -1532,12 +1708,75 @@
                     </div>
 
 
+                    <!-- PAYMENT METHOD -->
+
                     <div class="payment">
 
                         Payment Method:
                         <strong id="paymentMethod">
                             Pending
                         </strong>
+
+                    </div>
+
+
+                    <!-- PAYMENT VERIFICATION -->
+
+                    <div class="payment-verification">
+
+                        <div class="section-title">
+                            Payment Verification
+                        </div>
+
+
+                        <div
+                            id="paymentStatusBadge"
+                            class="payment-status-badge payment-pending"
+                        >
+                            Payment Pending
+                        </div>
+
+
+                        <div
+                            id="paymentStatusMessage"
+                            class="payment-status-message"
+                        >
+                            Your payment is waiting for verification.
+                        </div>
+
+
+                        <div
+                            id="paymentReferenceRow"
+                            class="payment-info-row"
+                            style="display:none;"
+                        >
+
+                            <span>
+                                Payment Reference
+                            </span>
+
+                            <strong
+                                id="paymentReference"
+                            ></strong>
+
+                        </div>
+
+
+                        <div
+                            id="paymentVerifiedRow"
+                            class="payment-info-row"
+                            style="display:none;"
+                        >
+
+                            <span>
+                                Verified Date
+                            </span>
+
+                            <strong
+                                id="paymentVerifiedDate"
+                            ></strong>
+
+                        </div>
 
                     </div>
 
@@ -1632,6 +1871,47 @@
     const statusMessageText =
         document.getElementById(
             "statusMessageText"
+        );
+
+
+    /* ==============================
+       PAYMENT VERIFICATION ELEMENTS
+    ============================== */
+
+
+    const paymentStatusBadge =
+        document.getElementById(
+            "paymentStatusBadge"
+        );
+
+
+    const paymentStatusMessage =
+        document.getElementById(
+            "paymentStatusMessage"
+        );
+
+
+    const paymentReferenceRow =
+        document.getElementById(
+            "paymentReferenceRow"
+        );
+
+
+    const paymentReference =
+        document.getElementById(
+            "paymentReference"
+        );
+
+
+    const paymentVerifiedRow =
+        document.getElementById(
+            "paymentVerifiedRow"
+        );
+
+
+    const paymentVerifiedDate =
+        document.getElementById(
+            "paymentVerifiedDate"
         );
 
 
@@ -1834,6 +2114,17 @@
             );
 
 
+        /* ==============================
+           PAYMENT VERIFICATION
+        ============================== */
+
+        setPaymentStatus(
+            order.payment_status,
+            order.payment_reference,
+            order.payment_verified_at
+        );
+
+
         displayItems(
             order.items
         );
@@ -1847,6 +2138,173 @@
             behavior: "smooth",
             block: "start"
         });
+
+    }
+
+
+
+    /* ==============================
+       PAYMENT STATUS
+    ============================== */
+
+
+    function setPaymentStatus(
+        status,
+        reference,
+        verifiedAt
+    ) {
+
+
+        const paymentStatus =
+            String(
+                status ||
+                "pending"
+            ).toLowerCase();
+
+
+        paymentStatusBadge.className =
+            "payment-status-badge";
+
+
+        /*
+         * PAYMENT PAID
+         */
+
+        if (
+            paymentStatus === "paid"
+        ) {
+
+
+            paymentStatusBadge.classList.add(
+                "payment-paid"
+            );
+
+
+            paymentStatusBadge.textContent =
+                "Payment Verified";
+
+
+            paymentStatusMessage.textContent =
+                "Your payment has been verified successfully.";
+
+        }
+
+
+        /*
+         * PAYMENT REJECTED
+         */
+
+        else if (
+            paymentStatus === "rejected"
+        ) {
+
+
+            paymentStatusBadge.classList.add(
+                "payment-rejected"
+            );
+
+
+            paymentStatusBadge.textContent =
+                "Payment Rejected";
+
+
+            paymentStatusMessage.textContent =
+                "The submitted payment could not be verified. Please contact ProBee if you believe this is incorrect.";
+
+        }
+
+
+        /*
+         * PAYMENT PENDING
+         */
+
+        else {
+
+
+            paymentStatusBadge.classList.add(
+                "payment-pending"
+            );
+
+
+            paymentStatusBadge.textContent =
+                "Payment Pending";
+
+
+            paymentStatusMessage.textContent =
+                "Your payment is waiting for verification.";
+
+        }
+
+
+
+        /* ==============================
+           PAYMENT REFERENCE
+        ============================== */
+
+
+        if (
+            reference &&
+            String(reference).trim() !== ""
+        ) {
+
+
+            paymentReference.textContent =
+                String(reference);
+
+
+            paymentReferenceRow.style.display =
+                "flex";
+
+        }
+
+
+        else {
+
+
+            paymentReference.textContent =
+                "";
+
+
+            paymentReferenceRow.style.display =
+                "none";
+
+        }
+
+
+
+        /* ==============================
+           VERIFIED DATE
+        ============================== */
+
+
+        if (
+            verifiedAt
+        ) {
+
+
+            paymentVerifiedDate.textContent =
+                formatDate(
+                    verifiedAt
+                );
+
+
+            paymentVerifiedRow.style.display =
+                "flex";
+
+        }
+
+
+        else {
+
+
+            paymentVerifiedDate.textContent =
+                "";
+
+
+            paymentVerifiedRow.style.display =
+                "none";
+
+        }
 
     }
 
@@ -2343,7 +2801,7 @@
 
 
     /* =====================================================
-       11F — SECURE TOKEN AUTO TRACKING
+       SECURE TOKEN AUTO TRACKING
     ===================================================== */
 
 
@@ -2402,4 +2860,4 @@
 
 </body>
 
-    </html>
+</html>
