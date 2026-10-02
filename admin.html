@@ -1583,7 +1583,7 @@ button{
                     class="verify-btn"
                     id="verifyPaymentButton">
 
-                    Mark as Paid
+                    Approve Payment
 
                 </button>
 
@@ -1818,7 +1818,6 @@ function escapeHtml(value){
     }
 
     return String(value)
-
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -3155,6 +3154,43 @@ function renderPaymentProof(order){
             ""
         }
 
+
+        ${
+            order.payment_proof_drive_url
+            ?
+
+            `
+
+            <div class="proof-info-row">
+
+                <span class="proof-info-label">
+                    Google Drive
+                </span>
+
+                <span class="proof-info-value">
+
+                    <a
+                        href="${escapeHtml(
+                            order.payment_proof_drive_url
+                        )}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="color:#4dabf7">
+
+                        Open archived proof
+
+                    </a>
+
+                </span>
+
+            </div>
+
+            `
+
+            :
+            ""
+        }
+
     `;
 
 
@@ -3347,6 +3383,12 @@ function openOrderModal(orderId){
     rejectPaymentButton.disabled =
         paymentStatus === "rejected" ||
         paymentStatus === "paid";
+
+
+    verifyPaymentButton.textContent =
+        paymentStatus === "paid"
+            ? "Payment Approved"
+            : "Approve Payment";
 
 
     orderDetails.innerHTML = `
@@ -3776,33 +3818,91 @@ async function verifyPayment(markPaid){
     }
 
 
-    const reference =
-        paymentReferenceInput.value.trim();
+    const order =
+        allOrders.find(
+            function(item){
+
+                return String(item.id) ===
+                    String(currentOrderId);
+
+            }
+        );
 
 
-    if(
-        markPaid &&
-        !reference
-    ){
-
-        paymentActionMessage.textContent =
-            "Enter the payment reference before marking the payment as paid.";
-
-        paymentActionMessage.style.color =
-            "#ff9f43";
+    if(!order){
 
         return;
     }
 
 
-    verifyPaymentButton.disabled = true;
+    const reference =
+        paymentReferenceInput.value.trim();
 
-    rejectPaymentButton.disabled = true;
+
+    /* =================================================
+       APPROVAL VALIDATION
+    ================================================= */
+
+    if(markPaid){
+
+        if(!reference){
+
+            paymentActionMessage.textContent =
+                "Enter the payment reference before approving the payment.";
+
+            paymentActionMessage.style.color =
+                "#ff9f43";
+
+            return;
+        }
+
+
+        if(!order.payment_proof_path){
+
+            paymentActionMessage.textContent =
+                "Payment proof has not been uploaded yet.";
+
+            paymentActionMessage.style.color =
+                "#ff4d4f";
+
+            return;
+        }
+
+
+        const proofStatus =
+            String(
+                order.payment_proof_status ||
+                "none"
+            ).toLowerCase();
+
+
+        if(
+            proofStatus !== "uploaded" &&
+            proofStatus !== "failed"
+        ){
+
+            paymentActionMessage.textContent =
+                "This payment proof is not ready for approval.";
+
+            paymentActionMessage.style.color =
+                "#ff9f43";
+
+            return;
+        }
+
+    }
+
+
+    verifyPaymentButton.disabled =
+        true;
+
+    rejectPaymentButton.disabled =
+        true;
 
 
     paymentActionMessage.textContent =
         markPaid
-            ? "Verifying payment..."
+            ? "Saving payment reference and archiving proof..."
             : "Rejecting payment...";
 
     paymentActionMessage.style.color =
@@ -3811,18 +3911,22 @@ async function verifyPayment(markPaid){
 
     try{
 
+        /* =============================================
+           GET CURRENT ADMIN SESSION
+        ============================================= */
+
         const {
-            data,
-            error:userError
+            data: sessionData,
+            error: sessionError
         } =
             await supabaseClient
                 .auth
-                .getUser();
+                .getSession();
 
 
         if(
-            userError ||
-            !data.user
+            sessionError ||
+            !sessionData.session
         ){
 
             throw new Error(
@@ -3831,42 +3935,167 @@ async function verifyPayment(markPaid){
         }
 
 
-        const updateData =
-            markPaid
+        /* =============================================
+           APPROVE PAYMENT
+        ============================================= */
 
-            ?
+        if(markPaid){
 
-            {
+            /* =========================================
+               SAVE PAYMENT REFERENCE FIRST
+            ========================================= */
 
-                payment_status:"paid",
+            const {
+                error:
+                    referenceError
+            } =
+                await supabaseClient
+                    .from("orders")
+                    .update({
+                        payment_reference:
+                            reference
+                    })
+                    .eq(
+                        "id",
+                        currentOrderId
+                    )
+                    .neq(
+                        "payment_status",
+                        "paid"
+                    );
 
-                payment_reference:
-                    reference || null,
 
-                payment_verified_at:
-                    new Date().toISOString(),
+            if(referenceError){
 
-                payment_verified_by:
-                    data.user.id
-
+                throw referenceError;
             }
 
-            :
 
-            {
+            /* =========================================
+               CALL SECURE EDGE FUNCTION
+            ========================================= */
 
-                payment_status:"rejected",
+            const {
+                data: functionData,
+                error: functionError
+            } =
+                await supabaseClient.functions.invoke(
+                    "archive-payment-proof",
+                    {
+                        body:{
+                            order_id:
+                                Number(currentOrderId)
+                        }
+                    }
+                );
 
-                payment_reference:
-                    reference || null,
 
-                payment_verified_at:
-                    new Date().toISOString(),
+            if(functionError){
 
-                payment_verified_by:
-                    data.user.id
+                throw new Error(
+                    functionError.message ||
+                    "Could not connect to the payment archive function."
+                );
+            }
 
-            };
+
+            if(
+                !functionData ||
+                functionData.success !== true
+            ){
+
+                throw new Error(
+                    functionData?.error ||
+                    "Payment approval failed."
+                );
+            }
+
+
+            /* =========================================
+               SUCCESS
+            ========================================= */
+
+            const updatedOrder =
+                allOrders.find(
+                    function(item){
+
+                        return String(item.id) ===
+                            String(currentOrderId);
+
+                    }
+                );
+
+
+            if(updatedOrder){
+
+                updatedOrder.payment_status =
+                    "paid";
+
+                updatedOrder.payment_reference =
+                    reference;
+
+                updatedOrder.payment_verified_at =
+                    new Date().toISOString();
+
+                updatedOrder.payment_verified_by =
+                    sessionData.session.user.id;
+
+                updatedOrder.payment_proof_status =
+                    "archived";
+
+                updatedOrder.payment_proof_archived_at =
+                    new Date().toISOString();
+
+                updatedOrder.payment_proof_drive_file_id =
+                    functionData.drive_file_id ||
+                    updatedOrder.payment_proof_drive_file_id;
+
+                updatedOrder.payment_proof_drive_url =
+                    functionData.drive_url ||
+                    updatedOrder.payment_proof_drive_url;
+            }
+
+
+            paymentActionMessage.innerHTML =
+                "✓ Payment approved successfully.<br>" +
+                "✓ Payment proof archived to Google Drive.";
+
+            paymentActionMessage.style.color =
+                "#28c76f";
+
+
+            updateStats();
+
+            renderOrders();
+
+            openOrderModal(
+                currentOrderId
+            );
+
+
+            return;
+        }
+
+
+        /* =============================================
+           REJECT PAYMENT
+        ============================================= */
+
+        const updateData = {
+
+            payment_status:
+                "rejected",
+
+            payment_reference:
+                reference || null,
+
+            payment_verified_at:
+                new Date().toISOString(),
+
+            payment_verified_by:
+                sessionData.session.user.id
+
+        };
 
 
         const {
@@ -3874,16 +4103,22 @@ async function verifyPayment(markPaid){
         } =
             await supabaseClient
                 .from("orders")
-                .update(updateData)
-                .eq("id",currentOrderId);
+                .update(
+                    updateData
+                )
+                .eq(
+                    "id",
+                    currentOrderId
+                );
 
 
         if(error){
+
             throw error;
         }
 
 
-        const order =
+        const rejectedOrder =
             allOrders.find(
                 function(item){
 
@@ -3894,45 +4129,46 @@ async function verifyPayment(markPaid){
             );
 
 
-        if(order){
+        if(rejectedOrder){
 
             Object.assign(
-                order,
+                rejectedOrder,
                 updateData
             );
         }
 
 
         paymentActionMessage.textContent =
-            markPaid
-                ? "Payment marked as PAID successfully."
-                : "Payment marked as REJECTED.";
+            "Payment marked as REJECTED.";
 
         paymentActionMessage.style.color =
-            markPaid
-                ? "#28c76f"
-                : "#ff4d4f";
+            "#ff4d4f";
 
 
         updateStats();
 
         renderOrders();
 
-
         openOrderModal(
             currentOrderId
         );
 
+
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "Payment action error:",
+            error
+        );
+
 
         paymentActionMessage.textContent =
             error.message ||
-            "Could not update payment status.";
+            "Could not process payment.";
 
         paymentActionMessage.style.color =
             "#ff4d4f";
+
 
         verifyPaymentButton.disabled =
             false;
