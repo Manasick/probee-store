@@ -42,872 +42,21 @@
     href="style.css">
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
 
 
 <style>
 
 /* =====================================================
-   GLOBAL
-===================================================== */
-
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    padding:0;
-    background:#080808;
-    color:#f5f5f5;
-    font-family:"Inter",sans-serif;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.site-header{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    z-index:9999;
-
-    background:rgba(8,8,8,.94);
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.06);
-
-    backdrop-filter:blur(18px);
-
-    -webkit-backdrop-filter:blur(18px);
-
-}
-
-
-.site-header.scrolled{
-
-    background:
-        rgba(8,8,8,.96);
-
-}
-
-
-.nav-container{
-
-    width:100%;
-
-    max-width:1280px;
-
-    height:78px;
-
-    margin:0 auto;
-
-    padding:0 28px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:25px;
-
-}
-
-
-/* =====================================================
-   BRAND
-===================================================== */
-
-.brand{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    flex-shrink:0;
-
-}
-
-
-.brand-mark{
-
-    width:38px;
-
-    height:38px;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border:
-        1px solid
-        rgba(220,174,56,.55);
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(220,174,56,.15),
-            rgba(255,255,255,.02)
-        );
-
-    color:#dcae38;
-
-    font-family:"Montserrat",sans-serif;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    text-align:center;
-
-}
-
-
-.brand-mark span{
-
-    display:block;
-
-}
-
-
-.brand-text{
-
-    display:flex;
-
-    flex-direction:column;
-
-    line-height:1;
-
-}
-
-
-.brand-text strong{
-
-    color:#fff;
-
-    font-family:"Montserrat",sans-serif;
-
-    font-size:17px;
-
-    font-weight:800;
-
-    letter-spacing:-.5px;
-
-}
-
-
-.brand-text strong span{
-
-    color:#dcae38;
-
-}
-
-
-.brand-text small{
-
-    margin-top:5px;
-
-    color:#777;
-
-    font-size:6px;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-}
-
-
-/* =====================================================
-   DESKTOP NAV
-===================================================== */
-
-.desktop-nav{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:28px;
-
-    flex:1;
-
-}
-
-
-.desktop-nav a{
-
-    position:relative;
-
-    color:#aaa;
-
-    text-decoration:none;
-
-    font-size:9px;
-
-    font-weight:600;
-
-    transition:.25s ease;
-
-}
-
-
-.desktop-nav a::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    bottom:-7px;
-
-    width:0;
-
-    height:1px;
-
-    background:#dcae38;
-
-    transition:.25s ease;
-
-}
-
-
-.desktop-nav a:hover{
-
-    color:#fff;
-
-}
-
-
-.desktop-nav a:hover::after{
-
-    width:100%;
-
-}
-
-
-/* =====================================================
-   NAV ACTIONS
-===================================================== */
-
-.nav-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-}
-
-
-.icon-button,
-.menu-button{
-
-    width:40px;
-
-    height:40px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius:10px;
-
-    color:#aaa;
-
-    background:
-        rgba(255,255,255,.025);
-
-    cursor:pointer;
-
-    transition:.25s ease;
-
-}
-
-
-.icon-button:hover,
-.menu-button:hover{
-
-    color:#dcae38;
-
-    border-color:
-        rgba(220,174,56,.25);
-
-}
-
-
-.cart-button{
-
-    position:relative;
-
-    width:40px;
-
-    height:40px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:#aaa;
-
-    text-decoration:none;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius:10px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    transition:.25s ease;
-
-}
-
-
-.cart-button:hover{
-
-    color:#dcae38;
-
-    border-color:
-        rgba(220,174,56,.25);
-
-}
-
-
-.cart-count{
-
-    position:absolute;
-
-    top:-5px;
-
-    right:-5px;
-
-    min-width:16px;
-
-    height:16px;
-
-    padding:0 4px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    color:#080808;
-
-    background:#dcae38;
-
-    font-size:7px;
-
-    font-weight:800;
-
-}
-
-
-/* =====================================================
-   MOBILE MENU
-===================================================== */
-
-.menu-button{
-
-    display:none;
-
-}
-
-
-.mobile-menu{
-
-    display:none;
-
-}
-
-
-/* =====================================================
-   SEARCH OVERLAY
-===================================================== */
-
-.search-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:10000;
-
-    display:none;
-
-    align-items:flex-start;
-
-    justify-content:center;
-
-    padding-top:120px;
-
-    background:
-        rgba(8,8,8,.97);
-
-    backdrop-filter:blur(20px);
-
-    -webkit-backdrop-filter:blur(20px);
-
-}
-
-
-.search-overlay.show{
-
-    display:flex;
-
-}
-
-
-.close-search{
-
-    position:absolute;
-
-    top:28px;
-
-    right:28px;
-
-    width:42px;
-
-    height:42px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius:50%;
-
-    color:#aaa;
-
-    background:
-        rgba(255,255,255,.03);
-
-    cursor:pointer;
-
-}
-
-
-.close-search:hover{
-
-    color:#dcae38;
-
-    border-color:
-        rgba(220,174,56,.3);
-
-}
-
-
-.search-box{
-
-    width:min(
-        650px,
-        calc(100% - 40px)
-    );
-
-}
-
-
-.search-box > span{
-
-    display:block;
-
-    margin-bottom:14px;
-
-    color:#dcae38;
-
-    font-size:8px;
-
-    font-weight:800;
-
-    letter-spacing:3px;
-
-}
-
-
-.search-input-wrapper{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:0 17px;
-
-    height:58px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius:14px;
-
-    background:
-        rgba(255,255,255,.035);
-
-}
-
-
-.search-input-wrapper i{
-
-    color:#dcae38;
-
-}
-
-
-.search-input-wrapper input{
-
-    width:100%;
-
-    height:100%;
-
-    border:none;
-
-    outline:none;
-
-    color:#fff;
-
-    background:transparent;
-
-    font-family:"Inter",sans-serif;
-
-    font-size:13px;
-
-}
-
-
-.search-input-wrapper input::placeholder{
-
-    color:#555;
-
-}
-
-
-/* =====================================================
-   BOTTOM NAV
-===================================================== */
-
-.bottom-nav{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:14px;
-
-    transform:translateX(-50%);
-
-    width:min(
-        560px,
-        calc(100% - 24px)
-    );
-
-    min-height:64px;
-
-    z-index:9998;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-around;
-
-    padding:8px 10px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius:20px;
-
-    background:
-        rgba(12,12,12,.94);
-
-    backdrop-filter:blur(20px);
-
-    -webkit-backdrop-filter:blur(20px);
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.45);
-
-}
-
-
-.bottom-nav-item{
-
-    min-width:60px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:5px;
-
-    color:#666;
-
-    text-decoration:none;
-
-    font-size:7px;
-
-    font-weight:600;
-
-    transition:.25s ease;
-
-}
-
-
-.bottom-nav-item i{
-
-    font-size:15px;
-
-}
-
-
-.bottom-nav-item:hover{
-
-    color:#dcae38;
-
-}
-
-
-.bottom-nav-item > div{
-
-    position:relative;
-
-}
-
-
-.bottom-nav-item > div > span{
-
-    position:absolute;
-
-    top:-7px;
-
-    right:-10px;
-
-    min-width:14px;
-
-    height:14px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:0 3px;
-
-    border-radius:50%;
-
-    color:#080808;
-
-    background:#dcae38;
-
-    font-size:6px;
-
-    font-weight:800;
-
-}
-
-
-/* =====================================================
-   HEADER RESPONSIVE
-===================================================== */
-
-@media(max-width:850px){
-
-    .nav-container{
-
-        height:68px;
-
-        padding:0 17px;
-
-    }
-
-
-    .desktop-nav{
-
-        display:none;
-
-    }
-
-
-    .menu-button{
-
-        display:flex;
-
-    }
-
-
-    .brand-mark{
-
-        width:35px;
-
-        height:35px;
-
-    }
-
-
-    .brand-text strong{
-
-        font-size:15px;
-
-    }
-
-
-    .mobile-menu{
-
-        position:absolute;
-
-        top:68px;
-
-        left:12px;
-
-        right:12px;
-
-        padding:10px;
-
-        border:
-            1px solid
-            rgba(255,255,255,.08);
-
-        border-radius:16px;
-
-        background:
-            rgba(12,12,12,.98);
-
-        box-shadow:
-            0 20px 50px
-            rgba(0,0,0,.4);
-
-    }
-
-
-    .mobile-menu.show{
-
-        display:block;
-
-    }
-
-
-    .mobile-menu a{
-
-        display:flex;
-
-        align-items:center;
-
-        gap:12px;
-
-        padding:14px 15px;
-
-        color:#aaa;
-
-        text-decoration:none;
-
-        border-radius:10px;
-
-        font-size:10px;
-
-        font-weight:600;
-
-    }
-
-
-    .mobile-menu a i{
-
-        width:18px;
-
-        color:#dcae38;
-
-    }
-
-
-    .mobile-menu a:hover{
-
-        color:#fff;
-
-        background:
-            rgba(220,174,56,.06);
-
-    }
-
-}
-
-
-@media(min-width:851px){
-
-    .bottom-nav{
-
-        display:none;
-
-    }
-
-}
-
-
-/* =====================================================
-   CHECKOUT PAGE
+   PROBEE CHECKOUT
 ===================================================== */
 
 .checkout-page{
 
     max-width:1180px;
-
     margin:0 auto;
-
     padding:120px 25px 190px;
 
 }
@@ -916,9 +65,7 @@ body{
 .checkout-heading{
 
     text-align:center;
-
     max-width:700px;
-
     margin:0 auto 55px;
 
 }
@@ -927,13 +74,9 @@ body{
 .checkout-heading .eyebrow{
 
     display:block;
-
-    color:#dcae38;
-
+    color:var(--gold,#dcae38);
     font-size:8px;
-
     font-weight:800;
-
     letter-spacing:3px;
 
 }
@@ -942,13 +85,9 @@ body{
 .checkout-heading h1{
 
     margin-top:12px;
-
     font-family:"Montserrat",sans-serif;
-
     font-size:clamp(42px,7vw,68px);
-
     line-height:1;
-
     letter-spacing:-3px;
 
 }
@@ -956,7 +95,7 @@ body{
 
 .checkout-heading h1 span{
 
-    color:#dcae38;
+    color:var(--gold,#dcae38);
 
 }
 
@@ -964,11 +103,8 @@ body{
 .checkout-heading p{
 
     margin-top:18px;
-
     color:#686868;
-
     font-size:11px;
-
     line-height:1.7;
 
 }
@@ -987,7 +123,6 @@ body{
         minmax(320px,.8fr);
 
     gap:30px;
-
     align-items:start;
 
 }
@@ -1000,7 +135,6 @@ body{
 .checkout-card{
 
     padding:28px;
-
     border-radius:22px;
 
     background:
@@ -1027,11 +161,8 @@ body{
 .checkout-card-heading{
 
     display:flex;
-
     align-items:center;
-
     gap:14px;
-
     margin-bottom:25px;
 
 }
@@ -1040,13 +171,10 @@ body{
 .checkout-number{
 
     width:34px;
-
     height:34px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     border-radius:50%;
@@ -1061,7 +189,6 @@ body{
         );
 
     font-size:11px;
-
     font-weight:800;
 
 }
@@ -1070,9 +197,7 @@ body{
 .checkout-card-heading div{
 
     display:flex;
-
     flex-direction:column;
-
     gap:4px;
 
 }
@@ -1080,12 +205,9 @@ body{
 
 .checkout-card-heading span{
 
-    color:#dcae38;
-
+    color:var(--gold,#dcae38);
     font-size:7px;
-
     font-weight:800;
-
     letter-spacing:2px;
 
 }
@@ -1093,12 +215,7 @@ body{
 
 .checkout-card-heading h2{
 
-    margin:0;
-
-    color:#f5f5f5;
-
     font-family:"Montserrat",sans-serif;
-
     font-size:20px;
 
 }
@@ -1111,9 +228,7 @@ body{
 .form-grid{
 
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:16px;
 
 }
@@ -1122,9 +237,7 @@ body{
 .form-group{
 
     display:flex;
-
     flex-direction:column;
-
     gap:8px;
 
 }
@@ -1140,9 +253,7 @@ body{
 .form-group label{
 
     color:#777;
-
     font-size:9px;
-
     font-weight:600;
 
 }
@@ -1150,7 +261,7 @@ body{
 
 .required{
 
-    color:#dcae38;
+    color:var(--gold,#dcae38);
 
 }
 
@@ -1165,7 +276,6 @@ body{
         rgba(255,255,255,.08);
 
     border-radius:12px;
-
     outline:none;
 
     color:#fff;
@@ -1174,7 +284,6 @@ body{
         rgba(255,255,255,.025);
 
     font-family:"Inter";
-
     font-size:11px;
 
     transition:.25s;
@@ -1185,7 +294,6 @@ body{
 .form-group input{
 
     height:50px;
-
     padding:0 15px;
 
 }
@@ -1194,9 +302,7 @@ body{
 .form-group textarea{
 
     min-height:105px;
-
     padding:14px 15px;
-
     resize:vertical;
 
 }
@@ -1226,9 +332,7 @@ body{
 .form-error{
 
     display:none;
-
     color:#e78b8b;
-
     font-size:8px;
 
 }
@@ -1257,15 +361,10 @@ body{
 .whatsapp-hint{
 
     display:flex;
-
     align-items:center;
-
     gap:8px;
-
     margin-top:7px;
-
     color:#555;
-
     font-size:7px;
 
 }
@@ -1285,11 +384,8 @@ body{
 .payment-loading{
 
     color:#777;
-
     font-size:9px;
-
     text-align:center;
-
     padding:20px 5px;
 
 }
@@ -1298,7 +394,6 @@ body{
 .payment-disabled{
 
     padding:18px;
-
     border-radius:13px;
 
     background:
@@ -1309,9 +404,7 @@ body{
         rgba(255,255,255,.06);
 
     color:#777;
-
     font-size:9px;
-
     line-height:1.7;
 
 }
@@ -1320,9 +413,7 @@ body{
 .bank-details{
 
     display:flex;
-
     flex-direction:column;
-
     gap:10px;
 
 }
@@ -1336,11 +427,9 @@ body{
         minmax(0,1fr) auto;
 
     gap:10px;
-
     align-items:center;
 
     padding:13px;
-
     border-radius:12px;
 
     background:
@@ -1363,11 +452,8 @@ body{
 .bank-detail-label{
 
     color:#666;
-
     font-size:7px;
-
     letter-spacing:1px;
-
     text-transform:uppercase;
 
 }
@@ -1376,13 +462,9 @@ body{
 .bank-detail-value{
 
     margin-top:5px;
-
     color:#eee;
-
     font-size:10px;
-
     font-weight:600;
-
     word-break:break-word;
 
 }
@@ -1391,11 +473,8 @@ body{
 .copy-bank-btn{
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:6px;
 
     min-width:72px;
@@ -1408,13 +487,12 @@ body{
 
     border-radius:8px;
 
-    color:#dcae38;
+    color:var(--gold,#dcae38);
 
     background:
         rgba(220,174,56,.05);
 
     font-size:8px;
-
     cursor:pointer;
 
 }
@@ -1441,9 +519,7 @@ body{
 .copy-all-bank-btn{
 
     width:100%;
-
     min-height:45px;
-
     margin-top:13px;
 
     border:
@@ -1462,12 +538,8 @@ body{
         );
 
     font-size:9px;
-
     font-weight:800;
-
     cursor:pointer;
-
-    transition:.25s ease;
 
 }
 
@@ -1482,7 +554,6 @@ body{
 .payment-note{
 
     margin-top:15px;
-
     padding:13px;
 
     border-radius:11px;
@@ -1499,12 +570,9 @@ body{
 
 .payment-note-title{
 
-    color:#dcae38;
-
+    color:var(--gold,#dcae38);
     font-size:7px;
-
     font-weight:800;
-
     letter-spacing:1px;
 
 }
@@ -1513,13 +581,9 @@ body{
 .payment-note-text{
 
     margin-top:6px;
-
     color:#777;
-
     font-size:8px;
-
     line-height:1.6;
-
     white-space:pre-line;
 
 }
@@ -1532,9 +596,7 @@ body{
 .checkout-items{
 
     display:flex;
-
     flex-direction:column;
-
     gap:10px;
 
 }
@@ -1548,7 +610,6 @@ body{
         52px minmax(0,1fr) auto;
 
     gap:13px;
-
     align-items:center;
 
     padding:13px;
@@ -1568,18 +629,15 @@ body{
 .checkout-item-icon{
 
     width:52px;
-
     height:52px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     border-radius:13px;
 
-    color:#dcae38;
+    color:var(--gold,#dcae38);
 
     background:
         rgba(220,174,56,.08);
@@ -1601,9 +659,7 @@ body{
 .checkout-item-info strong{
 
     display:block;
-
     color:#eee;
-
     font-size:11px;
 
 }
@@ -1612,11 +668,8 @@ body{
 .checkout-item-info span{
 
     display:block;
-
     margin-top:5px;
-
     color:#666;
-
     font-size:8px;
 
 }
@@ -1625,11 +678,8 @@ body{
 .checkout-item-info small{
 
     display:block;
-
     margin-top:4px;
-
-    color:#dcae38;
-
+    color:var(--gold,#dcae38);
     font-size:7px;
 
 }
@@ -1637,12 +687,9 @@ body{
 
 .checkout-item-price{
 
-    color:#f0ca61;
-
+    color:var(--gold-light,#f0ca61);
     font-size:10px;
-
     font-weight:700;
-
     white-space:nowrap;
 
 }
@@ -1655,7 +702,6 @@ body{
 .checkout-summary{
 
     position:sticky;
-
     top:105px;
 
 }
@@ -1664,13 +710,9 @@ body{
 .summary-row{
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
-
     margin-top:15px;
 
 }
@@ -1679,7 +721,6 @@ body{
 .summary-row span{
 
     color:#666;
-
     font-size:9px;
 
 }
@@ -1688,7 +729,6 @@ body{
 .summary-row strong{
 
     color:#aaa;
-
     font-size:10px;
 
 }
@@ -1704,7 +744,6 @@ body{
 .summary-divider{
 
     height:1px;
-
     margin:22px 0;
 
     background:
@@ -1716,9 +755,7 @@ body{
 .checkout-total{
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
 }
@@ -1727,7 +764,6 @@ body{
 .checkout-total span{
 
     color:#777;
-
     font-size:10px;
 
 }
@@ -1735,37 +771,29 @@ body{
 
 .checkout-total strong{
 
-    color:#f0ca61;
-
+    color:var(--gold-light,#f0ca61);
     font-size:25px;
 
 }
 
 
 /* =====================================================
-   CONFIRM BUTTON
+   BUTTON
 ===================================================== */
 
 .confirm-order-button{
 
     width:100%;
-
     min-height:56px;
-
     margin-top:25px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:10px;
 
     border:none;
-
     border-radius:12px;
-
     cursor:pointer;
 
     color:#090909;
@@ -1778,9 +806,7 @@ body{
         );
 
     font-family:"Inter";
-
     font-size:10px;
-
     font-weight:800;
 
     transition:.3s ease;
@@ -1802,9 +828,7 @@ body{
 .confirm-order-button:disabled{
 
     opacity:.6;
-
     cursor:wait;
-
     transform:none;
 
 }
@@ -1817,13 +841,10 @@ body{
 .checkout-security{
 
     display:flex;
-
     align-items:flex-start;
-
     gap:11px;
 
     margin-top:18px;
-
     padding:14px;
 
     border-radius:13px;
@@ -1837,7 +858,6 @@ body{
 .checkout-security i{
 
     color:#67c99a;
-
     margin-top:2px;
 
 }
@@ -1846,9 +866,7 @@ body{
 .checkout-security strong{
 
     display:block;
-
     color:#aaa;
-
     font-size:8px;
 
 }
@@ -1857,11 +875,8 @@ body{
 .checkout-security p{
 
     margin-top:5px;
-
     color:#555;
-
     font-size:7px;
-
     line-height:1.5;
 
 }
@@ -1876,9 +891,7 @@ body{
     display:none;
 
     text-align:center;
-
     max-width:600px;
-
     margin:0 auto;
 
     padding:65px 25px;
@@ -1905,20 +918,16 @@ body{
 .checkout-empty-icon{
 
     width:80px;
-
     height:80px;
-
     margin:0 auto 22px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     border-radius:22px;
 
-    color:#dcae38;
+    color:var(--gold,#dcae38);
 
     background:
         rgba(220,174,56,.08);
@@ -1935,12 +944,7 @@ body{
 
 .checkout-empty h2{
 
-    margin:0;
-
-    color:#fff;
-
     font-family:"Montserrat";
-
     font-size:23px;
 
 }
@@ -1949,9 +953,7 @@ body{
 .checkout-empty p{
 
     margin-top:10px;
-
     color:#666;
-
     font-size:9px;
 
 }
@@ -1960,13 +962,10 @@ body{
 .back-products{
 
     display:inline-flex;
-
     align-items:center;
-
     gap:9px;
 
     margin-top:22px;
-
     padding:13px 18px;
 
     border-radius:10px;
@@ -1981,10 +980,7 @@ body{
         );
 
     font-size:9px;
-
     font-weight:800;
-
-    text-decoration:none;
 
 }
 
@@ -1998,7 +994,6 @@ body{
     display:none;
 
     max-width:700px;
-
     margin:0 auto;
 
     padding:60px 25px;
@@ -2031,15 +1026,11 @@ body{
 .success-icon{
 
     width:85px;
-
     height:85px;
-
     margin:0 auto 25px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     border-radius:50%;
@@ -2064,12 +1055,9 @@ body{
 
 .order-success .success-label{
 
-    color:#dcae38;
-
+    color:var(--gold,#dcae38);
     font-size:8px;
-
     font-weight:800;
-
     letter-spacing:3px;
 
 }
@@ -2078,8 +1066,6 @@ body{
 .order-success h2{
 
     margin-top:10px;
-
-    color:#fff;
 
     font-family:"Montserrat";
 
@@ -2092,7 +1078,7 @@ body{
 
 .order-success h2 span{
 
-    color:#f0ca61;
+    color:var(--gold-light,#f0ca61);
 
 }
 
@@ -2100,13 +1086,10 @@ body{
 .order-success p{
 
     max-width:500px;
-
     margin:15px auto 0;
 
     color:#666;
-
     font-size:10px;
-
     line-height:1.7;
 
 }
@@ -2115,13 +1098,10 @@ body{
 .order-id-box{
 
     display:inline-flex;
-
     flex-direction:column;
-
     gap:7px;
 
     margin-top:25px;
-
     padding:15px 25px;
 
     border-radius:12px;
@@ -2139,9 +1119,7 @@ body{
 .order-id-box span{
 
     color:#555;
-
     font-size:7px;
-
     letter-spacing:2px;
 
 }
@@ -2149,10 +1127,8 @@ body{
 
 .order-id-box strong{
 
-    color:#f0ca61;
-
+    color:var(--gold-light,#f0ca61);
     font-size:15px;
-
     letter-spacing:1px;
 
 }
@@ -2161,13 +1137,10 @@ body{
 .success-actions{
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     gap:10px;
-
     margin-top:30px;
 
 }
@@ -2176,24 +1149,17 @@ body{
 .success-button{
 
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:8px;
 
     min-height:45px;
-
     padding:0 20px;
 
     border-radius:10px;
 
     font-size:9px;
-
     font-weight:700;
-
-    text-decoration:none;
 
 }
 
@@ -2227,7 +1193,7 @@ body{
 
 
 /* =====================================================
-   MOBILE CHECKOUT
+   MOBILE
 ===================================================== */
 
 @media(max-width:850px){
@@ -2275,7 +1241,6 @@ body{
     .checkout-card{
 
         padding:20px;
-
         border-radius:18px;
 
     }
@@ -2306,7 +1271,6 @@ body{
     .checkout-item-icon{
 
         width:45px;
-
         height:45px;
 
     }
@@ -2315,7 +1279,6 @@ body{
     .checkout-item-price{
 
         grid-column:2;
-
         margin-top:-3px;
 
     }
@@ -2429,7 +1392,6 @@ body{
         <div class="nav-actions">
 
             <button
-                type="button"
                 class="icon-button"
                 onclick="openSearch()">
 
@@ -2456,7 +1418,6 @@ body{
 
 
             <button
-                type="button"
                 class="menu-button"
                 id="menuButton">
 
@@ -2474,38 +1435,23 @@ body{
         id="mobileMenu">
 
         <a href="index.html">
-
             <i class="fa-solid fa-house"></i>
-
             Home
-
         </a>
-
 
         <a href="products.html">
-
             <i class="fa-solid fa-store"></i>
-
             Products
-
         </a>
-
 
         <a href="index.html#categories">
-
             <i class="fa-solid fa-layer-group"></i>
-
             Categories
-
         </a>
 
-
         <a href="index.html#support">
-
             <i class="fa-solid fa-headset"></i>
-
             Support
-
         </a>
 
     </div>
@@ -2522,7 +1468,6 @@ body{
     id="searchOverlay">
 
     <button
-        type="button"
         class="close-search"
         onclick="closeSearch()">
 
@@ -2544,9 +1489,7 @@ body{
 
             <input
                 type="text"
-                id="searchInput"
-                placeholder="Search products..."
-                autocomplete="off">
+                placeholder="Search products...">
 
         </div>
 
@@ -2582,9 +1525,7 @@ body{
     </section>
 
 
-    <!-- =================================================
-         EMPTY CART
-    ================================================= -->
+    <!-- EMPTY -->
 
     <section
         class="checkout-empty"
@@ -2618,9 +1559,7 @@ body{
     </section>
 
 
-    <!-- =================================================
-         CHECKOUT CONTENT
-    ================================================= -->
+    <!-- CHECKOUT CONTENT -->
 
     <section
         class="checkout-grid"
@@ -2630,9 +1569,7 @@ body{
         <div>
 
 
-            <!-- =========================================
-                 CUSTOMER
-            ========================================== -->
+            <!-- CUSTOMER -->
 
             <div class="checkout-card">
 
@@ -2669,10 +1606,7 @@ body{
                             <label for="customerName">
 
                                 Full Name
-
-                                <span class="required">
-                                    *
-                                </span>
+                                <span class="required">*</span>
 
                             </label>
 
@@ -2697,10 +1631,7 @@ body{
                             <label for="customerPhone">
 
                                 WhatsApp Number
-
-                                <span class="required">
-                                    *
-                                </span>
+                                <span class="required">*</span>
 
                             </label>
 
@@ -2735,10 +1666,7 @@ body{
                             <label for="customerEmail">
 
                                 Email Address
-
-                                <span class="required">
-                                    *
-                                </span>
+                                <span class="required">*</span>
 
                             </label>
 
@@ -2776,6 +1704,7 @@ body{
 
                         </div>
 
+
                     </div>
 
                 </form>
@@ -2783,9 +1712,7 @@ body{
             </div>
 
 
-            <!-- =========================================
-                 DELIVERY
-            ========================================== -->
+            <!-- DELIVERY -->
 
             <div class="checkout-card">
 
@@ -2856,9 +1783,7 @@ body{
             </div>
 
 
-            <!-- =========================================
-                 PAYMENT
-            ========================================== -->
+            <!-- PAYMENT -->
 
             <div class="checkout-card">
 
@@ -2910,11 +1835,8 @@ body{
                     id="bankPaymentDetails"
                     style="display:none;">
 
-
                     <div class="bank-details">
 
-
-                        <!-- BANK NAME -->
 
                         <div class="bank-detail-row">
 
@@ -2927,9 +1849,7 @@ body{
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutBankName">
-
                                     -
-
                                 </div>
 
                             </div>
@@ -2941,15 +1861,12 @@ body{
                                 data-copy-field="bankName">
 
                                 <i class="fa-regular fa-copy"></i>
-
                                 Copy
 
                             </button>
 
                         </div>
 
-
-                        <!-- ACCOUNT NAME -->
 
                         <div class="bank-detail-row">
 
@@ -2962,9 +1879,7 @@ body{
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutAccountName">
-
                                     -
-
                                 </div>
 
                             </div>
@@ -2976,15 +1891,12 @@ body{
                                 data-copy-field="accountName">
 
                                 <i class="fa-regular fa-copy"></i>
-
                                 Copy
 
                             </button>
 
                         </div>
 
-
-                        <!-- ACCOUNT NUMBER -->
 
                         <div class="bank-detail-row">
 
@@ -2997,9 +1909,7 @@ body{
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutAccountNumber">
-
                                     -
-
                                 </div>
 
                             </div>
@@ -3011,15 +1921,12 @@ body{
                                 data-copy-field="accountNumber">
 
                                 <i class="fa-regular fa-copy"></i>
-
                                 Copy
 
                             </button>
 
                         </div>
 
-
-                        <!-- BRANCH -->
 
                         <div class="bank-detail-row">
 
@@ -3032,9 +1939,7 @@ body{
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutBranch">
-
                                     -
-
                                 </div>
 
                             </div>
@@ -3046,15 +1951,12 @@ body{
                                 data-copy-field="branch">
 
                                 <i class="fa-regular fa-copy"></i>
-
                                 Copy
 
                             </button>
 
                         </div>
 
-
-                        <!-- BANK CODE -->
 
                         <div
                             class="bank-detail-row"
@@ -3069,9 +1971,7 @@ body{
                                 <div
                                     class="bank-detail-value"
                                     id="checkoutBankCode">
-
                                     -
-
                                 </div>
 
                             </div>
@@ -3083,7 +1983,6 @@ body{
                                 data-copy-field="bankCode">
 
                                 <i class="fa-regular fa-copy"></i>
-
                                 Copy
 
                             </button>
@@ -3093,8 +1992,6 @@ body{
 
                     </div>
 
-
-                    <!-- COPY ALL -->
 
                     <button
                         type="button"
@@ -3108,16 +2005,12 @@ body{
                     </button>
 
 
-                    <!-- PAYMENT NOTE -->
-
                     <div
                         class="payment-note"
                         id="paymentNoteBox">
 
                         <div class="payment-note-title">
-
                             PAYMENT INSTRUCTIONS
-
                         </div>
 
                         <div
@@ -3127,8 +2020,6 @@ body{
 
                     </div>
 
-
-                    <!-- RECEIPT -->
 
                     <div class="checkout-security">
 
@@ -3150,7 +2041,6 @@ body{
 
                     </div>
 
-
                 </div>
 
             </div>
@@ -3159,15 +2049,11 @@ body{
         </div>
 
 
-        <!-- =================================================
-             ORDER SUMMARY
-        ================================================= -->
+        <!-- SUMMARY -->
 
         <aside class="checkout-summary">
 
-
             <div class="checkout-card">
-
 
                 <div class="checkout-card-heading">
 
@@ -3283,14 +2169,11 @@ body{
     </section>
 
 
-    <!-- =================================================
-         SUCCESS
-    ================================================= -->
+    <!-- SUCCESS -->
 
     <section
         class="order-success"
         id="orderSuccess">
-
 
         <div class="success-icon">
 
@@ -3307,6 +2190,7 @@ body{
         <h2>
 
             Thank You,
+
             <span id="successName">
                 Customer
             </span>.
@@ -3315,9 +2199,11 @@ body{
 
 
         <p>
+
             Your ProBee order has been successfully
             received. Please keep your Order ID
             for future reference.
+
         </p>
 
 
@@ -3335,7 +2221,6 @@ body{
 
 
         <div class="success-actions">
-
 
             <a
                 href="#"
@@ -3368,9 +2253,7 @@ body{
 
             </a>
 
-
         </div>
-
 
     </section>
 
@@ -3383,7 +2266,6 @@ body{
 ===================================================== -->
 
 <nav class="bottom-nav">
-
 
     <a
         href="index.html"
@@ -3457,7 +2339,6 @@ body{
 
     </a>
 
-
 </nav>
 
 
@@ -3469,7 +2350,6 @@ body{
 
 const SUPABASE_URL =
     "https://fjczxixfajvvizsywrtr.supabase.co";
-
 
 const SUPABASE_ANON_KEY =
     "sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN";
@@ -3483,14 +2363,14 @@ const supabaseClient =
 
 
 /* =====================================================
-   PAYMENT SETTINGS
+   PAYMENT STATE
 ===================================================== */
 
 let paymentSettings = null;
 
 
 /* =====================================================
-   GET CART
+   CART
 ===================================================== */
 
 function getCart(){
@@ -3502,6 +2382,11 @@ function getCart(){
         ) || [];
 
     }catch(error){
+
+        console.error(
+            "Cart read error:",
+            error
+        );
 
         return [];
 
@@ -3517,7 +2402,7 @@ function getCart(){
 function formatPrice(price){
 
     return "LKR " +
-        Number(price).toLocaleString();
+        Number(price || 0).toLocaleString();
 
 }
 
@@ -3530,7 +2415,6 @@ function updateCartCount(){
 
     const cart =
         getCart();
-
 
     const count =
         cart.reduce(
@@ -3583,7 +2467,9 @@ function updateCartCount(){
 function escapeHTML(value){
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     div.textContent =
@@ -3598,7 +2484,7 @@ function escapeHTML(value){
 
 
 /* =====================================================
-   PAYMENT SETTINGS
+   LOAD PAYMENT SETTINGS
 ===================================================== */
 
 async function loadPaymentSettings(){
@@ -3623,10 +2509,7 @@ async function loadPaymentSettings(){
 
     try{
 
-        const {
-            data,
-            error
-        } =
+        const result =
             await supabaseClient
                 .from("payment_settings")
                 .select(
@@ -3639,11 +2522,15 @@ async function loadPaymentSettings(){
                 .maybeSingle();
 
 
-        if(error){
+        if(result.error){
 
-            throw error;
+            throw result.error;
 
         }
+
+
+        const data =
+            result.data;
 
 
         loading.style.display =
@@ -3681,15 +2568,11 @@ async function loadPaymentSettings(){
             "block";
 
 
-        /* BANK NAME */
-
         document.getElementById(
             "checkoutBankName"
         ).textContent =
             data.bank_name || "-";
 
-
-        /* ACCOUNT NAME */
 
         document.getElementById(
             "checkoutAccountName"
@@ -3697,23 +2580,17 @@ async function loadPaymentSettings(){
             data.account_name || "-";
 
 
-        /* ACCOUNT NUMBER */
-
         document.getElementById(
             "checkoutAccountNumber"
         ).textContent =
             data.account_number || "-";
 
 
-        /* BRANCH */
-
         document.getElementById(
             "checkoutBranch"
         ).textContent =
             data.branch || "-";
 
-
-        /* BANK CODE */
 
         const bankCodeRow =
             document.getElementById(
@@ -3723,14 +2600,13 @@ async function loadPaymentSettings(){
 
         if(
             data.bank_code &&
-            data.bank_code.trim()
+            String(data.bank_code).trim()
         ){
 
             document.getElementById(
                 "checkoutBankCode"
             ).textContent =
                 data.bank_code;
-
 
             bankCodeRow.style.display =
                 "grid";
@@ -3743,8 +2619,6 @@ async function loadPaymentSettings(){
         }
 
 
-        /* PAYMENT NOTE */
-
         const noteBox =
             document.getElementById(
                 "paymentNoteBox"
@@ -3755,13 +2629,14 @@ async function loadPaymentSettings(){
             data.payment_note || "";
 
 
-        if(note.trim()){
+        if(
+            String(note).trim()
+        ){
 
             document.getElementById(
                 "checkoutPaymentNote"
             ).textContent =
                 note;
-
 
             noteBox.style.display =
                 "block";
@@ -3777,7 +2652,7 @@ async function loadPaymentSettings(){
     }catch(error){
 
         console.error(
-            "Payment settings error:",
+            "PAYMENT SETTINGS ERROR:",
             error
         );
 
@@ -3809,7 +2684,7 @@ async function loadPaymentSettings(){
 
 
 /* =====================================================
-   COPY TEXT
+   COPY
 ===================================================== */
 
 async function copyText(
@@ -3839,86 +2714,94 @@ async function copyText(
         ){
 
             await navigator.clipboard.writeText(
-                text
+                String(text)
             );
 
         }else{
 
-            const textarea =
-                document.createElement(
-                    "textarea"
-                );
+            throw new Error(
+                "Clipboard API unavailable"
+            );
+
+        }
 
 
-            textarea.value =
-                text;
+    }catch(error){
 
-
-            textarea.style.position =
-                "fixed";
-
-
-            textarea.style.opacity =
-                "0";
-
-
-            document.body.appendChild(
-                textarea
+        const textarea =
+            document.createElement(
+                "textarea"
             );
 
 
-            textarea.focus();
+        textarea.value =
+            String(text);
 
-            textarea.select();
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.left =
+            "-9999px";
+
+
+        document.body.appendChild(
+            textarea
+        );
+
+
+        textarea.focus();
+        textarea.select();
+
+
+        try{
 
             document.execCommand(
                 "copy"
             );
 
+        }catch(copyError){
 
-            textarea.remove();
+            console.error(
+                "Copy failed:",
+                copyError
+            );
 
         }
 
 
-        button.classList.add(
-            "copied"
-        );
-
-
-        button.innerHTML = `
-
-            <i class="fa-solid fa-check"></i>
-
-            Copied
-
-        `;
-
-
-        setTimeout(
-            function(){
-
-                button.classList.remove(
-                    "copied"
-                );
-
-
-                button.innerHTML =
-                    original;
-
-            },
-            1500
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Copy failed:",
-            error
-        );
+        textarea.remove();
 
     }
+
+
+    button.classList.add(
+        "copied"
+    );
+
+
+    button.innerHTML = `
+
+        <i class="fa-solid fa-check"></i>
+
+        Copied
+
+    `;
+
+
+    setTimeout(
+        function(){
+
+            button.classList.remove(
+                "copied"
+            );
+
+            button.innerHTML =
+                original;
+
+        },
+        1500
+    );
 
 }
 
@@ -3949,7 +2832,8 @@ document
                         button.dataset.copyField;
 
 
-                    let value = "";
+                    let value =
+                        "";
 
 
                     if(
@@ -4083,7 +2967,9 @@ if(copyAllButton){
 
             if(
                 paymentSettings.bank_code &&
-                paymentSettings.bank_code.trim()
+                String(
+                    paymentSettings.bank_code
+                ).trim()
             ){
 
                 text +=
@@ -4095,7 +2981,9 @@ if(copyAllButton){
 
             if(
                 paymentSettings.payment_note &&
-                paymentSettings.payment_note.trim()
+                String(
+                    paymentSettings.payment_note
+                ).trim()
             ){
 
                 text +=
@@ -4105,12 +2993,8 @@ if(copyAllButton){
             }
 
 
-            const button =
-                this;
-
-
             const original =
-                button.innerHTML;
+                this.innerHTML;
 
 
             try{
@@ -4126,71 +3010,80 @@ if(copyAllButton){
 
                 }else{
 
-                    const textarea =
-                        document.createElement(
-                            "textarea"
-                        );
+                    throw new Error(
+                        "Clipboard API unavailable"
+                    );
+
+                }
 
 
-                    textarea.value =
-                        text;
+            }catch(error){
 
-
-                    textarea.style.position =
-                        "fixed";
-
-
-                    textarea.style.opacity =
-                        "0";
-
-
-                    document.body.appendChild(
-                        textarea
+                const textarea =
+                    document.createElement(
+                        "textarea"
                     );
 
 
-                    textarea.focus();
+                textarea.value =
+                    text;
 
-                    textarea.select();
+
+                textarea.style.position =
+                    "fixed";
+
+                textarea.style.left =
+                    "-9999px";
+
+
+                document.body.appendChild(
+                    textarea
+                );
+
+
+                textarea.focus();
+                textarea.select();
+
+
+                try{
 
                     document.execCommand(
                         "copy"
                     );
 
+                }catch(copyError){
 
-                    textarea.remove();
+                    console.error(
+                        "Copy all failed:",
+                        copyError
+                    );
 
                 }
 
 
-                button.innerHTML = `
-
-                    <i class="fa-solid fa-check"></i>
-
-                    All Details Copied
-
-                `;
-
-
-                setTimeout(
-                    function(){
-
-                        button.innerHTML =
-                            original;
-
-                    },
-                    1800
-                );
-
-
-            }catch(error){
-
-                console.error(
-                    "Copy all failed:",
-                    error
-                );
+                textarea.remove();
 
             }
+
+
+            this.innerHTML = `
+
+                <i class="fa-solid fa-check"></i>
+
+                All Details Copied
+
+            `;
+
+
+            setTimeout(
+                function(){
+
+                    copyAllButton.innerHTML =
+                        original;
+
+                },
+                1800
+            );
 
         }
     );
@@ -4262,10 +3155,6 @@ function loadCheckout(){
 
     content.style.display =
         "grid";
-
-
-    heading.style.display =
-        "block";
 
 
     items.innerHTML =
@@ -4360,13 +3249,17 @@ function loadCheckout(){
     document.getElementById(
         "checkoutSubtotal"
     ).textContent =
-        formatPrice(subtotal);
+        formatPrice(
+            subtotal
+        );
 
 
     document.getElementById(
         "checkoutTotal"
     ).textContent =
-        formatPrice(subtotal);
+        formatPrice(
+            subtotal
+        );
 
 }
 
@@ -4611,10 +3504,6 @@ async function confirmOrder(){
     }
 
 
-    /* ---------------------------------------------
-       PAYMENT CHECK
-    --------------------------------------------- */
-
     if(
         !paymentSettings ||
         paymentSettings.bank_enabled !== true
@@ -4739,64 +3628,105 @@ async function confirmOrder(){
         );
 
 
+    /* =================================================
+       ORDER PAYLOAD
+    ================================================= */
+
+    const orderPayload = {
+
+        order_number:
+            orderId,
+
+        tracking_token:
+            trackingToken,
+
+        customer_name:
+            name,
+
+        whatsapp:
+            phone,
+
+        email:
+            email,
+
+        note:
+            note,
+
+        items:
+            orderItems,
+
+        subtotal:
+            subtotal,
+
+        delivery_fee:
+            0,
+
+        total:
+            subtotal,
+
+        payment_method:
+            "bank_transfer",
+
+        order_status:
+            "pending"
+
+    };
+
+
+    console.log(
+        "Submitting ProBee order:",
+        orderPayload
+    );
+
+
     try{
 
-        const {
-            error
-        } =
+        const result =
             await supabaseClient
                 .from("orders")
-                .insert({
-
-                    order_number:
-                        orderId,
-
-                    tracking_token:
-                        trackingToken,
-
-                    customer_name:
-                        name,
-
-                    whatsapp:
-                        phone,
-
-                    email:
-                        email,
-
-                    note:
-                        note,
-
-                    items:
-                        orderItems,
-
-                    subtotal:
-                        subtotal,
-
-                    delivery_fee:
-                        0,
-
-                    total:
-                        subtotal,
-
-                    payment_method:
-                        "bank_transfer",
-
-                    order_status:
-                        "pending"
-
-                });
+                .insert(
+                    orderPayload
+                );
 
 
-        if(error){
+        if(result.error){
 
             console.error(
-                "Supabase order error:",
-                error
+                "========== SUPABASE ORDER ERROR =========="
+            );
+
+            console.error(
+                "Code:",
+                result.error.code
+            );
+
+            console.error(
+                "Message:",
+                result.error.message
+            );
+
+            console.error(
+                "Details:",
+                result.error.details
+            );
+
+            console.error(
+                "Hint:",
+                result.error.hint
+            );
+
+            console.error(
+                "=========================================="
             );
 
 
             alert(
-                "Order could not be submitted. Please try again."
+                "Order could not be submitted.\n\n" +
+                "Supabase Error: " +
+                (
+                    result.error.message ||
+                    "Unknown database error"
+                )
             );
 
 
@@ -4818,9 +3748,11 @@ async function confirmOrder(){
         }
 
 
-        /* -----------------------------------------
-           LOCAL ORDER
-        ----------------------------------------- */
+        console.log(
+            "ProBee order inserted successfully:",
+            orderId
+        );
+
 
         const order = {
 
@@ -4878,10 +3810,6 @@ async function confirmOrder(){
         );
 
 
-        /* -----------------------------------------
-           HIDE CHECKOUT
-        ----------------------------------------- */
-
         document.getElementById(
             "checkoutContent"
         ).style.display =
@@ -4893,10 +3821,6 @@ async function confirmOrder(){
         ).style.display =
             "none";
 
-
-        /* -----------------------------------------
-           SHOW SUCCESS
-        ----------------------------------------- */
 
         const success =
             document.getElementById(
@@ -4921,10 +3845,6 @@ async function confirmOrder(){
             orderId;
 
 
-        /* -----------------------------------------
-           TRACK BUTTON
-        ----------------------------------------- */
-
         const trackOrderButton =
             document.getElementById(
                 "trackOrderButton"
@@ -4942,10 +3862,6 @@ async function confirmOrder(){
         }
 
 
-        /* -----------------------------------------
-           CLEAR CART
-        ----------------------------------------- */
-
         localStorage.removeItem(
             "probCart"
         );
@@ -4953,10 +3869,6 @@ async function confirmOrder(){
 
         updateCartCount();
 
-
-        /* -----------------------------------------
-           TOP
-        ----------------------------------------- */
 
         window.scrollTo({
 
@@ -4976,7 +3888,11 @@ async function confirmOrder(){
 
 
         alert(
-            "Something went wrong. Please try again."
+            "Something went wrong.\n\n" +
+            (
+                error.message ||
+                "Unknown error"
+            )
         );
 
 
@@ -5083,26 +3999,6 @@ function openSearch(){
             "show"
         );
 
-
-        const input =
-            document.getElementById(
-                "searchInput"
-            );
-
-
-        if(input){
-
-            setTimeout(
-                function(){
-
-                    input.focus();
-
-                },
-                100
-            );
-
-        }
-
     }
 
 }
@@ -5125,27 +4021,6 @@ function closeSearch(){
     }
 
 }
-
-
-/* =====================================================
-   ESCAPE SEARCH WITH KEYBOARD
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key ===
-            "Escape"
-        ){
-
-            closeSearch();
-
-        }
-
-    }
-);
 
 
 /* =====================================================
