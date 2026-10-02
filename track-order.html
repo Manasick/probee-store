@@ -1159,6 +1159,211 @@
 
 
         /* ==============================
+           CUSTOMER PAYMENT REFERENCE
+        ============================== */
+
+        .payment-reference-form {
+
+            margin-top: 18px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.07);
+
+        }
+
+
+        .payment-reference-label {
+
+            display: block;
+
+            color: #fff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .payment-reference-help {
+
+            color: #888;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .payment-reference-row {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .payment-reference-row input {
+
+            flex: 1;
+
+            min-width: 0;
+
+            height: 48px;
+
+            padding:
+                0 14px;
+
+            background:
+                rgba(0,0,0,0.30);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            border-radius: 10px;
+
+            color: #fff;
+
+            outline: none;
+
+            font-size: 14px;
+
+        }
+
+
+        .payment-reference-row input:focus {
+
+            border-color: #d6ad60;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(214,173,96,0.07);
+
+        }
+
+
+        .payment-reference-row input::placeholder {
+
+            color: #666;
+
+        }
+
+
+        .payment-reference-row button {
+
+            height: 48px;
+
+            padding:
+                0 18px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d6ad60,
+                    #b78a3e
+                );
+
+            color: #080808;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition: 0.25s;
+
+        }
+
+
+        .payment-reference-row button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(214,173,96,0.16);
+
+        }
+
+
+        .payment-reference-row button:disabled {
+
+            opacity: 0.60;
+
+            cursor: wait;
+
+            transform: none;
+
+        }
+
+
+        .payment-submit-message {
+
+            display: none;
+
+            margin-top: 10px;
+
+            padding: 10px 12px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .payment-submit-message.success {
+
+            display: block;
+
+            color: #7ee6a3;
+
+            background:
+                rgba(80,210,130,0.08);
+
+            border:
+                1px solid
+                rgba(80,210,130,0.16);
+
+        }
+
+
+        .payment-submit-message.error {
+
+            display: block;
+
+            color: #ffaaaa;
+
+            background:
+                rgba(255,70,70,0.08);
+
+            border:
+                1px solid
+                rgba(255,70,70,0.16);
+
+        }
+
+
+        /* ==============================
            EMPTY
         ============================== */
 
@@ -1369,6 +1574,20 @@
             .payment-info-row strong {
 
                 text-align: left;
+
+            }
+
+
+            .payment-reference-row {
+
+                flex-direction: column;
+
+            }
+
+
+            .payment-reference-row button {
+
+                width: 100%;
 
             }
 
@@ -1778,6 +1997,61 @@
 
                         </div>
 
+
+                        <!-- CUSTOMER PAYMENT REFERENCE FORM -->
+
+                        <div
+                            id="paymentReferenceForm"
+                            class="payment-reference-form"
+                            style="display:none;"
+                        >
+
+                            <label
+                                class="payment-reference-label"
+                                for="customerPaymentReference"
+                            >
+                                Submit Payment Reference
+                            </label>
+
+
+                            <div class="payment-reference-help">
+
+                                Enter the payment reference,
+                                transaction ID, or bank transfer
+                                reference shown on your payment receipt.
+
+                            </div>
+
+
+                            <div class="payment-reference-row">
+
+                                <input
+                                    type="text"
+                                    id="customerPaymentReference"
+                                    maxlength="200"
+                                    autocomplete="off"
+                                    placeholder="e.g. Bank transfer reference"
+                                >
+
+
+                                <button
+                                    type="button"
+                                    id="submitPaymentReferenceButton"
+                                    onclick="submitPaymentReference()"
+                                >
+                                    Submit Reference
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                id="paymentSubmitMessage"
+                                class="payment-submit-message"
+                            ></div>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -1874,6 +2148,7 @@
         );
 
 
+
     /* ==============================
        PAYMENT VERIFICATION ELEMENTS
     ============================== */
@@ -1913,6 +2188,44 @@
         document.getElementById(
             "paymentVerifiedDate"
         );
+
+
+    /* ==============================
+       CUSTOMER PAYMENT REFERENCE
+    ============================== */
+
+
+    const paymentReferenceForm =
+        document.getElementById(
+            "paymentReferenceForm"
+        );
+
+
+    const customerPaymentReference =
+        document.getElementById(
+            "customerPaymentReference"
+        );
+
+
+    const submitPaymentReferenceButton =
+        document.getElementById(
+            "submitPaymentReferenceButton"
+        );
+
+
+    const paymentSubmitMessage =
+        document.getElementById(
+            "paymentSubmitMessage"
+        );
+
+
+
+    /* =====================================================
+       CURRENT TRACKING TOKEN
+    ===================================================== */
+
+
+    let currentTrackingToken = "";
 
 
 
@@ -2000,6 +2313,10 @@
 
             const order =
                 data[0];
+
+
+            currentTrackingToken =
+                trackingToken;
 
 
             displayOrder(order);
@@ -2167,6 +2484,22 @@
 
 
         /*
+         * Hide customer submit form first.
+         */
+
+        paymentReferenceForm.style.display =
+            "none";
+
+
+        paymentSubmitMessage.textContent =
+            "";
+
+
+        paymentSubmitMessage.className =
+            "payment-submit-message";
+
+
+        /*
          * PAYMENT PAID
          */
 
@@ -2232,6 +2565,33 @@
 
             paymentStatusMessage.textContent =
                 "Your payment is waiting for verification.";
+
+
+            /*
+             * Customer can submit/update
+             * payment reference while pending.
+             */
+
+            paymentReferenceForm.style.display =
+                "block";
+
+
+            if (
+                reference &&
+                String(reference).trim() !== ""
+            ) {
+
+                customerPaymentReference.value =
+                    String(reference);
+
+            }
+
+            else {
+
+                customerPaymentReference.value =
+                    "";
+
+            }
 
         }
 
@@ -2305,6 +2665,246 @@
                 "none";
 
         }
+
+    }
+
+
+
+    /* =====================================================
+       SUBMIT CUSTOMER PAYMENT REFERENCE
+    ===================================================== */
+
+
+    async function submitPaymentReference() {
+
+
+        const token =
+            currentTrackingToken ||
+            trackingInput.value.trim();
+
+
+        const reference =
+            customerPaymentReference.value.trim();
+
+
+        paymentSubmitMessage.textContent =
+            "";
+
+
+        paymentSubmitMessage.className =
+            "payment-submit-message";
+
+
+        if (!token) {
+
+            showPaymentSubmitMessage(
+                "Your tracking token is missing. Please track your order again.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!reference) {
+
+            showPaymentSubmitMessage(
+                "Please enter your payment reference.",
+                "error"
+            );
+
+            customerPaymentReference.focus();
+
+            return;
+
+        }
+
+
+        if (reference.length > 200) {
+
+            showPaymentSubmitMessage(
+                "Payment reference must be 200 characters or less.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        submitPaymentReferenceButton.disabled =
+            true;
+
+
+        submitPaymentReferenceButton.textContent =
+            "Submitting...";
+
+
+        try {
+
+
+            const { data, error } =
+                await supabaseClient
+                    .rpc(
+                        "submit_payment_reference",
+                        {
+                            p_tracking_token:
+                                token,
+
+                            p_payment_reference:
+                                reference
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(error);
+
+                throw new Error(
+                    "Unable to submit the payment reference right now."
+                );
+
+            }
+
+
+            /*
+             * RPC returns TRUE only when
+             * the pending order was updated.
+             */
+
+            if (data !== true) {
+
+                throw new Error(
+                    "This payment reference could not be submitted. The order may already have been verified or rejected."
+                );
+
+            }
+
+
+            showPaymentSubmitMessage(
+                "Payment reference submitted successfully. ProBee will verify your payment.",
+                "success"
+            );
+
+
+            /*
+             * Reload order data so the newly
+             * submitted reference appears
+             * immediately.
+             */
+
+            await reloadTrackedOrder(
+                token
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            showPaymentSubmitMessage(
+                error.message ||
+                "Something went wrong. Please try again.",
+                "error"
+            );
+
+        }
+
+        finally {
+
+            submitPaymentReferenceButton.disabled =
+                false;
+
+
+            submitPaymentReferenceButton.textContent =
+                "Submit Reference";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       RELOAD TRACKED ORDER
+    ===================================================== */
+
+
+    async function reloadTrackedOrder(
+        token
+    ) {
+
+
+        try {
+
+
+            const { data, error } =
+                await supabaseClient
+                    .rpc(
+                        "track_order_by_token",
+                        {
+                            p_tracking_token:
+                                token
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(error);
+
+                return;
+
+            }
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            displayOrder(
+                data[0]
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+
+
+
+    /* ==============================
+       PAYMENT SUBMIT MESSAGE
+    ============================== */
+
+
+    function showPaymentSubmitMessage(
+        message,
+        type
+    ) {
+
+
+        paymentSubmitMessage.textContent =
+            message;
+
+
+        paymentSubmitMessage.className =
+            "payment-submit-message " +
+            type;
 
     }
 
@@ -2835,7 +3435,7 @@
 
 
     /* =====================================================
-       ENTER KEY
+       ENTER KEY - TRACKING
     ===================================================== */
 
 
@@ -2848,6 +3448,28 @@
             ) {
 
                 trackOrder();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ENTER KEY - PAYMENT REFERENCE
+    ===================================================== */
+
+
+    customerPaymentReference.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                submitPaymentReference();
 
             }
 
