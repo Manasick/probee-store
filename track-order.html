@@ -1364,6 +1364,296 @@
 
 
         /* ==============================
+           PAYMENT PROOF UPLOAD
+        ============================== */
+
+        .payment-proof-form {
+
+            margin-top: 20px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.07);
+
+        }
+
+
+        .payment-proof-title {
+
+            color: #fff;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .payment-proof-help {
+
+            color: #888;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .payment-proof-input {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            padding: 10px;
+
+            background:
+                rgba(0,0,0,0.30);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            border-radius: 10px;
+
+            color: #aaa;
+
+            font-size: 13px;
+
+            outline: none;
+
+            cursor: pointer;
+
+        }
+
+
+        .payment-proof-input:focus {
+
+            border-color: #d6ad60;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(214,173,96,0.07);
+
+        }
+
+
+        .payment-proof-input::file-selector-button {
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 9px 13px;
+
+            margin-right: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d6ad60,
+                    #b78a3e
+                );
+
+            color: #080808;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+        }
+
+
+        .payment-proof-selected {
+
+            display: none;
+
+            margin-top: 10px;
+
+            padding: 10px 12px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(214,173,96,0.07);
+
+            border:
+                1px solid
+                rgba(214,173,96,0.14);
+
+            color: #bbb;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            word-break: break-word;
+
+        }
+
+
+        .payment-proof-upload-button {
+
+            width: 100%;
+
+            height: 48px;
+
+            margin-top: 12px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d6ad60,
+                    #b78a3e
+                );
+
+            color: #080808;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        .payment-proof-upload-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(214,173,96,0.16);
+
+        }
+
+
+        .payment-proof-upload-button:disabled {
+
+            opacity: 0.60;
+
+            cursor: wait;
+
+            transform: none;
+
+        }
+
+
+        .payment-proof-message {
+
+            display: none;
+
+            margin-top: 10px;
+
+            padding: 10px 12px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .payment-proof-message.success {
+
+            display: block;
+
+            color: #7ee6a3;
+
+            background:
+                rgba(80,210,130,0.08);
+
+            border:
+                1px solid
+                rgba(80,210,130,0.16);
+
+        }
+
+
+        .payment-proof-message.error {
+
+            display: block;
+
+            color: #ffaaaa;
+
+            background:
+                rgba(255,70,70,0.08);
+
+            border:
+                1px solid
+                rgba(255,70,70,0.16);
+
+        }
+
+
+        .payment-proof-status {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 13px 14px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(214,173,96,0.055);
+
+            border:
+                1px solid
+                rgba(214,173,96,0.14);
+
+            color: #aaa;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .payment-proof-status strong {
+
+            color: #d6ad60;
+
+        }
+
+
+        .payment-proof-status.archived {
+
+            background:
+                rgba(80,210,130,0.055);
+
+            border-color:
+                rgba(80,210,130,0.14);
+
+        }
+
+
+        .payment-proof-status.archived strong {
+
+            color: #7ee6a3;
+
+        }
+
+
+        /* ==============================
            EMPTY
         ============================== */
 
@@ -2052,6 +2342,75 @@
 
                         </div>
 
+
+
+                        <!-- ==============================
+                             PAYMENT PROOF UPLOAD
+                        ============================== -->
+
+                        <div
+                            id="paymentProofForm"
+                            class="payment-proof-form"
+                            style="display:none;"
+                        >
+
+                            <div class="payment-proof-title">
+
+                                Upload Payment Proof
+
+                            </div>
+
+
+                            <div class="payment-proof-help">
+
+                                Upload a screenshot/photo of your
+                                bank transfer receipt or a PDF receipt.
+                                Accepted formats: JPG, JPEG, PNG and PDF.
+                                Maximum file size: 10 MB.
+
+                            </div>
+
+
+                            <input
+                                type="file"
+                                id="paymentProofInput"
+                                class="payment-proof-input"
+                                accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf"
+                            >
+
+
+                            <div
+                                id="paymentProofSelected"
+                                class="payment-proof-selected"
+                            ></div>
+
+
+                            <button
+                                type="button"
+                                id="uploadPaymentProofButton"
+                                class="payment-proof-upload-button"
+                                onclick="uploadPaymentProof()"
+                            >
+                                Upload Payment Proof
+                            </button>
+
+
+                            <div
+                                id="paymentProofMessage"
+                                class="payment-proof-message"
+                            ></div>
+
+                        </div>
+
+
+
+                        <!-- PAYMENT PROOF STATUS -->
+
+                        <div
+                            id="paymentProofStatus"
+                            class="payment-proof-status"
+                        ></div>
+
                     </div>
 
                 </div>
@@ -2190,6 +2549,7 @@
         );
 
 
+
     /* ==============================
        CUSTOMER PAYMENT REFERENCE
     ============================== */
@@ -2216,6 +2576,48 @@
     const paymentSubmitMessage =
         document.getElementById(
             "paymentSubmitMessage"
+        );
+
+
+
+    /* ==============================
+       PAYMENT PROOF ELEMENTS
+    ============================== */
+
+
+    const paymentProofForm =
+        document.getElementById(
+            "paymentProofForm"
+        );
+
+
+    const paymentProofInput =
+        document.getElementById(
+            "paymentProofInput"
+        );
+
+
+    const paymentProofSelected =
+        document.getElementById(
+            "paymentProofSelected"
+        );
+
+
+    const uploadPaymentProofButton =
+        document.getElementById(
+            "uploadPaymentProofButton"
+        );
+
+
+    const paymentProofMessage =
+        document.getElementById(
+            "paymentProofMessage"
+        );
+
+
+    const paymentProofStatus =
+        document.getElementById(
+            "paymentProofStatus"
         );
 
 
@@ -2438,7 +2840,11 @@
         setPaymentStatus(
             order.payment_status,
             order.payment_reference,
-            order.payment_verified_at
+            order.payment_verified_at,
+            order.payment_proof_name,
+            order.payment_proof_uploaded_at,
+            order.payment_proof_archived_at,
+            order.payment_proof_status
         );
 
 
@@ -2468,7 +2874,11 @@
     function setPaymentStatus(
         status,
         reference,
-        verifiedAt
+        verifiedAt,
+        proofName,
+        proofUploadedAt,
+        proofArchivedAt,
+        proofStatus
     ) {
 
 
@@ -2479,15 +2889,26 @@
             ).toLowerCase();
 
 
+        const cleanProofStatus =
+            String(
+                proofStatus ||
+                "none"
+            ).toLowerCase();
+
+
         paymentStatusBadge.className =
             "payment-status-badge";
 
 
         /*
-         * Hide customer submit form first.
+         * Hide forms first.
          */
 
         paymentReferenceForm.style.display =
+            "none";
+
+
+        paymentProofForm.style.display =
             "none";
 
 
@@ -2497,6 +2918,22 @@
 
         paymentSubmitMessage.className =
             "payment-submit-message";
+
+
+        paymentProofMessage.textContent =
+            "";
+
+
+        paymentProofMessage.className =
+            "payment-proof-message";
+
+
+        paymentProofStatus.style.display =
+            "none";
+
+
+        paymentProofStatus.className =
+            "payment-proof-status";
 
 
         /*
@@ -2542,7 +2979,7 @@
 
 
             paymentStatusMessage.textContent =
-                "The submitted payment could not be verified. Please contact ProBee if you believe this is incorrect.";
+                "The submitted payment could not be verified. You can submit a new payment reference and payment proof.";
 
         }
 
@@ -2565,33 +3002,6 @@
 
             paymentStatusMessage.textContent =
                 "Your payment is waiting for verification.";
-
-
-            /*
-             * Customer can submit/update
-             * payment reference while pending.
-             */
-
-            paymentReferenceForm.style.display =
-                "block";
-
-
-            if (
-                reference &&
-                String(reference).trim() !== ""
-            ) {
-
-                customerPaymentReference.value =
-                    String(reference);
-
-            }
-
-            else {
-
-                customerPaymentReference.value =
-                    "";
-
-            }
 
         }
 
@@ -2665,6 +3075,144 @@
                 "none";
 
         }
+
+
+
+        /*
+         * Customer can submit/update
+         * payment reference while
+         * payment is pending.
+         *
+         * Rejected payments can also
+         * be resubmitted.
+         */
+
+        if (
+            paymentStatus === "pending" ||
+            paymentStatus === "rejected"
+        ) {
+
+
+            paymentReferenceForm.style.display =
+                "block";
+
+
+            if (
+                reference &&
+                String(reference).trim() !== ""
+            ) {
+
+                customerPaymentReference.value =
+                    String(reference);
+
+            }
+
+            else {
+
+                customerPaymentReference.value =
+                    "";
+
+            }
+
+
+            paymentProofForm.style.display =
+                "block";
+
+        }
+
+
+
+        /* ==============================
+           PAYMENT PROOF STATUS
+        ============================== */
+
+
+        if (
+            cleanProofStatus === "uploaded"
+        ) {
+
+
+            paymentProofStatus.style.display =
+                "block";
+
+
+            paymentProofStatus.innerHTML = `
+                <strong>Payment proof uploaded.</strong><br>
+                ${proofName
+                    ? "File: " + escapeHtml(proofName) + "<br>"
+                    : ""
+                }
+                Your payment proof is waiting for ProBee verification.
+                ${
+                    proofUploadedAt
+                    ? "<br>Uploaded: " +
+                      escapeHtml(
+                          formatDate(
+                              proofUploadedAt
+                          )
+                      )
+                    : ""
+                }
+            `;
+
+        }
+
+
+        else if (
+            cleanProofStatus === "archived"
+        ) {
+
+
+            paymentProofStatus.style.display =
+                "block";
+
+
+            paymentProofStatus.classList.add(
+                "archived"
+            );
+
+
+            paymentProofStatus.innerHTML = `
+                <strong>Payment proof archived.</strong><br>
+                Your payment proof has been securely archived for verification.
+                ${
+                    proofArchivedAt
+                    ? "<br>Archived: " +
+                      escapeHtml(
+                          formatDate(
+                              proofArchivedAt
+                          )
+                      )
+                    : ""
+                }
+            `;
+
+        }
+
+
+        else if (
+            cleanProofStatus === "failed"
+        ) {
+
+
+            paymentProofStatus.style.display =
+                "block";
+
+
+            paymentProofStatus.innerHTML = `
+                <strong>Payment proof needs to be submitted again.</strong><br>
+                Please choose your payment proof file and upload it again.
+            `;
+
+        }
+
+
+        /*
+         * If a proof is already uploaded,
+         * still keep the form visible while
+         * payment is pending/rejected so
+         * customer can replace/resubmit it.
+         */
 
     }
 
@@ -2769,11 +3317,6 @@
             }
 
 
-            /*
-             * RPC returns TRUE only when
-             * the pending order was updated.
-             */
-
             if (data !== true) {
 
                 throw new Error(
@@ -2788,12 +3331,6 @@
                 "success"
             );
 
-
-            /*
-             * Reload order data so the newly
-             * submitted reference appears
-             * immediately.
-             */
 
             await reloadTrackedOrder(
                 token
@@ -2821,6 +3358,471 @@
 
             submitPaymentReferenceButton.textContent =
                 "Submit Reference";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       PAYMENT PROOF FILE SELECT
+    ===================================================== */
+
+
+    paymentProofInput.addEventListener(
+        "change",
+        function() {
+
+
+            paymentProofSelected.style.display =
+                "none";
+
+
+            paymentProofSelected.textContent =
+                "";
+
+
+            paymentProofMessage.textContent =
+                "";
+
+
+            paymentProofMessage.className =
+                "payment-proof-message";
+
+
+            const file =
+                paymentProofInput.files &&
+                paymentProofInput.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            const validation =
+                validatePaymentProofFile(
+                    file
+                );
+
+
+            if (!validation.valid) {
+
+                showPaymentProofMessage(
+                    validation.message,
+                    "error"
+                );
+
+
+                paymentProofInput.value =
+                    "";
+
+
+                return;
+
+            }
+
+
+            paymentProofSelected.style.display =
+                "block";
+
+
+            paymentProofSelected.textContent =
+                "Selected file: " +
+                file.name +
+                " • " +
+                formatFileSize(
+                    file.size
+                );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       VALIDATE PAYMENT PROOF
+    ===================================================== */
+
+
+    function validatePaymentProofFile(
+        file
+    ) {
+
+
+        const maxSize =
+            10 * 1024 * 1024;
+
+
+        if (!file) {
+
+            return {
+                valid: false,
+                message:
+                    "Please choose a payment proof file."
+            };
+
+        }
+
+
+        if (
+            file.size <= 0
+        ) {
+
+            return {
+                valid: false,
+                message:
+                    "The selected file is empty."
+            };
+
+        }
+
+
+        if (
+            file.size > maxSize
+        ) {
+
+            return {
+                valid: false,
+                message:
+                    "File size must be 10 MB or less."
+            };
+
+        }
+
+
+        const fileName =
+            String(
+                file.name ||
+                ""
+            );
+
+
+        const extension =
+            fileName
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        const allowedExtensions = [
+            "jpg",
+            "jpeg",
+            "png",
+            "pdf"
+        ];
+
+
+        if (
+            !allowedExtensions.includes(
+                extension
+            )
+        ) {
+
+            return {
+                valid: false,
+                message:
+                    "Only JPG, JPEG, PNG and PDF files are allowed."
+            };
+
+        }
+
+
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "application/pdf"
+        ];
+
+
+        /*
+         * Some mobile browsers may not
+         * provide a reliable MIME type.
+         * Therefore extension is also checked.
+         */
+
+        if (
+            file.type &&
+            !allowedTypes.includes(
+                file.type
+            )
+        ) {
+
+            return {
+                valid: false,
+                message:
+                    "This file type is not supported. Please choose JPG, PNG or PDF."
+            };
+
+        }
+
+
+        return {
+            valid: true
+        };
+
+    }
+
+
+
+    /* =====================================================
+       UPLOAD PAYMENT PROOF
+    ===================================================== */
+
+
+    async function uploadPaymentProof() {
+
+
+        const token =
+            currentTrackingToken ||
+            trackingInput.value.trim();
+
+
+        const file =
+            paymentProofInput.files &&
+            paymentProofInput.files[0];
+
+
+        paymentProofMessage.textContent =
+            "";
+
+
+        paymentProofMessage.className =
+            "payment-proof-message";
+
+
+        if (!token) {
+
+            showPaymentProofMessage(
+                "Your tracking token is missing. Please track your order again.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!file) {
+
+            showPaymentProofMessage(
+                "Please choose your payment proof file first.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const validation =
+            validatePaymentProofFile(
+                file
+            );
+
+
+        if (!validation.valid) {
+
+            showPaymentProofMessage(
+                validation.message,
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        uploadPaymentProofButton.disabled =
+            true;
+
+
+        uploadPaymentProofButton.textContent =
+            "Uploading...";
+
+
+        try {
+
+
+            /*
+             * Make a safe unique filename.
+             */
+
+            const originalName =
+                String(
+                    file.name ||
+                    "payment-proof"
+                );
+
+
+            const extension =
+                originalName
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            const uniquePart =
+                createUniqueId();
+
+
+            const filePath =
+                token +
+                "/" +
+                Date.now() +
+                "-" +
+                uniquePart +
+                "." +
+                extension;
+
+
+            /*
+             * Upload to private Supabase
+             * Storage bucket.
+             */
+
+            const {
+                error: uploadError
+            } =
+                await supabaseClient
+                    .storage
+                    .from(
+                        "payment-proofs"
+                    )
+                    .upload(
+                        filePath,
+                        file,
+                        {
+                            cacheControl:
+                                "3600",
+
+                            upsert:
+                                false,
+
+                            contentType:
+                                file.type ||
+                                getMimeType(
+                                    extension
+                                )
+                        }
+                    );
+
+
+            if (uploadError) {
+
+                console.error(
+                    uploadError
+                );
+
+                throw new Error(
+                    "Unable to upload the payment proof. Please try again."
+                );
+
+            }
+
+
+            /*
+             * Register uploaded file
+             * against the order.
+             */
+
+            const {
+                data,
+                error: rpcError
+            } =
+                await supabaseClient
+                    .rpc(
+                        "submit_payment_proof",
+                        {
+                            p_tracking_token:
+                                token,
+
+                            p_payment_proof_path:
+                                filePath,
+
+                            p_payment_proof_name:
+                                originalName
+                        }
+                    );
+
+
+            if (rpcError) {
+
+                console.error(
+                    rpcError
+                );
+
+                throw new Error(
+                    "The file was uploaded, but it could not be registered with the order. Please contact ProBee."
+                );
+
+            }
+
+
+            if (data !== true) {
+
+                throw new Error(
+                    "This payment proof could not be attached to the order. The order may already be verified."
+                );
+
+            }
+
+
+            showPaymentProofMessage(
+                "Payment proof uploaded successfully. ProBee will now review your payment.",
+                "success"
+            );
+
+
+            paymentProofInput.value =
+                "";
+
+
+            paymentProofSelected.style.display =
+                "none";
+
+
+            paymentProofSelected.textContent =
+                "";
+
+
+            /*
+             * Reload order so the new
+             * proof status appears.
+             */
+
+            await reloadTrackedOrder(
+                token
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            showPaymentProofMessage(
+                error.message ||
+                "Something went wrong while uploading the payment proof.",
+                "error"
+            );
+
+        }
+
+        finally {
+
+            uploadPaymentProofButton.disabled =
+                false;
+
+
+            uploadPaymentProofButton.textContent =
+                "Upload Payment Proof";
 
         }
 
@@ -2911,18 +3913,161 @@
 
 
     /* ==============================
+       PAYMENT PROOF MESSAGE
+    ============================== */
+
+
+    function showPaymentProofMessage(
+        message,
+        type
+    ) {
+
+
+        paymentProofMessage.textContent =
+            message;
+
+
+        paymentProofMessage.className =
+            "payment-proof-message " +
+            type;
+
+    }
+
+
+
+    /* ==============================
+       CREATE UNIQUE ID
+    ============================== */
+
+
+    function createUniqueId() {
+
+
+        if (
+            window.crypto &&
+            typeof window.crypto.randomUUID ===
+                "function"
+        ) {
+
+            return window.crypto.randomUUID();
+
+        }
+
+
+        return (
+            Date.now().toString(36) +
+            "-" +
+            Math.random()
+                .toString(36)
+                .slice(2)
+        );
+
+    }
+
+
+
+    /* ==============================
+       MIME TYPE
+    ============================== */
+
+
+    function getMimeType(
+        extension
+    ) {
+
+
+        if (
+            extension === "jpg" ||
+            extension === "jpeg"
+        ) {
+
+            return "image/jpeg";
+
+        }
+
+
+        if (
+            extension === "png"
+        ) {
+
+            return "image/png";
+
+        }
+
+
+        if (
+            extension === "pdf"
+        ) {
+
+            return "application/pdf";
+
+        }
+
+
+        return "application/octet-stream";
+
+    }
+
+
+
+    /* ==============================
+       FILE SIZE
+    ============================== */
+
+
+    function formatFileSize(
+        bytes
+    ) {
+
+
+        if (
+            bytes < 1024
+        ) {
+
+            return bytes + " B";
+
+        }
+
+
+        if (
+            bytes < 1024 * 1024
+        ) {
+
+            return (
+                bytes / 1024
+            ).toFixed(1) +
+            " KB";
+
+        }
+
+
+        return (
+            bytes /
+            (1024 * 1024)
+        ).toFixed(2) +
+        " MB";
+
+    }
+
+
+
+    /* ==============================
        STATUS MESSAGE
     ============================== */
 
 
-    function setStatusMessage(status) {
+    function setStatusMessage(
+        status
+    ) {
 
 
         statusMessage.className =
             "status-message";
 
 
-        if (status === "processing") {
+        if (
+            status === "processing"
+        ) {
 
 
             statusMessage.classList.add(
@@ -2944,7 +4089,9 @@
         }
 
 
-        else if (status === "completed") {
+        else if (
+            status === "completed"
+        ) {
 
 
             statusMessage.classList.add(
@@ -2966,7 +4113,9 @@
         }
 
 
-        else if (status === "cancelled") {
+        else if (
+            status === "cancelled"
+        ) {
 
 
             statusMessage.classList.add(
@@ -3013,7 +4162,9 @@
     ============================== */
 
 
-    function displayItems(items) {
+    function displayItems(
+        items
+    ) {
 
 
         const container =
@@ -3043,72 +4194,74 @@
         }
 
 
-        items.forEach(function(item) {
+        items.forEach(
+            function(item) {
 
 
-            const name =
-                escapeHtml(
-                    item.name ||
-                    item.title ||
-                    "Product"
-                );
+                const name =
+                    escapeHtml(
+                        item.name ||
+                        item.title ||
+                        "Product"
+                    );
 
 
-            const quantity =
-                Number(
-                    item.quantity ||
-                    item.qty ||
-                    1
-                );
+                const quantity =
+                    Number(
+                        item.quantity ||
+                        item.qty ||
+                        1
+                    );
 
 
-            const price =
-                Number(
-                    item.price ||
-                    0
-                );
+                const price =
+                    Number(
+                        item.price ||
+                        0
+                    );
 
 
-            const total =
-                price * quantity;
+                const total =
+                    price * quantity;
 
 
-            const itemElement =
-                document.createElement(
-                    "div"
-                );
+                const itemElement =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            itemElement.className =
-                "item";
+                itemElement.className =
+                    "item";
 
 
-            itemElement.innerHTML = `
+                itemElement.innerHTML = `
 
-                <div>
+                    <div>
 
-                    <div class="item-name">
-                        ${name}
+                        <div class="item-name">
+                            ${name}
+                        </div>
+
+                        <div class="item-qty">
+                            Qty: ${quantity}
+                        </div>
+
                     </div>
 
-                    <div class="item-qty">
-                        Qty: ${quantity}
+                    <div class="item-price">
+                        ${formatMoney(total)}
                     </div>
 
-                </div>
-
-                <div class="item-price">
-                    ${formatMoney(total)}
-                </div>
-
-            `;
+                `;
 
 
-            container.appendChild(
-                itemElement
-            );
+                container.appendChild(
+                    itemElement
+                );
 
-        });
+            }
+        );
 
     }
 
@@ -3119,7 +4272,9 @@
     ============================== */
 
 
-    function setStatus(status) {
+    function setStatus(
+        status
+    ) {
 
 
         const badge =
@@ -3170,7 +4325,9 @@
             status.slice(1);
 
 
-        if (status === "processing") {
+        if (
+            status === "processing"
+        ) {
 
 
             badge.classList.add(
@@ -3190,7 +4347,9 @@
         }
 
 
-        else if (status === "completed") {
+        else if (
+            status === "completed"
+        ) {
 
 
             badge.classList.add(
@@ -3215,7 +4374,9 @@
         }
 
 
-        else if (status === "cancelled") {
+        else if (
+            status === "cancelled"
+        ) {
 
 
             badge.classList.add(
@@ -3253,7 +4414,9 @@
     ============================== */
 
 
-    function showError(message) {
+    function showError(
+        message
+    ) {
 
 
         errorMessage.textContent =
@@ -3272,7 +4435,9 @@
     ============================== */
 
 
-    function formatDate(value) {
+    function formatDate(
+        value
+    ) {
 
 
         if (!value) {
@@ -3317,7 +4482,9 @@
     ============================== */
 
 
-    function formatMoney(value) {
+    function formatMoney(
+        value
+    ) {
 
 
         return "LKR " +
@@ -3340,7 +4507,9 @@
     ============================== */
 
 
-    function formatPayment(value) {
+    function formatPayment(
+        value
+    ) {
 
 
         if (!value) {
@@ -3371,7 +4540,9 @@
     ============================== */
 
 
-    function escapeHtml(value) {
+    function escapeHtml(
+        value
+    ) {
 
 
         return String(value)
@@ -3412,21 +4583,19 @@
 
 
     const urlTrackingToken =
-        urlParams.get("token");
+        urlParams.get(
+            "token"
+        );
 
 
-    if (urlTrackingToken) {
+    if (
+        urlTrackingToken
+    ) {
 
 
         trackingInput.value =
             urlTrackingToken;
 
-
-        /*
-         * Automatically track the order
-         * when the customer opens the
-         * secure tracking link.
-         */
 
         trackOrder();
 
