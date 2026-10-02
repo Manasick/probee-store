@@ -15,17 +15,11 @@
 
 <title>Admin Dashboard | ProBee</title>
 
-
 <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 </script>
 
-
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
     box-sizing:border-box;
@@ -33,72 +27,41 @@
     padding:0;
 }
 
-
 :root{
-
     --bg:#080808;
     --card:#111;
     --card2:#151515;
-
     --gold:#d4af37;
     --gold2:#f2d675;
-
     --text:#f5f5f5;
     --muted:#999;
-
     --border:#282828;
-
     --green:#28c76f;
     --orange:#ff9f43;
     --red:#ff4d4f;
     --blue:#4dabf7;
-
 }
-
-
-/* =====================================================
-   BASE
-===================================================== */
 
 body{
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:
-        var(--bg);
-
-    color:
-        var(--text);
-
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
     min-height:100vh;
-
 }
-
 
 button,
 input,
 select,
 textarea{
-
     font:inherit;
-
 }
-
 
 button{
-
     cursor:pointer;
-
 }
 
-
 .hidden{
-
     display:none !important;
-
 }
 
 
@@ -107,172 +70,92 @@ button{
 ===================================================== */
 
 #loginScreen{
-
     min-height:100vh;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
-
 }
-
 
 .login-card{
-
     width:100%;
     max-width:420px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid
-        var(--border);
-
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:20px;
-
     padding:32px;
-
-    box-shadow:
-        0 20px 70px
-        rgba(0,0,0,.45);
-
+    box-shadow:0 20px 70px rgba(0,0,0,.45);
 }
-
 
 .logo{
-
     text-align:center;
-
     font-size:32px;
-
     font-weight:800;
-
     color:var(--gold);
-
     letter-spacing:2px;
-
     margin-bottom:8px;
-
 }
-
 
 .login-subtitle{
-
     text-align:center;
-
     color:var(--muted);
-
     margin-bottom:28px;
-
 }
-
 
 .field{
-
     margin-bottom:18px;
-
 }
-
 
 .field label{
-
     display:block;
-
     color:#ccc;
-
     font-size:13px;
-
     margin-bottom:8px;
-
 }
-
 
 .field input,
 .field textarea,
 .field select{
-
     width:100%;
-
     background:#0b0b0b;
-
     color:#fff;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:10px;
-
     padding:13px 14px;
-
     outline:none;
-
 }
-
 
 .field textarea{
-
     min-height:110px;
-
     resize:vertical;
-
 }
-
 
 .field input:focus,
 .field textarea:focus,
 .field select:focus{
-
-    border-color:
-        var(--gold);
-
+    border-color:var(--gold);
 }
-
 
 .primary-btn{
-
     width:100%;
-
     border:none;
-
     border-radius:10px;
-
     padding:14px;
-
-    background:
-        var(--gold);
-
+    background:var(--gold);
     color:#000;
-
     font-weight:800;
-
 }
-
 
 .primary-btn:hover,
 .save-btn:hover{
-
-    background:
-        var(--gold2);
-
+    background:var(--gold2);
 }
 
-
 .message{
-
     margin-top:15px;
-
     font-size:13px;
-
     text-align:center;
-
     color:var(--red);
-
 }
 
 
@@ -281,118 +164,64 @@ button{
 ===================================================== */
 
 #dashboard{
-
     min-height:100vh;
-
 }
-
 
 .topbar{
-
     position:sticky;
-
     top:0;
-
     z-index:50;
-
-    background:
-        rgba(8,8,8,.96);
-
-    backdrop-filter:
-        blur(15px);
-
-    border-bottom:
-        1px solid
-        var(--border);
-
+    background:rgba(8,8,8,.96);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
 }
-
 
 .topbar-inner{
-
     max-width:1400px;
-
     margin:auto;
-
     padding:16px 20px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
-
 }
-
 
 .brand{
-
-    color:
-        var(--gold);
-
+    color:var(--gold);
     font-size:23px;
-
     font-weight:800;
-
     letter-spacing:1px;
-
 }
-
 
 .brand small{
-
     display:block;
-
     font-size:10px;
-
     color:#777;
-
     letter-spacing:2px;
-
     margin-top:3px;
-
 }
-
 
 .logout-btn,
 .refresh-btn,
 .view-btn,
 .close-btn,
 .reset-btn{
-
     background:#171717;
-
     color:#fff;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:9px;
-
 }
-
 
 .logout-btn{
-
     padding:9px 15px;
-
 }
-
 
 .logout-btn:hover,
 .refresh-btn:hover,
 .view-btn:hover,
 .reset-btn:hover{
-
-    border-color:
-        var(--gold);
-
-    color:
-        var(--gold);
-
+    border-color:var(--gold);
+    color:var(--gold);
 }
 
 
@@ -401,36 +230,22 @@ button{
 ===================================================== */
 
 .container{
-
     max-width:1400px;
-
     margin:auto;
-
     padding:25px 20px 50px;
-
 }
-
 
 .page-title{
-
     margin-bottom:20px;
-
 }
-
 
 .page-title h1{
-
     font-size:28px;
-
 }
 
-
 .page-title p{
-
     color:var(--muted);
-
     margin-top:5px;
-
 }
 
 
@@ -439,131 +254,71 @@ button{
 ===================================================== */
 
 .stats{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
-
     margin-bottom:25px;
-
 }
-
 
 .stat-card{
-
-    background:
-        var(--card);
-
-    border:
-        1px solid
-        var(--border);
-
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:16px;
-
     padding:20px;
-
 }
-
 
 .stat-label{
-
     color:var(--muted);
-
     font-size:13px;
-
     margin-bottom:10px;
-
 }
-
 
 .stat-value{
-
     font-size:27px;
-
     font-weight:800;
-
 }
-
 
 .stat-card.gold .stat-value{
-
-    color:
-        var(--gold);
-
+    color:var(--gold);
 }
-
 
 .stat-card.orange .stat-value{
-
-    color:
-        var(--orange);
-
+    color:var(--orange);
 }
 
-
 .stat-card.green .stat-value{
-
-    color:
-        var(--green);
-
+    color:var(--green);
 }
 
 
 /* =====================================================
-   SECTION CARD
+   SECTION
 ===================================================== */
 
 .section-card{
-
-    background:
-        var(--card);
-
-    border:
-        1px solid
-        var(--border);
-
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:18px;
-
     padding:22px;
-
     margin-bottom:25px;
-
 }
-
 
 .section-header{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
-
     margin-bottom:20px;
-
 }
-
 
 .section-header h2{
-
     font-size:19px;
-
 }
 
-
 .section-header p{
-
     color:var(--muted);
-
     font-size:12px;
-
     margin-top:4px;
-
 }
 
 
@@ -572,64 +327,34 @@ button{
 ===================================================== */
 
 .payment-grid{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:16px;
-
 }
-
 
 .payment-grid .full{
-
-    grid-column:
-        1/-1;
-
+    grid-column:1/-1;
 }
-
 
 .payment-status{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     background:#0b0b0b;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:12px;
-
     padding:15px 16px;
-
     margin-bottom:18px;
-
 }
-
 
 .payment-status-left strong{
-
     display:block;
-
     margin-bottom:4px;
-
 }
 
-
 .payment-status-left span{
-
-    color:
-        var(--muted);
-
+    color:var(--muted);
     font-size:12px;
-
 }
 
 
@@ -638,74 +363,43 @@ button{
 ===================================================== */
 
 .switch{
-
     position:relative;
-
     width:52px;
     height:28px;
-
 }
-
 
 .switch input{
-
     opacity:0;
-
     width:0;
     height:0;
-
 }
-
 
 .slider{
-
     position:absolute;
-
     inset:0;
-
     background:#333;
-
     border-radius:30px;
-
     transition:.2s;
-
 }
-
 
 .slider:before{
-
     content:"";
-
     position:absolute;
-
     width:22px;
     height:22px;
-
     left:3px;
     top:3px;
-
     background:#fff;
-
     border-radius:50%;
-
     transition:.2s;
-
 }
-
 
 .switch input:checked + .slider{
-
-    background:
-        var(--gold);
-
+    background:var(--gold);
 }
 
-
 .switch input:checked + .slider:before{
-
-    transform:
-        translateX(24px);
-
+    transform:translateX(24px);
 }
 
 
@@ -714,111 +408,55 @@ button{
 ===================================================== */
 
 .save-row{
-
     display:flex;
-
     align-items:center;
-
     justify-content:flex-end;
-
     gap:15px;
-
     margin-top:18px;
-
 }
-
 
 .save-btn{
-
-    background:
-        var(--gold);
-
+    background:var(--gold);
     color:#000;
-
     border:0;
-
     border-radius:10px;
-
     padding:12px 20px;
-
     font-weight:800;
-
 }
 
-
 .settings-message{
-
     font-size:13px;
-
-    color:
-        var(--green);
-
+    color:var(--green);
 }
 
 
 /* =====================================================
-   ORDER CONTROLS
+   CONTROLS
 ===================================================== */
 
 .controls{
-
     display:grid;
-
-    grid-template-columns:
-        2fr
-        1fr
-        1fr
-        1fr
-        auto
-        auto;
-
+    grid-template-columns:2fr 1fr 1fr 1fr auto auto;
     gap:12px;
-
     margin-bottom:20px;
-
 }
-
 
 .control{
-
     background:#0b0b0b;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     color:#fff;
-
     border-radius:10px;
-
     padding:12px 13px;
-
     outline:none;
-
 }
-
 
 .control:focus{
-
-    border-color:
-        var(--gold);
-
+    border-color:var(--gold);
 }
 
-
-.refresh-btn{
-
-    padding:
-        12px 18px;
-
-}
-
-
+.refresh-btn,
 .reset-btn{
-
-    padding:
-        12px 18px;
-
+    padding:12px 18px;
 }
 
 
@@ -827,91 +465,49 @@ button{
 ===================================================== */
 
 .table-wrap{
-
     overflow-x:auto;
-
 }
-
 
 .orders-table{
-
     width:100%;
-
     border-collapse:collapse;
-
-    min-width:1250px;
-
+    min-width:1350px;
 }
-
 
 .orders-table th{
-
     text-align:left;
-
     padding:13px;
-
     background:#0c0c0c;
-
     color:#aaa;
-
     font-size:12px;
-
-    border-bottom:
-        1px solid
-        var(--border);
-
+    border-bottom:1px solid var(--border);
 }
-
 
 .orders-table td{
-
     padding:14px 13px;
-
-    border-bottom:
-        1px solid
-        #202020;
-
+    border-bottom:1px solid #202020;
     font-size:13px;
-
     vertical-align:top;
-
 }
-
 
 .orders-table tr:hover td{
-
     background:#151515;
-
 }
-
 
 .order-number{
-
-    color:
-        var(--gold);
-
+    color:var(--gold);
     font-weight:700;
-
 }
-
 
 .customer-name{
-
     font-weight:700;
-
 }
 
-
 .small-text{
-
     color:#888;
-
     font-size:11px;
-
     margin-top:4px;
-
     word-break:break-word;
-
 }
 
 
@@ -921,79 +517,62 @@ button{
 
 .status-select,
 .payment-status-select{
-
     border-radius:8px;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     background:#0b0b0b;
-
     color:#fff;
-
     padding:8px;
-
 }
-
 
 .status-select:focus{
-
-    border-color:
-        var(--gold);
-
+    border-color:var(--gold);
 }
-
 
 .status-badge{
-
     display:inline-block;
-
     padding:5px 8px;
-
     border-radius:7px;
-
     font-size:11px;
-
     font-weight:700;
-
 }
-
 
 .payment-pending{
-
     background:#2a2115;
-
-    color:
-        var(--orange);
-
+    color:var(--orange);
 }
-
 
 .payment-paid{
-
     background:#102719;
-
-    color:
-        var(--green);
-
+    color:var(--green);
 }
-
 
 .payment-rejected{
-
     background:#2b1112;
-
-    color:
-        var(--red);
-
+    color:var(--red);
 }
 
+.proof-uploaded{
+    background:#172436;
+    color:var(--blue);
+}
+
+.proof-archived{
+    background:#102719;
+    color:var(--green);
+}
+
+.proof-failed{
+    background:#2b1112;
+    color:var(--red);
+}
+
+.proof-none{
+    background:#202020;
+    color:#999;
+}
 
 .view-btn{
-
     padding:8px 12px;
-
 }
 
 
@@ -1002,13 +581,9 @@ button{
 ===================================================== */
 
 .empty{
-
     text-align:center;
-
     color:#777;
-
     padding:35px;
-
 }
 
 
@@ -1017,80 +592,43 @@ button{
 ===================================================== */
 
 .modal{
-
     position:fixed;
-
     inset:0;
-
     z-index:100;
-
-    background:
-        rgba(0,0,0,.78);
-
+    background:rgba(0,0,0,.78);
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
-
 }
-
 
 .modal-box{
-
     width:100%;
-
-    max-width:720px;
-
+    max-width:760px;
     max-height:90vh;
-
     overflow:auto;
-
     background:#111;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:18px;
-
     padding:23px;
-
 }
-
 
 .modal-header{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
-
     margin-bottom:20px;
-
 }
-
 
 .modal-header h2{
-
-    color:
-        var(--gold);
-
+    color:var(--gold);
 }
 
-
 .close-btn{
-
     width:35px;
     height:35px;
-
     font-size:20px;
-
 }
 
 
@@ -1099,118 +637,118 @@ button{
 ===================================================== */
 
 .detail-grid{
-
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:12px;
-
 }
-
 
 .detail{
-
     background:#0b0b0b;
-
-    border:
-        1px solid
-        #202020;
-
+    border:1px solid #202020;
     border-radius:10px;
-
     padding:12px;
-
 }
-
 
 .detail.full{
-
-    grid-column:
-        1/-1;
-
+    grid-column:1/-1;
 }
-
 
 .detail-label{
-
     color:#777;
-
     font-size:11px;
-
     margin-bottom:5px;
-
 }
 
-
 .detail-value{
-
     word-break:break-word;
-
 }
 
 
 /* =====================================================
-   ITEMS
+   PAYMENT PROOF
 ===================================================== */
 
-.items-box{
-
+.payment-proof-box{
     margin-top:18px;
-
+    padding:17px;
+    background:#0b0b0b;
+    border:1px solid var(--border);
+    border-radius:12px;
 }
 
+.payment-proof-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+}
 
-.items-box h3{
-
+.payment-proof-header h3{
     font-size:15px;
-
-    margin-bottom:10px;
-
 }
 
-
-.item-row{
-
+.proof-status-line{
     display:flex;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    padding:10px 0;
-
-    border-bottom:
-        1px solid
-        #222;
-
-    font-size:13px;
-
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-
-.total-box{
-
-    margin-top:15px;
-
-    padding:15px;
-
-    border:
-        1px solid
-        var(--gold);
-
+.proof-info{
+    background:#111;
+    border:1px solid #202020;
     border-radius:10px;
+    padding:12px;
+}
 
+.proof-info-row{
     display:flex;
-
     justify-content:space-between;
+    gap:15px;
+    padding:7px 0;
+    border-bottom:1px solid #202020;
+    font-size:12px;
+}
 
-    color:
-        var(--gold);
+.proof-info-row:last-child{
+    border-bottom:0;
+}
 
+.proof-info-label{
+    color:#777;
+}
+
+.proof-info-value{
+    text-align:right;
+    word-break:break-word;
+}
+
+.proof-actions{
+    margin-top:13px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.proof-view-btn{
+    border:0;
+    border-radius:9px;
+    padding:10px 15px;
+    background:var(--blue);
+    color:#000;
     font-weight:800;
+}
 
+.proof-view-btn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.proof-message{
+    margin-top:10px;
+    font-size:12px;
+    color:var(--muted);
 }
 
 
@@ -1219,126 +757,101 @@ button{
 ===================================================== */
 
 .payment-action-box{
-
     margin-top:18px;
-
     padding:16px;
-
     background:#0b0b0b;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:12px;
-
 }
-
 
 .payment-action-box h3{
-
     font-size:15px;
-
     margin-bottom:12px;
-
 }
-
 
 .payment-action-row{
-
     display:flex;
-
     gap:10px;
-
     flex-wrap:wrap;
-
 }
-
 
 .payment-ref-input{
-
     flex:1;
-
     min-width:200px;
-
     background:#111;
-
     color:#fff;
-
-    border:
-        1px solid
-        var(--border);
-
+    border:1px solid var(--border);
     border-radius:9px;
-
     padding:11px;
-
 }
-
 
 .payment-ref-input:focus{
-
     outline:none;
-
-    border-color:
-        var(--gold);
-
+    border-color:var(--gold);
 }
-
 
 .verify-btn,
 .reject-btn{
-
     border:0;
-
     border-radius:9px;
-
     padding:11px 15px;
-
     font-weight:800;
-
 }
-
 
 .verify-btn{
-
-    background:
-        var(--green);
-
+    background:var(--green);
     color:#000;
-
 }
-
 
 .reject-btn{
-
-    background:
-        var(--red);
-
+    background:var(--red);
     color:#fff;
-
 }
-
 
 .verify-btn:disabled,
 .reject-btn:disabled{
-
     opacity:.55;
-
     cursor:not-allowed;
+}
 
+.payment-action-message{
+    margin-top:10px;
+    font-size:12px;
+    color:var(--muted);
 }
 
 
-.payment-action-message{
+/* =====================================================
+   ITEMS
+===================================================== */
 
-    margin-top:10px;
+.items-box{
+    margin-top:18px;
+}
 
-    font-size:12px;
+.items-box h3{
+    font-size:15px;
+    margin-bottom:10px;
+}
 
-    color:
-        var(--muted);
+.item-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:10px 0;
+    border-bottom:1px solid #222;
+    font-size:13px;
+}
 
+.total-box{
+    margin-top:15px;
+    padding:15px;
+    border:1px solid var(--gold);
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    color:var(--gold);
+    font-weight:800;
 }
 
 
@@ -1347,24 +860,14 @@ button{
 ===================================================== */
 
 .whatsapp-btn{
-
     display:inline-block;
-
     margin-top:18px;
-
-    background:
-        #25d366;
-
+    background:#25d366;
     color:#000;
-
     text-decoration:none;
-
     padding:11px 17px;
-
     border-radius:9px;
-
     font-weight:800;
-
 }
 
 
@@ -1375,167 +878,117 @@ button{
 @media(max-width:1100px){
 
     .orders-table{
-
-        min-width:1350px;
-
+        min-width:1400px;
     }
 
-
     .controls{
-
-        grid-template-columns:
-            2fr
-            1fr
-            1fr;
-
+        grid-template-columns:2fr 1fr 1fr;
     }
 
 }
-
 
 @media(max-width:900px){
 
     .stats{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+        grid-template-columns:repeat(2,1fr);
     }
-
 
     .controls{
-
-        grid-template-columns:
-            1fr 1fr;
-
+        grid-template-columns:1fr 1fr;
     }
 
-
     .payment-grid{
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns:1fr;
     }
 
 }
 
-
 @media(max-width:600px){
 
     .topbar-inner{
-
-        padding:
-            13px 15px;
-
+        padding:13px 15px;
     }
-
 
     .container{
-
-        padding:
-            20px 14px 40px;
-
+        padding:20px 14px 40px;
     }
-
 
     .brand{
-
         font-size:20px;
-
     }
-
 
     .page-title h1{
-
         font-size:23px;
-
     }
-
 
     .stats{
-
-        grid-template-columns:
-            1fr 1fr;
-
+        grid-template-columns:1fr 1fr;
         gap:10px;
-
     }
-
 
     .stat-card{
-
         padding:15px;
-
     }
-
 
     .stat-value{
-
         font-size:21px;
-
     }
-
 
     .controls{
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns:1fr;
     }
-
 
     .section-card{
-
         padding:16px;
-
     }
-
 
     .detail-grid{
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns:1fr;
     }
-
 
     .detail.full{
-
         grid-column:auto;
-
     }
-
 
     .save-row{
-
         flex-direction:column;
-
         align-items:stretch;
-
     }
-
 
     .save-btn{
-
         width:100%;
-
     }
-
 
     .payment-action-row{
-
         flex-direction:column;
-
     }
-
 
     .payment-ref-input,
     .verify-btn,
     .reject-btn{
-
         width:100%;
+    }
 
+    .payment-proof-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .proof-info-row{
+        flex-direction:column;
+        gap:3px;
+    }
+
+    .proof-info-value{
+        text-align:left;
+    }
+
+    .proof-actions{
+        flex-direction:column;
+    }
+
+    .proof-view-btn{
+        width:100%;
     }
 
 }
@@ -1564,7 +1017,6 @@ button{
             Admin Dashboard
         </div>
 
-
         <form id="loginForm">
 
             <div class="field">
@@ -1581,7 +1033,6 @@ button{
 
             </div>
 
-
             <div class="field">
 
                 <label>
@@ -1596,7 +1047,6 @@ button{
 
             </div>
 
-
             <button
                 type="submit"
                 class="primary-btn"
@@ -1605,7 +1055,6 @@ button{
                 Login
 
             </button>
-
 
             <div
                 class="message"
@@ -1627,9 +1076,6 @@ button{
     id="dashboard"
     class="hidden">
 
-
-    <!-- TOPBAR -->
-
     <header class="topbar">
 
         <div class="topbar-inner">
@@ -1643,7 +1089,6 @@ button{
                 </small>
 
             </div>
-
 
             <button
                 class="logout-btn"
@@ -1660,9 +1105,6 @@ button{
 
     <main class="container">
 
-
-        <!-- PAGE TITLE -->
-
         <div class="page-title">
 
             <h1>
@@ -1676,9 +1118,7 @@ button{
         </div>
 
 
-        <!-- =================================================
-             STATS
-        ================================================= -->
+        <!-- STATS -->
 
         <section class="stats">
 
@@ -1691,13 +1131,10 @@ button{
                 <div
                     class="stat-value"
                     id="totalOrders">
-
                     0
-
                 </div>
 
             </div>
-
 
             <div class="stat-card orange">
 
@@ -1708,13 +1145,10 @@ button{
                 <div
                     class="stat-value"
                     id="pendingOrders">
-
                     0
-
                 </div>
 
             </div>
-
 
             <div class="stat-card green">
 
@@ -1725,13 +1159,10 @@ button{
                 <div
                     class="stat-value"
                     id="completedOrders">
-
                     0
-
                 </div>
 
             </div>
-
 
             <div class="stat-card gold">
 
@@ -1742,9 +1173,7 @@ button{
                 <div
                     class="stat-value"
                     id="completedSales">
-
                     LKR 0.00
-
                 </div>
 
             </div>
@@ -1752,9 +1181,7 @@ button{
         </section>
 
 
-        <!-- =================================================
-             PAYMENT SETTINGS
-        ================================================= -->
+        <!-- PAYMENT SETTINGS -->
 
         <section class="section-card">
 
@@ -1789,7 +1216,6 @@ button{
 
                 </div>
 
-
                 <label class="switch">
 
                     <input
@@ -1805,7 +1231,6 @@ button{
 
             <div class="payment-grid">
 
-
                 <div class="field">
 
                     <label>
@@ -1814,11 +1239,9 @@ button{
 
                     <input
                         type="text"
-                        id="bankName"
-                        placeholder="National Savings Bank (NSB)">
+                        id="bankName">
 
                 </div>
-
 
                 <div class="field">
 
@@ -1828,11 +1251,9 @@ button{
 
                     <input
                         type="text"
-                        id="accountName"
-                        placeholder="Account holder name">
+                        id="accountName">
 
                 </div>
-
 
                 <div class="field">
 
@@ -1842,11 +1263,9 @@ button{
 
                     <input
                         type="text"
-                        id="accountNumber"
-                        placeholder="Account number">
+                        id="accountNumber">
 
                 </div>
-
 
                 <div class="field">
 
@@ -1856,11 +1275,9 @@ button{
 
                     <input
                         type="text"
-                        id="branch"
-                        placeholder="Branch">
+                        id="branch">
 
                 </div>
-
 
                 <div class="field">
 
@@ -1870,11 +1287,9 @@ button{
 
                     <input
                         type="text"
-                        id="bankCode"
-                        placeholder="Optional">
+                        id="bankCode">
 
                 </div>
-
 
                 <div class="field full">
 
@@ -1883,8 +1298,7 @@ button{
                     </label>
 
                     <textarea
-                        id="paymentNote"
-                        placeholder="Please complete the bank transfer and keep your payment reference."></textarea>
+                        id="paymentNote"></textarea>
 
                 </div>
 
@@ -1897,7 +1311,6 @@ button{
                     class="settings-message"
                     id="paymentSettingsMessage">
                 </span>
-
 
                 <button
                     type="button"
@@ -1913,9 +1326,7 @@ button{
         </section>
 
 
-        <!-- =================================================
-             ORDERS
-        ================================================= -->
+        <!-- ORDERS -->
 
         <section class="section-card">
 
@@ -1928,7 +1339,7 @@ button{
                     </h2>
 
                     <p>
-                        View orders and verify manual bank-transfer payments.
+                        View orders, payment references and payment proofs.
                     </p>
 
                 </div>
@@ -1936,17 +1347,13 @@ button{
             </div>
 
 
-            <!-- FILTERS -->
-
             <div class="controls">
-
 
                 <input
                     type="text"
                     class="control"
                     id="searchInput"
                     placeholder="Search order, customer, WhatsApp, email or payment ref...">
-
 
                 <select
                     class="control"
@@ -1974,7 +1381,6 @@ button{
 
                 </select>
 
-
                 <select
                     class="control"
                     id="paymentFilter">
@@ -1997,12 +1403,10 @@ button{
 
                 </select>
 
-
                 <input
                     type="date"
                     class="control"
                     id="dateFilter">
-
 
                 <button
                     class="refresh-btn"
@@ -2011,7 +1415,6 @@ button{
                     Refresh
 
                 </button>
-
 
                 <button
                     class="reset-btn"
@@ -2023,8 +1426,6 @@ button{
 
             </div>
 
-
-            <!-- TABLE -->
 
             <div class="table-wrap">
 
@@ -2070,10 +1471,7 @@ button{
 
                     </thead>
 
-
-                    <tbody
-                        id="ordersBody">
-                    </tbody>
+                    <tbody id="ordersBody"></tbody>
 
                 </table>
 
@@ -2094,16 +1492,13 @@ button{
     class="modal hidden"
     id="orderModal">
 
-
     <div class="modal-box">
-
 
         <div class="modal-header">
 
             <h2>
                 Order Details
             </h2>
-
 
             <button
                 class="close-btn"
@@ -2122,6 +1517,52 @@ button{
         </div>
 
 
+        <!-- PAYMENT PROOF -->
+
+        <div class="payment-proof-box">
+
+            <div class="payment-proof-header">
+
+                <h3>
+                    Payment Proof
+                </h3>
+
+                <div
+                    class="proof-status-line"
+                    id="paymentProofStatus">
+                </div>
+
+            </div>
+
+
+            <div
+                class="proof-info"
+                id="paymentProofInfo">
+            </div>
+
+
+            <div class="proof-actions">
+
+                <button
+                    type="button"
+                    class="proof-view-btn"
+                    id="viewPaymentProofButton">
+
+                    View Payment Proof
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="proof-message"
+                id="paymentProofMessage">
+            </div>
+
+        </div>
+
+
         <!-- PAYMENT VERIFICATION -->
 
         <div class="payment-action-box">
@@ -2129,7 +1570,6 @@ button{
             <h3>
                 Payment Verification
             </h3>
-
 
             <div class="payment-action-row">
 
@@ -2139,7 +1579,6 @@ button{
                     type="text"
                     placeholder="Payment reference / transaction ID">
 
-
                 <button
                     class="verify-btn"
                     id="verifyPaymentButton">
@@ -2147,7 +1586,6 @@ button{
                     Mark as Paid
 
                 </button>
-
 
                 <button
                     class="reject-btn"
@@ -2158,7 +1596,6 @@ button{
                 </button>
 
             </div>
-
 
             <div
                 class="payment-action-message"
@@ -2176,10 +1613,7 @@ button{
                 Ordered Products
             </h3>
 
-
-            <div
-                id="modalItems">
-            </div>
+            <div id="modalItems"></div>
 
         </div>
 
@@ -2224,10 +1658,8 @@ button{
 const SUPABASE_URL =
     "https://fjczxixfajvvizsywrtr.supabase.co";
 
-
 const SUPABASE_ANON_KEY =
     "sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN";
-
 
 const supabaseClient =
     window.supabase.createClient(
@@ -2241,231 +1673,130 @@ const supabaseClient =
 ===================================================== */
 
 const loginScreen =
-    document.getElementById(
-        "loginScreen"
-    );
-
+    document.getElementById("loginScreen");
 
 const dashboard =
-    document.getElementById(
-        "dashboard"
-    );
-
+    document.getElementById("dashboard");
 
 const loginForm =
-    document.getElementById(
-        "loginForm"
-    );
-
+    document.getElementById("loginForm");
 
 const loginEmail =
-    document.getElementById(
-        "loginEmail"
-    );
-
+    document.getElementById("loginEmail");
 
 const loginPassword =
-    document.getElementById(
-        "loginPassword"
-    );
-
+    document.getElementById("loginPassword");
 
 const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
-
+    document.getElementById("loginButton");
 
 const loginMessage =
-    document.getElementById(
-        "loginMessage"
-    );
-
+    document.getElementById("loginMessage");
 
 const logoutButton =
-    document.getElementById(
-        "logoutButton"
-    );
-
+    document.getElementById("logoutButton");
 
 const totalOrders =
-    document.getElementById(
-        "totalOrders"
-    );
-
+    document.getElementById("totalOrders");
 
 const pendingOrders =
-    document.getElementById(
-        "pendingOrders"
-    );
-
+    document.getElementById("pendingOrders");
 
 const completedOrders =
-    document.getElementById(
-        "completedOrders"
-    );
-
+    document.getElementById("completedOrders");
 
 const completedSales =
-    document.getElementById(
-        "completedSales"
-    );
-
+    document.getElementById("completedSales");
 
 const ordersBody =
-    document.getElementById(
-        "ordersBody"
-    );
-
+    document.getElementById("ordersBody");
 
 const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
-
+    document.getElementById("searchInput");
 
 const statusFilter =
-    document.getElementById(
-        "statusFilter"
-    );
-
+    document.getElementById("statusFilter");
 
 const paymentFilter =
-    document.getElementById(
-        "paymentFilter"
-    );
-
+    document.getElementById("paymentFilter");
 
 const dateFilter =
-    document.getElementById(
-        "dateFilter"
-    );
-
+    document.getElementById("dateFilter");
 
 const refreshButton =
-    document.getElementById(
-        "refreshButton"
-    );
-
+    document.getElementById("refreshButton");
 
 const resetFiltersButton =
-    document.getElementById(
-        "resetFiltersButton"
-    );
-
+    document.getElementById("resetFiltersButton");
 
 const orderModal =
-    document.getElementById(
-        "orderModal"
-    );
-
+    document.getElementById("orderModal");
 
 const closeModal =
-    document.getElementById(
-        "closeModal"
-    );
-
+    document.getElementById("closeModal");
 
 const orderDetails =
-    document.getElementById(
-        "orderDetails"
-    );
-
+    document.getElementById("orderDetails");
 
 const modalItems =
-    document.getElementById(
-        "modalItems"
-    );
-
+    document.getElementById("modalItems");
 
 const modalTotal =
-    document.getElementById(
-        "modalTotal"
-    );
-
+    document.getElementById("modalTotal");
 
 const whatsappButton =
-    document.getElementById(
-        "whatsappButton"
-    );
-
+    document.getElementById("whatsappButton");
 
 const bankEnabled =
-    document.getElementById(
-        "bankEnabled"
-    );
-
+    document.getElementById("bankEnabled");
 
 const bankName =
-    document.getElementById(
-        "bankName"
-    );
-
+    document.getElementById("bankName");
 
 const accountName =
-    document.getElementById(
-        "accountName"
-    );
-
+    document.getElementById("accountName");
 
 const accountNumber =
-    document.getElementById(
-        "accountNumber"
-    );
-
+    document.getElementById("accountNumber");
 
 const branch =
-    document.getElementById(
-        "branch"
-    );
-
+    document.getElementById("branch");
 
 const bankCode =
-    document.getElementById(
-        "bankCode"
-    );
-
+    document.getElementById("bankCode");
 
 const paymentNote =
-    document.getElementById(
-        "paymentNote"
-    );
-
+    document.getElementById("paymentNote");
 
 const savePaymentSettingsBtn =
-    document.getElementById(
-        "savePaymentSettingsBtn"
-    );
-
+    document.getElementById("savePaymentSettingsBtn");
 
 const paymentSettingsMessage =
-    document.getElementById(
-        "paymentSettingsMessage"
-    );
-
+    document.getElementById("paymentSettingsMessage");
 
 const paymentReferenceInput =
-    document.getElementById(
-        "paymentReferenceInput"
-    );
-
+    document.getElementById("paymentReferenceInput");
 
 const verifyPaymentButton =
-    document.getElementById(
-        "verifyPaymentButton"
-    );
-
+    document.getElementById("verifyPaymentButton");
 
 const rejectPaymentButton =
-    document.getElementById(
-        "rejectPaymentButton"
-    );
-
+    document.getElementById("rejectPaymentButton");
 
 const paymentActionMessage =
-    document.getElementById(
-        "paymentActionMessage"
-    );
+    document.getElementById("paymentActionMessage");
+
+const paymentProofStatus =
+    document.getElementById("paymentProofStatus");
+
+const paymentProofInfo =
+    document.getElementById("paymentProofInfo");
+
+const paymentProofMessage =
+    document.getElementById("paymentProofMessage");
+
+const viewPaymentProofButton =
+    document.getElementById("viewPaymentProofButton");
 
 
 let allOrders = [];
@@ -2483,54 +1814,30 @@ function escapeHtml(value){
         value === null ||
         value === undefined
     ){
-
         return "";
-
     }
-
 
     return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
 
 function formatCurrency(value){
 
     return "LKR " +
-        Number(
-            value || 0
-        ).toLocaleString(
-            "en-LK",
-            {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            }
-        );
+        Number(value || 0)
+            .toLocaleString(
+                "en-LK",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            );
 
 }
 
@@ -2538,24 +1845,20 @@ function formatCurrency(value){
 function formatDate(value){
 
     if(!value){
-
         return "-";
-
     }
 
-
-    return new Date(
-        value
-    ).toLocaleString(
-        "en-LK",
-        {
-            year:"numeric",
-            month:"short",
-            day:"numeric",
-            hour:"2-digit",
-            minute:"2-digit"
-        }
-    );
+    return new Date(value)
+        .toLocaleString(
+            "en-LK",
+            {
+                year:"numeric",
+                month:"short",
+                day:"numeric",
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
 
 }
 
@@ -2563,111 +1866,116 @@ function formatDate(value){
 function cleanPhone(phone){
 
     if(!phone){
-
         return "";
-
     }
-
 
     let value =
         String(phone)
-            .replace(
-                /[^\d+]/g,
-                ""
-            );
+            .replace(/[^\d+]/g,"");
 
-
-    if(
-        value.startsWith("0")
-    ){
-
+    if(value.startsWith("0")){
         value =
             "94" +
             value.substring(1);
-
     }
 
-
-    if(
-        value.startsWith("+")
-    ){
-
+    if(value.startsWith("+")){
         value =
             value.substring(1);
-
     }
 
-
     return value;
-
 }
 
 
 function getStatusLabel(status){
 
     const value =
-        String(
-            status || "pending"
-        ).toLowerCase();
-
+        String(status || "pending")
+            .toLowerCase();
 
     return value.charAt(0).toUpperCase() +
         value.slice(1);
-
 }
 
 
 function getPaymentStatusLabel(status){
 
     const value =
-        String(
-            status || "pending"
-        ).toLowerCase();
-
+        String(status || "pending")
+            .toLowerCase();
 
     if(value === "paid"){
-
         return "Paid";
-
     }
-
 
     if(value === "rejected"){
-
         return "Rejected";
-
     }
 
-
     return "Pending";
-
 }
 
 
 function paymentClass(status){
 
     const value =
-        String(
-            status || "pending"
-        ).toLowerCase();
-
+        String(status || "pending")
+            .toLowerCase();
 
     if(value === "paid"){
-
         return "payment-paid";
-
     }
-
 
     if(value === "rejected"){
-
         return "payment-rejected";
-
     }
 
-
     return "payment-pending";
+}
 
+
+function getProofLabel(status){
+
+    const value =
+        String(status || "none")
+            .toLowerCase();
+
+    if(value === "uploaded"){
+        return "Uploaded";
+    }
+
+    if(value === "archived"){
+        return "Archived";
+    }
+
+    if(value === "failed"){
+        return "Failed";
+    }
+
+    return "None";
+}
+
+
+function proofClass(status){
+
+    const value =
+        String(status || "none")
+            .toLowerCase();
+
+    if(value === "uploaded"){
+        return "proof-uploaded";
+    }
+
+    if(value === "archived"){
+        return "proof-archived";
+    }
+
+    if(value === "failed"){
+        return "proof-failed";
+    }
+
+    return "proof-none";
 }
 
 
@@ -2675,45 +1983,26 @@ function paymentClass(status){
    ADMIN AUTHORIZATION
 ===================================================== */
 
-async function isAuthorizedAdmin(
-    userId
-){
+async function isAuthorizedAdmin(userId){
 
     const {
         data,
         error
     } =
         await supabaseClient
-
-            .from(
-                "admin_users"
-            )
-
-            .select(
-                "user_id"
-            )
-
-            .eq(
-                "user_id",
-                userId
-            )
-
+            .from("admin_users")
+            .select("user_id")
+            .eq("user_id",userId)
             .maybeSingle();
-
 
     if(error){
 
-        console.error(
-            error
-        );
+        console.error(error);
 
         return false;
-
     }
 
-
     return !!data;
-
 }
 
 
@@ -2723,27 +2012,17 @@ async function isAuthorizedAdmin(
 
 function showDashboard(){
 
-    loginScreen.classList.add(
-        "hidden"
-    );
+    loginScreen.classList.add("hidden");
 
-    dashboard.classList.remove(
-        "hidden"
-    );
-
+    dashboard.classList.remove("hidden");
 }
 
 
 function showLogin(){
 
-    dashboard.classList.add(
-        "hidden"
-    );
+    dashboard.classList.add("hidden");
 
-    loginScreen.classList.remove(
-        "hidden"
-    );
-
+    loginScreen.classList.remove("hidden");
 }
 
 
@@ -2757,18 +2036,12 @@ loginForm.addEventListener(
 
         event.preventDefault();
 
+        loginMessage.textContent = "";
 
-        loginMessage.textContent =
-            "";
-
-
-        loginButton.disabled =
-            true;
-
+        loginButton.disabled = true;
 
         loginButton.textContent =
             "Signing in...";
-
 
         try{
 
@@ -2788,28 +2061,20 @@ loginForm.addEventListener(
 
                     });
 
-
             if(error){
-
                 throw error;
-
             }
 
-
             if(!data.user){
-
                 throw new Error(
                     "Login failed."
                 );
-
             }
-
 
             const authorized =
                 await isAuthorizedAdmin(
                     data.user.id
                 );
-
 
             if(!authorized){
 
@@ -2817,16 +2082,12 @@ loginForm.addEventListener(
                     .auth
                     .signOut();
 
-
                 throw new Error(
                     "This account is not an authorized ProBee admin."
                 );
-
             }
 
-
             showDashboard();
-
 
             await loadPaymentSettings();
 
@@ -2834,10 +2095,7 @@ loginForm.addEventListener(
 
         }catch(error){
 
-            console.error(
-                error
-            );
-
+            console.error(error);
 
             loginMessage.textContent =
                 error.message ||
@@ -2845,13 +2103,10 @@ loginForm.addEventListener(
 
         }finally{
 
-            loginButton.disabled =
-                false;
-
+            loginButton.disabled = false;
 
             loginButton.textContent =
                 "Login";
-
         }
 
     }
@@ -2873,25 +2128,20 @@ async function checkSession(){
                 .auth
                 .getSession();
 
-
         const session =
             data.session;
-
 
         if(!session){
 
             showLogin();
 
             return;
-
         }
-
 
         const authorized =
             await isAuthorizedAdmin(
                 session.user.id
             );
-
 
         if(!authorized){
 
@@ -2899,16 +2149,12 @@ async function checkSession(){
                 .auth
                 .signOut();
 
-
             showLogin();
 
             return;
-
         }
 
-
         showDashboard();
-
 
         await loadPaymentSettings();
 
@@ -2916,15 +2162,10 @@ async function checkSession(){
 
     }catch(error){
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         showLogin();
-
     }
-
 }
 
 
@@ -2940,15 +2181,11 @@ logoutButton.addEventListener(
             .auth
             .signOut();
 
-
         showLogin();
-
 
         loginForm.reset();
 
-
-        loginMessage.textContent =
-            "";
+        loginMessage.textContent = "";
 
     }
 );
@@ -2963,103 +2200,71 @@ async function loadPaymentSettings(){
     paymentSettingsMessage.textContent =
         "Loading...";
 
-
     paymentSettingsMessage.style.color =
         "#999";
-
 
     const {
         data,
         error
     } =
         await supabaseClient
-
-            .from(
-                "payment_settings"
-            )
-
+            .from("payment_settings")
             .select(
                 "id,bank_enabled,bank_name,account_name,account_number,branch,bank_code,payment_note,updated_at"
             )
-
-            .eq(
-                "id",
-                1
-            )
-
+            .eq("id",1)
             .maybeSingle();
-
 
     if(error){
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         paymentSettingsMessage.textContent =
             "Could not load payment settings.";
 
-
         paymentSettingsMessage.style.color =
             "#ff4d4f";
 
-
         return;
-
     }
-
 
     if(!data){
 
         paymentSettingsMessage.textContent =
             "Payment settings record not found.";
 
-
         paymentSettingsMessage.style.color =
             "#ff4d4f";
 
-
         return;
-
     }
-
 
     bankEnabled.checked =
         !!data.bank_enabled;
 
-
     bankName.value =
         data.bank_name || "";
-
 
     accountName.value =
         data.account_name || "";
 
-
     accountNumber.value =
         data.account_number || "";
-
 
     branch.value =
         data.branch || "";
 
-
     bankCode.value =
         data.bank_code || "";
-
 
     paymentNote.value =
         data.payment_note || "";
 
-
     paymentSettingsMessage.textContent =
         "Current settings loaded.";
 
-
     paymentSettingsMessage.style.color =
         "#28c76f";
-
 }
 
 
@@ -3071,21 +2276,16 @@ savePaymentSettingsBtn.addEventListener(
     "click",
     async function(){
 
-        savePaymentSettingsBtn.disabled =
-            true;
-
+        savePaymentSettingsBtn.disabled = true;
 
         savePaymentSettingsBtn.textContent =
             "Saving...";
 
-
         paymentSettingsMessage.textContent =
             "Saving...";
 
-
         paymentSettingsMessage.style.color =
             "#999";
-
 
         try{
 
@@ -3093,11 +2293,7 @@ savePaymentSettingsBtn.addEventListener(
                 error
             } =
                 await supabaseClient
-
-                    .from(
-                        "payment_settings"
-                    )
-
+                    .from("payment_settings")
                     .update({
 
                         bank_enabled:
@@ -3125,38 +2321,25 @@ savePaymentSettingsBtn.addEventListener(
                             new Date().toISOString()
 
                     })
-
-                    .eq(
-                        "id",
-                        1
-                    );
-
+                    .eq("id",1);
 
             if(error){
-
                 throw error;
-
             }
-
 
             paymentSettingsMessage.textContent =
                 "Payment settings saved successfully.";
-
 
             paymentSettingsMessage.style.color =
                 "#28c76f";
 
         }catch(error){
 
-            console.error(
-                error
-            );
-
+            console.error(error);
 
             paymentSettingsMessage.textContent =
                 error.message ||
                 "Could not save payment settings.";
-
 
             paymentSettingsMessage.style.color =
                 "#ff4d4f";
@@ -3166,10 +2349,8 @@ savePaymentSettingsBtn.addEventListener(
             savePaymentSettingsBtn.disabled =
                 false;
 
-
             savePaymentSettingsBtn.textContent =
                 "Save Payment Settings";
-
         }
 
     }
@@ -3204,15 +2385,10 @@ async function loadOrders(){
         error
     } =
         await supabaseClient
-
-            .from(
-                "orders"
-            )
-
+            .from("orders")
             .select(
-                "id,order_number,customer_name,whatsapp,email,total,created_at,note,items,subtotal,delivery_fee,payment_method,order_status,tracking_token,payment_status,payment_reference,payment_verified_at,payment_verified_by"
+                "id,order_number,customer_name,whatsapp,email,total,created_at,note,items,subtotal,delivery_fee,payment_method,order_status,tracking_token,payment_status,payment_reference,payment_verified_at,payment_verified_by,payment_proof_path,payment_proof_name,payment_proof_uploaded_at,payment_proof_archived_at,payment_proof_drive_file_id,payment_proof_drive_url,payment_proof_status"
             )
-
             .order(
                 "created_at",
                 {
@@ -3223,10 +2399,7 @@ async function loadOrders(){
 
     if(error){
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         ordersBody.innerHTML = `
 
@@ -3246,9 +2419,7 @@ async function loadOrders(){
 
         `;
 
-
         return;
-
     }
 
 
@@ -3259,7 +2430,6 @@ async function loadOrders(){
     updateStats();
 
     renderOrders();
-
 }
 
 
@@ -3271,7 +2441,6 @@ function updateStats(){
 
     const total =
         allOrders.length;
-
 
     const pending =
         allOrders.filter(
@@ -3286,7 +2455,6 @@ function updateStats(){
             }
         ).length;
 
-
     const completedList =
         allOrders.filter(
             function(order){
@@ -3299,7 +2467,6 @@ function updateStats(){
 
             }
         );
-
 
     const sales =
         completedList.reduce(
@@ -3314,24 +2481,17 @@ function updateStats(){
             0
         );
 
-
     totalOrders.textContent =
         total;
-
 
     pendingOrders.textContent =
         pending;
 
-
     completedOrders.textContent =
         completedList.length;
 
-
     completedSales.textContent =
-        formatCurrency(
-            sales
-        );
-
+        formatCurrency(sales);
 }
 
 
@@ -3346,20 +2506,16 @@ function getFilteredOrders(){
             .trim()
             .toLowerCase();
 
-
     const status =
         statusFilter.value
             .toLowerCase();
-
 
     const paymentStatus =
         paymentFilter.value
             .toLowerCase();
 
-
     const date =
         dateFilter.value;
-
 
     return allOrders.filter(
         function(order){
@@ -3367,32 +2523,23 @@ function getFilteredOrders(){
             const searchable = [
 
                 order.order_number,
-
                 order.customer_name,
-
                 order.whatsapp,
-
                 order.email,
-
-                order.payment_reference
+                order.payment_reference,
+                order.payment_proof_name
 
             ]
                 .filter(Boolean)
                 .join(" ")
                 .toLowerCase();
 
-
             if(
                 search &&
-                !searchable.includes(
-                    search
-                )
+                !searchable.includes(search)
             ){
-
                 return false;
-
             }
-
 
             const orderStatus =
                 String(
@@ -3400,16 +2547,12 @@ function getFilteredOrders(){
                     "pending"
                 ).toLowerCase();
 
-
             if(
                 status &&
                 orderStatus !== status
             ){
-
                 return false;
-
             }
-
 
             const currentPayment =
                 String(
@@ -3417,16 +2560,12 @@ function getFilteredOrders(){
                     "pending"
                 ).toLowerCase();
 
-
             if(
                 paymentStatus &&
                 currentPayment !== paymentStatus
             ){
-
                 return false;
-
             }
-
 
             if(date){
 
@@ -3434,7 +2573,6 @@ function getFilteredOrders(){
                     new Date(
                         order.created_at
                     );
-
 
                 const localDate =
                     `${d.getFullYear()}-${String(
@@ -3449,23 +2587,14 @@ function getFilteredOrders(){
                         "0"
                     )}`;
 
-
-                if(
-                    localDate !== date
-                ){
-
+                if(localDate !== date){
                     return false;
-
                 }
-
             }
 
-
             return true;
-
         }
     );
-
 }
 
 
@@ -3477,7 +2606,6 @@ function renderOrders(){
 
     const orders =
         getFilteredOrders();
-
 
     if(!orders.length){
 
@@ -3497,9 +2625,7 @@ function renderOrders(){
 
         `;
 
-
         return;
-
     }
 
 
@@ -3508,12 +2634,9 @@ function renderOrders(){
             function(order){
 
                 const items =
-                    Array.isArray(
-                        order.items
-                    )
+                    Array.isArray(order.items)
                         ? order.items
                         : [];
-
 
                 const itemCount =
                     items.reduce(
@@ -3530,13 +2653,11 @@ function renderOrders(){
                         0
                     );
 
-
                 const status =
                     String(
                         order.order_status ||
                         "pending"
                     ).toLowerCase();
-
 
                 const paymentStatus =
                     String(
@@ -3544,11 +2665,15 @@ function renderOrders(){
                         "pending"
                     ).toLowerCase();
 
+                const proofStatus =
+                    String(
+                        order.payment_proof_status ||
+                        "none"
+                    ).toLowerCase();
 
                 return `
 
                     <tr>
-
 
                         <td>
 
@@ -3560,7 +2685,6 @@ function renderOrders(){
                                 )}
 
                             </div>
-
 
                             <div
                                 class="small-text">
@@ -3585,7 +2709,6 @@ function renderOrders(){
 
                             </div>
 
-
                             <div
                                 class="small-text">
 
@@ -3594,7 +2717,6 @@ function renderOrders(){
                                 )}
 
                             </div>
-
 
                             <div
                                 class="small-text">
@@ -3672,9 +2794,33 @@ function renderOrders(){
                                 `
 
                                 :
-
                                 ""
+                            }
 
+
+                            ${
+                                proofStatus !== "none"
+                                ?
+
+                                `
+
+                                <div
+                                    class="small-text"
+                                    style="color:#4dabf7">
+
+                                    Proof:
+                                    ${escapeHtml(
+                                        getProofLabel(
+                                            proofStatus
+                                        )
+                                    )}
+
+                                </div>
+
+                                `
+
+                                :
+                                ""
                             }
 
                         </td>
@@ -3688,12 +2834,10 @@ function renderOrders(){
                                     order.id
                                 )}">
 
-
                                 <option
                                     value="pending"
                                     ${
-                                        status ===
-                                        "pending"
+                                        status === "pending"
                                         ? "selected"
                                         : ""
                                     }>
@@ -3702,12 +2846,10 @@ function renderOrders(){
 
                                 </option>
 
-
                                 <option
                                     value="processing"
                                     ${
-                                        status ===
-                                        "processing"
+                                        status === "processing"
                                         ? "selected"
                                         : ""
                                     }>
@@ -3716,12 +2858,10 @@ function renderOrders(){
 
                                 </option>
 
-
                                 <option
                                     value="completed"
                                     ${
-                                        status ===
-                                        "completed"
+                                        status === "completed"
                                         ? "selected"
                                         : ""
                                     }>
@@ -3730,12 +2870,10 @@ function renderOrders(){
 
                                 </option>
 
-
                                 <option
                                     value="cancelled"
                                     ${
-                                        status ===
-                                        "cancelled"
+                                        status === "cancelled"
                                         ? "selected"
                                         : ""
                                     }>
@@ -3772,7 +2910,6 @@ function renderOrders(){
 
 
     attachOrderEvents();
-
 }
 
 
@@ -3783,9 +2920,7 @@ function renderOrders(){
 function attachOrderEvents(){
 
     document
-        .querySelectorAll(
-            ".status-select"
-        )
+        .querySelectorAll(".status-select")
         .forEach(
             function(select){
 
@@ -3806,9 +2941,7 @@ function attachOrderEvents(){
 
 
     document
-        .querySelectorAll(
-            "[data-view-id]"
-        )
+        .querySelectorAll("[data-view-id]")
         .forEach(
             function(button){
 
@@ -3825,7 +2958,6 @@ function attachOrderEvents(){
 
             }
         );
-
 }
 
 
@@ -3842,92 +2974,213 @@ async function updateOrderStatus(
         error
     } =
         await supabaseClient
-
-            .from(
-                "orders"
-            )
-
+            .from("orders")
             .update({
-
-                order_status:
-                    newStatus
-
+                order_status:newStatus
             })
-
-            .eq(
-                "id",
-                orderId
-            );
-
+            .eq("id",orderId);
 
     if(error){
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Could not update order status.\n\n" +
             error.message
         );
 
-
         await loadOrders();
 
         return;
-
     }
-
 
     const order =
         allOrders.find(
             function(item){
 
-                return String(
-                    item.id
-                ) ===
-                String(
-                    orderId
-                );
+                return String(item.id) ===
+                    String(orderId);
 
             }
         );
 
-
     if(order){
-
         order.order_status =
             newStatus;
-
     }
-
 
     updateStats();
 
     renderOrders();
-
 }
 
 
 /* =====================================================
-   OPEN ORDER MODAL
+   RENDER PAYMENT PROOF
 ===================================================== */
 
-function openOrderModal(
-    orderId
-){
+function renderPaymentProof(order){
+
+    const status =
+        String(
+            order.payment_proof_status ||
+            "none"
+        ).toLowerCase();
+
+
+    paymentProofMessage.textContent =
+        "";
+
+    paymentProofMessage.style.color =
+        "#999";
+
+
+    paymentProofStatus.innerHTML = `
+
+        <span
+            class="status-badge ${proofClass(status)}">
+
+            ${escapeHtml(
+                getProofLabel(status)
+            )}
+
+        </span>
+
+    `;
+
+
+    if(
+        !order.payment_proof_path ||
+        status === "none"
+    ){
+
+        paymentProofInfo.innerHTML = `
+
+            <div
+                class="small-text"
+                style="margin-top:0">
+
+                No payment proof has been uploaded by the customer.
+
+            </div>
+
+        `;
+
+        viewPaymentProofButton.disabled =
+            true;
+
+        return;
+    }
+
+
+    paymentProofInfo.innerHTML = `
+
+        <div class="proof-info-row">
+
+            <span class="proof-info-label">
+                File Name
+            </span>
+
+            <span class="proof-info-value">
+                ${escapeHtml(
+                    order.payment_proof_name ||
+                    "Payment proof"
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="proof-info-row">
+
+            <span class="proof-info-label">
+                Uploaded
+            </span>
+
+            <span class="proof-info-value">
+                ${escapeHtml(
+                    formatDate(
+                        order.payment_proof_uploaded_at
+                    )
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="proof-info-row">
+
+            <span class="proof-info-label">
+                Proof Status
+            </span>
+
+            <span class="proof-info-value">
+
+                ${escapeHtml(
+                    getProofLabel(status)
+                )}
+
+            </span>
+
+        </div>
+
+
+        ${
+            order.payment_proof_archived_at
+            ?
+
+            `
+
+            <div class="proof-info-row">
+
+                <span class="proof-info-label">
+                    Archived
+                </span>
+
+                <span class="proof-info-value">
+
+                    ${escapeHtml(
+                        formatDate(
+                            order.payment_proof_archived_at
+                        )
+                    )}
+
+                </span>
+
+            </div>
+
+            `
+
+            :
+            ""
+        }
+
+    `;
+
+
+    viewPaymentProofButton.disabled =
+        false;
+}
+
+
+/* =====================================================
+   VIEW PAYMENT PROOF
+===================================================== */
+
+async function viewPaymentProof(){
+
+    if(!currentOrderId){
+
+        return;
+    }
+
 
     const order =
         allOrders.find(
             function(item){
 
-                return String(
-                    item.id
-                ) ===
-                String(
-                    orderId
-                );
+                return String(item.id) ===
+                    String(currentOrderId);
 
             }
         );
@@ -3936,7 +3189,127 @@ function openOrderModal(
     if(!order){
 
         return;
+    }
 
+
+    if(!order.payment_proof_path){
+
+        paymentProofMessage.textContent =
+            "No payment proof file is available.";
+
+        paymentProofMessage.style.color =
+            "#ff9f43";
+
+        return;
+    }
+
+
+    viewPaymentProofButton.disabled =
+        true;
+
+    viewPaymentProofButton.textContent =
+        "Opening...";
+
+    paymentProofMessage.textContent =
+        "Creating secure viewing link...";
+
+    paymentProofMessage.style.color =
+        "#999";
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .storage
+                .from("payment-proofs")
+                .createSignedUrl(
+                    order.payment_proof_path,
+                    300
+                );
+
+
+        if(error){
+
+            throw error;
+        }
+
+
+        if(
+            !data ||
+            !data.signedUrl
+        ){
+
+            throw new Error(
+                "Could not create a secure proof link."
+            );
+        }
+
+
+        window.open(
+            data.signedUrl,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+
+        paymentProofMessage.textContent =
+            "Secure payment proof link opened. The link expires in 5 minutes.";
+
+        paymentProofMessage.style.color =
+            "#28c76f";
+
+    }catch(error){
+
+        console.error(error);
+
+        paymentProofMessage.textContent =
+            "Could not open payment proof. " +
+            (error.message || "");
+
+        paymentProofMessage.style.color =
+            "#ff4d4f";
+
+    }finally{
+
+        viewPaymentProofButton.disabled =
+            false;
+
+        viewPaymentProofButton.textContent =
+            "View Payment Proof";
+    }
+}
+
+
+viewPaymentProofButton.addEventListener(
+    "click",
+    viewPaymentProof
+);
+
+
+/* =====================================================
+   OPEN ORDER MODAL
+===================================================== */
+
+function openOrderModal(orderId){
+
+    const order =
+        allOrders.find(
+            function(item){
+
+                return String(item.id) ===
+                    String(orderId);
+
+            }
+        );
+
+
+    if(!order){
+
+        return;
     }
 
 
@@ -3966,13 +3339,6 @@ function openOrderModal(
     paymentActionMessage.textContent =
         "";
 
-
-    /*
-       Payment action safety:
-       PAID -> cannot reject accidentally.
-       REJECTED -> can be changed to PAID.
-       PENDING -> both actions available.
-    */
 
     verifyPaymentButton.disabled =
         paymentStatus === "paid";
@@ -4009,9 +3375,7 @@ function openOrderModal(
             <div class="detail-value">
 
                 ${escapeHtml(
-                    getStatusLabel(
-                        status
-                    )
+                    getStatusLabel(status)
                 )}
 
             </div>
@@ -4264,18 +3628,17 @@ function openOrderModal(
             `
 
             :
-
             ""
-
         }
 
     `;
 
 
+    renderPaymentProof(order);
+
+
     const items =
-        Array.isArray(
-            order.items
-        )
+        Array.isArray(order.items)
             ? order.items
             : [];
 
@@ -4293,14 +3656,12 @@ function openOrderModal(
                     item.title ||
                     "Product";
 
-
                 const qty =
                     Number(
                         item.quantity ||
                         item.qty ||
                         1
                     );
-
 
                 const price =
                     Number(
@@ -4309,13 +3670,11 @@ function openOrderModal(
                         0
                     );
 
-
                 const lineTotal =
                     Number(
                         item.total ||
                         price * qty
                     );
-
 
                 return `
 
@@ -4330,7 +3689,6 @@ function openOrderModal(
                             × ${qty}
 
                         </span>
-
 
                         <strong>
 
@@ -4389,7 +3747,6 @@ function openOrderModal(
             "https://wa.me/" +
             phone;
 
-
         whatsappButton.classList.remove(
             "hidden"
         );
@@ -4399,29 +3756,23 @@ function openOrderModal(
         whatsappButton.classList.add(
             "hidden"
         );
-
     }
 
 
     orderModal.classList.remove(
         "hidden"
     );
-
 }
 
 
 /* =====================================================
-   VERIFY PAYMENT
+   VERIFY / REJECT PAYMENT
 ===================================================== */
 
-async function verifyPayment(
-    markPaid
-){
+async function verifyPayment(markPaid){
 
     if(!currentOrderId){
-
         return;
-
     }
 
 
@@ -4437,29 +3788,22 @@ async function verifyPayment(
         paymentActionMessage.textContent =
             "Enter the payment reference before marking the payment as paid.";
 
-
         paymentActionMessage.style.color =
             "#ff9f43";
 
-
         return;
-
     }
 
 
-    verifyPaymentButton.disabled =
-        true;
+    verifyPaymentButton.disabled = true;
 
-
-    rejectPaymentButton.disabled =
-        true;
+    rejectPaymentButton.disabled = true;
 
 
     paymentActionMessage.textContent =
         markPaid
             ? "Verifying payment..."
             : "Rejecting payment...";
-
 
     paymentActionMessage.style.color =
         "#999";
@@ -4484,7 +3828,6 @@ async function verifyPayment(
             throw new Error(
                 "Admin session expired. Please login again."
             );
-
         }
 
 
@@ -4495,8 +3838,7 @@ async function verifyPayment(
 
             {
 
-                payment_status:
-                    "paid",
+                payment_status:"paid",
 
                 payment_reference:
                     reference || null,
@@ -4513,8 +3855,7 @@ async function verifyPayment(
 
             {
 
-                payment_status:
-                    "rejected",
+                payment_status:"rejected",
 
                 payment_reference:
                     reference || null,
@@ -4532,25 +3873,13 @@ async function verifyPayment(
             error
         } =
             await supabaseClient
-
-                .from(
-                    "orders"
-                )
-
-                .update(
-                    updateData
-                )
-
-                .eq(
-                    "id",
-                    currentOrderId
-                );
+                .from("orders")
+                .update(updateData)
+                .eq("id",currentOrderId);
 
 
         if(error){
-
             throw error;
-
         }
 
 
@@ -4558,12 +3887,8 @@ async function verifyPayment(
             allOrders.find(
                 function(item){
 
-                    return String(
-                        item.id
-                    ) ===
-                    String(
-                        currentOrderId
-                    );
+                    return String(item.id) ===
+                        String(currentOrderId);
 
                 }
             );
@@ -4575,21 +3900,13 @@ async function verifyPayment(
                 order,
                 updateData
             );
-
         }
 
 
         paymentActionMessage.textContent =
             markPaid
-
-                ?
-
-                "Payment marked as PAID successfully."
-
-                :
-
-                "Payment marked as REJECTED.";
-
+                ? "Payment marked as PAID successfully."
+                : "Payment marked as REJECTED.";
 
         paymentActionMessage.style.color =
             markPaid
@@ -4602,40 +3919,27 @@ async function verifyPayment(
         renderOrders();
 
 
-        /*
-           Re-open modal so the
-           latest payment state is visible.
-        */
-
         openOrderModal(
             currentOrderId
         );
 
     }catch(error){
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         paymentActionMessage.textContent =
             error.message ||
             "Could not update payment status.";
 
-
         paymentActionMessage.style.color =
             "#ff4d4f";
-
 
         verifyPaymentButton.disabled =
             false;
 
-
         rejectPaymentButton.disabled =
             false;
-
     }
-
 }
 
 
@@ -4675,7 +3979,6 @@ closeModal.addEventListener(
             "hidden"
         );
 
-
         currentOrderId =
             null;
 
@@ -4687,19 +3990,14 @@ orderModal.addEventListener(
     "click",
     function(event){
 
-        if(
-            event.target ===
-            orderModal
-        ){
+        if(event.target === orderModal){
 
             orderModal.classList.add(
                 "hidden"
             );
 
-
             currentOrderId =
                 null;
-
         }
 
     }
@@ -4715,18 +4013,15 @@ searchInput.addEventListener(
     renderOrders
 );
 
-
 statusFilter.addEventListener(
     "change",
     renderOrders
 );
 
-
 paymentFilter.addEventListener(
     "change",
     renderOrders
 );
-
 
 dateFilter.addEventListener(
     "change",
@@ -4771,19 +4066,15 @@ refreshButton.addEventListener(
         refreshButton.disabled =
             true;
 
-
         refreshButton.textContent =
             "Loading...";
-
 
         await loadOrders();
 
         await loadPaymentSettings();
 
-
         refreshButton.disabled =
             false;
-
 
         refreshButton.textContent =
             "Refresh";
@@ -4800,7 +4091,6 @@ checkSession();
 
 </script>
 
-
 </body>
 
-  </html>
+</html>
