@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="ProB - Premium digital products, subscriptions and services.">
+
+    <meta name="theme-color"
+          content="#080808">
+
+    <title>ProB — Premium Digital Store</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- ProB stylesheet -->
+    <link rel="stylesheet"
+          href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         BACKGROUND EFFECTS
+    ========================================== -->
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="site-header" id="siteHeader">
+
+        <div class="nav-container">
+
+            <!-- LOGO -->
+            <a href="index.html" class="brand">
+
+                <div class="brand-mark">
+                    <span>P</span>
+                    <span>B</span>
+                </div>
+
+                <div class="brand-text">
+                    <strong>Pro<span>B</span></strong>
+                    <small>EXPERIENCE</small>
+                </div>
+
+            </a>
+
+            <!-- DESKTOP NAVIGATION -->
+            <nav class="desktop-nav">
+
+                <a href="index.html" class="active">
+                    Home
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="#categories">
+                    Categories
+                </a>
+
+                <a href="#why-prob">
+                    Why ProB
+                </a>
+
+                <a href="#support">
+                    Support
+                </a>
+
+            </nav>
+
+            <!-- NAV ACTIONS -->
+            <div class="nav-actions">
+
+                <button class="icon-button"
+                        aria-label="Search"
+                        onclick="openSearch()">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </button>
+
+                <a href="cart.html"
+                   class="cart-button"
+                   aria-label="Shopping cart">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    <span class="cart-count"
+                          id="cartCount">
+                        0
+                    </span>
+
+                </a>
+
+                <button class="menu-button"
+                        id="menuButton"
+                        aria-label="Open menu">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MOBILE MENU -->
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="products.html">
+                <i class="fa-solid fa-store"></i>
+                Products
+            </a>
+
+            <a href="#categories">
+                <i class="fa-solid fa-layer-group"></i>
+                Categories
+            </a>
+
+            <a href="#why-prob">
+                <i class="fa-solid fa-star"></i>
+                Why ProB
+            </a>
+
+            <a href="#support">
+                <i class="fa-solid fa-headset"></i>
+                Support
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         SEARCH OVERLAY
+    ========================================== -->
+
+    <div class="search-overlay" id="searchOverlay">
+
+        <button class="close-search"
+                onclick="closeSearch()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div class="search-box">
+
+            <span>SEARCH PROB</span>
+
+            <div class="search-input-wrapper">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    autocomplete="off">
+
+            </div>
+
+            <p>
+                Find premium digital products and services.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <!-- Decorative grid -->
+
+            <div class="hero-grid"></div>
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+
+                    <span class="pulse-dot"></span>
+
+                    PREMIUM DIGITAL STORE
+
+                </div>
+
+
+                <h1>
+
+                    Everything Digital.
+                    <br>
+
+                    <span>One ProB.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Discover premium digital products,
+                    subscriptions and services — all in one
+                    trusted place.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a href="products.html"
+                       class="primary-button">
+
+                        Explore Products
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a href="#categories"
+                       class="secondary-button">
+
+                        Explore Categories
+
+                    </a>
+
+                </div>
+
+
+                <div class="hero-trust">
+
+                    <div class="trust-item">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <span>Secure</span>
+
+                    </div>
+
+                    <div class="trust-item">
+
+                        <i class="fa-solid fa-bolt"></i>
+
+                        <span>Fast</span>
+
+                    </div>
+
+                    <div class="trust-item">
+
+                        <i class="fa-solid fa-headset"></i>
+
+                        <span>Support</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO VISUAL -->
+
+            <div class="hero-visual">
+
+                <div class="orb orb-large"></div>
+
+                <div class="orb orb-small"></div>
+
+
+                <div class="floating-card card-one">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                    <div>
+                        <strong>Fast Delivery</strong>
+                        <span>Quick & Reliable</span>
+                    </div>
+
+                </div>
+
+
+                <div class="floating-card card-two">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+                        <strong>Secure Orders</strong>
+                        <span>Built for trust</span>
+                    </div>
+
+                </div>
+
+
+                <div class="prob-emblem">
+
+                    <div class="emblem-ring">
+
+                        <span>PRO</span>
+
+                        <strong>B</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             TRUST BAR
+        ========================================== -->
+
+        <section class="trust-bar">
+
+            <div class="trust-container">
+
+                <div class="trust-box">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+                        <strong>Secure Ordering</strong>
+                        <span>Your information stays protected</span>
+                    </div>
+
+                </div>
+
+
+                <div class="trust-box">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                    <div>
+                        <strong>Fast Delivery</strong>
+                        <span>Get your digital products quickly</span>
+                    </div>
+
+                </div>
+
+
+                <div class="trust-box">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                    <div>
+                        <strong>Customer Support</strong>
+                        <span>We're here when you need us</span>
+                    </div>
+
+                </div>
+
+
+                <div class="trust-box">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    <div>
+                        <strong>Premium Experience</strong>
+                        <span>Quality products & service</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CATEGORIES
+        ========================================== -->
+
+        <section class="section categories-section"
+                 id="categories">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        EXPLORE
+                    </span>
+
+                    <h2>
+                        Shop by <span>Category</span>
+                    </h2>
+
+                </div>
+
+                <a href="products.html"
+                   class="view-all">
+
+                    View All
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="category-grid">
+
+
+                <!-- PREMIUM -->
+
+                <a href="products.html"
+                   class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="fa-solid fa-crown"></i>
+
+                    </div>
+
+                    <div class="category-info">
+
+                        <h3>Premium Packages</h3>
+
+                        <p>
+                            Premium subscriptions
+                            & digital packages
+                        </p>
+
+                    </div>
+
+                    <span class="category-arrow">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    </span>
+
+                </a>
+
+
+                <!-- V2R -->
+
+                <a href="products.html"
+                   class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+                    <div class="category-info">
+
+                        <h3>V2R / VPN</h3>
+
+                        <p>
+                            Fast and reliable
+                            connectivity plans
+                        </p>
+
+                    </div>
+
+                    <span class="category-arrow">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    </span>
+
+                </a>
+
+
+                <!-- DATA -->
+
+                <a href="products.html"
+                   class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="fa-solid fa-wifi"></i>
+
+                    </div>
+
+                    <div class="category-info">
+
+                        <h3>Data Plans</h3>
+
+                        <p>
+                            Flexible digital
+                            data packages
+                        </p>
+
+                    </div>
+
+                    <span class="category-arrow">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    </span>
+
+                </a>
+
+
+                <!-- SOFTWARE -->
+
+                <a href="products.html"
+                   class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                    </div>
+
+                    <div class="category-info">
+
+                        <h3>Software</h3>
+
+                        <p>
+                            Useful software and
+                            digital tools
+                        </p>
+
+                    </div>
+
+                    <span class="category-arrow">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    </span>
+
+                </a>
+
+
+                <!-- STREAMING -->
+
+                <a href="products.html"
+                   class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="fa-solid fa-play"></i>
+
+                    </div>
+
+                    <div class="category-info">
+
+                        <h3>Streaming</h3>
+
+                        <p>
+                            Entertainment and
+                            streaming services
+                        </p>
+
+                    </div>
+
+                    <span class="category-arrow">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    </span>
+
+                </a>
+
+
+                <!-- DIGITAL SERVICES -->
+
+                <a href="products.html"
+                   class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                    </div>
+
+                    <div class="category-info">
+
+                        <h3>Digital Services</h3>
+
+                        <p>
+                            More digital products
+                            and services
+                        </p>
+
+                    </div>
+
+                    <span class="category-arrow">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             FEATURED PRODUCTS
+        ========================================== -->
+
+        <section class="section featured-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        FEATURED
+                    </span>
+
+                    <h2>
+                        Popular <span>Products</span>
+                    </h2>
+
+                </div>
+
+                <a href="products.html"
+                   class="view-all">
+
+                    View All
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="product-preview-grid">
+
+
+                <div class="product-preview-card">
+
+                    <div class="product-image-placeholder">
+
+                        <i class="fa-solid fa-crown"></i>
+
+                        <span>PREMIUM</span>
+
+                    </div>
+
+                    <div class="product-preview-info">
+
+                        <span class="product-category">
+                            Premium
+                        </span>
+
+                        <h3>
+                            Premium Package
+                        </h3>
+
+                        <div class="product-bottom">
+
+                            <strong>
+                                From LKR 999
+                            </strong>
+
+                            <button
+                                onclick="goProducts(event)">
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-preview-card">
+
+                    <div class="product-image-placeholder">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <span>V2R</span>
+
+                    </div>
+
+                    <div class="product-preview-info">
+
+                        <span class="product-category">
+                            V2R / VPN
+                        </span>
+
+                        <h3>
+                            V2R Premium Plan
+                        </h3>
+
+                        <div class="product-bottom">
+
+                            <strong>
+                                From LKR 499
+                            </strong>
+
+                            <button
+                                onclick="goProducts(event)">
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-preview-card">
+
+                    <div class="product-image-placeholder">
+
+                        <i class="fa-solid fa-wifi"></i>
+
+                        <span>DATA</span>
+
+                    </div>
+
+                    <div class="product-preview-info">
+
+                        <span class="product-category">
+                            Data
+                        </span>
+
+                        <h3>
+                            Data Package
+                        </h3>
+
+                        <div class="product-bottom">
+
+                            <strong>
+                                From LKR 299
+                            </strong>
+
+                            <button
+                                onclick="goProducts(event)">
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             WHY PROB
+        ========================================== -->
+
+        <section class="section why-section"
+                 id="why-prob">
+
+            <div class="why-content">
+
+                <span class="section-label">
+                    THE PROB DIFFERENCE
+                </span>
+
+                <h2>
+                    More than a store.
+                    <br>
+                    <span>A better experience.</span>
+                </h2>
+
+                <p>
+
+                    ProB is designed to make buying digital
+                    products simple, fast and reliable.
+
+                    From browsing to order confirmation,
+                    everything is built around a smooth
+                    customer experience.
+
+                </p>
+
+                <a href="products.html"
+                   class="primary-button">
+
+                    Start Shopping
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="why-features">
+
+                <div class="why-feature">
+
+                    <div class="why-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Fast & Simple</h3>
+
+                        <p>
+                            A clean shopping experience
+                            without unnecessary steps.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="why-feature">
+
+                    <div class="why-icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Secure</h3>
+
+                        <p>
+                            Your account and order
+                            information are protected.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="why-feature">
+
+                    <div class="why-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Real Support</h3>
+
+                        <p>
+                            Get assistance whenever
+                            you need it.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="why-feature">
+
+                    <div class="why-icon">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Premium Experience</h3>
+
+                        <p>
+                            Built with quality,
+                            detail and consistency.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             SUPPORT CTA
+        ========================================== -->
+
+        <section class="support-section"
+                 id="support">
+
+            <div class="support-glow"></div>
+
+            <div class="support-content">
+
+                <span class="section-label">
+                    NEED HELP?
+                </span>
+
+                <h2>
+                    We're here to help.
+                </h2>
+
+                <p>
+                    Have a question about a product,
+                    order or payment?
+                </p>
+
+                <a href="#"
+                   class="whatsapp-button">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    Chat with ProB
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <a href="index.html"
+                   class="brand">
+
+                    <div class="brand-mark">
+                        <span>P</span>
+                        <span>B</span>
+                    </div>
+
+                    <div class="brand-text">
+                        <strong>Pro<span>B</span></strong>
+                        <small>EXPERIENCE</small>
+                    </div>
+
+                </a>
+
+                <p>
+                    Premium digital products,
+                    subscriptions and services.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Explore</h4>
+
+                <a href="index.html">Home</a>
+
+                <a href="products.html">Products</a>
+
+                <a href="#categories">Categories</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Support</h4>
+
+                <a href="#support">Contact Us</a>
+
+                <a href="#">FAQ</a>
+
+                <a href="#">Help Center</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Account</h4>
+
+                <a href="#">Login</a>
+
+                <a href="#">Register</a>
+
+                <a href="cart.html">Cart</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 ProB. All rights reserved.
+            </p>
+
+            <div>
+
+                <a href="#">
+                    Privacy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================
+         MOBILE BOTTOM NAV
+    ========================================== -->
+
+    <nav class="bottom-nav">
+
+        <a href="index.html"
+           class="bottom-nav-item active">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Home</span>
+
+        </a>
+
+
+        <a href="products.html"
+           class="bottom-nav-item">
+
+            <i class="fa-solid fa-store"></i>
+
+            <span>Products</span>
+
+        </a>
+
+
+        <a href="cart.html"
+           class="bottom-nav-item cart-nav">
+
+            <div>
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span id="bottomCartCount">
+                    0
+                </span>
+
+            </div>
+
+            <span>Cart</span>
+
+        </a>
+
+
+        <a href="#support"
+           class="bottom-nav-item">
+
+            <i class="fa-solid fa-headset"></i>
+
+            <span>Support</span>
+
+        </a>
+
+
+        <a href="#"
+           class="bottom-nav-item">
+
+            <i class="fa-solid fa-user"></i>
+
+            <span>Account</span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        /* MOBILE MENU */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+        menuButton.addEventListener("click", function () {
+
+            mobileMenu.classList.toggle("show");
+
+            const icon =
+                menuButton.querySelector("i");
+
+            if (mobileMenu.classList.contains("show")) {
+
+                icon.classList.remove("fa-bars");
+
+                icon.classList.add("fa-xmark");
+
+            } else {
+
+                icon.classList.remove("fa-xmark");
+
+                icon.classList.add("fa-bars");
+
+            }
+
+        });
+
+
+        /* CLOSE MOBILE MENU WHEN LINK IS CLICKED */
+
+        document
+            .querySelectorAll(".mobile-menu a")
+            .forEach(function (link) {
+
+                link.addEventListener("click", function () {
+
+                    mobileMenu.classList.remove("show");
+
+                    const icon =
+                        menuButton.querySelector("i");
+
+                    icon.classList.remove("fa-xmark");
+
+                    icon.classList.add("fa-bars");
+
+                });
+
+            });
+
+
+        /* SEARCH */
+
+        const searchOverlay =
+            document.getElementById("searchOverlay");
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+
+        function openSearch() {
+
+            searchOverlay.classList.add("show");
+
+            setTimeout(function () {
+
+                searchInput.focus();
+
+            }, 200);
+
+        }
+
+
+        function closeSearch() {
+
+            searchOverlay.classList.remove("show");
+
+        }
+
+
+        /* ESCAPE KEY */
+
+        document.addEventListener("keydown", function (event) {
+
+            if (event.key === "Escape") {
+
+                closeSearch();
+
+            }
+
+        });
+
+
+        /* HEADER SCROLL EFFECT */
+
+        window.addEventListener("scroll", function () {
+
+            const header =
+                document.getElementById("siteHeader");
+
+            if (window.scrollY > 30) {
+
+                header.classList.add("scrolled");
+
+            } else {
+
+                header.classList.remove("scrolled");
+
+            }
+
+        });
+
+
+        /* PRODUCTS BUTTON */
+
+        function goProducts(event) {
+
+            event.preventDefault();
+
+            window.location.href = "products.html";
+
+        }
+
+
+        /* CART COUNT */
+
+        function updateCartCount() {
+
+            let cart = [];
+
+            try {
+
+                cart =
+                    JSON.parse(
+                        localStorage.getItem("probCart")
+                    ) || [];
+
+            } catch (error) {
+
+                cart = [];
+
+            }
+
+            const count =
+                cart.reduce(function (total, item) {
+
+                    return total +
+                        (Number(item.quantity) || 0);
+
+                }, 0);
+
+
+            const cartCount =
+                document.getElementById("cartCount");
+
+            const bottomCartCount =
+                document.getElementById(
+                    "bottomCartCount"
+                );
+
+
+            if (cartCount) {
+
+                cartCount.textContent = count;
+
+            }
+
+            if (bottomCartCount) {
+
+                bottomCartCount.textContent = count;
+
+            }
+
+        }
+
+
+        updateCartCount();
+
+
+    </script>
+
+</body>
+</html>

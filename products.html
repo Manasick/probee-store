@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Explore premium digital products at ProB.">
+
+    <meta name="theme-color"
+          content="#080808">
+
+    <title>Products — ProB</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     BACKGROUND
+========================================= -->
+
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="site-header scrolled">
+
+    <div class="nav-container">
+
+
+        <!-- BRAND -->
+
+        <a href="index.html"
+           class="brand">
+
+            <div class="brand-mark">
+
+                <span>P</span>
+                <span>B</span>
+
+            </div>
+
+            <div class="brand-text">
+
+                <strong>
+                    Pro<span>B</span>
+                </strong>
+
+                <small>
+                    EXPERIENCE
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <!-- DESKTOP NAV -->
+
+        <nav class="desktop-nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html"
+               class="active">
+                Products
+            </a>
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
+            <a href="index.html#why-prob">
+                Why ProB
+            </a>
+
+            <a href="index.html#support">
+                Support
+            </a>
+
+        </nav>
+
+
+        <!-- ACTIONS -->
+
+        <div class="nav-actions">
+
+            <button class="icon-button"
+                    onclick="openProductSearch()">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </button>
+
+
+            <a href="cart.html"
+               class="cart-button">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span class="cart-count"
+                      id="cartCount">
+
+                    0
+
+                </span>
+
+            </a>
+
+
+            <button class="menu-button"
+                    id="menuButton">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MOBILE MENU -->
+
+    <div class="mobile-menu"
+         id="mobileMenu">
+
+        <a href="index.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
+        </a>
+
+
+        <a href="products.html">
+
+            <i class="fa-solid fa-store"></i>
+
+            Products
+
+        </a>
+
+
+        <a href="index.html#categories">
+
+            <i class="fa-solid fa-layer-group"></i>
+
+            Categories
+
+        </a>
+
+
+        <a href="index.html#why-prob">
+
+            <i class="fa-solid fa-star"></i>
+
+            Why ProB
+
+        </a>
+
+
+        <a href="index.html#support">
+
+            <i class="fa-solid fa-headset"></i>
+
+            Support
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================
+     SEARCH OVERLAY
+========================================= -->
+
+<div class="search-overlay"
+     id="productSearchOverlay">
+
+    <button class="close-search"
+            onclick="closeProductSearch()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <div class="search-box">
+
+        <span>
+            SEARCH PROB
+        </span>
+
+
+        <div class="search-input-wrapper">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="productSearchInput"
+                placeholder="Search products..."
+                autocomplete="off">
+
+        </div>
+
+
+        <p>
+            Search premium digital products and services.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="products-page">
+
+
+    <!-- PAGE HERO -->
+
+    <section class="products-hero">
+
+        <span class="section-label">
+            PROB STORE
+        </span>
+
+
+        <h1>
+            Explore <span>Products.</span>
+        </h1>
+
+
+        <p>
+
+            Discover premium digital products,
+            subscriptions and services
+            designed for your needs.
+
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="products-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="liveSearch"
+                placeholder="Search products...">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         CATEGORY FILTER
+    ========================================== -->
+
+    <section class="product-controls">
+
+
+        <div class="category-filters">
+
+
+            <button
+                class="filter-button active"
+                data-category="all">
+
+                All
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                data-category="premium">
+
+                <i class="fa-solid fa-crown"></i>
+
+                Premium
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                data-category="v2r">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                V2R
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                data-category="data">
+
+                <i class="fa-solid fa-wifi"></i>
+
+                Data
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                data-category="software">
+
+                <i class="fa-solid fa-laptop-code"></i>
+
+                Software
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                data-category="streaming">
+
+                <i class="fa-solid fa-play"></i>
+
+                Streaming
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                data-category="services">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                Services
+
+            </button>
+
+
+        </div>
+
+
+        <div class="product-sort">
+
+            <select id="sortProducts">
+
+                <option value="featured">
+                    Featured
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+                <option value="az">
+                    Name: A-Z
+                </option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         PRODUCTS
+    ========================================== -->
+
+    <section class="products-section">
+
+
+        <div class="products-result">
+
+            <span id="resultCount">
+                9 Products
+            </span>
+
+        </div>
+
+
+        <div class="products-grid"
+             id="productsGrid">
+
+
+            <!-- PRODUCT 1 -->
+
+            <article
+                class="store-product"
+                data-category="premium"
+                data-name="Premium Package"
+                data-price="999">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-crown"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        PREMIUM
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        Premium Packages
+                    </span>
+
+
+                    <h2>
+                        Premium Package
+                    </h2>
+
+
+                    <p>
+                        Premium digital package
+                        with flexible plans.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 999
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 2 -->
+
+            <article
+                class="store-product"
+                data-category="v2r"
+                data-name="V2R Premium"
+                data-price="499">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        V2R
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        V2R / VPN
+                    </span>
+
+
+                    <h2>
+                        V2R Premium
+                    </h2>
+
+
+                    <p>
+                        Reliable connectivity
+                        plans for your needs.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 499
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 3 -->
+
+            <article
+                class="store-product"
+                data-category="data"
+                data-name="Data Package"
+                data-price="299">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-wifi"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        DATA
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        Data
+                    </span>
+
+
+                    <h2>
+                        Data Package
+                    </h2>
+
+
+                    <p>
+                        Flexible data packages
+                        for everyday use.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 299
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 4 -->
+
+            <article
+                class="store-product"
+                data-category="software"
+                data-name="Software Pro"
+                data-price="799">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        SOFTWARE
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        Software
+                    </span>
+
+
+                    <h2>
+                        Software Pro
+                    </h2>
+
+
+                    <p>
+                        Premium software and
+                        digital tools.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 799
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 5 -->
+
+            <article
+                class="store-product"
+                data-category="streaming"
+                data-name="Streaming Premium"
+                data-price="899">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-play"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        STREAMING
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        Streaming
+                    </span>
+
+
+                    <h2>
+                        Streaming Premium
+                    </h2>
+
+
+                    <p>
+                        Entertainment and
+                        streaming services.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 899
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 6 -->
+
+            <article
+                class="store-product"
+                data-category="services"
+                data-name="Digital Service"
+                data-price="599">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        SERVICE
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        Digital Services
+                    </span>
+
+
+                    <h2>
+                        Digital Service
+                    </h2>
+
+
+                    <p>
+                        Useful digital services
+                        and solutions.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 599
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 7 -->
+
+            <article
+                class="store-product"
+                data-category="premium"
+                data-name="Premium Plus"
+                data-price="1499">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-gem"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        PREMIUM+
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        Premium Packages
+                    </span>
+
+
+                    <h2>
+                        Premium Plus
+                    </h2>
+
+
+                    <p>
+                        Extended premium
+                        digital experience.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 1,499
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 8 -->
+
+            <article
+                class="store-product"
+                data-category="v2r"
+                data-name="V2R Pro Plan"
+                data-price="799">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-network-wired"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        V2R PRO
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        V2R / VPN
+                    </span>
+
+
+                    <h2>
+                        V2R Pro Plan
+                    </h2>
+
+
+                    <p>
+                        Premium connectivity
+                        plan with flexible options.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 799
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 9 -->
+
+            <article
+                class="store-product"
+                data-category="data"
+                data-name="Data Plus"
+                data-price="499">
+
+                <a href="product.html"
+                   class="product-image">
+
+                    <div class="product-icon">
+
+                        <i class="fa-solid fa-signal"></i>
+
+                    </div>
+
+                    <span class="product-tag">
+                        DATA+
+                    </span>
+
+                </a>
+
+
+                <div class="store-product-content">
+
+                    <span class="store-product-category">
+                        Data
+                    </span>
+
+
+                    <h2>
+                        Data Plus
+                    </h2>
+
+
+                    <p>
+                        Extra data options
+                        for flexible usage.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+                        <div>
+
+                            <small>
+                                Starting from
+                            </small>
+
+                            <strong>
+                                LKR 499
+                            </strong>
+
+                        </div>
+
+
+                        <a href="product.html"
+                           class="product-view-button">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- NO RESULTS -->
+
+        <div class="no-products"
+             id="noProducts">
+
+            <i class="fa-solid fa-box-open"></i>
+
+            <h3>
+                No products found
+            </h3>
+
+            <p>
+                Try another search or category.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-container">
+
+
+        <div class="footer-brand">
+
+            <a href="index.html"
+               class="brand">
+
+                <div class="brand-mark">
+
+                    <span>P</span>
+                    <span>B</span>
+
+                </div>
+
+                <div class="brand-text">
+
+                    <strong>
+                        Pro<span>B</span>
+                    </strong>
+
+                    <small>
+                        EXPERIENCE
+                    </small>
+
+                </div>
+
+            </a>
+
+
+            <p>
+                Premium digital products,
+                subscriptions and services.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Explore
+            </h4>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Support
+            </h4>
+
+            <a href="index.html#support">
+                Contact Us
+            </a>
+
+            <a href="#">
+                FAQ
+            </a>
+
+            <a href="#">
+                Help Center
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Account
+            </h4>
+
+            <a href="#">
+                Login
+            </a>
+
+            <a href="#">
+                Register
+            </a>
+
+            <a href="cart.html">
+                Cart
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 ProB. All rights reserved.
+        </p>
+
+
+        <div>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================
+     MOBILE NAV
+========================================= -->
+
+<nav class="bottom-nav">
+
+
+    <a href="index.html"
+       class="bottom-nav-item">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>
+            Home
+        </span>
+
+    </a>
+
+
+    <a href="products.html"
+       class="bottom-nav-item active">
+
+        <i class="fa-solid fa-store"></i>
+
+        <span>
+            Products
+        </span>
+
+    </a>
+
+
+    <a href="cart.html"
+       class="bottom-nav-item cart-nav">
+
+        <div>
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span id="bottomCartCount">
+                0
+            </span>
+
+        </div>
+
+        <span>
+            Cart
+        </span>
+
+    </a>
+
+
+    <a href="index.html#support"
+       class="bottom-nav-item">
+
+        <i class="fa-solid fa-headset"></i>
+
+        <span>
+            Support
+        </span>
+
+    </a>
+
+
+    <a href="#"
+       class="bottom-nav-item">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>
+            Account
+        </span>
+
+    </a>
+
+</nav>
+
+
+
+<script>
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+if (menuButton) {
+
+    menuButton.addEventListener(
+        "click",
+        function () {
+
+            mobileMenu.classList.toggle("show");
+
+            const icon =
+                menuButton.querySelector("i");
+
+
+            if (
+                mobileMenu.classList.contains("show")
+            ) {
+
+                icon.classList.remove(
+                    "fa-bars"
+                );
+
+                icon.classList.add(
+                    "fa-xmark"
+                );
+
+            } else {
+
+                icon.classList.remove(
+                    "fa-xmark"
+                );
+
+                icon.classList.add(
+                    "fa-bars"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   SEARCH OVERLAY
+========================================= */
+
+function openProductSearch() {
+
+    document
+        .getElementById(
+            "productSearchOverlay"
+        )
+        .classList.add("show");
+
+
+    setTimeout(function () {
+
+        document
+            .getElementById(
+                "productSearchInput"
+            )
+            .focus();
+
+    }, 200);
+
+}
+
+
+function closeProductSearch() {
+
+    document
+        .getElementById(
+            "productSearchOverlay"
+        )
+        .classList.remove("show");
+
+}
+
+
+
+/* =========================================
+   LIVE SEARCH
+========================================= */
+
+const liveSearch =
+    document.getElementById(
+        "liveSearch"
+    );
+
+const productCards =
+    document.querySelectorAll(
+        ".store-product"
+    );
+
+const resultCount =
+    document.getElementById(
+        "resultCount"
+    );
+
+const noProducts =
+    document.getElementById(
+        "noProducts"
+    );
+
+
+let currentCategory = "all";
+
+
+function filterProducts() {
+
+    const search =
+        liveSearch.value
+            .toLowerCase()
+            .trim();
+
+
+    let visible = 0;
+
+
+    productCards.forEach(function (card) {
+
+        const name =
+            card.dataset.name
+                .toLowerCase();
+
+
+        const category =
+            card.dataset.category;
+
+
+        const matchesSearch =
+            name.includes(search);
+
+
+        const matchesCategory =
+            currentCategory === "all" ||
+            category === currentCategory;
+
+
+        if (
+            matchesSearch &&
+            matchesCategory
+        ) {
+
+            card.style.display = "";
+
+            visible++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    resultCount.textContent =
+        visible + " Products";
+
+
+    if (visible === 0) {
+
+        noProducts.classList.add(
+            "show"
+        );
+
+    } else {
+
+        noProducts.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+liveSearch.addEventListener(
+    "input",
+    filterProducts
+);
+
+
+
+/* =========================================
+   CATEGORY FILTER
+========================================= */
+
+document
+    .querySelectorAll(
+        ".filter-button"
+    )
+    .forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                document
+                    .querySelectorAll(
+                        ".filter-button"
+                    )
+                    .forEach(function (item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentCategory =
+                    button.dataset.category;
+
+
+                filterProducts();
+
+            }
+        );
+
+    });
+
+
+
+/* =========================================
+   SORT
+========================================= */
+
+const sortProducts =
+    document.getElementById(
+        "sortProducts"
+    );
+
+
+sortProducts.addEventListener(
+    "change",
+    function () {
+
+        const value =
+            sortProducts.value;
+
+
+        const container =
+            document.getElementById(
+                "productsGrid"
+            );
+
+
+        const cards =
+            Array.from(
+                container.querySelectorAll(
+                    ".store-product"
+                )
+            );
+
+
+        cards.sort(function (a, b) {
+
+            if (value === "low") {
+
+                return Number(
+                    a.dataset.price
+                ) -
+                Number(
+                    b.dataset.price
+                );
+
+            }
+
+
+            if (value === "high") {
+
+                return Number(
+                    b.dataset.price
+                ) -
+                Number(
+                    a.dataset.price
+                );
+
+            }
+
+
+            if (value === "az") {
+
+                return a.dataset.name
+                    .localeCompare(
+                        b.dataset.name
+                    );
+
+            }
+
+
+            return 0;
+
+        });
+
+
+        cards.forEach(function (card) {
+
+            container.appendChild(card);
+
+        });
+
+
+        filterProducts();
+
+    }
+);
+
+
+
+/* =========================================
+   CART COUNT
+========================================= */
+
+function updateCartCount() {
+
+    let cart = [];
+
+    try {
+
+        cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "probCart"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        cart = [];
+
+    }
+
+
+    const count =
+        cart.reduce(
+            function (total, item) {
+
+                return total +
+                    (
+                        Number(
+                            item.quantity
+                        ) || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const cartCount =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    const bottomCartCount =
+        document.getElementById(
+            "bottomCartCount"
+        );
+
+
+    if (cartCount) {
+
+        cartCount.textContent =
+            count;
+
+    }
+
+
+    if (bottomCartCount) {
+
+        bottomCartCount.textContent =
+            count;
+
+    }
+
+}
+
+
+updateCartCount();
+
+
+
+/* =========================================
+   ESCAPE SEARCH
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            closeProductSearch();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   CONNECT PRODUCT CARDS
+========================================= */
+
+const productLinks = {
+
+    "Premium Package":
+        "product.html?id=premium",
+
+    "V2R Premium":
+        "product.html?id=v2r",
+
+    "Data Package":
+        "product.html?id=data",
+
+    "Software Pro":
+        "product.html?id=software",
+
+    "Streaming Premium":
+        "product.html?id=streaming",
+
+    "Digital Service":
+        "product.html?id=services",
+
+    "Premium Plus":
+        "product.html?id=premiumplus",
+
+    "V2R Pro Plan":
+        "product.html?id=v2rpro",
+
+    "Data Plus":
+        "product.html?id=dataplus"
+
+};
+
+
+document
+.querySelectorAll(".store-product")
+.forEach(function(card) {
+
+    const name =
+        card.dataset.name;
+
+    const link =
+        productLinks[name];
+
+    if (!link) return;
+
+    card
+    .querySelectorAll(
+        ".product-image, .product-view-button"
+    )
+    .forEach(function(element) {
+
+        element.href = link;
+
+    });
+
+});
+</script>
+
+
+</body>
+
+</html>

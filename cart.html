@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#080808">
+
+<title>Cart — ProB</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     BACKGROUND
+===================================== -->
+
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header class="site-header scrolled">
+
+<div class="nav-container">
+
+
+<a href="index.html"
+class="brand">
+
+<div class="brand-mark">
+
+<span>P</span>
+<span>B</span>
+
+</div>
+
+<div class="brand-text">
+
+<strong>
+Pro<span>B</span>
+</strong>
+
+<small>
+EXPERIENCE
+</small>
+
+</div>
+
+</a>
+
+
+
+<nav class="desktop-nav">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="products.html">
+Products
+</a>
+
+<a href="index.html#categories">
+Categories
+</a>
+
+<a href="index.html#why-prob">
+Why ProB
+</a>
+
+<a href="index.html#support">
+Support
+</a>
+
+</nav>
+
+
+
+<div class="nav-actions">
+
+<button
+class="icon-button"
+onclick="openSearch()">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</button>
+
+
+<a href="cart.html"
+class="cart-button">
+
+<i class="fa-solid fa-bag-shopping"></i>
+
+<span
+class="cart-count"
+id="cartCount">
+
+0
+
+</span>
+
+</a>
+
+
+<button
+class="menu-button"
+id="menuButton">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<div
+class="mobile-menu"
+id="mobileMenu">
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
+
+<a href="products.html">
+<i class="fa-solid fa-store"></i>
+Products
+</a>
+
+<a href="index.html#categories">
+<i class="fa-solid fa-layer-group"></i>
+Categories
+</a>
+
+<a href="index.html#support">
+<i class="fa-solid fa-headset"></i>
+Support
+</a>
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================
+     SEARCH
+===================================== -->
+
+<div
+class="search-overlay"
+id="searchOverlay">
+
+<button
+class="close-search"
+onclick="closeSearch()">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="search-box">
+
+<span>
+SEARCH PROB
+</span>
+
+<div class="search-input-wrapper">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+placeholder="Search products...">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     CART PAGE
+===================================== -->
+
+<main class="cart-page">
+
+
+<!-- HEADER -->
+
+<section class="cart-heading">
+
+<span>
+PROB STORE
+</span>
+
+<h1>
+Your <em>Cart.</em>
+</h1>
+
+<p>
+Review your selected products
+before checkout.
+</p>
+
+</section>
+
+
+
+<!-- =====================================
+     EMPTY CART
+===================================== -->
+
+<section
+class="empty-cart"
+id="emptyCart">
+
+<div class="empty-cart-icon">
+
+<i class="fa-solid fa-bag-shopping"></i>
+
+</div>
+
+<h2>
+Your cart is empty
+</h2>
+
+<p>
+Looks like you haven't added
+anything yet.
+</p>
+
+<a href="products.html"
+class="continue-shopping">
+
+Explore Products
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</section>
+
+
+
+<!-- =====================================
+     CART CONTENT
+===================================== -->
+
+<section
+class="cart-content"
+id="cartContent">
+
+
+<!-- CART ITEMS -->
+
+<div class="cart-items-section">
+
+
+<div class="cart-section-heading">
+
+<div>
+
+<span>
+YOUR ITEMS
+</span>
+
+<h2>
+Selected Products
+</h2>
+
+</div>
+
+<strong id="itemCount">
+0 items
+</strong>
+
+</div>
+
+
+
+<div
+class="cart-items"
+id="cartItems">
+
+</div>
+
+
+
+<a href="products.html"
+class="continue-link">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Continue Shopping
+
+</a>
+
+
+</div>
+
+
+
+<!-- =====================================
+     ORDER SUMMARY
+===================================== -->
+
+<aside class="order-summary">
+
+
+<div class="summary-header">
+
+<span>
+ORDER SUMMARY
+</span>
+
+<h2>
+Your Order
+</h2>
+
+</div>
+
+
+
+<div class="summary-lines">
+
+
+<div>
+
+<span>
+Subtotal
+</span>
+
+<strong id="subtotal">
+LKR 0
+</strong>
+
+</div>
+
+
+<div>
+
+<span>
+Delivery
+</span>
+
+<strong class="free">
+FREE
+</strong>
+
+</div>
+
+
+</div>
+
+
+
+<div class="summary-divider"></div>
+
+
+
+<div class="summary-total">
+
+<span>
+Total
+</span>
+
+<strong id="grandTotal">
+LKR 0
+</strong>
+
+</div>
+
+
+
+<button
+class="checkout-button"
+onclick="goToCheckout()">
+
+Proceed to Checkout
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</button>
+
+
+
+<div class="secure-checkout">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<strong>
+Secure Checkout
+</strong>
+
+<span>
+Your information is protected.
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="summary-benefits">
+
+<div>
+
+<i class="fa-solid fa-bolt"></i>
+
+<span>
+Fast Digital Delivery
+</span>
+
+</div>
+
+<div>
+
+<i class="fa-solid fa-headset"></i>
+
+<span>
+ProB Support
+</span>
+
+</div>
+
+<div>
+
+<i class="fa-solid fa-circle-check"></i>
+
+<span>
+Reliable Service
+</span>
+
+</div>
+
+</div>
+
+
+</aside>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================
+     BOTTOM NAV
+===================================== -->
+
+<nav class="bottom-nav">
+
+<a href="index.html"
+class="bottom-nav-item">
+
+<i class="fa-solid fa-house"></i>
+
+<span>
+Home
+</span>
+
+</a>
+
+
+<a href="products.html"
+class="bottom-nav-item">
+
+<i class="fa-solid fa-store"></i>
+
+<span>
+Products
+</span>
+
+</a>
+
+
+<a href="cart.html"
+class="bottom-nav-item active cart-nav">
+
+<div>
+
+<i class="fa-solid fa-bag-shopping"></i>
+
+<span id="bottomCartCount">
+0
+</span>
+
+</div>
+
+<span>
+Cart
+</span>
+
+</a>
+
+
+<a href="index.html#support"
+class="bottom-nav-item">
+
+<i class="fa-solid fa-headset"></i>
+
+<span>
+Support
+</span>
+
+</a>
+
+
+<a href="#"
+class="bottom-nav-item">
+
+<i class="fa-solid fa-user"></i>
+
+<span>
+Account
+</span>
+
+</a>
+
+</nav>
+
+
+
+<script>
+
+/* =====================================
+   CART STORAGE
+===================================== */
+
+function getCart() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem("probCart")
+        ) || [];
+
+    } catch {
+
+        return [];
+
+    }
+
+}
+
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        "probCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+
+/* =====================================
+   FORMAT PRICE
+===================================== */
+
+function formatPrice(price) {
+
+    return "LKR " +
+        Number(price).toLocaleString();
+
+}
+
+
+
+/* =====================================
+   RENDER CART
+===================================== */
+
+function renderCart() {
+
+    const cart = getCart();
+
+    const emptyCart =
+        document.getElementById("emptyCart");
+
+    const cartContent =
+        document.getElementById("cartContent");
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+
+    /* EMPTY */
+
+    if (cart.length === 0) {
+
+        emptyCart.classList.add("show");
+
+        cartContent.classList.remove("show");
+
+        updateCounts();
+
+        return;
+
+    }
+
+
+    /* SHOW CART */
+
+    emptyCart.classList.remove("show");
+
+    cartContent.classList.add("show");
+
+
+    cartItems.innerHTML = "";
+
+
+    let subtotal = 0;
+
+    let totalItems = 0;
+
+
+    cart.forEach(
+        function(item, index) {
+
+            const itemTotal =
+                Number(item.price) *
+                Number(item.quantity);
+
+
+            subtotal += itemTotal;
+
+            totalItems +=
+                Number(item.quantity);
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "cart-item";
+
+
+            card.innerHTML = `
+
+                <div class="cart-product-icon">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                </div>
+
+
+                <div class="cart-product-info">
+
+                    <span class="cart-product-category">
+                        ${item.category}
+                    </span>
+
+                    <h3>
+                        ${item.name}
+                    </h3>
+
+                    <p>
+                        ${item.plan}
+                    </p>
+
+                    <span class="cart-unit-price">
+                        ${formatPrice(item.price)}
+                        / item
+                    </span>
+
+                </div>
+
+
+                <div class="cart-item-controls">
+
+                    <div class="cart-quantity">
+
+                        <button
+                            onclick="changeCartQuantity(${index}, -1)">
+                            −
+                        </button>
+
+                        <strong>
+                            ${item.quantity}
+                        </strong>
+
+                        <button
+                            onclick="changeCartQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <strong class="cart-item-total">
+                        ${formatPrice(itemTotal)}
+                    </strong>
+
+
+                    <button
+                        class="remove-item"
+                        onclick="removeItem(${index})">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            cartItems.appendChild(card);
+
+        }
+    );
+
+
+    document.getElementById(
+        "subtotal"
+    ).textContent =
+        formatPrice(subtotal);
+
+
+    document.getElementById(
+        "grandTotal"
+    ).textContent =
+        formatPrice(subtotal);
+
+
+    document.getElementById(
+        "itemCount"
+    ).textContent =
+        totalItems +
+        (totalItems === 1
+            ? " item"
+            : " items");
+
+
+    updateCounts();
+
+}
+
+
+
+/* =====================================
+   CHANGE QUANTITY
+===================================== */
+
+function changeCartQuantity(
+    index,
+    amount
+) {
+
+    const cart = getCart();
+
+    if (!cart[index]) return;
+
+
+    cart[index].quantity += amount;
+
+
+    if (cart[index].quantity < 1) {
+
+        cart[index].quantity = 1;
+
+    }
+
+
+    if (cart[index].quantity > 20) {
+
+        cart[index].quantity = 20;
+
+    }
+
+
+    saveCart(cart);
+
+    renderCart();
+
+}
+
+
+
+/* =====================================
+   REMOVE
+===================================== */
+
+function removeItem(index) {
+
+    const cart = getCart();
+
+    if (!cart[index]) return;
+
+
+    cart.splice(index, 1);
+
+    saveCart(cart);
+
+    renderCart();
+
+}
+
+
+
+/* =====================================
+   COUNTS
+===================================== */
+
+function updateCounts() {
+
+    const cart = getCart();
+
+
+    const count =
+        cart.reduce(
+            function(total, item) {
+
+                return total +
+                    Number(
+                        item.quantity || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const top =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    const bottom =
+        document.getElementById(
+            "bottomCartCount"
+        );
+
+
+    if (top)
+        top.textContent = count;
+
+
+    if (bottom)
+        bottom.textContent = count;
+
+}
+
+
+
+/* =====================================
+   CHECKOUT
+===================================== */
+
+function goToCheckout() {
+
+    const cart = getCart();
+
+
+    if (cart.length === 0) {
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "checkout.html";
+
+}
+
+
+
+/* =====================================
+   MOBILE MENU
+===================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        mobileMenu.classList.toggle(
+            "show"
+        );
+
+
+        const icon =
+            menuButton.querySelector("i");
+
+
+        if (
+            mobileMenu.classList.contains("show")
+        ) {
+
+            icon.classList.remove(
+                "fa-bars"
+            );
+
+            icon.classList.add(
+                "fa-xmark"
+            );
+
+        } else {
+
+            icon.classList.remove(
+                "fa-xmark"
+            );
+
+            icon.classList.add(
+                "fa-bars"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+function openSearch() {
+
+    document
+        .getElementById(
+            "searchOverlay"
+        )
+        .classList.add("show");
+
+}
+
+
+function closeSearch() {
+
+    document
+        .getElementById(
+            "searchOverlay"
+        )
+        .classList.remove("show");
+
+}
+
+
+
+/* =====================================
+   INITIALIZE
+===================================== */
+
+renderCart();
+
+</script>
+
+
+</body>
+
+</html>
