@@ -7,17 +7,38 @@
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    content="width=device-width, initial-scale=1.0"
+>
 
 <meta
     name="referrer"
-    content="no-referrer">
+    content="no-referrer"
+>
 
 <title>Admin Dashboard | ProBee</title>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
 
 <style>
 
@@ -29,21 +50,25 @@
 
 :root{
     --bg:#080808;
-    --card:#111;
-    --card2:#151515;
+    --panel:#111111;
+    --panel2:#151515;
+    --border:#292929;
     --gold:#d4af37;
-    --gold2:#f2d675;
+    --gold2:#f0ca61;
     --text:#f5f5f5;
     --muted:#999;
-    --border:#282828;
-    --green:#28c76f;
-    --orange:#ff9f43;
-    --red:#ff4d4f;
-    --blue:#4dabf7;
+    --green:#35d07f;
+    --red:#ff5c5c;
+    --orange:#f0a34a;
+    --blue:#62a8ff;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Inter,Arial,sans-serif;
     background:var(--bg);
     color:var(--text);
     min-height:100vh;
@@ -51,8 +76,8 @@ body{
 
 button,
 input,
-select,
-textarea{
+textarea,
+select{
     font:inherit;
 }
 
@@ -61,55 +86,70 @@ button{
 }
 
 .hidden{
-    display:none !important;
+    display:none!important;
 }
-
 
 /* =====================================================
    LOGIN
 ===================================================== */
 
-#loginScreen{
+.login-screen{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:20px;
+    padding:24px;
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(212,175,55,.10),
+            transparent 40%
+        ),
+        #080808;
 }
 
-.login-card{
+.login-box{
     width:100%;
-    max-width:420px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:32px;
-    box-shadow:0 20px 70px rgba(0,0,0,.45);
+    max-width:430px;
+    background:rgba(17,17,17,.96);
+    border:1px solid #292929;
+    border-radius:24px;
+    padding:34px 26px;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        0 0 0 1px rgba(212,175,55,.04);
 }
 
 .logo{
     text-align:center;
-    font-size:32px;
-    font-weight:800;
-    color:var(--gold);
-    letter-spacing:2px;
-    margin-bottom:8px;
+    margin-bottom:26px;
 }
 
-.login-subtitle{
-    text-align:center;
-    color:var(--muted);
-    margin-bottom:28px;
+.logo-title{
+    font-family:Montserrat,sans-serif;
+    font-size:34px;
+    font-weight:800;
+    color:var(--gold2);
+    letter-spacing:.5px;
+}
+
+.logo-sub{
+    color:#888;
+    font-size:12px;
+    margin-top:6px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
 .field{
-    margin-bottom:18px;
+    margin-bottom:16px;
 }
 
 .field label{
     display:block;
-    color:#ccc;
+    color:#bbb;
     font-size:13px;
+    font-weight:600;
     margin-bottom:8px;
 }
 
@@ -117,16 +157,17 @@ button{
 .field textarea,
 .field select{
     width:100%;
-    background:#0b0b0b;
+    background:#0c0c0c;
+    border:1px solid #303030;
     color:#fff;
-    border:1px solid var(--border);
-    border-radius:10px;
+    border-radius:12px;
     padding:13px 14px;
     outline:none;
+    transition:.2s;
 }
 
 .field textarea{
-    min-height:110px;
+    min-height:100px;
     resize:vertical;
 }
 
@@ -134,36 +175,59 @@ button{
 .field textarea:focus,
 .field select:focus{
     border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(212,175,55,.08);
 }
 
 .primary-btn{
     width:100%;
-    border:none;
-    border-radius:10px;
-    padding:14px;
-    background:var(--gold);
-    color:#000;
+    border:0;
+    border-radius:13px;
+    padding:14px 18px;
+    background:linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold2)
+    );
+    color:#080808;
     font-weight:800;
+    transition:.2s;
 }
 
-.primary-btn:hover,
-.save-btn:hover{
-    background:var(--gold2);
+.primary-btn:hover{
+    transform:translateY(-1px);
+}
+
+.primary-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
 }
 
 .message{
-    margin-top:15px;
+    margin-top:14px;
+    border-radius:11px;
+    padding:11px 13px;
     font-size:13px;
-    text-align:center;
-    color:var(--red);
+    line-height:1.5;
 }
 
+.message.error{
+    background:rgba(255,92,92,.10);
+    border:1px solid rgba(255,92,92,.25);
+    color:#ff9a9a;
+}
+
+.message.success{
+    background:rgba(53,208,127,.10);
+    border:1px solid rgba(53,208,127,.25);
+    color:#7be5a9;
+}
 
 /* =====================================================
-   DASHBOARD
+   APP
 ===================================================== */
 
-#dashboard{
+.app{
     min-height:100vh;
 }
 
@@ -171,226 +235,243 @@ button{
     position:sticky;
     top:0;
     z-index:50;
-    background:rgba(8,8,8,.96);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid var(--border);
-}
-
-.topbar-inner{
-    max-width:1400px;
-    margin:auto;
-    padding:16px 20px;
+    height:72px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
+    padding:0 22px;
+    background:rgba(8,8,8,.94);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid #222;
 }
 
 .brand{
-    color:var(--gold);
-    font-size:23px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.brand-mark{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold2)
+    );
+    color:#080808;
+    font-weight:900;
+}
+
+.brand-name{
+    font-family:Montserrat,sans-serif;
+    font-size:19px;
     font-weight:800;
-    letter-spacing:1px;
+    color:#f5d77a;
 }
 
-.brand small{
-    display:block;
-    font-size:10px;
-    color:#777;
-    letter-spacing:2px;
-    margin-top:3px;
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:9px;
 }
 
-.logout-btn,
-.refresh-btn,
-.view-btn,
-.close-btn,
-.reset-btn{
-    background:#171717;
-    color:#fff;
-    border:1px solid var(--border);
-    border-radius:9px;
+.small-btn{
+    border:1px solid #303030;
+    background:#121212;
+    color:#ddd;
+    border-radius:10px;
+    padding:9px 12px;
+    font-size:12px;
+    font-weight:700;
 }
 
-.logout-btn{
-    padding:9px 15px;
+.small-btn:hover{
+    border-color:#555;
 }
 
-.logout-btn:hover,
-.refresh-btn:hover,
-.view-btn:hover,
-.reset-btn:hover{
-    border-color:var(--gold);
-    color:var(--gold);
+.small-btn.gold{
+    border-color:rgba(212,175,55,.35);
+    color:var(--gold2);
 }
 
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
-.container{
-    max-width:1400px;
+.dashboard{
+    width:min(1450px,100%);
     margin:auto;
-    padding:25px 20px 50px;
+    padding:24px;
 }
 
 .page-title{
-    margin-bottom:20px;
+    margin-bottom:22px;
 }
 
 .page-title h1{
-    font-size:28px;
+    font-family:Montserrat,sans-serif;
+    font-size:27px;
+    margin-bottom:6px;
 }
 
 .page-title p{
-    color:var(--muted);
-    margin-top:5px;
+    color:#888;
+    font-size:13px;
 }
 
-
 /* =====================================================
-   STATS
+   CARDS
 ===================================================== */
 
-.stats{
+.stats-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:25px;
+    gap:14px;
+    margin-bottom:22px;
 }
 
 .stat-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:20px;
+    background:linear-gradient(
+        145deg,
+        #141414,
+        #0f0f0f
+    );
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:19px;
+}
+
+.stat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
 }
 
 .stat-label{
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:10px;
+    color:#999;
+    font-size:12px;
+    font-weight:600;
+}
+
+.stat-icon{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold2);
+    background:rgba(212,175,55,.08);
 }
 
 .stat-value{
-    font-size:27px;
+    font-size:24px;
     font-weight:800;
 }
 
-.stat-card.gold .stat-value{
-    color:var(--gold);
+.stat-sub{
+    margin-top:5px;
+    color:#777;
+    font-size:11px;
 }
-
-.stat-card.orange .stat-value{
-    color:var(--orange);
-}
-
-.stat-card.green .stat-value{
-    color:var(--green);
-}
-
 
 /* =====================================================
-   SECTION
+   PANELS
 ===================================================== */
 
-.section-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:22px;
-    margin-bottom:25px;
+.panel{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:19px;
+    overflow:hidden;
+    margin-bottom:20px;
 }
 
-.section-header{
+.panel-head{
+    padding:18px 20px;
+    border-bottom:1px solid #242424;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:15px;
-    margin-bottom:20px;
 }
 
-.section-header h2{
-    font-size:19px;
+.panel-title{
+    font-size:15px;
+    font-weight:800;
 }
 
-.section-header p{
-    color:var(--muted);
-    font-size:12px;
+.panel-sub{
+    color:#777;
+    font-size:11px;
     margin-top:4px;
 }
-
 
 /* =====================================================
    PAYMENT SETTINGS
 ===================================================== */
 
-.payment-grid{
+.settings-grid{
+    padding:20px;
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:16px;
+    gap:15px;
 }
 
-.payment-grid .full{
+.switch-row{
     grid-column:1/-1;
-}
-
-.payment-status{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    background:#0b0b0b;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:15px 16px;
-    margin-bottom:18px;
+    gap:15px;
+    background:#0c0c0c;
+    border:1px solid #292929;
+    padding:14px;
+    border-radius:13px;
 }
 
-.payment-status-left strong{
+.switch-info strong{
     display:block;
-    margin-bottom:4px;
+    font-size:13px;
 }
 
-.payment-status-left span{
-    color:var(--muted);
-    font-size:12px;
+.switch-info span{
+    display:block;
+    margin-top:4px;
+    color:#777;
+    font-size:11px;
 }
-
-
-/* =====================================================
-   SWITCH
-===================================================== */
 
 .switch{
     position:relative;
     width:52px;
-    height:28px;
+    height:29px;
+    flex-shrink:0;
 }
 
 .switch input{
-    opacity:0;
-    width:0;
-    height:0;
+    display:none;
 }
 
 .slider{
     position:absolute;
     inset:0;
     background:#333;
-    border-radius:30px;
+    border-radius:50px;
     transition:.2s;
 }
 
 .slider:before{
     content:"";
     position:absolute;
-    width:22px;
-    height:22px;
-    left:3px;
-    top:3px;
-    background:#fff;
+    width:21px;
+    height:21px;
+    left:4px;
+    top:4px;
     border-radius:50%;
+    background:#aaa;
     transition:.2s;
 }
 
@@ -399,253 +480,243 @@ button{
 }
 
 .switch input:checked + .slider:before{
-    transform:translateX(24px);
+    transform:translateX(23px);
+    background:#080808;
 }
 
-
-/* =====================================================
-   SAVE
-===================================================== */
-
-.save-row{
+.settings-actions{
+    padding:0 20px 20px;
     display:flex;
-    align-items:center;
     justify-content:flex-end;
-    gap:15px;
-    margin-top:18px;
 }
 
 .save-btn{
-    background:var(--gold);
-    color:#000;
     border:0;
-    border-radius:10px;
-    padding:12px 20px;
+    background:var(--gold);
+    color:#080808;
+    border-radius:11px;
+    padding:11px 18px;
     font-weight:800;
 }
 
-.settings-message{
-    font-size:13px;
-    color:var(--green);
-}
-
-
 /* =====================================================
-   CONTROLS
+   FILTERS
 ===================================================== */
 
-.controls{
+.filters{
+    padding:17px 20px;
     display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr auto auto;
-    gap:12px;
-    margin-bottom:20px;
+    grid-template-columns:2fr 1fr 1fr 1fr auto;
+    gap:10px;
 }
 
-.control{
+.filter-input,
+.filter-select{
+    width:100%;
     background:#0b0b0b;
-    border:1px solid var(--border);
-    color:#fff;
+    border:1px solid #2b2b2b;
     border-radius:10px;
-    padding:12px 13px;
+    color:#eee;
+    padding:11px 12px;
     outline:none;
 }
 
-.control:focus{
+.filter-input:focus,
+.filter-select:focus{
     border-color:var(--gold);
 }
 
-.refresh-btn,
-.reset-btn{
-    padding:12px 18px;
+.refresh-btn{
+    border:1px solid #333;
+    background:#151515;
+    color:var(--gold2);
+    border-radius:10px;
+    padding:0 14px;
 }
-
 
 /* =====================================================
    TABLE
 ===================================================== */
 
 .table-wrap{
+    width:100%;
     overflow-x:auto;
 }
 
-.orders-table{
+table{
     width:100%;
     border-collapse:collapse;
-    min-width:1350px;
+    min-width:1100px;
 }
 
-.orders-table th{
+th{
     text-align:left;
-    padding:13px;
-    background:#0c0c0c;
-    color:#aaa;
+    color:#777;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    padding:12px 14px;
+    border-bottom:1px solid #252525;
+    white-space:nowrap;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #1e1e1e;
     font-size:12px;
-    border-bottom:1px solid var(--border);
+    vertical-align:middle;
 }
 
-.orders-table td{
-    padding:14px 13px;
-    border-bottom:1px solid #202020;
-    font-size:13px;
-    vertical-align:top;
+tbody tr:hover{
+    background:#141414;
 }
 
-.orders-table tr:hover td{
-    background:#151515;
-}
-
-.order-number{
-    color:var(--gold);
-    font-weight:700;
+.order-no{
+    color:var(--gold2);
+    font-weight:800;
 }
 
 .customer-name{
     font-weight:700;
 }
 
-.small-text{
-    color:#888;
-    font-size:11px;
-    margin-top:4px;
-    word-break:break-word;
+.customer-email{
+    color:#777;
+    margin-top:3px;
+    font-size:10px;
 }
 
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.status-select,
-.payment-status-select{
-    border-radius:8px;
-    border:1px solid var(--border);
-    background:#0b0b0b;
-    color:#fff;
-    padding:8px;
+.amount{
+    font-weight:800;
 }
 
-.status-select:focus{
-    border-color:var(--gold);
-}
-
-.status-badge{
-    display:inline-block;
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    border-radius:30px;
     padding:5px 8px;
-    border-radius:7px;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.badge.pending{
+    color:#f2bd69;
+    background:rgba(240,163,74,.10);
+}
+
+.badge.processing{
+    color:#75b4ff;
+    background:rgba(98,168,255,.10);
+}
+
+.badge.completed,
+.badge.paid,
+.badge.archived{
+    color:#67dc9b;
+    background:rgba(53,208,127,.10);
+}
+
+.badge.cancelled,
+.badge.rejected,
+.badge.failed{
+    color:#ff7777;
+    background:rgba(255,92,92,.10);
+}
+
+.badge.uploaded{
+    color:#d9bd62;
+    background:rgba(212,175,55,.10);
+}
+
+.view-btn{
+    border:1px solid #343434;
+    background:#151515;
+    color:#ddd;
+    border-radius:8px;
+    padding:7px 10px;
     font-size:11px;
     font-weight:700;
 }
 
-.payment-pending{
-    background:#2a2115;
-    color:var(--orange);
+.view-btn:hover{
+    border-color:var(--gold);
+    color:var(--gold2);
 }
-
-.payment-paid{
-    background:#102719;
-    color:var(--green);
-}
-
-.payment-rejected{
-    background:#2b1112;
-    color:var(--red);
-}
-
-.proof-uploaded{
-    background:#172436;
-    color:var(--blue);
-}
-
-.proof-archived{
-    background:#102719;
-    color:var(--green);
-}
-
-.proof-failed{
-    background:#2b1112;
-    color:var(--red);
-}
-
-.proof-none{
-    background:#202020;
-    color:#999;
-}
-
-.view-btn{
-    padding:8px 12px;
-}
-
-
-/* =====================================================
-   EMPTY
-===================================================== */
-
-.empty{
-    text-align:center;
-    color:#777;
-    padding:35px;
-}
-
 
 /* =====================================================
    MODAL
 ===================================================== */
 
-.modal{
+.modal-overlay{
     position:fixed;
     inset:0;
     z-index:100;
-    background:rgba(0,0,0,.78);
-    display:flex;
+    display:none;
     align-items:center;
     justify-content:center;
-    padding:20px;
+    padding:18px;
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(8px);
 }
 
-.modal-box{
-    width:100%;
-    max-width:760px;
-    max-height:90vh;
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:min(760px,100%);
+    max-height:92vh;
     overflow:auto;
     background:#111;
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:23px;
+    border:1px solid #333;
+    border-radius:20px;
+    box-shadow:0 30px 100px rgba(0,0,0,.7);
 }
 
-.modal-header{
+.modal-head{
+    position:sticky;
+    top:0;
+    z-index:2;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
-    margin-bottom:20px;
+    padding:17px 20px;
+    background:#111;
+    border-bottom:1px solid #282828;
 }
 
-.modal-header h2{
-    color:var(--gold);
+.modal-title{
+    font-family:Montserrat,sans-serif;
+    font-size:17px;
+    font-weight:800;
 }
 
 .close-btn{
-    width:35px;
-    height:35px;
-    font-size:20px;
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    border:1px solid #333;
+    background:#181818;
+    color:#aaa;
 }
 
-
-/* =====================================================
-   DETAILS
-===================================================== */
+.modal-body{
+    padding:20px;
+}
 
 .detail-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
+    margin-bottom:20px;
 }
 
 .detail{
-    background:#0b0b0b;
-    border:1px solid #202020;
-    border-radius:10px;
+    background:#0c0c0c;
+    border:1px solid #252525;
+    border-radius:11px;
     padding:12px;
 }
 
@@ -655,291 +726,298 @@ button{
 
 .detail-label{
     color:#777;
-    font-size:11px;
-    margin-bottom:5px;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    margin-bottom:6px;
 }
 
 .detail-value{
+    color:#eee;
+    font-size:12px;
+    line-height:1.5;
     word-break:break-word;
 }
 
-
-/* =====================================================
-   PAYMENT PROOF
-===================================================== */
-
-.payment-proof-box{
-    margin-top:18px;
-    padding:17px;
-    background:#0b0b0b;
-    border:1px solid var(--border);
-    border-radius:12px;
-}
-
-.payment-proof-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:14px;
-}
-
-.payment-proof-header h3{
-    font-size:15px;
-}
-
-.proof-status-line{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.proof-info{
-    background:#111;
-    border:1px solid #202020;
-    border-radius:10px;
-    padding:12px;
-}
-
-.proof-info-row{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    padding:7px 0;
-    border-bottom:1px solid #202020;
-    font-size:12px;
-}
-
-.proof-info-row:last-child{
-    border-bottom:0;
-}
-
-.proof-info-label{
-    color:#777;
-}
-
-.proof-info-value{
-    text-align:right;
-    word-break:break-word;
-}
-
-.proof-actions{
-    margin-top:13px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.proof-view-btn{
-    border:0;
-    border-radius:9px;
-    padding:10px 15px;
-    background:var(--blue);
-    color:#000;
+.section-title{
+    font-size:13px;
     font-weight:800;
+    color:var(--gold2);
+    margin:20px 0 10px;
 }
-
-.proof-view-btn:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-}
-
-.proof-message{
-    margin-top:10px;
-    font-size:12px;
-    color:var(--muted);
-}
-
-
-/* =====================================================
-   PAYMENT VERIFICATION
-===================================================== */
-
-.payment-action-box{
-    margin-top:18px;
-    padding:16px;
-    background:#0b0b0b;
-    border:1px solid var(--border);
-    border-radius:12px;
-}
-
-.payment-action-box h3{
-    font-size:15px;
-    margin-bottom:12px;
-}
-
-.payment-action-row{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.payment-ref-input{
-    flex:1;
-    min-width:200px;
-    background:#111;
-    color:#fff;
-    border:1px solid var(--border);
-    border-radius:9px;
-    padding:11px;
-}
-
-.payment-ref-input:focus{
-    outline:none;
-    border-color:var(--gold);
-}
-
-.verify-btn,
-.reject-btn{
-    border:0;
-    border-radius:9px;
-    padding:11px 15px;
-    font-weight:800;
-}
-
-.verify-btn{
-    background:var(--green);
-    color:#000;
-}
-
-.reject-btn{
-    background:var(--red);
-    color:#fff;
-}
-
-.verify-btn:disabled,
-.reject-btn:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-}
-
-.payment-action-message{
-    margin-top:10px;
-    font-size:12px;
-    color:var(--muted);
-}
-
-
-/* =====================================================
-   ITEMS
-===================================================== */
 
 .items-box{
-    margin-top:18px;
-}
-
-.items-box h3{
-    font-size:15px;
-    margin-bottom:10px;
+    background:#0b0b0b;
+    border:1px solid #252525;
+    border-radius:12px;
+    overflow:hidden;
 }
 
 .item-row{
     display:flex;
+    align-items:center;
     justify-content:space-between;
-    gap:15px;
-    padding:10px 0;
-    border-bottom:1px solid #222;
+    gap:10px;
+    padding:11px 13px;
+    border-bottom:1px solid #1e1e1e;
+    font-size:11px;
+}
+
+.item-row:last-child{
+    border-bottom:0;
+}
+
+.item-left{
+    min-width:0;
+}
+
+.item-name{
+    font-weight:700;
+}
+
+.item-meta{
+    color:#777;
+    margin-top:3px;
+}
+
+.item-price{
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.proof-box{
+    background:#0b0b0b;
+    border:1px solid #292929;
+    border-radius:13px;
+    padding:14px;
+}
+
+.proof-status{
+    margin-bottom:12px;
+}
+
+.proof-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.action-btn{
+    border-radius:10px;
+    padding:10px 13px;
+    border:1px solid #333;
+    background:#151515;
+    color:#ddd;
+    font-size:11px;
+    font-weight:800;
+}
+
+.action-btn.gold{
+    border-color:rgba(212,175,55,.4);
+    background:rgba(212,175,55,.08);
+    color:var(--gold2);
+}
+
+.action-btn.green{
+    border-color:rgba(53,208,127,.3);
+    background:rgba(53,208,127,.08);
+    color:#75e4a7;
+}
+
+.action-btn.red{
+    border-color:rgba(255,92,92,.3);
+    background:rgba(255,92,92,.08);
+    color:#ff8d8d;
+}
+
+.action-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+.drive-link{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-top:12px;
+    color:var(--gold2);
+    font-size:11px;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.drive-link:hover{
+    text-decoration:underline;
+}
+
+.modal-footer{
+    position:sticky;
+    bottom:0;
+    background:#111;
+    border-top:1px solid #282828;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.status-control{
+    display:flex;
+    gap:8px;
+    flex:1;
+}
+
+.status-control select{
+    flex:1;
+    background:#0c0c0c;
+    color:#eee;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:10px;
+}
+
+.save-status{
+    border:1px solid #333;
+    background:#171717;
+    color:var(--gold2);
+    border-radius:10px;
+    padding:10px 13px;
+    font-weight:800;
+    font-size:11px;
+}
+
+.reference-box{
+    display:flex;
+    gap:8px;
+}
+
+.reference-box input{
+    flex:1;
+    min-width:0;
+    background:#0b0b0b;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:11px;
+    outline:none;
+}
+
+.reference-box input:focus{
+    border-color:var(--gold);
+}
+
+.info-note{
+    color:#777;
+    font-size:11px;
+    line-height:1.5;
+    margin-top:9px;
+}
+
+.empty{
+    text-align:center;
+    padding:40px 20px;
+    color:#777;
     font-size:13px;
 }
 
-.total-box{
-    margin-top:15px;
-    padding:15px;
-    border:1px solid var(--gold);
-    border-radius:10px;
-    display:flex;
-    justify-content:space-between;
-    color:var(--gold);
-    font-weight:800;
-}
-
-
 /* =====================================================
-   WHATSAPP
+   TOAST
 ===================================================== */
 
-.whatsapp-btn{
-    display:inline-block;
-    margin-top:18px;
-    background:#25d366;
-    color:#000;
-    text-decoration:none;
-    padding:11px 17px;
-    border-radius:9px;
-    font-weight:800;
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:300;
+    max-width:360px;
+    background:#171717;
+    border:1px solid #333;
+    border-radius:13px;
+    padding:13px 15px;
+    box-shadow:0 20px 60px rgba(0,0,0,.55);
+    font-size:12px;
+    display:none;
 }
 
+.toast.show{
+    display:block;
+}
+
+.toast.success{
+    border-color:rgba(53,208,127,.4);
+}
+
+.toast.error{
+    border-color:rgba(255,92,92,.4);
+}
 
 /* =====================================================
    RESPONSIVE
 ===================================================== */
 
-@media(max-width:1100px){
+@media(max-width:1000px){
 
-    .orders-table{
-        min-width:1400px;
-    }
-
-    .controls{
-        grid-template-columns:2fr 1fr 1fr;
-    }
-
-}
-
-@media(max-width:900px){
-
-    .stats{
+    .stats-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .controls{
+    .filters{
         grid-template-columns:1fr 1fr;
     }
 
-    .payment-grid{
-        grid-template-columns:1fr;
+    .filters .search{
+        grid-column:1/-1;
     }
 
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-    .topbar-inner{
-        padding:13px 15px;
+    .topbar{
+        padding:0 13px;
     }
 
-    .container{
-        padding:20px 14px 40px;
+    .brand-name{
+        font-size:17px;
     }
 
-    .brand{
-        font-size:20px;
-    }
-
-    .page-title h1{
-        font-size:23px;
-    }
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-    }
-
-    .stat-card{
+    .dashboard{
         padding:15px;
     }
 
-    .stat-value{
-        font-size:21px;
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
     }
 
-    .controls{
+    .stat-card{
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:20px;
+    }
+
+    .settings-grid{
+        grid-template-columns:1fr;
+        padding:15px;
+    }
+
+    .settings-actions{
+        padding:0 15px 15px;
+    }
+
+    .filters{
+        padding:14px;
         grid-template-columns:1fr;
     }
 
-    .section-card{
-        padding:16px;
+    .filters .search{
+        grid-column:auto;
+    }
+
+    .refresh-btn{
+        min-height:42px;
     }
 
     .detail-grid{
@@ -950,45 +1028,25 @@ button{
         grid-column:auto;
     }
 
-    .save-row{
-        flex-direction:column;
-        align-items:stretch;
+    .modal-overlay{
+        padding:8px;
     }
 
-    .save-btn{
+    .modal{
+        max-height:95vh;
+        border-radius:16px;
+    }
+
+    .modal-footer{
+        flex-direction:column;
+    }
+
+    .status-control{
         width:100%;
     }
 
-    .payment-action-row{
-        flex-direction:column;
-    }
-
-    .payment-ref-input,
-    .verify-btn,
-    .reject-btn{
-        width:100%;
-    }
-
-    .payment-proof-header{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .proof-info-row{
-        flex-direction:column;
-        gap:3px;
-    }
-
-    .proof-info-value{
-        text-align:left;
-    }
-
-    .proof-actions{
-        flex-direction:column;
-    }
-
-    .proof-view-btn{
-        width:100%;
+    .top-actions .small-btn span{
+        display:none;
     }
 
 }
@@ -997,24 +1055,29 @@ button{
 
 </head>
 
-
 <body>
 
-
 <!-- =====================================================
-     LOGIN
+     LOGIN SCREEN
 ===================================================== -->
 
-<div id="loginScreen">
+<div
+    id="loginScreen"
+    class="login-screen"
+>
 
-    <div class="login-card">
+    <div class="login-box">
 
         <div class="logo">
-            ProBee
-        </div>
 
-        <div class="login-subtitle">
-            Admin Dashboard
+            <div class="logo-title">
+                ProBee
+            </div>
+
+            <div class="logo-sub">
+                Admin Dashboard
+            </div>
+
         </div>
 
         <form id="loginForm">
@@ -1026,10 +1089,12 @@ button{
                 </label>
 
                 <input
-                    type="email"
                     id="loginEmail"
+                    type="email"
+                    autocomplete="username"
                     required
-                    autocomplete="email">
+                    placeholder="Admin email"
+                >
 
             </div>
 
@@ -1040,28 +1105,30 @@ button{
                 </label>
 
                 <input
-                    type="password"
                     id="loginPassword"
+                    type="password"
+                    autocomplete="current-password"
                     required
-                    autocomplete="current-password">
+                    placeholder="Password"
+                >
 
             </div>
 
             <button
-                type="submit"
+                id="loginButton"
                 class="primary-btn"
-                id="loginButton">
-
-                Login
-
+                type="submit"
+            >
+                <i class="fa-solid fa-right-to-bracket"></i>
+                &nbsp; Login
             </button>
 
-            <div
-                class="message"
-                id="loginMessage">
-            </div>
-
         </form>
+
+        <div
+            id="loginMessage"
+            class="message hidden"
+        ></div>
 
     </div>
 
@@ -1069,33 +1136,44 @@ button{
 
 
 <!-- =====================================================
-     DASHBOARD
+     MAIN APP
 ===================================================== -->
 
 <div
-    id="dashboard"
-    class="hidden">
+    id="app"
+    class="app hidden"
+>
 
     <header class="topbar">
 
-        <div class="topbar-inner">
+        <div class="brand">
 
-            <div class="brand">
-
-                ProBee
-
-                <small>
-                    ADMIN DASHBOARD
-                </small>
-
+            <div class="brand-mark">
+                PB
             </div>
 
+            <div class="brand-name">
+                ProBee
+            </div>
+
+        </div>
+
+        <div class="top-actions">
+
             <button
-                class="logout-btn"
-                id="logoutButton">
+                class="small-btn gold"
+                onclick="loadOrders()"
+            >
+                <i class="fa-solid fa-rotate"></i>
+                <span> Refresh</span>
+            </button>
 
-                Logout
-
+            <button
+                class="small-btn"
+                onclick="logout()"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span> Logout</span>
             </button>
 
         </div>
@@ -1103,77 +1181,134 @@ button{
     </header>
 
 
-    <main class="container">
+    <main class="dashboard">
 
         <div class="page-title">
 
             <h1>
-                Dashboard
+                Admin Dashboard
             </h1>
 
             <p>
-                Manage orders, payments and customer requests.
+                Manage ProBee orders, payments and bank-transfer verification.
             </p>
 
         </div>
 
 
-        <!-- STATS -->
+        <!-- =================================================
+             STATS
+        ================================================== -->
 
-        <section class="stats">
+        <section class="stats-grid">
 
-            <div class="stat-card gold">
+            <div class="stat-card">
 
-                <div class="stat-label">
-                    Total Orders
+                <div class="stat-top">
+
+                    <div class="stat-label">
+                        Total Orders
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+
                 </div>
 
                 <div
+                    id="statTotal"
                     class="stat-value"
-                    id="totalOrders">
+                >
                     0
+                </div>
+
+                <div class="stat-sub">
+                    All orders
                 </div>
 
             </div>
 
-            <div class="stat-card orange">
 
-                <div class="stat-label">
-                    Pending
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
                 </div>
 
                 <div
+                    id="statPending"
                     class="stat-value"
-                    id="pendingOrders">
+                >
                     0
+                </div>
+
+                <div class="stat-sub">
+                    Awaiting action
                 </div>
 
             </div>
 
-            <div class="stat-card green">
 
-                <div class="stat-label">
-                    Completed
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-label">
+                        Completed
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
                 </div>
 
                 <div
+                    id="statCompleted"
                     class="stat-value"
-                    id="completedOrders">
+                >
                     0
+                </div>
+
+                <div class="stat-sub">
+                    Completed orders
                 </div>
 
             </div>
 
-            <div class="stat-card gold">
 
-                <div class="stat-label">
-                    Completed Sales
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-label">
+                        Completed Sales
+                    </div>
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+
                 </div>
 
                 <div
+                    id="statSales"
                     class="stat-value"
-                    id="completedSales">
-                    LKR 0.00
+                >
+                    LKR 0
+                </div>
+
+                <div class="stat-sub">
+                    Completed order value
                 </div>
 
             </div>
@@ -1181,55 +1316,58 @@ button{
         </section>
 
 
-        <!-- PAYMENT SETTINGS -->
+        <!-- =================================================
+             PAYMENT SETTINGS
+        ================================================== -->
 
-        <section class="section-card">
+        <section class="panel">
 
-            <div class="section-header">
+            <div class="panel-head">
 
                 <div>
 
-                    <h2>
-                        Payment Settings
-                    </h2>
+                    <div class="panel-title">
+                        Bank Transfer Payment Settings
+                    </div>
 
-                    <p>
-                        Manage customer-facing payment details.
-                    </p>
+                    <div class="panel-sub">
+                        These details are shown automatically on checkout.
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <div class="payment-status">
+            <div class="settings-grid">
 
-                <div class="payment-status-left">
+                <div class="switch-row">
 
-                    <strong>
-                        Bank Transfer
-                    </strong>
+                    <div class="switch-info">
 
-                    <span>
-                        Enable or disable Bank Transfer at checkout.
-                    </span>
+                        <strong>
+                            Bank Transfer
+                        </strong>
+
+                        <span>
+                            Enable or disable customer bank-transfer payments.
+                        </span>
+
+                    </div>
+
+                    <label class="switch">
+
+                        <input
+                            id="bankEnabled"
+                            type="checkbox"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
 
                 </div>
 
-                <label class="switch">
-
-                    <input
-                        type="checkbox"
-                        id="bankEnabled">
-
-                    <span class="slider"></span>
-
-                </label>
-
-            </div>
-
-
-            <div class="payment-grid">
 
                 <div class="field">
 
@@ -1238,10 +1376,12 @@ button{
                     </label>
 
                     <input
+                        id="bankName"
                         type="text"
-                        id="bankName">
+                    >
 
                 </div>
+
 
                 <div class="field">
 
@@ -1250,10 +1390,12 @@ button{
                     </label>
 
                     <input
+                        id="accountName"
                         type="text"
-                        id="accountName">
+                    >
 
                 </div>
+
 
                 <div class="field">
 
@@ -1262,10 +1404,12 @@ button{
                     </label>
 
                     <input
+                        id="accountNumber"
                         type="text"
-                        id="accountNumber">
+                    >
 
                 </div>
+
 
                 <div class="field">
 
@@ -1274,10 +1418,12 @@ button{
                     </label>
 
                     <input
+                        id="branch"
                         type="text"
-                        id="branch">
+                    >
 
                 </div>
+
 
                 <div class="field">
 
@@ -1286,39 +1432,37 @@ button{
                     </label>
 
                     <input
+                        id="bankCode"
                         type="text"
-                        id="bankCode">
+                    >
 
                 </div>
 
-                <div class="field full">
+
+                <div class="field">
 
                     <label>
                         Payment Instructions
                     </label>
 
                     <textarea
-                        id="paymentNote"></textarea>
+                        id="paymentNote"
+                    ></textarea>
 
                 </div>
 
             </div>
 
 
-            <div class="save-row">
-
-                <span
-                    class="settings-message"
-                    id="paymentSettingsMessage">
-                </span>
+            <div class="settings-actions">
 
                 <button
-                    type="button"
+                    id="savePaymentSettingsBtn"
                     class="save-btn"
-                    id="savePaymentSettingsBtn">
-
-                    Save Payment Settings
-
+                    onclick="savePaymentSettings()"
+                >
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    &nbsp; Save Payment Settings
                 </button>
 
             </div>
@@ -1326,41 +1470,48 @@ button{
         </section>
 
 
-        <!-- ORDERS -->
+        <!-- =================================================
+             ORDERS
+        ================================================== -->
 
-        <section class="section-card">
+        <section class="panel">
 
-            <div class="section-header">
+            <div class="panel-head">
 
                 <div>
 
-                    <h2>
+                    <div class="panel-title">
                         Orders
-                    </h2>
+                    </div>
 
-                    <p>
-                        View orders, payment references and payment proofs.
-                    </p>
+                    <div class="panel-sub">
+                        Search and manage customer orders.
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <div class="controls">
+            <div class="filters">
 
                 <input
-                    type="text"
-                    class="control"
                     id="searchInput"
-                    placeholder="Search order, customer, WhatsApp, email or payment ref...">
+                    class="filter-input search"
+                    type="search"
+                    placeholder="Search order, customer, WhatsApp or email..."
+                    oninput="applyFilters()"
+                >
+
 
                 <select
-                    class="control"
-                    id="statusFilter">
+                    id="statusFilter"
+                    class="filter-select"
+                    onchange="applyFilters()"
+                >
 
                     <option value="">
-                        All Order Statuses
+                        All Order Status
                     </option>
 
                     <option value="pending">
@@ -1381,12 +1532,15 @@ button{
 
                 </select>
 
+
                 <select
-                    class="control"
-                    id="paymentFilter">
+                    id="paymentFilter"
+                    class="filter-select"
+                    onchange="applyFilters()"
+                >
 
                     <option value="">
-                        All Payment Statuses
+                        All Payment Status
                     </option>
 
                     <option value="pending">
@@ -1403,77 +1557,55 @@ button{
 
                 </select>
 
-                <input
-                    type="date"
-                    class="control"
-                    id="dateFilter">
+
+                <select
+                    id="proofFilter"
+                    class="filter-select"
+                    onchange="applyFilters()"
+                >
+
+                    <option value="">
+                        All Proof Status
+                    </option>
+
+                    <option value="none">
+                        No Proof
+                    </option>
+
+                    <option value="uploaded">
+                        Uploaded
+                    </option>
+
+                    <option value="archived">
+                        Archived
+                    </option>
+
+                    <option value="failed">
+                        Archive Failed
+                    </option>
+
+                </select>
+
 
                 <button
                     class="refresh-btn"
-                    id="refreshButton">
-
-                    Refresh
-
-                </button>
-
-                <button
-                    class="reset-btn"
-                    id="resetFiltersButton">
-
-                    Reset
-
+                    onclick="loadOrders()"
+                    title="Refresh orders"
+                >
+                    <i class="fa-solid fa-rotate"></i>
                 </button>
 
             </div>
 
 
-            <div class="table-wrap">
+            <div
+                id="ordersTableContainer"
+                class="table-wrap"
+            >
 
-                <table class="orders-table">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Order
-                            </th>
-
-                            <th>
-                                Customer
-                            </th>
-
-                            <th>
-                                Items
-                            </th>
-
-                            <th>
-                                Total
-                            </th>
-
-                            <th>
-                                Date
-                            </th>
-
-                            <th>
-                                Payment
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
-                            <th>
-                                Action
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="ordersBody"></tbody>
-
-                </table>
+                <div class="empty">
+                    Loading orders...
+                </div>
 
             </div>
 
@@ -1489,170 +1621,95 @@ button{
 ===================================================== -->
 
 <div
-    class="modal hidden"
-    id="orderModal">
+    id="orderModal"
+    class="modal-overlay"
+    onclick="handleModalBackground(event)"
+>
 
-    <div class="modal-box">
+    <div class="modal">
 
-        <div class="modal-header">
+        <div class="modal-head">
 
-            <h2>
+            <div
+                id="modalTitle"
+                class="modal-title"
+            >
                 Order Details
-            </h2>
+            </div>
 
             <button
                 class="close-btn"
-                id="closeModal">
-
-                ×
-
+                onclick="closeModal()"
+            >
+                <i class="fa-solid fa-xmark"></i>
             </button>
 
         </div>
 
 
-        <div
-            class="detail-grid"
-            id="orderDetails">
+        <div class="modal-body">
+
+            <div
+                id="orderDetails"
+            ></div>
+
         </div>
 
 
-        <!-- PAYMENT PROOF -->
+        <div class="modal-footer">
 
-        <div class="payment-proof-box">
+            <div class="status-control">
 
-            <div class="payment-proof-header">
+                <select id="orderStatusSelect">
 
-                <h3>
-                    Payment Proof
-                </h3>
+                    <option value="pending">
+                        Pending
+                    </option>
 
-                <div
-                    class="proof-status-line"
-                    id="paymentProofStatus">
-                </div>
+                    <option value="processing">
+                        Processing
+                    </option>
 
-            </div>
+                    <option value="completed">
+                        Completed
+                    </option>
 
+                    <option value="cancelled">
+                        Cancelled
+                    </option>
 
-            <div
-                class="proof-info"
-                id="paymentProofInfo">
-            </div>
-
-
-            <div class="proof-actions">
+                </select>
 
                 <button
-                    type="button"
-                    class="proof-view-btn"
-                    id="viewPaymentProofButton">
-
-                    View Payment Proof
-
+                    class="save-status"
+                    onclick="saveOrderStatus()"
+                >
+                    Save Status
                 </button>
 
             </div>
 
-
-            <div
-                class="proof-message"
-                id="paymentProofMessage">
-            </div>
-
         </div>
-
-
-        <!-- PAYMENT VERIFICATION -->
-
-        <div class="payment-action-box">
-
-            <h3>
-                Payment Verification
-            </h3>
-
-            <div class="payment-action-row">
-
-                <input
-                    class="payment-ref-input"
-                    id="paymentReferenceInput"
-                    type="text"
-                    placeholder="Payment reference / transaction ID">
-
-                <button
-                    class="verify-btn"
-                    id="verifyPaymentButton">
-
-                    Approve Payment
-
-                </button>
-
-                <button
-                    class="reject-btn"
-                    id="rejectPaymentButton">
-
-                    Reject Payment
-
-                </button>
-
-            </div>
-
-            <div
-                class="payment-action-message"
-                id="paymentActionMessage">
-            </div>
-
-        </div>
-
-
-        <!-- PRODUCTS -->
-
-        <div class="items-box">
-
-            <h3>
-                Ordered Products
-            </h3>
-
-            <div id="modalItems"></div>
-
-        </div>
-
-
-        <div
-            class="total-box"
-            id="modalTotal">
-
-            <span>
-                Total
-            </span>
-
-            <span>
-                LKR 0.00
-            </span>
-
-        </div>
-
-
-        <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="whatsapp-btn hidden"
-            id="whatsappButton">
-
-            Open WhatsApp
-
-        </a>
 
     </div>
 
 </div>
 
 
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
 <script>
 
 /* =====================================================
-   SUPABASE
+   SUPABASE CONFIG
 ===================================================== */
 
 const SUPABASE_URL =
@@ -1660,6 +1717,7 @@ const SUPABASE_URL =
 
 const SUPABASE_ANON_KEY =
     "sb_publishable_UkqBPcpXJVhl4PVvpniI2Q_zoe_e_MN";
+
 
 const supabaseClient =
     window.supabase.createClient(
@@ -1669,139 +1727,16 @@ const supabaseClient =
 
 
 /* =====================================================
-   DOM
+   GLOBAL STATE
 ===================================================== */
-
-const loginScreen =
-    document.getElementById("loginScreen");
-
-const dashboard =
-    document.getElementById("dashboard");
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const loginEmail =
-    document.getElementById("loginEmail");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-const loginButton =
-    document.getElementById("loginButton");
-
-const loginMessage =
-    document.getElementById("loginMessage");
-
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const totalOrders =
-    document.getElementById("totalOrders");
-
-const pendingOrders =
-    document.getElementById("pendingOrders");
-
-const completedOrders =
-    document.getElementById("completedOrders");
-
-const completedSales =
-    document.getElementById("completedSales");
-
-const ordersBody =
-    document.getElementById("ordersBody");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const statusFilter =
-    document.getElementById("statusFilter");
-
-const paymentFilter =
-    document.getElementById("paymentFilter");
-
-const dateFilter =
-    document.getElementById("dateFilter");
-
-const refreshButton =
-    document.getElementById("refreshButton");
-
-const resetFiltersButton =
-    document.getElementById("resetFiltersButton");
-
-const orderModal =
-    document.getElementById("orderModal");
-
-const closeModal =
-    document.getElementById("closeModal");
-
-const orderDetails =
-    document.getElementById("orderDetails");
-
-const modalItems =
-    document.getElementById("modalItems");
-
-const modalTotal =
-    document.getElementById("modalTotal");
-
-const whatsappButton =
-    document.getElementById("whatsappButton");
-
-const bankEnabled =
-    document.getElementById("bankEnabled");
-
-const bankName =
-    document.getElementById("bankName");
-
-const accountName =
-    document.getElementById("accountName");
-
-const accountNumber =
-    document.getElementById("accountNumber");
-
-const branch =
-    document.getElementById("branch");
-
-const bankCode =
-    document.getElementById("bankCode");
-
-const paymentNote =
-    document.getElementById("paymentNote");
-
-const savePaymentSettingsBtn =
-    document.getElementById("savePaymentSettingsBtn");
-
-const paymentSettingsMessage =
-    document.getElementById("paymentSettingsMessage");
-
-const paymentReferenceInput =
-    document.getElementById("paymentReferenceInput");
-
-const verifyPaymentButton =
-    document.getElementById("verifyPaymentButton");
-
-const rejectPaymentButton =
-    document.getElementById("rejectPaymentButton");
-
-const paymentActionMessage =
-    document.getElementById("paymentActionMessage");
-
-const paymentProofStatus =
-    document.getElementById("paymentProofStatus");
-
-const paymentProofInfo =
-    document.getElementById("paymentProofInfo");
-
-const paymentProofMessage =
-    document.getElementById("paymentProofMessage");
-
-const viewPaymentProofButton =
-    document.getElementById("viewPaymentProofButton");
-
 
 let allOrders = [];
 
+let filteredOrders = [];
+
 let currentOrderId = null;
+
+let currentUser = null;
 
 
 /* =====================================================
@@ -1810,10 +1745,7 @@ let currentOrderId = null;
 
 function escapeHtml(value){
 
-    if(
-        value === null ||
-        value === undefined
-    ){
+    if(value === null || value === undefined){
         return "";
     }
 
@@ -1826,202 +1758,232 @@ function escapeHtml(value){
 }
 
 
-function formatCurrency(value){
+function formatMoney(value){
+
+    const number =
+        Number(value || 0);
 
     return "LKR " +
-        Number(value || 0)
-            .toLocaleString(
-                "en-LK",
-                {
-                    minimumFractionDigits:2,
-                    maximumFractionDigits:2
-                }
-            );
-
+        number.toLocaleString(
+            "en-LK",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
 }
 
 
 function formatDate(value){
 
     if(!value){
-        return "-";
+        return "—";
     }
 
-    return new Date(value)
-        .toLocaleString(
-            "en-LK",
-            {
-                year:"numeric",
-                month:"short",
-                day:"numeric",
-                hour:"2-digit",
-                minute:"2-digit"
-            }
+    const date =
+        new Date(value);
+
+    if(Number.isNaN(date.getTime())){
+        return "—";
+    }
+
+    return date.toLocaleString(
+        "en-LK",
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+}
+
+
+function statusBadge(status){
+
+    const value =
+        String(status || "pending")
+            .toLowerCase();
+
+    let label =
+        value.toUpperCase();
+
+    return `
+        <span class="badge ${escapeHtml(value)}">
+            ${escapeHtml(label)}
+        </span>
+    `;
+}
+
+
+function proofBadge(status){
+
+    const value =
+        String(status || "none")
+            .toLowerCase();
+
+    let label = value;
+
+    if(value === "uploaded"){
+        label = "Uploaded";
+    }
+
+    if(value === "archived"){
+        label = "Archived";
+    }
+
+    if(value === "failed"){
+        label = "Archive Failed";
+    }
+
+    if(value === "none"){
+        label = "No Proof";
+    }
+
+    return `
+        <span class="badge ${escapeHtml(value)}">
+            ${escapeHtml(label)}
+        </span>
+    `;
+}
+
+
+function showToast(message,type="success"){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className =
+        "toast show " + type;
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(
+            ()=>{
+                toast.className =
+                    "toast";
+            },
+            4000
+        );
+}
+
+
+function showLoginMessage(message,type="error"){
+
+    const box =
+        document.getElementById(
+            "loginMessage"
         );
 
+    box.textContent = message;
+
+    box.className =
+        "message " + type;
 }
 
 
-function cleanPhone(phone){
+function setLoginLoading(loading){
 
-    if(!phone){
-        return "";
-    }
+    const button =
+        document.getElementById(
+            "loginButton"
+        );
 
-    let value =
-        String(phone)
-            .replace(/[^\d+]/g,"");
+    button.disabled = loading;
 
-    if(value.startsWith("0")){
-        value =
-            "94" +
-            value.substring(1);
-    }
-
-    if(value.startsWith("+")){
-        value =
-            value.substring(1);
-    }
-
-    return value;
-}
-
-
-function getStatusLabel(status){
-
-    const value =
-        String(status || "pending")
-            .toLowerCase();
-
-    return value.charAt(0).toUpperCase() +
-        value.slice(1);
-}
-
-
-function getPaymentStatusLabel(status){
-
-    const value =
-        String(status || "pending")
-            .toLowerCase();
-
-    if(value === "paid"){
-        return "Paid";
-    }
-
-    if(value === "rejected"){
-        return "Rejected";
-    }
-
-    return "Pending";
-}
-
-
-function paymentClass(status){
-
-    const value =
-        String(status || "pending")
-            .toLowerCase();
-
-    if(value === "paid"){
-        return "payment-paid";
-    }
-
-    if(value === "rejected"){
-        return "payment-rejected";
-    }
-
-    return "payment-pending";
-}
-
-
-function getProofLabel(status){
-
-    const value =
-        String(status || "none")
-            .toLowerCase();
-
-    if(value === "uploaded"){
-        return "Uploaded";
-    }
-
-    if(value === "archived"){
-        return "Archived";
-    }
-
-    if(value === "failed"){
-        return "Failed";
-    }
-
-    return "None";
-}
-
-
-function proofClass(status){
-
-    const value =
-        String(status || "none")
-            .toLowerCase();
-
-    if(value === "uploaded"){
-        return "proof-uploaded";
-    }
-
-    if(value === "archived"){
-        return "proof-archived";
-    }
-
-    if(value === "failed"){
-        return "proof-failed";
-    }
-
-    return "proof-none";
+    button.innerHTML =
+        loading
+        ? `<i class="fa-solid fa-spinner fa-spin"></i> &nbsp; Logging in...`
+        : `<i class="fa-solid fa-right-to-bracket"></i> &nbsp; Login`;
 }
 
 
 /* =====================================================
-   ADMIN AUTHORIZATION
+   AUTHORIZATION
 ===================================================== */
 
-async function isAuthorizedAdmin(userId){
+async function checkAdmin(){
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("admin_users")
-            .select("user_id")
-            .eq("user_id",userId)
-            .maybeSingle();
+    try{
 
-    if(error){
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .auth
+                .getUser();
+
+        if(error){
+            throw error;
+        }
+
+        const user =
+            data.user;
+
+        if(!user){
+
+            showLoginScreen();
+
+            return false;
+        }
+
+        const {
+            data:adminRow,
+            error:adminError
+        } =
+            await supabaseClient
+                .from("admin_users")
+                .select("user_id")
+                .eq("user_id",user.id)
+                .maybeSingle();
+
+        if(adminError){
+            throw adminError;
+        }
+
+        if(!adminRow){
+
+            await supabaseClient.auth.signOut();
+
+            showLoginScreen();
+
+            showLoginMessage(
+                "This account is not an authorized ProBee admin.",
+                "error"
+            );
+
+            return false;
+        }
+
+        currentUser =
+            user;
+
+        showApp();
+
+        return true;
+
+    }catch(error){
 
         console.error(error);
+
+        showLoginScreen();
+
+        showLoginMessage(
+            error.message ||
+            "Unable to verify admin account.",
+            "error"
+        );
 
         return false;
     }
 
-    return !!data;
-}
-
-
-/* =====================================================
-   SCREEN
-===================================================== */
-
-function showDashboard(){
-
-    loginScreen.classList.add("hidden");
-
-    dashboard.classList.remove("hidden");
-}
-
-
-function showLogin(){
-
-    dashboard.classList.add("hidden");
-
-    loginScreen.classList.remove("hidden");
 }
 
 
@@ -2029,142 +1991,110 @@ function showLogin(){
    LOGIN
 ===================================================== */
 
-loginForm.addEventListener(
-    "submit",
-    async function(event){
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        async function(event){
 
-        event.preventDefault();
+            event.preventDefault();
 
-        loginMessage.textContent = "";
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim();
 
-        loginButton.disabled = true;
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    .value;
 
-        loginButton.textContent =
-            "Signing in...";
+            setLoginLoading(true);
 
-        try{
+            try{
 
-            const {
-                data,
-                error
-            } =
-                await supabaseClient
-                    .auth
-                    .signInWithPassword({
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signInWithPassword({
+                            email,
+                            password
+                        });
 
-                        email:
-                            loginEmail.value.trim(),
+                if(error){
+                    throw error;
+                }
 
-                        password:
-                            loginPassword.value
+                currentUser =
+                    data.user;
 
-                    });
+                const authorized =
+                    await checkAdmin();
 
-            if(error){
-                throw error;
+                if(!authorized){
+
+                    await supabaseClient.auth.signOut();
+
+                    return;
+                }
+
+                showToast(
+                    "Admin login successful."
+                );
+
+                await loadPaymentSettings();
+
+                await loadOrders();
+
+            }catch(error){
+
+                console.error(error);
+
+                showLoginMessage(
+                    error.message ||
+                    "Login failed.",
+                    "error"
+                );
+
+            }finally{
+
+                setLoginLoading(false);
+
             }
 
-            if(!data.user){
-                throw new Error(
-                    "Login failed."
-                );
-            }
-
-            const authorized =
-                await isAuthorizedAdmin(
-                    data.user.id
-                );
-
-            if(!authorized){
-
-                await supabaseClient
-                    .auth
-                    .signOut();
-
-                throw new Error(
-                    "This account is not an authorized ProBee admin."
-                );
-            }
-
-            showDashboard();
-
-            await loadPaymentSettings();
-
-            await loadOrders();
-
-        }catch(error){
-
-            console.error(error);
-
-            loginMessage.textContent =
-                error.message ||
-                "Login failed.";
-
-        }finally{
-
-            loginButton.disabled = false;
-
-            loginButton.textContent =
-                "Login";
         }
-
-    }
-);
+    );
 
 
 /* =====================================================
-   SESSION
+   SHOW / HIDE APP
 ===================================================== */
 
-async function checkSession(){
+function showLoginScreen(){
 
-    try{
+    document
+        .getElementById("loginScreen")
+        .classList.remove("hidden");
 
-        const {
-            data
-        } =
-            await supabaseClient
-                .auth
-                .getSession();
+    document
+        .getElementById("app")
+        .classList.add("hidden");
+}
 
-        const session =
-            data.session;
 
-        if(!session){
+function showApp(){
 
-            showLogin();
+    document
+        .getElementById("loginScreen")
+        .classList.add("hidden");
 
-            return;
-        }
-
-        const authorized =
-            await isAuthorizedAdmin(
-                session.user.id
-            );
-
-        if(!authorized){
-
-            await supabaseClient
-                .auth
-                .signOut();
-
-            showLogin();
-
-            return;
-        }
-
-        showDashboard();
-
-        await loadPaymentSettings();
-
-        await loadOrders();
-
-    }catch(error){
-
-        console.error(error);
-
-        showLogin();
-    }
+    document
+        .getElementById("app")
+        .classList.remove("hidden");
 }
 
 
@@ -2172,188 +2102,212 @@ async function checkSession(){
    LOGOUT
 ===================================================== */
 
-logoutButton.addEventListener(
-    "click",
-    async function(){
+async function logout(){
 
-        await supabaseClient
-            .auth
-            .signOut();
+    await supabaseClient
+        .auth
+        .signOut();
 
-        showLogin();
+    currentUser = null;
 
-        loginForm.reset();
+    allOrders = [];
 
-        loginMessage.textContent = "";
+    filteredOrders = [];
 
-    }
-);
+    showLoginScreen();
 
+    document
+        .getElementById("loginForm")
+        .reset();
 
-/* =====================================================
-   PAYMENT SETTINGS LOAD
-===================================================== */
-
-async function loadPaymentSettings(){
-
-    paymentSettingsMessage.textContent =
-        "Loading...";
-
-    paymentSettingsMessage.style.color =
-        "#999";
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("payment_settings")
-            .select(
-                "id,bank_enabled,bank_name,account_name,account_number,branch,bank_code,payment_note,updated_at"
-            )
-            .eq("id",1)
-            .maybeSingle();
-
-    if(error){
-
-        console.error(error);
-
-        paymentSettingsMessage.textContent =
-            "Could not load payment settings.";
-
-        paymentSettingsMessage.style.color =
-            "#ff4d4f";
-
-        return;
-    }
-
-    if(!data){
-
-        paymentSettingsMessage.textContent =
-            "Payment settings record not found.";
-
-        paymentSettingsMessage.style.color =
-            "#ff4d4f";
-
-        return;
-    }
-
-    bankEnabled.checked =
-        !!data.bank_enabled;
-
-    bankName.value =
-        data.bank_name || "";
-
-    accountName.value =
-        data.account_name || "";
-
-    accountNumber.value =
-        data.account_number || "";
-
-    branch.value =
-        data.branch || "";
-
-    bankCode.value =
-        data.bank_code || "";
-
-    paymentNote.value =
-        data.payment_note || "";
-
-    paymentSettingsMessage.textContent =
-        "Current settings loaded.";
-
-    paymentSettingsMessage.style.color =
-        "#28c76f";
 }
 
 
 /* =====================================================
-   PAYMENT SETTINGS SAVE
+   PAYMENT SETTINGS
 ===================================================== */
 
-savePaymentSettingsBtn.addEventListener(
-    "click",
-    async function(){
+async function loadPaymentSettings(){
 
-        savePaymentSettingsBtn.disabled = true;
+    try{
 
-        savePaymentSettingsBtn.textContent =
-            "Saving...";
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("payment_settings")
+                .select(`
+                    id,
+                    bank_enabled,
+                    bank_name,
+                    account_name,
+                    account_number,
+                    branch,
+                    bank_code,
+                    payment_note,
+                    updated_at
+                `)
+                .eq("id",1)
+                .maybeSingle();
 
-        paymentSettingsMessage.textContent =
-            "Saving...";
-
-        paymentSettingsMessage.style.color =
-            "#999";
-
-        try{
-
-            const {
-                error
-            } =
-                await supabaseClient
-                    .from("payment_settings")
-                    .update({
-
-                        bank_enabled:
-                            bankEnabled.checked,
-
-                        bank_name:
-                            bankName.value.trim(),
-
-                        account_name:
-                            accountName.value.trim(),
-
-                        account_number:
-                            accountNumber.value.trim(),
-
-                        branch:
-                            branch.value.trim(),
-
-                        bank_code:
-                            bankCode.value.trim(),
-
-                        payment_note:
-                            paymentNote.value.trim(),
-
-                        updated_at:
-                            new Date().toISOString()
-
-                    })
-                    .eq("id",1);
-
-            if(error){
-                throw error;
-            }
-
-            paymentSettingsMessage.textContent =
-                "Payment settings saved successfully.";
-
-            paymentSettingsMessage.style.color =
-                "#28c76f";
-
-        }catch(error){
-
-            console.error(error);
-
-            paymentSettingsMessage.textContent =
-                error.message ||
-                "Could not save payment settings.";
-
-            paymentSettingsMessage.style.color =
-                "#ff4d4f";
-
-        }finally{
-
-            savePaymentSettingsBtn.disabled =
-                false;
-
-            savePaymentSettingsBtn.textContent =
-                "Save Payment Settings";
+        if(error){
+            throw error;
         }
 
+        if(!data){
+            return;
+        }
+
+        document
+            .getElementById("bankEnabled")
+            .checked =
+                data.bank_enabled === true;
+
+        document
+            .getElementById("bankName")
+            .value =
+                data.bank_name || "";
+
+        document
+            .getElementById("accountName")
+            .value =
+                data.account_name || "";
+
+        document
+            .getElementById("accountNumber")
+            .value =
+                data.account_number || "";
+
+        document
+            .getElementById("branch")
+            .value =
+                data.branch || "";
+
+        document
+            .getElementById("bankCode")
+            .value =
+                data.bank_code || "";
+
+        document
+            .getElementById("paymentNote")
+            .value =
+                data.payment_note || "";
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Could not load payment settings.",
+            "error"
+        );
+
     }
-);
+
+}
+
+
+async function savePaymentSettings(){
+
+    const button =
+        document.getElementById(
+            "savePaymentSettingsBtn"
+        );
+
+    button.disabled = true;
+
+    button.innerHTML =
+        `<i class="fa-solid fa-spinner fa-spin"></i> &nbsp; Saving...`;
+
+    try{
+
+        const payload = {
+
+            bank_enabled:
+                document
+                    .getElementById("bankEnabled")
+                    .checked,
+
+            bank_name:
+                document
+                    .getElementById("bankName")
+                    .value
+                    .trim(),
+
+            account_name:
+                document
+                    .getElementById("accountName")
+                    .value
+                    .trim(),
+
+            account_number:
+                document
+                    .getElementById("accountNumber")
+                    .value
+                    .trim(),
+
+            branch:
+                document
+                    .getElementById("branch")
+                    .value
+                    .trim(),
+
+            bank_code:
+                document
+                    .getElementById("bankCode")
+                    .value
+                    .trim(),
+
+            payment_note:
+                document
+                    .getElementById("paymentNote")
+                    .value
+                    .trim(),
+
+            updated_at:
+                new Date().toISOString()
+
+        };
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("payment_settings")
+                .update(payload)
+                .eq("id",1);
+
+        if(error){
+            throw error;
+        }
+
+        showToast(
+            "Payment settings saved successfully."
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Could not save payment settings.",
+            "error"
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+        button.innerHTML =
+            `<i class="fa-solid fa-floppy-disk"></i>
+             &nbsp; Save Payment Settings`;
+
+    }
+
+}
 
 
 /* =====================================================
@@ -2362,73 +2316,84 @@ savePaymentSettingsBtn.addEventListener(
 
 async function loadOrders(){
 
-    ordersBody.innerHTML = `
+    const container =
+        document.getElementById(
+            "ordersTableContainer"
+        );
 
-        <tr>
-
-            <td
-                colspan="8"
-                class="empty">
-
-                Loading orders...
-
-            </td>
-
-        </tr>
-
-    `;
+    container.innerHTML =
+        `<div class="empty">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            &nbsp; Loading orders...
+        </div>`;
 
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("orders")
-            .select(
-                "id,order_number,customer_name,whatsapp,email,total,created_at,note,items,subtotal,delivery_fee,payment_method,order_status,tracking_token,payment_status,payment_reference,payment_verified_at,payment_verified_by,payment_proof_path,payment_proof_name,payment_proof_uploaded_at,payment_proof_archived_at,payment_proof_drive_file_id,payment_proof_drive_url,payment_proof_status"
-            )
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
+    try{
 
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("orders")
+                .select(`
+                    id,
+                    order_number,
+                    customer_name,
+                    whatsapp,
+                    email,
+                    total,
+                    created_at,
+                    note,
+                    items,
+                    subtotal,
+                    delivery_fee,
+                    payment_method,
+                    order_status,
+                    tracking_token,
+                    payment_status,
+                    payment_reference,
+                    payment_verified_at,
+                    payment_verified_by,
+                    payment_proof_path,
+                    payment_proof_name,
+                    payment_proof_uploaded_at,
+                    payment_proof_archived_at,
+                    payment_proof_drive_file_id,
+                    payment_proof_drive_url,
+                    payment_proof_status
+                `)
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
+                    }
+                );
 
-    if(error){
+        if(error){
+            throw error;
+        }
+
+        allOrders =
+            data || [];
+
+        updateStats();
+
+        applyFilters();
+
+    }catch(error){
 
         console.error(error);
 
-        ordersBody.innerHTML = `
+        container.innerHTML =
+            `<div class="empty">
+                Unable to load orders.
+                <br><br>
+                ${escapeHtml(error.message)}
+            </div>`;
 
-            <tr>
-
-                <td
-                    colspan="8"
-                    class="empty">
-
-                    ${escapeHtml(
-                        error.message
-                    )}
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
     }
 
-
-    allOrders =
-        data || [];
-
-
-    updateStats();
-
-    renderOrders();
 }
 
 
@@ -2443,157 +2408,139 @@ function updateStats(){
 
     const pending =
         allOrders.filter(
-            function(order){
-
-                return String(
-                    order.order_status ||
-                    "pending"
-                ).toLowerCase() ===
-                "pending";
-
-            }
+            order =>
+                order.order_status === "pending"
         ).length;
 
-    const completedList =
+    const completed =
         allOrders.filter(
-            function(order){
-
-                return String(
-                    order.order_status ||
-                    ""
-                ).toLowerCase() ===
-                "completed";
-
-            }
-        );
+            order =>
+                order.order_status === "completed"
+        ).length;
 
     const sales =
-        completedList.reduce(
-            function(sum,order){
+        allOrders
+            .filter(
+                order =>
+                    order.order_status === "completed"
+            )
+            .reduce(
+                (sum,order)=>
+                    sum + Number(order.total || 0),
+                0
+            );
 
-                return sum +
-                    Number(
-                        order.total || 0
-                    );
 
-            },
-            0
-        );
+    document
+        .getElementById("statTotal")
+        .textContent =
+            total.toLocaleString();
 
-    totalOrders.textContent =
-        total;
+    document
+        .getElementById("statPending")
+        .textContent =
+            pending.toLocaleString();
 
-    pendingOrders.textContent =
-        pending;
+    document
+        .getElementById("statCompleted")
+        .textContent =
+            completed.toLocaleString();
 
-    completedOrders.textContent =
-        completedList.length;
+    document
+        .getElementById("statSales")
+        .textContent =
+            formatMoney(sales);
 
-    completedSales.textContent =
-        formatCurrency(sales);
 }
 
 
 /* =====================================================
-   FILTERED ORDERS
+   FILTERS
 ===================================================== */
 
-function getFilteredOrders(){
+function applyFilters(){
 
     const search =
-        searchInput.value
+        document
+            .getElementById("searchInput")
+            .value
             .trim()
             .toLowerCase();
 
-    const status =
-        statusFilter.value
-            .toLowerCase();
+    const orderStatus =
+        document
+            .getElementById("statusFilter")
+            .value;
 
     const paymentStatus =
-        paymentFilter.value
-            .toLowerCase();
+        document
+            .getElementById("paymentFilter")
+            .value;
 
-    const date =
-        dateFilter.value;
+    const proofStatus =
+        document
+            .getElementById("proofFilter")
+            .value;
 
-    return allOrders.filter(
-        function(order){
 
-            const searchable = [
+    filteredOrders =
+        allOrders.filter(
+            order => {
 
-                order.order_number,
-                order.customer_name,
-                order.whatsapp,
-                order.email,
-                order.payment_reference,
-                order.payment_proof_name
+                const searchText =
+                    [
+                        order.order_number,
+                        order.customer_name,
+                        order.whatsapp,
+                        order.email,
+                        order.tracking_token
+                    ]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLowerCase();
 
-            ]
-                .filter(Boolean)
-                .join(" ")
-                .toLowerCase();
 
-            if(
-                search &&
-                !searchable.includes(search)
-            ){
-                return false;
-            }
-
-            const orderStatus =
-                String(
-                    order.order_status ||
-                    "pending"
-                ).toLowerCase();
-
-            if(
-                status &&
-                orderStatus !== status
-            ){
-                return false;
-            }
-
-            const currentPayment =
-                String(
-                    order.payment_status ||
-                    "pending"
-                ).toLowerCase();
-
-            if(
-                paymentStatus &&
-                currentPayment !== paymentStatus
-            ){
-                return false;
-            }
-
-            if(date){
-
-                const d =
-                    new Date(
-                        order.created_at
-                    );
-
-                const localDate =
-                    `${d.getFullYear()}-${String(
-                        d.getMonth()+1
-                    ).padStart(
-                        2,
-                        "0"
-                    )}-${String(
-                        d.getDate()
-                    ).padStart(
-                        2,
-                        "0"
-                    )}`;
-
-                if(localDate !== date){
+                if(
+                    search &&
+                    !searchText.includes(search)
+                ){
                     return false;
                 }
-            }
 
-            return true;
-        }
-    );
+
+                if(
+                    orderStatus &&
+                    order.order_status !== orderStatus
+                ){
+                    return false;
+                }
+
+
+                if(
+                    paymentStatus &&
+                    order.payment_status !== paymentStatus
+                ){
+                    return false;
+                }
+
+
+                if(
+                    proofStatus &&
+                    (order.payment_proof_status || "none")
+                        !== proofStatus
+                ){
+                    return false;
+                }
+
+
+                return true;
+
+            }
+        );
+
+
+    renderOrders();
+
 }
 
 
@@ -2603,599 +2550,793 @@ function getFilteredOrders(){
 
 function renderOrders(){
 
-    const orders =
-        getFilteredOrders();
+    const container =
+        document.getElementById(
+            "ordersTableContainer"
+        );
 
-    if(!orders.length){
 
-        ordersBody.innerHTML = `
+    if(!filteredOrders.length){
 
-            <tr>
-
-                <td
-                    colspan="8"
-                    class="empty">
-
-                    No orders found.
-
-                </td>
-
-            </tr>
-
-        `;
+        container.innerHTML =
+            `<div class="empty">
+                <i class="fa-solid fa-box-open"></i>
+                <br><br>
+                No orders found.
+            </div>`;
 
         return;
     }
 
 
-    ordersBody.innerHTML =
-        orders.map(
-            function(order){
+    let rows = "";
 
-                const items =
-                    Array.isArray(order.items)
-                        ? order.items
-                        : [];
 
-                const itemCount =
-                    items.reduce(
-                        function(sum,item){
+    filteredOrders.forEach(
+        order => {
 
-                            return sum +
-                                Number(
-                                    item.quantity ||
-                                    item.qty ||
-                                    1
-                                );
+            rows += `
 
-                        },
-                        0
+                <tr>
+
+                    <td>
+
+                        <div class="order-no">
+                            ${escapeHtml(order.order_number || "—")}
+                        </div>
+
+                        <div
+                            style="
+                                color:#666;
+                                font-size:10px;
+                                margin-top:4px;
+                            "
+                        >
+                            ${escapeHtml(order.tracking_token || "")}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="customer-name">
+                            ${escapeHtml(order.customer_name || "—")}
+                        </div>
+
+                        <div class="customer-email">
+                            ${escapeHtml(order.email || "")}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(order.whatsapp || "—")}
+                    </td>
+
+
+                    <td class="amount">
+                        ${formatMoney(order.total)}
+                    </td>
+
+
+                    <td>
+                        ${statusBadge(order.order_status)}
+                    </td>
+
+
+                    <td>
+                        ${statusBadge(order.payment_status)}
+                    </td>
+
+
+                    <td>
+                        ${proofBadge(order.payment_proof_status)}
+                    </td>
+
+
+                    <td>
+                        ${formatDate(order.created_at)}
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="view-btn"
+                            onclick="openOrderModal(${Number(order.id)})"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                            View
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    container.innerHTML = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Order
+                    </th>
+
+                    <th>
+                        Customer
+                    </th>
+
+                    <th>
+                        WhatsApp
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                    <th>
+                        Order Status
+                    </th>
+
+                    <th>
+                        Payment
+                    </th>
+
+                    <th>
+                        Proof
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+                ${rows}
+            </tbody>
+
+        </table>
+
+    `;
+
+}
+
+
+/* =====================================================
+   OPEN ORDER
+===================================================== */
+
+function openOrderModal(orderId){
+
+    const order =
+        allOrders.find(
+            item =>
+                Number(item.id) === Number(orderId)
+        );
+
+
+    if(!order){
+        return;
+    }
+
+
+    currentOrderId =
+        order.id;
+
+
+    document
+        .getElementById("modalTitle")
+        .textContent =
+            "Order " +
+            (order.order_number || "");
+
+
+    document
+        .getElementById("orderStatusSelect")
+        .value =
+            order.order_status || "pending";
+
+
+    renderOrderDetails(order);
+
+
+    document
+        .getElementById("orderModal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    currentOrderId = null;
+
+    document
+        .getElementById("orderModal")
+        .classList.remove("show");
+
+}
+
+
+function handleModalBackground(event){
+
+    if(
+        event.target ===
+        document.getElementById("orderModal")
+    ){
+        closeModal();
+    }
+
+}
+
+
+/* =====================================================
+   RENDER ORDER DETAILS
+===================================================== */
+
+function renderOrderDetails(order){
+
+    let itemsHtml = "";
+
+    const items =
+        Array.isArray(order.items)
+            ? order.items
+            : [];
+
+
+    if(items.length){
+
+        items.forEach(
+            item => {
+
+                const name =
+                    item.name ||
+                    item.title ||
+                    "Product";
+
+                const qty =
+                    Number(
+                        item.quantity ||
+                        item.qty ||
+                        1
                     );
 
-                const status =
-                    String(
-                        order.order_status ||
-                        "pending"
-                    ).toLowerCase();
+                const price =
+                    Number(
+                        item.price || 0
+                    );
 
-                const paymentStatus =
-                    String(
-                        order.payment_status ||
-                        "pending"
-                    ).toLowerCase();
+                itemsHtml += `
 
-                const proofStatus =
-                    String(
-                        order.payment_proof_status ||
-                        "none"
-                    ).toLowerCase();
+                    <div class="item-row">
 
-                return `
+                        <div class="item-left">
 
-                    <tr>
-
-                        <td>
-
-                            <div
-                                class="order-number">
-
-                                ${escapeHtml(
-                                    order.order_number
-                                )}
-
+                            <div class="item-name">
+                                ${escapeHtml(name)}
                             </div>
 
-                            <div
-                                class="small-text">
-
-                                #${escapeHtml(
-                                    order.id
-                                )}
-
+                            <div class="item-meta">
+                                Qty: ${qty}
                             </div>
 
-                        </td>
+                        </div>
 
+                        <div class="item-price">
+                            ${formatMoney(price * qty)}
+                        </div>
 
-                        <td>
-
-                            <div
-                                class="customer-name">
-
-                                ${escapeHtml(
-                                    order.customer_name
-                                )}
-
-                            </div>
-
-                            <div
-                                class="small-text">
-
-                                ${escapeHtml(
-                                    order.whatsapp
-                                )}
-
-                            </div>
-
-                            <div
-                                class="small-text">
-
-                                ${escapeHtml(
-                                    order.email
-                                )}
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            ${itemCount}
-
-                            item${itemCount === 1 ? "" : "s"}
-
-                        </td>
-
-
-                        <td>
-
-                            <strong>
-
-                                ${formatCurrency(
-                                    order.total
-                                )}
-
-                            </strong>
-
-                        </td>
-
-
-                        <td>
-
-                            ${formatDate(
-                                order.created_at
-                            )}
-
-                        </td>
-
-
-                        <td>
-
-                            <span
-                                class="status-badge ${paymentClass(
-                                    paymentStatus
-                                )}">
-
-                                ${getPaymentStatusLabel(
-                                    paymentStatus
-                                )}
-
-                            </span>
-
-
-                            ${
-                                order.payment_reference
-                                ?
-
-                                `
-
-                                <div
-                                    class="small-text">
-
-                                    Ref:
-                                    ${escapeHtml(
-                                        order.payment_reference
-                                    )}
-
-                                </div>
-
-                                `
-
-                                :
-                                ""
-                            }
-
-
-                            ${
-                                proofStatus !== "none"
-                                ?
-
-                                `
-
-                                <div
-                                    class="small-text"
-                                    style="color:#4dabf7">
-
-                                    Proof:
-                                    ${escapeHtml(
-                                        getProofLabel(
-                                            proofStatus
-                                        )
-                                    )}
-
-                                </div>
-
-                                `
-
-                                :
-                                ""
-                            }
-
-                        </td>
-
-
-                        <td>
-
-                            <select
-                                class="status-select"
-                                data-order-id="${escapeHtml(
-                                    order.id
-                                )}">
-
-                                <option
-                                    value="pending"
-                                    ${
-                                        status === "pending"
-                                        ? "selected"
-                                        : ""
-                                    }>
-
-                                    Pending
-
-                                </option>
-
-                                <option
-                                    value="processing"
-                                    ${
-                                        status === "processing"
-                                        ? "selected"
-                                        : ""
-                                    }>
-
-                                    Processing
-
-                                </option>
-
-                                <option
-                                    value="completed"
-                                    ${
-                                        status === "completed"
-                                        ? "selected"
-                                        : ""
-                                    }>
-
-                                    Completed
-
-                                </option>
-
-                                <option
-                                    value="cancelled"
-                                    ${
-                                        status === "cancelled"
-                                        ? "selected"
-                                        : ""
-                                    }>
-
-                                    Cancelled
-
-                                </option>
-
-                            </select>
-
-                        </td>
-
-
-                        <td>
-
-                            <button
-                                class="view-btn"
-                                data-view-id="${escapeHtml(
-                                    order.id
-                                )}">
-
-                                View
-
-                            </button>
-
-                        </td>
-
-                    </tr>
+                    </div>
 
                 `;
 
             }
-        ).join("");
-
-
-    attachOrderEvents();
-}
-
-
-/* =====================================================
-   ORDER EVENTS
-===================================================== */
-
-function attachOrderEvents(){
-
-    document
-        .querySelectorAll(".status-select")
-        .forEach(
-            function(select){
-
-                select.addEventListener(
-                    "change",
-                    async function(){
-
-                        await updateOrderStatus(
-                            this.dataset.orderId,
-                            this.value
-                        );
-
-                    }
-                );
-
-            }
         );
 
+    }else{
 
-    document
-        .querySelectorAll("[data-view-id]")
-        .forEach(
-            function(button){
+        itemsHtml =
+            `<div class="item-row">
+                <div class="item-meta">
+                    No item details available.
+                </div>
+            </div>`;
 
-                button.addEventListener(
-                    "click",
-                    function(){
-
-                        openOrderModal(
-                            button.dataset.viewId
-                        );
-
-                    }
-                );
-
-            }
-        );
-}
-
-
-/* =====================================================
-   UPDATE ORDER STATUS
-===================================================== */
-
-async function updateOrderStatus(
-    orderId,
-    newStatus
-){
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("orders")
-            .update({
-                order_status:newStatus
-            })
-            .eq("id",orderId);
-
-    if(error){
-
-        console.error(error);
-
-        alert(
-            "Could not update order status.\n\n" +
-            error.message
-        );
-
-        await loadOrders();
-
-        return;
     }
 
-    const order =
-        allOrders.find(
-            function(item){
 
-                return String(item.id) ===
-                    String(orderId);
-
-            }
-        );
-
-    if(order){
-        order.order_status =
-            newStatus;
-    }
-
-    updateStats();
-
-    renderOrders();
-}
-
-
-/* =====================================================
-   RENDER PAYMENT PROOF
-===================================================== */
-
-function renderPaymentProof(order){
-
-    const status =
-        String(
-            order.payment_proof_status ||
-            "none"
-        ).toLowerCase();
-
-
-    paymentProofMessage.textContent =
-        "";
-
-    paymentProofMessage.style.color =
-        "#999";
-
-
-    paymentProofStatus.innerHTML = `
-
-        <span
-            class="status-badge ${proofClass(status)}">
-
-            ${escapeHtml(
-                getProofLabel(status)
-            )}
-
-        </span>
-
-    `;
+    let proofHtml = "";
 
 
     if(
-        !order.payment_proof_path ||
-        status === "none"
+        order.payment_proof_path
     ){
 
-        paymentProofInfo.innerHTML = `
-
-            <div
-                class="small-text"
-                style="margin-top:0">
-
-                No payment proof has been uploaded by the customer.
-
-            </div>
-
-        `;
-
-        viewPaymentProofButton.disabled =
-            true;
-
-        return;
-    }
+        const proofStatus =
+            order.payment_proof_status ||
+            "uploaded";
 
 
-    paymentProofInfo.innerHTML = `
-
-        <div class="proof-info-row">
-
-            <span class="proof-info-label">
-                File Name
-            </span>
-
-            <span class="proof-info-value">
-                ${escapeHtml(
-                    order.payment_proof_name ||
-                    "Payment proof"
-                )}
-            </span>
-
-        </div>
+        const hasDrive =
+            Boolean(
+                order.payment_proof_drive_url
+            );
 
 
-        <div class="proof-info-row">
-
-            <span class="proof-info-label">
-                Uploaded
-            </span>
-
-            <span class="proof-info-value">
-                ${escapeHtml(
-                    formatDate(
-                        order.payment_proof_uploaded_at
-                    )
-                )}
-            </span>
-
-        </div>
+        const isPaid =
+            order.payment_status === "paid";
 
 
-        <div class="proof-info-row">
+        proofHtml = `
 
-            <span class="proof-info-label">
-                Proof Status
-            </span>
+            <div class="proof-box">
 
-            <span class="proof-info-value">
+                <div class="proof-status">
 
-                ${escapeHtml(
-                    getProofLabel(status)
-                )}
+                    <strong>
+                        Payment Proof:
+                    </strong>
 
-            </span>
+                    &nbsp;
 
-        </div>
+                    ${proofBadge(proofStatus)}
+
+                </div>
 
 
-        ${
-            order.payment_proof_archived_at
-            ?
-
-            `
-
-            <div class="proof-info-row">
-
-                <span class="proof-info-label">
-                    Archived
-                </span>
-
-                <span class="proof-info-value">
-
+                <div
+                    class="detail-value"
+                    style="margin-bottom:8px"
+                >
+                    <strong>File:</strong>
                     ${escapeHtml(
-                        formatDate(
-                            order.payment_proof_archived_at
-                        )
+                        order.payment_proof_name ||
+                        "Payment proof"
                     )}
-
-                </span>
-
-            </div>
-
-            `
-
-            :
-            ""
-        }
+                </div>
 
 
-        ${
-            order.payment_proof_drive_url
-            ?
+                <div
+                    class="detail-value"
+                    style="margin-bottom:8px"
+                >
+                    <strong>Uploaded:</strong>
+                    ${formatDate(
+                        order.payment_proof_uploaded_at
+                    )}
+                </div>
 
-            `
 
-            <div class="proof-info-row">
+                ${
+                    order.payment_proof_archived_at
+                    ?
+                    `
+                    <div
+                        class="detail-value"
+                        style="margin-bottom:8px"
+                    >
+                        <strong>Archived:</strong>
+                        ${formatDate(
+                            order.payment_proof_archived_at
+                        )}
+                    </div>
+                    `
+                    :
+                    ""
+                }
 
-                <span class="proof-info-label">
-                    Google Drive
-                </span>
 
-                <span class="proof-info-value">
+                <div class="proof-actions">
 
+                    <button
+                        id="viewProofBtn"
+                        class="action-btn gold"
+                        onclick="viewPaymentProof()"
+                    >
+                        <i class="fa-solid fa-file-image"></i>
+                        View Proof
+                    </button>
+
+
+                    <button
+                        id="approvePaymentBtn"
+                        class="action-btn green"
+                        onclick="approvePayment()"
+                        ${
+                            isPaid
+                            ? "disabled"
+                            : ""
+                        }
+                    >
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Approve & Archive Payment
+                    </button>
+
+
+                    <button
+                        id="rejectPaymentBtn"
+                        class="action-btn red"
+                        onclick="rejectPayment()"
+                        ${
+                            isPaid
+                            ? "disabled"
+                            : ""
+                        }
+                    >
+                        <i class="fa-solid fa-ban"></i>
+                        Reject Payment
+                    </button>
+
+                </div>
+
+
+                ${
+                    hasDrive
+                    ?
+                    `
                     <a
+                        class="drive-link"
                         href="${escapeHtml(
                             order.payment_proof_drive_url
                         )}"
                         target="_blank"
                         rel="noopener noreferrer"
-                        style="color:#4dabf7">
-
-                        Open archived proof
-
+                    >
+                        <i class="fa-brands fa-google-drive"></i>
+                        Open Google Drive Archive
                     </a>
+                    `
+                    :
+                    ""
+                }
 
-                </span>
+
+                ${
+                    order.payment_proof_drive_file_id
+                    ?
+                    `
+                    <div class="info-note">
+                        Drive File ID:
+                        ${escapeHtml(
+                            order.payment_proof_drive_file_id
+                        )}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    proofStatus === "failed"
+                    ?
+                    `
+                    <div class="info-note">
+                        Google Drive archive failed.
+                        Payment has NOT been marked as paid.
+                        You can try the approval again.
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    isPaid
+                    ?
+                    `
+                    <div class="info-note">
+                        This payment has already been approved.
+                        The payment proof was archived through the secure server workflow.
+                    </div>
+                    `
+                    :
+                    ""
+                }
 
             </div>
 
-            `
+        `;
 
-            :
-            ""
-        }
+    }else{
+
+        proofHtml = `
+
+            <div class="proof-box">
+
+                <div class="info-note">
+                    No payment proof has been uploaded by the customer yet.
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    document
+        .getElementById("orderDetails")
+        .innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Order Number
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(order.order_number || "—")}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Tracking Token
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(order.tracking_token || "—")}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Customer
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(order.customer_name || "—")}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    WhatsApp
+                </div>
+
+                <div class="detail-value">
+
+                    ${
+                        order.whatsapp
+                        ?
+                        `
+                        <a
+                            href="https://wa.me/${escapeHtml(
+                                String(order.whatsapp)
+                                    .replace(/[^\d]/g,"")
+                            )}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="
+                                color:#72dfa2;
+                                text-decoration:none;
+                                font-weight:700;
+                            "
+                        >
+                            <i class="fa-brands fa-whatsapp"></i>
+                            ${escapeHtml(order.whatsapp)}
+                        </a>
+                        `
+                        :
+                        "—"
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Email
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(order.email || "—")}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Created
+                </div>
+
+                <div class="detail-value">
+                    ${formatDate(order.created_at)}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Subtotal
+                </div>
+
+                <div class="detail-value">
+                    ${formatMoney(order.subtotal)}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Delivery
+                </div>
+
+                <div class="detail-value">
+                    ${formatMoney(order.delivery_fee)}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Total
+                </div>
+
+                <div class="detail-value">
+                    <strong style="color:#f0ca61">
+                        ${formatMoney(order.total)}
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Payment Method
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        order.payment_method || "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Payment Status
+                </div>
+
+                <div class="detail-value">
+                    ${statusBadge(order.payment_status)}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Payment Reference
+                </div>
+
+                <div class="detail-value">
+                    ${
+                        escapeHtml(
+                            order.payment_reference ||
+                            "Not provided"
+                        )
+                    }
+                </div>
+
+            </div>
+
+
+            <div class="detail full">
+
+                <div class="detail-label">
+                    Customer Note
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        order.note ||
+                        "No note"
+                    )}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="section-title">
+            Order Items
+        </div>
+
+        <div class="items-box">
+            ${itemsHtml}
+        </div>
+
+
+        <div class="section-title">
+            Payment Verification
+        </div>
+
+
+        <div class="detail">
+
+            <div class="detail-label">
+                Payment Reference / Transaction ID
+            </div>
+
+            <div class="reference-box">
+
+                <input
+                    id="paymentReferenceInput"
+                    type="text"
+                    maxlength="200"
+                    value="${escapeHtml(
+                        order.payment_reference || ""
+                    )}"
+                    placeholder="Enter payment reference"
+                >
+
+            </div>
+
+            <div class="info-note">
+                For approval, enter the customer's payment reference before archiving the proof.
+            </div>
+
+        </div>
+
+
+        <div class="section-title">
+            Payment Proof
+        </div>
+
+        ${proofHtml}
 
     `;
 
-
-    viewPaymentProofButton.disabled =
-        false;
 }
 
 
@@ -3206,51 +3347,47 @@ function renderPaymentProof(order){
 async function viewPaymentProof(){
 
     if(!currentOrderId){
-
         return;
     }
 
 
     const order =
         allOrders.find(
-            function(item){
-
-                return String(item.id) ===
-                    String(currentOrderId);
-
-            }
+            item =>
+                Number(item.id) ===
+                Number(currentOrderId)
         );
 
 
-    if(!order){
+    if(
+        !order ||
+        !order.payment_proof_path
+    ){
+
+        showToast(
+            "Payment proof is not available.",
+            "error"
+        );
 
         return;
     }
 
 
-    if(!order.payment_proof_path){
+    const button =
+        document.getElementById(
+            "viewProofBtn"
+        );
 
-        paymentProofMessage.textContent =
-            "No payment proof file is available.";
 
-        paymentProofMessage.style.color =
-            "#ff9f43";
+    if(button){
 
-        return;
+        button.disabled = true;
+
+        button.innerHTML =
+            `<i class="fa-solid fa-spinner fa-spin"></i>
+             Loading...`;
+
     }
-
-
-    viewPaymentProofButton.disabled =
-        true;
-
-    viewPaymentProofButton.textContent =
-        "Opening...";
-
-    paymentProofMessage.textContent =
-        "Creating secure viewing link...";
-
-    paymentProofMessage.style.color =
-        "#999";
 
 
     try{
@@ -3269,18 +3406,13 @@ async function viewPaymentProof(){
 
 
         if(error){
-
             throw error;
         }
 
 
-        if(
-            !data ||
-            !data.signedUrl
-        ){
-
+        if(!data || !data.signedUrl){
             throw new Error(
-                "Could not create a secure proof link."
+                "Could not create secure proof URL."
             );
         }
 
@@ -3292,526 +3424,39 @@ async function viewPaymentProof(){
         );
 
 
-        paymentProofMessage.textContent =
-            "Secure payment proof link opened. The link expires in 5 minutes.";
-
-        paymentProofMessage.style.color =
-            "#28c76f";
-
     }catch(error){
 
         console.error(error);
 
-        paymentProofMessage.textContent =
-            "Could not open payment proof. " +
-            (error.message || "");
-
-        paymentProofMessage.style.color =
-            "#ff4d4f";
+        showToast(
+            error.message ||
+            "Could not open payment proof.",
+            "error"
+        );
 
     }finally{
 
-        viewPaymentProofButton.disabled =
-            false;
+        if(button){
 
-        viewPaymentProofButton.textContent =
-            "View Payment Proof";
-    }
-}
+            button.disabled = false;
 
+            button.innerHTML =
+                `<i class="fa-solid fa-file-image"></i>
+                 View Proof`;
 
-viewPaymentProofButton.addEventListener(
-    "click",
-    viewPaymentProof
-);
-
-
-/* =====================================================
-   OPEN ORDER MODAL
-===================================================== */
-
-function openOrderModal(orderId){
-
-    const order =
-        allOrders.find(
-            function(item){
-
-                return String(item.id) ===
-                    String(orderId);
-
-            }
-        );
-
-
-    if(!order){
-
-        return;
-    }
-
-
-    currentOrderId =
-        order.id;
-
-
-    const status =
-        String(
-            order.order_status ||
-            "pending"
-        ).toLowerCase();
-
-
-    const paymentStatus =
-        String(
-            order.payment_status ||
-            "pending"
-        ).toLowerCase();
-
-
-    paymentReferenceInput.value =
-        order.payment_reference ||
-        "";
-
-
-    paymentActionMessage.textContent =
-        "";
-
-
-    verifyPaymentButton.disabled =
-        paymentStatus === "paid";
-
-
-    rejectPaymentButton.disabled =
-        paymentStatus === "rejected" ||
-        paymentStatus === "paid";
-
-
-    verifyPaymentButton.textContent =
-        paymentStatus === "paid"
-            ? "Payment Approved"
-            : "Approve Payment";
-
-
-    orderDetails.innerHTML = `
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Order Number
-            </div>
-
-            <div class="detail-value">
-                ${escapeHtml(
-                    order.order_number
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Order Status
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    getStatusLabel(status)
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Payment Status
-            </div>
-
-            <div class="detail-value">
-
-                <span
-                    class="status-badge ${paymentClass(
-                        paymentStatus
-                    )}">
-
-                    ${getPaymentStatusLabel(
-                        paymentStatus
-                    )}
-
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Payment Reference
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    order.payment_reference ||
-                    "-"
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Customer
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    order.customer_name
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                WhatsApp
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    order.whatsapp
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Email
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    order.email
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Order Date
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    formatDate(
-                        order.created_at
-                    )
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Subtotal
-            </div>
-
-            <div class="detail-value">
-
-                ${formatCurrency(
-                    order.subtotal
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Delivery
-            </div>
-
-            <div class="detail-value">
-
-                ${formatCurrency(
-                    order.delivery_fee
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Payment Method
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    order.payment_method ||
-                    "Pending"
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <div class="detail-label">
-                Verified At
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    formatDate(
-                        order.payment_verified_at
-                    )
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail full">
-
-            <div class="detail-label">
-                Verified By
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    order.payment_verified_by ||
-                    "-"
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail full">
-
-            <div class="detail-label">
-                Tracking Token
-            </div>
-
-            <div class="detail-value">
-
-                ${escapeHtml(
-                    order.tracking_token ||
-                    "-"
-                )}
-
-            </div>
-
-        </div>
-
-
-        ${
-            order.note
-
-            ?
-
-            `
-
-            <div class="detail full">
-
-                <div class="detail-label">
-                    Customer Note
-                </div>
-
-                <div class="detail-value">
-
-                    ${escapeHtml(
-                        order.note
-                    )}
-
-                </div>
-
-            </div>
-
-            `
-
-            :
-            ""
         }
 
-    `;
-
-
-    renderPaymentProof(order);
-
-
-    const items =
-        Array.isArray(order.items)
-            ? order.items
-            : [];
-
-
-    modalItems.innerHTML =
-        items.length
-
-        ?
-
-        items.map(
-            function(item){
-
-                const name =
-                    item.name ||
-                    item.title ||
-                    "Product";
-
-                const qty =
-                    Number(
-                        item.quantity ||
-                        item.qty ||
-                        1
-                    );
-
-                const price =
-                    Number(
-                        item.price ||
-                        item.unit_price ||
-                        0
-                    );
-
-                const lineTotal =
-                    Number(
-                        item.total ||
-                        price * qty
-                    );
-
-                return `
-
-                    <div class="item-row">
-
-                        <span>
-
-                            ${escapeHtml(
-                                name
-                            )}
-
-                            × ${qty}
-
-                        </span>
-
-                        <strong>
-
-                            ${formatCurrency(
-                                lineTotal
-                            )}
-
-                        </strong>
-
-                    </div>
-
-                `;
-
-            }
-        ).join("")
-
-        :
-
-        `
-
-        <div class="small-text">
-
-            No item information available.
-
-        </div>
-
-        `;
-
-
-    modalTotal.innerHTML = `
-
-        <span>
-            Total
-        </span>
-
-        <span>
-
-            ${formatCurrency(
-                order.total
-            )}
-
-        </span>
-
-    `;
-
-
-    const phone =
-        cleanPhone(
-            order.whatsapp
-        );
-
-
-    if(phone){
-
-        whatsappButton.href =
-            "https://wa.me/" +
-            phone;
-
-        whatsappButton.classList.remove(
-            "hidden"
-        );
-
-    }else{
-
-        whatsappButton.classList.add(
-            "hidden"
-        );
     }
 
-
-    orderModal.classList.remove(
-        "hidden"
-    );
 }
 
 
 /* =====================================================
-   VERIFY / REJECT PAYMENT
+   APPROVE PAYMENT
+   SECURE GOOGLE DRIVE WORKFLOW
 ===================================================== */
 
-async function verifyPayment(markPaid){
+async function approvePayment(){
 
     if(!currentOrderId){
         return;
@@ -3820,266 +3465,312 @@ async function verifyPayment(markPaid){
 
     const order =
         allOrders.find(
-            function(item){
-
-                return String(item.id) ===
-                    String(currentOrderId);
-
-            }
+            item =>
+                Number(item.id) ===
+                Number(currentOrderId)
         );
 
 
     if(!order){
+        return;
+    }
+
+
+    if(
+        order.payment_status === "paid"
+    ){
+
+        showToast(
+            "This payment is already paid.",
+            "error"
+        );
 
         return;
     }
 
 
+    if(
+        !order.payment_proof_path
+    ){
+
+        showToast(
+            "Customer payment proof is required before approval.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const referenceInput =
+        document.getElementById(
+            "paymentReferenceInput"
+        );
+
+
     const reference =
-        paymentReferenceInput.value.trim();
+        referenceInput
+            ? referenceInput.value.trim()
+            : "";
 
 
-    /* =================================================
-       APPROVAL VALIDATION
-    ================================================= */
+    if(!reference){
 
-    if(markPaid){
+        showToast(
+            "Enter the payment reference before approval.",
+            "error"
+        );
 
-        if(!reference){
-
-            paymentActionMessage.textContent =
-                "Enter the payment reference before approving the payment.";
-
-            paymentActionMessage.style.color =
-                "#ff9f43";
-
-            return;
+        if(referenceInput){
+            referenceInput.focus();
         }
 
-
-        if(!order.payment_proof_path){
-
-            paymentActionMessage.textContent =
-                "Payment proof has not been uploaded yet.";
-
-            paymentActionMessage.style.color =
-                "#ff4d4f";
-
-            return;
-        }
+        return;
+    }
 
 
-        const proofStatus =
-            String(
-                order.payment_proof_status ||
-                "none"
-            ).toLowerCase();
+    const button =
+        document.getElementById(
+            "approvePaymentBtn"
+        );
 
 
-        if(
-            proofStatus !== "uploaded" &&
-            proofStatus !== "failed"
-        ){
+    if(button){
 
-            paymentActionMessage.textContent =
-                "This payment proof is not ready for approval.";
+        button.disabled = true;
 
-            paymentActionMessage.style.color =
-                "#ff9f43";
-
-            return;
-        }
+        button.innerHTML =
+            `<i class="fa-solid fa-spinner fa-spin"></i>
+             Archiving...`;
 
     }
 
 
-    verifyPaymentButton.disabled =
-        true;
-
-    rejectPaymentButton.disabled =
-        true;
-
-
-    paymentActionMessage.textContent =
-        markPaid
-            ? "Saving payment reference and archiving proof..."
-            : "Rejecting payment...";
-
-    paymentActionMessage.style.color =
-        "#999";
-
-
     try{
 
-        /* =============================================
-           GET CURRENT ADMIN SESSION
-        ============================================= */
+        /*
+         * IMPORTANT:
+         *
+         * The Google Drive credentials are NOT here.
+         *
+         * This calls the secure Supabase Edge Function.
+         */
 
         const {
-            data: sessionData,
-            error: sessionError
+            data,
+            error
         } =
             await supabaseClient
-                .auth
-                .getSession();
-
-
-        if(
-            sessionError ||
-            !sessionData.session
-        ){
-
-            throw new Error(
-                "Admin session expired. Please login again."
-            );
-        }
-
-
-        /* =============================================
-           APPROVE PAYMENT
-        ============================================= */
-
-        if(markPaid){
-
-            /* =========================================
-               SAVE PAYMENT REFERENCE FIRST
-            ========================================= */
-
-            const {
-                error:
-                    referenceError
-            } =
-                await supabaseClient
-                    .from("orders")
-                    .update({
-                        payment_reference:
-                            reference
-                    })
-                    .eq(
-                        "id",
-                        currentOrderId
-                    )
-                    .neq(
-                        "payment_status",
-                        "paid"
-                    );
-
-
-            if(referenceError){
-
-                throw referenceError;
-            }
-
-
-            /* =========================================
-               CALL SECURE EDGE FUNCTION
-            ========================================= */
-
-            const {
-                data: functionData,
-                error: functionError
-            } =
-                await supabaseClient.functions.invoke(
+                .functions
+                .invoke(
                     "archive-payment-proof",
                     {
                         body:{
                             order_id:
-                                Number(currentOrderId)
+                                currentOrderId,
+
+                            payment_reference:
+                                reference
                         }
                     }
                 );
 
 
-            if(functionError){
+        if(error){
 
-                throw new Error(
-                    functionError.message ||
-                    "Could not connect to the payment archive function."
-                );
-            }
-
+            let message =
+                error.message ||
+                "Payment approval failed.";
 
             if(
-                !functionData ||
-                functionData.success !== true
+                error.context
             ){
 
-                throw new Error(
-                    functionData?.error ||
-                    "Payment approval failed."
-                );
-            }
+                try{
 
+                    const response =
+                        await error.context.json();
 
-            /* =========================================
-               SUCCESS
-            ========================================= */
-
-            const updatedOrder =
-                allOrders.find(
-                    function(item){
-
-                        return String(item.id) ===
-                            String(currentOrderId);
-
+                    if(
+                        response &&
+                        response.error
+                    ){
+                        message =
+                            response.error;
                     }
-                );
 
+                }catch(_){
 
-            if(updatedOrder){
+                }
 
-                updatedOrder.payment_status =
-                    "paid";
-
-                updatedOrder.payment_reference =
-                    reference;
-
-                updatedOrder.payment_verified_at =
-                    new Date().toISOString();
-
-                updatedOrder.payment_verified_by =
-                    sessionData.session.user.id;
-
-                updatedOrder.payment_proof_status =
-                    "archived";
-
-                updatedOrder.payment_proof_archived_at =
-                    new Date().toISOString();
-
-                updatedOrder.payment_proof_drive_file_id =
-                    functionData.drive_file_id ||
-                    updatedOrder.payment_proof_drive_file_id;
-
-                updatedOrder.payment_proof_drive_url =
-                    functionData.drive_url ||
-                    updatedOrder.payment_proof_drive_url;
             }
 
-
-            paymentActionMessage.innerHTML =
-                "✓ Payment approved successfully.<br>" +
-                "✓ Payment proof archived to Google Drive.";
-
-            paymentActionMessage.style.color =
-                "#28c76f";
-
-
-            updateStats();
-
-            renderOrders();
-
-            openOrderModal(
-                currentOrderId
-            );
-
-
-            return;
+            throw new Error(message);
         }
 
 
-        /* =============================================
-           REJECT PAYMENT
-        ============================================= */
+        if(
+            !data ||
+            data.success !== true
+        ){
+
+            throw new Error(
+                data?.error ||
+                "Payment approval failed."
+            );
+
+        }
+
+
+        showToast(
+            "Payment approved and payment proof archived to Google Drive."
+        );
+
+
+        await loadOrders();
+
+
+        const updatedOrder =
+            allOrders.find(
+                item =>
+                    Number(item.id) ===
+                    Number(currentOrderId)
+            );
+
+
+        if(updatedOrder){
+
+            renderOrderDetails(
+                updatedOrder
+            );
+
+            document
+                .getElementById(
+                    "orderStatusSelect"
+                )
+                .value =
+                    updatedOrder.order_status ||
+                    "pending";
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Google Drive archive failed. Payment was not marked as paid.",
+            "error"
+        );
+
+        if(button){
+
+            button.disabled = false;
+
+            button.innerHTML =
+                `<i class="fa-solid fa-cloud-arrow-up"></i>
+                 Approve & Archive Payment`;
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   REJECT PAYMENT
+===================================================== */
+
+async function rejectPayment(){
+
+    if(!currentOrderId){
+        return;
+    }
+
+
+    const order =
+        allOrders.find(
+            item =>
+                Number(item.id) ===
+                Number(currentOrderId)
+        );
+
+
+    if(!order){
+        return;
+    }
+
+
+    if(
+        order.payment_status === "paid"
+    ){
+
+        showToast(
+            "A paid payment cannot be rejected.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const referenceInput =
+        document.getElementById(
+            "paymentReferenceInput"
+        );
+
+
+    const reference =
+        referenceInput
+            ? referenceInput.value.trim()
+            : (
+                order.payment_reference ||
+                ""
+            );
+
+
+    const button =
+        document.getElementById(
+            "rejectPaymentBtn"
+        );
+
+
+    if(button){
+
+        button.disabled = true;
+
+        button.innerHTML =
+            `<i class="fa-solid fa-spinner fa-spin"></i>
+             Rejecting...`;
+
+    }
+
+
+    try{
+
+        const {
+            data:userData,
+            error:userError
+        } =
+            await supabaseClient
+                .auth
+                .getUser();
+
+
+        if(userError){
+            throw userError;
+        }
+
+
+        if(!userData.user){
+            throw new Error(
+                "Admin session expired. Please login again."
+            );
+        }
+
 
         const updateData = {
 
@@ -4093,7 +3784,7 @@ async function verifyPayment(markPaid){
                 new Date().toISOString(),
 
             payment_verified_by:
-                sessionData.session.user.id
+                userData.user.id
 
         };
 
@@ -4103,9 +3794,7 @@ async function verifyPayment(markPaid){
         } =
             await supabaseClient
                 .from("orders")
-                .update(
-                    updateData
-                )
+                .update(updateData)
                 .eq(
                     "id",
                     currentOrderId
@@ -4113,217 +3802,232 @@ async function verifyPayment(markPaid){
 
 
         if(error){
-
             throw error;
         }
 
 
-        const rejectedOrder =
-            allOrders.find(
-                function(item){
-
-                    return String(item.id) ===
-                        String(currentOrderId);
-
-                }
-            );
-
-
-        if(rejectedOrder){
-
-            Object.assign(
-                rejectedOrder,
-                updateData
-            );
-        }
-
-
-        paymentActionMessage.textContent =
-            "Payment marked as REJECTED.";
-
-        paymentActionMessage.style.color =
-            "#ff4d4f";
-
-
-        updateStats();
-
-        renderOrders();
-
-        openOrderModal(
-            currentOrderId
+        showToast(
+            "Payment rejected."
         );
+
+
+        await loadOrders();
+
+
+        const updatedOrder =
+            allOrders.find(
+                item =>
+                    Number(item.id) ===
+                    Number(currentOrderId)
+            );
+
+
+        if(updatedOrder){
+
+            renderOrderDetails(
+                updatedOrder
+            );
+
+        }
 
 
     }catch(error){
 
-        console.error(
-            "Payment action error:",
-            error
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Could not reject payment.",
+            "error"
         );
 
+    }finally{
 
-        paymentActionMessage.textContent =
-            error.message ||
-            "Could not process payment.";
+        if(button){
 
-        paymentActionMessage.style.color =
-            "#ff4d4f";
+            button.disabled = false;
 
+            button.innerHTML =
+                `<i class="fa-solid fa-ban"></i>
+                 Reject Payment`;
 
-        verifyPaymentButton.disabled =
-            false;
+        }
 
-        rejectPaymentButton.disabled =
-            false;
     }
+
 }
 
 
 /* =====================================================
-   PAYMENT BUTTONS
+   ORDER STATUS
 ===================================================== */
 
-verifyPaymentButton.addEventListener(
-    "click",
-    function(){
+async function saveOrderStatus(){
 
-        verifyPayment(true);
+    if(!currentOrderId){
+        return;
+    }
+
+
+    const status =
+        document
+            .getElementById(
+                "orderStatusSelect"
+            )
+            .value;
+
+
+    try{
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("orders")
+                .update({
+                    order_status:
+                        status
+                })
+                .eq(
+                    "id",
+                    currentOrderId
+                );
+
+
+        if(error){
+            throw error;
+        }
+
+
+        showToast(
+            "Order status updated successfully."
+        );
+
+
+        await loadOrders();
+
+
+        const updatedOrder =
+            allOrders.find(
+                item =>
+                    Number(item.id) ===
+                    Number(currentOrderId)
+            );
+
+
+        if(updatedOrder){
+
+            renderOrderDetails(
+                updatedOrder
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Could not update order status.",
+            "error"
+        );
 
     }
-);
 
-
-rejectPaymentButton.addEventListener(
-    "click",
-    function(){
-
-        verifyPayment(false);
-
-    }
-);
+}
 
 
 /* =====================================================
-   CLOSE MODAL
+   AUTH STATE
 ===================================================== */
 
-closeModal.addEventListener(
-    "click",
-    function(){
+supabaseClient
+    .auth
+    .onAuthStateChange(
+        async (event,session)=>{
 
-        orderModal.classList.add(
-            "hidden"
-        );
+            if(
+                event === "SIGNED_OUT"
+            ){
 
-        currentOrderId =
-            null;
+                currentUser = null;
+
+                showLoginScreen();
+
+                return;
+            }
+
+            if(
+                session &&
+                !currentUser
+            ){
+
+                await checkAdmin();
+
+                if(currentUser){
+
+                    await loadPaymentSettings();
+
+                    await loadOrders();
+
+                }
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   INITIAL START
+===================================================== */
+
+(async function(){
+
+    const isAdmin =
+        await checkAdmin();
+
+    if(isAdmin){
+
+        await loadPaymentSettings();
+
+        await loadOrders();
 
     }
-);
+
+})();
 
 
-orderModal.addEventListener(
-    "click",
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
     function(event){
 
-        if(event.target === orderModal){
+        if(
+            event.key === "Escape"
+        ){
 
-            orderModal.classList.add(
-                "hidden"
-            );
+            const modal =
+                document.getElementById(
+                    "orderModal"
+                );
 
-            currentOrderId =
-                null;
+            if(
+                modal.classList.contains("show")
+            ){
+
+                closeModal();
+
+            }
+
         }
 
     }
 );
-
-
-/* =====================================================
-   FILTER EVENTS
-===================================================== */
-
-searchInput.addEventListener(
-    "input",
-    renderOrders
-);
-
-statusFilter.addEventListener(
-    "change",
-    renderOrders
-);
-
-paymentFilter.addEventListener(
-    "change",
-    renderOrders
-);
-
-dateFilter.addEventListener(
-    "change",
-    renderOrders
-);
-
-
-/* =====================================================
-   RESET FILTERS
-===================================================== */
-
-resetFiltersButton.addEventListener(
-    "click",
-    function(){
-
-        searchInput.value =
-            "";
-
-        statusFilter.value =
-            "";
-
-        paymentFilter.value =
-            "";
-
-        dateFilter.value =
-            "";
-
-        renderOrders();
-
-    }
-);
-
-
-/* =====================================================
-   REFRESH
-===================================================== */
-
-refreshButton.addEventListener(
-    "click",
-    async function(){
-
-        refreshButton.disabled =
-            true;
-
-        refreshButton.textContent =
-            "Loading...";
-
-        await loadOrders();
-
-        await loadPaymentSettings();
-
-        refreshButton.disabled =
-            false;
-
-        refreshButton.textContent =
-            "Refresh";
-
-    }
-);
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-checkSession();
 
 </script>
 
